@@ -3,6 +3,18 @@
 Brief description of your project.
 
 ## Setup Instructions
+###  Folder structure description
+SIP/
+├── ESP_HardSplits/
+│ ├── data/
+│ │ ├── data_ESP/
+│ │ ├── data_ProSmith/
+│ │ └── Reports/
+│ └── notebooks_and_code/
+│   └── additional_code/
+├── SIP/
+├── README.md
+└── requirements.txt
 
 ### Setting up `sail` Environment
 
