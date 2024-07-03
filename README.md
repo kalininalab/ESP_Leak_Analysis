@@ -1,39 +1,60 @@
+# Project Name
 
-### Explanation:
+Brief description of your project.
 
-- **ESP_HardSplits/**: This directory contains data splits specifically designed to prevent data leakage.
-  - **data/**: Holds segregated data into `train/`, `validation/`, and `test/` sets.
-  - **notebooks_and_code/**: Contains notebooks for analysis (`notebooks/`) and scripts for operations (`scripts/`).
+## Setup Instructions
 
-- **SIP/**: Main project directory.
-  - **data/**: Contains different stages of data processing:
-    - **raw/**: Original data.
-    - **processed/**: Cleaned and processed data.
-    - **external/**: Data from external sources.
-    - **intermediate/**: Intermediate data during preprocessing.
-  - **code/**: Includes directories for:
-    - **preprocessing/**: Scripts for data preparation.
-    - **training/**: Scripts for model training.
-    - **evaluation/**: Scripts for model evaluation.
-    - **utils/**: Utility scripts and functions.
+### Setting up `sail` Environment
 
-### Next Steps
+```bash
+# Create and activate the environment
+conda create --name sail python=3.12.0
+conda activate sail
 
-Provide instructions or links for how to install dependencies, set up the environment, and get started with using or contributing to your project.
+# Install Mamba package manager (optional but recommended)
+conda install mamba -n sail -c conda-forge
 
-```markdown
+# Install datasail-lite package
+mamba install -c kalininalab -c conda-forge -c bioconda datasail-lite
+
+# Install Grakel using pip
+pip install grakel
+
+
+# Create and activate the environment
+conda create --name SIP python=3.12.0
+conda activate SIP
+
+# Install required packages
+conda install pandas=2.2.2
+conda install numpy=1.26.4
+pip install rdkit==2024.3.1
+pip install biopython==1.84
+conda install matplotlib=3.8.4
+conda install scikit-learn=1.4.2 
+
+# Install PyTorch with CPU support
+conda install pytorch torchvision torchaudio cpuonly -c pytorch
+
+
 ## Getting Started
 
-To get a local copy up and running follow these simple steps:
+To get started with using the `sail` or `SIP` environments, activate the respective environment and follow the instructions in the README or documentation.
 
-### Prerequisites
+### Usage
 
-Ensure you have Python 3.x installed.
+Provide examples of how to use your project. Include screenshots, code examples, and demos if possible.
 
-### Installation
+### Contributing
 
-1. Clone the repo
-   ```sh
-   git clone https://github.com/your-username/your-repo.git
+If you want to contribute to this project, please fork the repository and submit a pull request. You can also open issues for feature requests or bug reports.
 
+### License
 
+Distributed under the MIT License. See `LICENSE` for more information.
+
+### Contact
+
+Your Name - email@example.com
+
+Project Link: [https://github.com/your-username/your-repo](https://github.com/your-username/your-repo)
