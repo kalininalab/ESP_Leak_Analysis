@@ -1,6 +1,7 @@
 # Substrate Inhibitor Prediction(SIP)
 
-Brief description of your project.
+Addressing data leakage in ESP model
+
 
 ## Setup Instructions
 ###  Folder structure description
