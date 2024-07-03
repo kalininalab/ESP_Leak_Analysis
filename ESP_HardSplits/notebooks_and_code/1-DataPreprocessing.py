@@ -27,7 +27,7 @@ df_UID_MID.pkl
 df_test_with_ESM1b_ts_GNN.pkl
 df_train_with_ESM1b_ts_GNN.pkl
 
-Please download train and test set of ESP model from below link and locate them in data_ESP folder
+Please download all of them from  ESP model repository:
 (https://github.com/AlexanderKroll/ESP/tree/main/data/splits)
 """
 
