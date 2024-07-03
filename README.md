@@ -18,7 +18,7 @@ SIP/
 └── requirements.txt
 ```
 
-### Setting up `sail` Environment
+### Setting up `sail` Environment for DataSAIL
 
 ```bash
 # Create and activate the environment
