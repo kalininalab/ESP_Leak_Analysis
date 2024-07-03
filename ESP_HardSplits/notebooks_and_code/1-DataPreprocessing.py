@@ -18,8 +18,12 @@ warnings.filterwarnings("ignore")
 CURRENT_DIR = os.getcwd()
 print(CURRENT_DIR)
 
-
+######
 # Extract all experimental data point from train and test set
+######
+
+# Please download train and test set of ESP model from below link and locate them in data_ESP folder
+# (https://github.com/AlexanderKroll/ESP/tree/main/data/splits)
 train_set = pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "df_train_with_ESM1b_ts_GNN.pkl"))
 test_set = pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "df_test_with_ESM1b_ts_GNN.pkl"))
 train_set=train_set[train_set["Binding"]==1]
@@ -71,8 +75,9 @@ data_ESP['Sequence'] = data_ESP['Uniprot ID'].map(uniprot_id_to_seq)
 data_ESP['SMILES'] = data_ESP['molecule ID'].map(mol_id_to_smiles)
 data_ESP.reset_index(drop=True, inplace=True)
 
+
 ###########
-# prepare data for split
+# Prepare data for split
 ###########
 
 # Add Ids column according to DataSAIL documentation for 1D split method:
