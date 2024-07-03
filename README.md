@@ -1,4 +1,4 @@
-# Project Name
+# Substrate Inhibitor Prediction(SIP)
 
 Brief description of your project.
 
@@ -37,26 +37,9 @@ conda install scikit-learn=1.4.2
 
 # Install PyTorch with CPU support
 conda install pytorch torchvision torchaudio cpuonly -c pytorch
+```
 
+### Getting Started
+```
 
-## Getting Started
-
-To get started with using the `sail` or `SIP` environments, activate the respective environment and follow the instructions in the README or documentation.
-
-### Usage
-
-Provide examples of how to use your project. Include screenshots, code examples, and demos if possible.
-
-### Contributing
-
-If you want to contribute to this project, please fork the repository and submit a pull request. You can also open issues for feature requests or bug reports.
-
-### License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-### Contact
-
-Your Name - email@example.com
-
-Project Link: [https://github.com/your-username/your-repo](https://github.com/your-username/your-repo)
+```
