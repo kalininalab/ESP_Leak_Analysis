@@ -19,8 +19,10 @@ mamba install -c kalininalab -c conda-forge -c bioconda datasail-lite
 
 # Install Grakel using pip
 pip install grakel
+```
+### Setting up `SIP` Environment
 
-
+```bash
 # Create and activate the environment
 conda create --name SIP python=3.12.0
 conda activate SIP
