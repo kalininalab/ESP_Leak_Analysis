@@ -1,0 +1,47 @@
+2024-07-04 10:54:58,256 - INFO - Current Directory: /Users/vahidatabaigi/SIP/ESP_HardSplits/notebooks_and_code
+2024-07-04 10:54:58,256 - INFO - *** Start running the dataSAIL***'
+'For more information about dataSAIL please check the dataSAIL documentation: https://datasail.readthedocs.io/en/latest/index.html
+2024-07-04 10:55:10,029 - INFO - dataSAIL splits the data successfully
+2024-07-04 10:55:10,073 - INFO - Report after splitting data by C1e split method and check for nan or null cells '
+'                      NaNTrain  NullTrain  NaNTest  NullTest
+Uniprot ID                   0          0        0         0
+molecule ID                  0          0        0         0
+evidence                     0          0        0         0
+Binding                      0          0        0         0
+type                     11924          0     2981         0
+substrate ID                 0          0        0         0
+ESM1b_ts                     0          0        0         0
+GNN rep (pretrained)         0          0        0         0
+ECFP                         0          0        0         0
+Sequence                     0          0        0         0
+SMILES                       0          0        0         0
+ids                          0          0        0         0
+split_mol                    0          0        0         0
+2024-07-04 10:55:10,073 - INFO - Total number of samples: 14905
+2024-07-04 10:55:10,073 - INFO - Ratio of test set to dataset: 0.2
+2024-07-04 10:55:10,073 - INFO - Start to create negative data points for the training set...
+2024-07-04 10:55:24,263 - INFO - Number of metabolites in training set: 1035
+2024-07-04 11:04:48,431 - INFO - Creating negative data points for the train set DONE
+2024-07-04 11:04:48,433 - INFO - Start to create negative data points for the test set...
+2024-07-04 11:04:49,900 - INFO - Number of metabolites in test set: 317
+2024-07-04 11:08:52,170 - INFO - Creating negative data points for the test set DONE
+2024-07-04 11:08:52,327 - INFO - Report after adding negative data and check for nan or null data cells '
+'                      NaNTrain  NullTrain  NaNTest  NullTest
+Uniprot ID                   0          0        0         0
+molecule ID                  0          0        0         0
+evidence                 33786          0     8428         0
+Binding                      0          0        0         0
+type                     45710          0    11409         0
+substrate ID                 0          0        0         0
+ESM1b_ts                     0          0        0         0
+GNN rep (pretrained)         0          0        0         0
+ECFP                         0          0        0         0
+Sequence                     0          0        0         0
+SMILES                       0          0        0         0
+ids                      33786          0     8428         0
+split_mol                33786          0     8428         0
+2024-07-04 11:08:52,327 - INFO - Total number of samples: 57119
+2024-07-04 11:08:52,327 - INFO - Ratio of test set to total dataset: 0.2
+2024-07-04 11:08:52,334 - INFO - the ratio of negative to positive data in train: 2.83
+2024-07-04 11:08:52,334 - INFO - the ratio of negative to positive data in test: 2.83
+2024-07-04 11:08:52,459 - INFO - [32m***** PROCESS COMPLETED: For an overview, please review the Report_2Splits_C1e_NoATP.log file in Reports folder. *****[0m
