@@ -22,17 +22,10 @@ SIP/
 ### Setting up `sail` Environment for DataSAIL
 
 ```bash
-# Create and activate the environment
 conda create --name sail python=3.12.0
 conda activate sail
-
-# Install Mamba package manager (optional but recommended)
 conda install mamba -n sail -c conda-forge
-
-# Install datasail-lite package
 mamba install -c kalininalab -c conda-forge -c bioconda datasail-lite
-
-# Install Grakel using pip
 pip install grakel
 ```
 ### Setting up `SIP` Environment
