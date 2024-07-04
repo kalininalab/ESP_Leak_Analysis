@@ -35,6 +35,7 @@ SIP/
 ```
 
 ### Setting up `SIP` Environment
+It is
 
 ```bash
 conda create --name SIP python=3.12.0
@@ -42,14 +43,13 @@ conda activate SIP
 conda install mamba -n SIP -c conda-forge
 mamba install -c kalininalab -c conda-forge -c bioconda datasail-lite
 pip install grakel
-conda install scikit-learn=1.4.2 
-conda install pytorch torchvision torchaudio cpuonly -c pytorch
-pip install biopython==1.84
 pip install xgboost==2.1.0
+pip install biopython==1.84
+pip install torch==2.3.1
 pip install hyperopt==0.2.7
+pip install colorama==0.4.6
+pip install libchebipy==1.0.10
 pip install wandb==0.17.4(not necessary)
-pip install colorama
-pip install libchebipy
 ```
 
 ### Getting Started
