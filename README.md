@@ -55,10 +55,11 @@ conda install pandas=2.2.2
 conda install numpy=1.26.4
 pip install rdkit==2024.3.1
 pip install biopython==1.84
+pip install xgboost==2.1.0
+pip install hyperopt==0.2.7
+pip install wandb-0.17.4(not necessary) 
 conda install matplotlib=3.8.4
 conda install scikit-learn=1.4.2 
-
-# Install PyTorch with CPU support
 conda install pytorch torchvision torchaudio cpuonly -c pytorch
 ```
 
