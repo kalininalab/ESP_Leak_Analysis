@@ -1,7 +1,5 @@
 # Substrate Inhibitor Prediction (SIP)
 
-![Project Logo](https://example.com/logo.png)
-
 ## Table of Contents
 
 - [Introduction](#introduction)
