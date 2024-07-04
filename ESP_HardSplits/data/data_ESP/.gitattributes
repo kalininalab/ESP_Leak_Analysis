@@ -1,0 +1,2 @@
+df_train_with_ESM1b_ts_GNN.pkl filter=lfs diff=lfs merge=lfs -text
+UNIPROT_df.pkl filter=lfs diff=lfs merge=lfs -text
