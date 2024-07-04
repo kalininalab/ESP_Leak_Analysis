@@ -12,68 +12,12 @@ from rdkit.Chem import AllChem
 from Bio import SeqIO
 import warnings
 import argparse
-import logging
+import os.path
 from colorama import init, Fore, Style
-from datasail.sail import datasail
-sys.path.append('./additional_code')
-from additional_code.data_preprocessing import *
-from additional_code.negative_data_generator import *
+sys.path.append("./additional_code")
+from helper_functions import *
+from negative_data_generator import *
 warnings.filterwarnings("ignore")
-
-
-def datasail_wrapper(split_method, DataFrame, split_number):
-    names = ["train", "test"]
-    if len(split_number) == 3:
-        names.append("val")
-
-    if split_method in ["C1e", "I1e"]:
-        e_splits, f_splits, inter_sp = datasail(
-            techniques=[split_method],
-            splits=split_number,
-            names=names,
-            solver="SCIP",
-            e_type="M",
-            e_data=dict(DataFrame[["ids", "SMILES"]].values.tolist()),
-            e_sim="ecfp",
-            epsilon=0
-        )
-    elif split_method in ["C1f", "I1f"]:
-        e_splits, f_splits, inter_sp = datasail(
-            techniques=[split_method],
-            splits=split_number,
-            names=names,
-            solver="SCIP",
-            f_type="P",
-            f_data=dict(DataFrame[["ids", "Sequence"]].values.tolist()),
-            f_sim="cdhit",
-            epsilon=0
-        )
-    elif split_method in ["C2"]:
-        e_splits, f_splits, inter_sp = datasail(
-            techniques=[split_method],
-            splits=split_number,
-            names=names,
-            solver="SCIP",
-            inter=[(x[0], x[0]) for x in DataFrame[["ids"]].values.tolist()],
-            e_type="M",
-            e_data=dict(DataFrame[["ids", "SMILES"]].values.tolist()),
-            f_type="P",
-            f_data=dict(DataFrame[["ids", "Sequence"]].values.tolist())
-        )
-    else:
-        raise ValueError("Invalid split method provided. Use one of ['C2','C1e', 'C1f', 'I1e', 'I1f']")
-    return e_splits, f_splits, inter_sp
-
-
-def setup_logging(log_file):
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(message)s',
-        handlers=[
-            logging.FileHandler(log_file),
-            logging.StreamHandler(sys.stdout)
-        ]
-    )
 
 
 def main(args):

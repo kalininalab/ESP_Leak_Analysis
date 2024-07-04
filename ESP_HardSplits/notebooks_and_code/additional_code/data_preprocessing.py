@@ -1,22 +1,3 @@
-import pandas as pd
-import numpy as np
-from rdkit import Chem
-from rdkit import DataStructs
-import matplotlib.pyplot as plt
-from rdkit.Chem import AllChem
-import random
-import time
-import gzip
-import os
-import collections
-from os.path import join
-
-CURRENT_DIR = os.getcwd()
-mol_folder = join(CURRENT_DIR, ".." ,"additional_data_ESP", "mol-files")
-df_UID_MID = pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "df_UID_MID.pkl"))
-df_chebi_to_inchi = pd.read_csv(join(CURRENT_DIR, ".." ,"data", "data_ESP", "chebiID_to_inchi.tsv"), sep = "\t")
-
-
 # Code for creating cluster of enzyme by enzyme sequence identity. Code was created by Martin Engqvist:
 import os
 import re
@@ -406,61 +387,4 @@ def make_splits(folder, df):
                 sep="\t", index=False, header=False)
 
 
-##########################################
-
-def two_split_report(train_set, test_set):
-    # Calculate NaN counts and empty string counts for train and test sets
-    nan_check_train_set = train_set.isnull().sum()
-    empty_check_train_set = train_set.applymap(lambda x: isinstance(x, str) and x == '').sum()
-
-    nan_check_test_set = test_set.isnull().sum()
-    empty_check_test_set = test_set.applymap(lambda x: isinstance(x, str) and x == '').sum()
-
-    # Concatenate results side by side
-    result = pd.concat(
-        [nan_check_train_set, empty_check_train_set, nan_check_test_set, empty_check_test_set], axis=1)
-    result.columns = ['NaNtrain', 'Emptytrain', 'NaNtest', 'Emptytest']
-    test_to_data = round(len(test_set) / (len(test_set) + len(train_set)), 2)
-    number_data=len(train_set) + len(test_set)
-
-    return result, number_data, test_to_data
-
-
-def three_split_report(train_set, test_set, val_set):
-    # Calculate NaN counts and empty string counts for train and test sets
-    nan_check_train_set = train_set.isnull().sum()
-    empty_check_train_set = train_set.applymap(lambda x: isinstance(x, str) and x == '').sum()
-
-    nan_check_test_set = test_set.isnull().sum()
-    empty_check_test_set = test_set.applymap(lambda x: isinstance(x, str) and x == '').sum()
-
-    nan_check_val_set = val_set.isnull().sum()
-    empty_check_val_set = val_set.applymap(lambda x: isinstance(x, str) and x == '').sum()
-
-    # Concatenate results side by side
-    result = pd.concat(
-        [nan_check_train_set, empty_check_train_set, nan_check_test_set, empty_check_test_set, nan_check_val_set, empty_check_val_set], axis=1)
-    result.columns = ['nanTrain', 'NullTrain', 'NaNTest', 'NullTest', 'nanVal','NullVal']
-    test_to_data = round(len(test_set) / (len(test_set) + len(train_set) + len(val_set)), 2)
-    val_to_data = round(len(val_set) / (len(test_set) + len(train_set) + len(val_set)), 2)
-    number_data=len(train_set) + len(test_set) + len(val_set)
-
-    return result, number_data , test_to_data, val_to_data
-
-
-def plot_top_keys_values(df, key_column, value_column, xlabel, ylabel, title, color='blue', figsize=(12, 10),
-                         top_count=30):
-    dict = collections.Counter(df[key_column])
-    top = dict.most_common(top_count)
-    print(top)
-    keys, values = zip(*top)
-    plt.figure(figsize=figsize)
-    plt.bar(keys, values, color=color, alpha=0.8)
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
-    plt.title(title)
-    plt.xticks(rotation=90, fontsize='xx-small')
-    plt.subplots_adjust(bottom=0.25)
-    plt.legend()
-    plt.show()
 

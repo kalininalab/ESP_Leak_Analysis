@@ -20,9 +20,11 @@ from data_preprocessing import *
 CURRENT_DIR = os.getcwd()
 print(CURRENT_DIR)
 
-
+df_UID_MID = pd.read_pickle(join(CURRENT_DIR, ".." ,"data","data_ESP", "df_UID_MID.pkl"))
 df_chebi_to_inchi = pd.read_csv(join(CURRENT_DIR, ".." ,"data", "data_ESP", "chebiID_to_inchi.tsv"), sep = "\t")
-mol_folder = join(CURRENT_DIR, ".." ,"additional_data_ESP", "mol-files")
+CURRENT_DIR = os.getcwd()
+datasets_PubChem = join(CURRENT_DIR, ".." ,"data","data_ESP", "substrate_synonyms")
+mol_folder = join(CURRENT_DIR, ".." ,"data" ,"data_ESP", "mol-files")
 
 count = 0
 
