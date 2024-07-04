@@ -1,10 +1,7 @@
 
-.idea/modules.xml
-.idea/inspectionProfiles/profiles_settings.xml
-.idea/vcs.xml
-.idea/SIP.iml
-.idea/other.xml
-.idea/misc.xml
-.idea/material_theme_project_new.xml
 .DS_Store
-.idea/workspace.xml
+ESP_HardSplits/notebooks_and_code/additional_code/__pycache__/negative_data_generator.cpython-312.pyc
+ESP_HardSplits/notebooks_and_code/additional_code/__pycache__/helper_functions.cpython-312.pyc
+ESP_HardSplits/notebooks_and_code/additional_code/__pycache__/data_preprocessing.cpython-312.pyc
+ESP_HardSplits/notebooks_and_code/additional_code/.ipynb_checkpoints/negative_data_generator-checkpoint.py
+ESP_HardSplits/notebooks_and_code/additional_code/.ipynb_checkpoints/data_preprocessing-checkpoint.py
