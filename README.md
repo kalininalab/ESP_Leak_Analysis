@@ -1,13 +1,4 @@
-# Substrate Inhibitor Prediction(SIP)
-
-Addressing data leakage in ESP model
-
 # Substrate Inhibitor Prediction (SIP)
-
-*Addressing data leakage in ESP model*
-
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://example.com/build-status)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ![Project Logo](https://example.com/logo.png)
 
@@ -25,7 +16,7 @@ Addressing data leakage in ESP model
 
 ## Introduction
 
-Welcome to the Substrate Inhibitor Prediction (SIP) project. This project addresses data leakage in the ESP model by implementing a robust data preparation and splitting strategy.
+Welcome to the Substrate Inhibitor Prediction (SIP) project. This project addresses data leakage in the ESP and SIP models. 
 
 ## Setup Instructions
 
