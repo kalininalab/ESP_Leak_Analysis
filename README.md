@@ -2,6 +2,36 @@
 
 Addressing data leakage in ESP model
 
+# Substrate Inhibitor Prediction (SIP)
+
+*Addressing data leakage in ESP model*
+
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://example.com/build-status)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+![Project Logo](https://example.com/logo.png)
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Setup Instructions](#setup-instructions)
+  - [Folder Structure](#folder-structure)
+  - [Setting up `sail` Environment for DataSAIL](#setting-up-sail-environment-for-datasail)
+  - [Setting up `SIP` Environment](#setting-up-sip-environment)
+- [Getting Started](#getting-started)
+  - [Data Preparation](#1-run-1-datapreparationpy)
+  - [Data Splitting](#2-run-2-1-splitbydatasailpy)
+- [Contact](#contact)
+
+## Introduction
+
+Welcome to the Substrate Inhibitor Prediction (SIP) project. This project addresses data leakage in the ESP model by implementing a robust data preparation and splitting strategy.
+
+## Setup Instructions
+
+### Folder Structure
+
+
 
 ## Setup Instructions
 ###  Folder structure description
