@@ -34,33 +34,26 @@ SIP/
 └── requirements.txt
 ```
 
-### Setting up `sail` Environment for DataSAIL
-
-```bash
-conda create --name sail python=3.12.0
-conda activate sail
-conda install mamba -n sail -c conda-forge
-mamba install -c kalininalab -c conda-forge -c bioconda datasail-lite
-pip install grakel
-```
 ### Setting up `SIP` Environment
 
 ```bash
-# Create and activate the environment
 conda create --name SIP python=3.12.0
 conda activate SIP
-
-# Install required packages
+conda install mamba -n SIP -c conda-forge
+mamba install -c kalininalab -c conda-forge -c bioconda datasail-lite
+pip install grakel
 conda install pandas=2.2.2
 conda install numpy=1.26.4
+conda install matplotlib=3.8.4
+conda install scikit-learn=1.4.2 
+conda install pytorch torchvision torchaudio cpuonly -c pytorch
 pip install rdkit==2024.3.1
 pip install biopython==1.84
 pip install xgboost==2.1.0
 pip install hyperopt==0.2.7
-pip install wandb-0.17.4(not necessary) 
-conda install matplotlib=3.8.4
-conda install scikit-learn=1.4.2 
-conda install pytorch torchvision torchaudio cpuonly -c pytorch
+pip install wandb==0.17.4(not necessary)
+pip install colorama
+pip install libchebipy
 ```
 
 ### Getting Started
