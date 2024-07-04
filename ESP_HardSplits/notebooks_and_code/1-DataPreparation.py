@@ -12,8 +12,8 @@ from rdkit import DataStructs
 from rdkit.Chem import AllChem
 from Bio import SeqIO
 sys.path.append("./additional_code")
-from helper_functions import *
-from negative_data_generator import *
+from additional_code.helper_functions import *
+from additional_code.negative_data_generator import *
 warnings.filterwarnings("ignore")
 CURRENT_DIR = os.getcwd()
 print(CURRENT_DIR)
@@ -28,7 +28,7 @@ df_test_with_ESM1b_ts_GNN.pkl
 df_train_with_ESM1b_ts_GNN.pkl
 
 Please download all of them from  ESP model repository:
-(https://github.com/AlexanderKroll/ESP/tree/main/data/splits)
+https://github.com/AlexanderKroll/ESP/tree/main/data/splits
 """
 
 ######

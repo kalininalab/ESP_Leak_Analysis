@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from Bio import PDB
 import warnings
 import logging
+import torch
 from os.path import join
 warnings.filterwarnings("ignore")
 import inspect
@@ -28,31 +29,6 @@ def split_on_empty_lines(s):
 def remove_whitespace_end(s):
     # Remove occurrences of \n, \t, or space, or a combination of them from the end of the string
     return re.sub(r'[\n\t\s]+$', '', s)
-
-
-def data_report(df, display_limit=None):
-    nan_check = df.isnull().sum()
-    nan_check.name = 'NaN'
-    empty_check = pd.Series(0, index=df.columns, name='Empty')
-    for col in df.select_dtypes(include=['object']).columns:
-        empty_check[col] = df[col].apply(lambda x: isinstance(x, str) and x == '').sum()
-    empty_list = df.apply(
-        lambda col: col.apply(lambda x: isinstance(x, list) and len(x) == 0 if x is not None else False)).sum()
-    empty_list = pd.Series(empty_list, name='empty_list')
-    def count_unique(x):
-        if isinstance(x.iloc[0], (list, np.ndarray)):
-            return len(x)
-        else:
-            return len(pd.Series(x).dropna().unique()) if x is not None else 0
-    unique_count = df.apply(count_unique)
-    unique_count = pd.Series(unique_count, name='Unique')
-    result = pd.concat([nan_check, empty_check, empty_list, unique_count], axis=1)
-    if display_limit:
-        result = result.iloc[:, :display_limit]
-    caller_frame = inspect.currentframe().f_back
-    df_name = [var_name for var_name, var in caller_frame.f_locals.items() if var is df][0]
-    print(f"Dimension for {df_name}: {str(df.shape)}")
-    return result
 
 
 def sub_protein_pair(dataframe, ID_Col, Protein_col, substrate_col):
@@ -241,6 +217,31 @@ def map_embedded_smiles_to_mol_id(dataframe,path):
     return embeddings_dict
 
 ##################################################################################
+
+
+def data_report(df, display_limit=None):
+    nan_check = df.isnull().sum()
+    nan_check.name = 'NaN'
+    empty_check = pd.Series(0, index=df.columns, name='Empty')
+    for col in df.select_dtypes(include=['object']).columns:
+        empty_check[col] = df[col].apply(lambda x: isinstance(x, str) and x == '').sum()
+    empty_list = df.apply(
+        lambda col: col.apply(lambda x: isinstance(x, list) and len(x) == 0 if x is not None else False)).sum()
+    empty_list = pd.Series(empty_list, name='empty_list')
+    def count_unique(x):
+        if isinstance(x.iloc[0], (list, np.ndarray)):
+            return len(x)
+        else:
+            return len(pd.Series(x).dropna().unique()) if x is not None else 0
+    unique_count = df.apply(count_unique)
+    unique_count = pd.Series(unique_count, name='Unique')
+    result = pd.concat([nan_check, empty_check, empty_list, unique_count], axis=1)
+    if display_limit:
+        result = result.iloc[:, :display_limit]
+    caller_frame = inspect.currentframe().f_back
+    df_name = [var_name for var_name, var in caller_frame.f_locals.items() if var is df][0]
+    print(f"Dimension for {df_name}: {str(df.shape)}")
+    return result
 
 
 def two_split_report(train_set, test_set):
