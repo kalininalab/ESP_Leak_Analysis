@@ -19,13 +19,7 @@
 Welcome to the Substrate Inhibitor Prediction (SIP) project. This project addresses data leakage in the ESP and SIP models. 
 
 ## Setup Instructions
-
-### Folder Structure
-
-
-
-## Setup Instructions
-###  Folder structure description
+###  Folder structure
 ```
 SIP/
 ├── ESP_HardSplits/
