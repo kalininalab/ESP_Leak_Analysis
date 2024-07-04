@@ -42,12 +42,8 @@ conda activate SIP
 conda install mamba -n SIP -c conda-forge
 mamba install -c kalininalab -c conda-forge -c bioconda datasail-lite
 pip install grakel
-conda install pandas=2.2.2
-conda install numpy=1.26.4
-conda install matplotlib=3.8.4
 conda install scikit-learn=1.4.2 
 conda install pytorch torchvision torchaudio cpuonly -c pytorch
-pip install rdkit==2024.3.1
 pip install biopython==1.84
 pip install xgboost==2.1.0
 pip install hyperopt==0.2.7
