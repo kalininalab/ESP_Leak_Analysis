@@ -50,6 +50,11 @@ conda install pytorch torchvision torchaudio cpuonly -c pytorch
 ### Getting Started
 
 #### 1- Run 1-DataPreparation.py to generate all data set need to perform data split
+After running this script, three different versions of the data will be generated:
+dataESP: Original ESP data containing only positive data points with experimental evidence.
+dataESP_NoATP: This dataset excludes all ATP data points from dataESP.
+dataESP_D3408: This dataset randomly removes 3408 data points from dataESP (equivalent to the number of ATP points).
+
 #### 2- Run 2-1-SplitByDataSAIL.py
 ```
 python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e I1f] --split-number [8 2, 7 2 1] --Data-suffix ['', _NoATP ,_D3408]
