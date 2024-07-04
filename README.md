@@ -55,6 +55,16 @@ conda install pytorch torchvision torchaudio cpuonly -c pytorch
 ```
 
 ### Getting Started
+
+#### 1- Run 1-DataPreparation.py to generate all data set need to perform data split
+#### 2- Run 2-1-SplitByDataSAIL.py
 ```
+python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e I1f] --split-number [8 2, 7 2 1] --Data-suffix ['', _NoATP ,_D3408]
+```
+##### Example:
+```
+python 2-1-SplitByDataSAIL.py --split-method C1e --split-number 8 2 --Data-suffix ''
+```
+
 
 ```
