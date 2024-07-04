@@ -15,8 +15,8 @@ import argparse
 import os.path
 from colorama import init, Fore, Style
 sys.path.append("./additional_code")
-from helper_functions import *
-from negative_data_generator import *
+from additional_code.helper_functions import *
+from additional_code.negative_data_generator import *
 warnings.filterwarnings("ignore")
 
 
@@ -36,9 +36,9 @@ def main(args):
     logging.info(f"Current Directory: {CURRENT_DIR}")
 
     data_file = os.path.join(CURRENT_DIR, "..", "data", "data_ESP", f"dataESP{Data_suffix}.pkl")
-    train_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_number)}splits", f"train_ESM1bts_PreGNN_{split_method}{Data_suffix}_{len(split_number)}S.pkl")
-    test_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_number)}splits", f"test_ESM1bts_PreGNN_{split_method}{Data_suffix}_{len(split_number)}S.pkl")
-    val_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_number)}splits",f"val_ESM1bts_PreGNN_{split_method}{Data_suffix}_{len(split_number)}S.pkl")
+    train_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_number)}splits", f"train_{split_method}{Data_suffix}_{len(split_number)}S.pkl")
+    test_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_number)}splits", f"test_{split_method}{Data_suffix}_{len(split_number)}S.pkl")
+    val_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_number)}splits",f"val_{split_method}{Data_suffix}_{len(split_number)}S.pkl")
 
     if split_method in ["C1e", "I1e"]:
         logging.info("*** Start running the dataSAIL***'\n'For more information about dataSAIL please check the dataSAIL documentation: https://datasail.readthedocs.io/en/latest/index.html")
