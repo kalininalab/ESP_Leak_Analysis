@@ -12,7 +12,7 @@
   - [Data Splitting](#2-run-2-1-splitbydatasail.py)
 - [Contact](#contact)
 
-## Introduction
+## Introductions
 
 Welcome to the Substrate Inhibitor Prediction (SIP) project. This project addresses data leakage in the ESP and SIP models. 
 
