@@ -35,8 +35,9 @@ SIP/
 ```
 
 ### Setting up `SIP` Environment
-It is
+It is recommended to install the packages in order
 
+For MacOSX M1 desktop 
 ```bash
 conda create --name SIP python=3.12.0
 conda activate SIP
@@ -49,9 +50,22 @@ pip install torch==2.3.1
 pip install hyperopt==0.2.7
 pip install colorama==0.4.6
 pip install libchebipy==1.0.10
-pip install wandb==0.17.4(not necessary)
 ```
-
+For server with linux OS
+```
+conda create --name SIP python=3.12.0
+conda activate SIP
+conda install mamba -n SIP -c conda-forge
+mamba install -c kalininalab -c conda-forge -c bioconda datasail-lite
+pip install grakel
+conda install pytorch torchvision torchaudio pytorch-cuda -c pytorch -c nvidia
+conda install conda-forge::xgboost
+pip install biopython==1.84
+pip install hyperopt==0.2.7
+pip install colorama==0.4.6
+pip install libchebipy==1.0.10
+pip install wandb
+```
 ### Getting Started
 
 #### 1- Run 1-DataPreparation.py to generate all data set need to perform data split
@@ -86,7 +100,7 @@ python 2-1-SplitByDataSAIL.py --split-method C1e --split-number 8 2 --Data-suffi
 ```
 Output files:
 ```
-./SIP/data/2splits/train_ESM1bts_PreGNN_C1e_2S.pkl
-./SIP/data/2splits/test_ESM1bts_PreGNN_C1e_2S.pkl
+./SIP/data/2splits/train_C1e_2S.pkl
+./SIP/data/2splits/test_C1e_2S.pkl
 ./SIP/data/Reports/Report_2Splits_C1e.log
 ```
