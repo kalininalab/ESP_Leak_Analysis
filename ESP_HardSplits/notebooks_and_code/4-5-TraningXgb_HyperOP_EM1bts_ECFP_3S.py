@@ -27,19 +27,19 @@ logging.info(f"Current directory: {CURRENT_DIR}")
 def load_data(file_path):
     try:
         df = pd.read_pickle(file_path)
-        df = df.loc[df["ESM1b_ts"] != ""]
+        df = df[df["ESM1b_ts"].apply(lambda x: len(x) > 0)]
         df = df.loc[df["type"] != "engqvist"]
-        df = df.loc[df["GNN rep"] != ""]
-        df = df.loc[df["ECFP"] != ""]
+        df = df[df["GNN rep (pretrained)"].apply(lambda x: len(x) > 0)]
+        df = df[df["ECFP"].apply(lambda x: len(x) > 0)]
         df.reset_index(inplace=True, drop=True)
         return df
     except Exception as e:
         logging.error(f"Error loading data from {file_path}: {e}")
         raise
 
-df_train = load_data(join(CURRENT_DIR, "..", "data", "3splits", "df_train_with_ESM1b_ts_GNN_I1e.pkl"))
-df_test = load_data(join(CURRENT_DIR, "..", "data", "3splits", "df_test_with_ESM1b_ts_GNN_I1e.pkl"))
-df_val = load_data(join(CURRENT_DIR, "..", "data", "3splits", "df_val_with_ESM1b_ts_GNN_I1e.pkl"))
+df_train = load_data(join(CURRENT_DIR, "..", "data", "3splits", "train_C1e_NoATP_3S.pkl"))
+df_test = load_data(join(CURRENT_DIR, "..", "data", "3splits", "test_C1e_NoATP_3S.pkl"))
+df_val = load_data(join(CURRENT_DIR, "..", "data", "3splits", "val_C1e_NoATP_3S.pkl"))
 
 def create_input_and_output_data(df):
     X = []
@@ -61,7 +61,9 @@ feature_names = ["ECFP_" + str(i) for i in range(1024)] + ["ESM1b_ts_" + str(i) 
 
 def optimize_hyperparameters(param):
     num_round = int(param["num_rounds"])
-    param["tree_method"] = "gpu_hist"
+    #param["tree_method"] = "gpu_hist"
+    param["tree_method"] = "hist"
+    param["device"] = "cuda"
     param["sampling_method"] = "gradient_based"
     param['objective'] = 'binary:logistic'
 
