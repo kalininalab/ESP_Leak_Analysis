@@ -128,8 +128,8 @@ def main(args):
 
         test_indices[i] = fold_indices[i]
 
-    np.save(join(CURRENT_DIR, "..", "data", "2splits", "CV_train_indices_Rand_NOATP.npy"), train_indices)
-    np.save(join(CURRENT_DIR, "..", "data", "2splits", "CV_test_indices_Rand_NOATP.npy"), test_indices)
+    np.save(join(CURRENT_DIR, "..", "data", "2splits", f"CV_train_indices_{split_method}{Data_suffix}.npy"), train_indices)
+    np.save(join(CURRENT_DIR, "..", "data", "2splits", f"CV_test_indices_{split_method}{Data_suffix}.npy"), test_indices)
 
     train_indices = list(
         np.load(join(CURRENT_DIR, "..", "data", "2splits", f"CV_train_indices_{split_method}{Data_suffix}.npy"), allow_pickle=True))
