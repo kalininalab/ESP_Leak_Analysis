@@ -45,14 +45,14 @@ def main(args):
     df_train = df_train.loc[df_train["type"] != "engqvist"]
     df_train = df_train[df_train[column_name].apply(lambda x: len(x) > 0)]
     df_train.reset_index(inplace=True, drop=True)
-    df_train=df_train[0:1000]
+    df_train=df_train[0:8000]
 
     df_test = pd.read_pickle(join(CURRENT_DIR, "..", "data", "2splits", f"test_{split_method}{Data_suffix}_2S.pkl"))
     df_test = df_test[df_test["ESM1b_ts"].apply(lambda x: len(x) > 0)]
     df_test = df_test.loc[df_test["type"] != "engqvist"]
     df_test = df_test[df_test[column_name].apply(lambda x: len(x) > 0)]
     df_test.reset_index(inplace=True, drop=True)
-    df_test=df_test[0:100]
+    df_test=df_test[0:1000]
 
     def split_dataframe(df, frac):
         df1 = pd.DataFrame(columns=list(df.columns))
