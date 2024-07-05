@@ -202,7 +202,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Run the data preprocessing and negative sample generation script.")
+        description="End to end Hyperparameter tuning and xgboost model training for train:test:val splits")
     parser.add_argument('--split-method', type=str, required=True,
                         help="The split method should be one of [C2,C1e, C1f, I1e, I1f, ESP]")
     parser.add_argument('--column-name', type=str, required=True,
