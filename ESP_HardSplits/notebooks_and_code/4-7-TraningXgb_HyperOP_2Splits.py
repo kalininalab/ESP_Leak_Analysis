@@ -290,9 +290,9 @@ def main(args):
     print("Accuracies: %s" % accuracy)
     print("ROC-AUC scores: %s" % ROC_AUC)
 
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_2S", f"acc_CV_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), np.array(accuracy))
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_2S", f"loss_CV_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), np.array(loss))
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_2S", f"ROC_AUC_CV_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), np.array(ROC_AUC))
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_2S", f"acc_CV_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_2S.npy"), np.array(accuracy))
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_2S", f"loss_CV_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_2S.npy"), np.array(loss))
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_2S", f"ROC_AUC_CV_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_2S.npy"), np.array(ROC_AUC))
 
     dtrain = xgb.DMatrix(np.array(train_X), weight=weights, label=np.array(train_y),
                          feature_names=feature_names)
@@ -308,8 +308,8 @@ def main(args):
     print("Accuracy on test set: %s, ROC-AUC score for test set: %s, MCC: %s" % (acc_test, roc_auc, mcc))
     wandb.log({f"Test Accuracy_ESM1bts_{column_name}": acc_test, f"Test ROC-AUC_ESM1bts_{column_name}": roc_auc, f"Test MCC_ESM1bts_{column_name}": mcc})
 
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_2S", f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), bst.predict(dtest))
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_2S", f"y_test_true_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), test_y)
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_2S", f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_2S.npy"), bst.predict(dtest))
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_2S", f"y_test_true_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_2S.npy"), test_y)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
