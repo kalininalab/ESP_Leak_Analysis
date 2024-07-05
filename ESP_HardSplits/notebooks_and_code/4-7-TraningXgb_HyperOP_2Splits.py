@@ -40,13 +40,13 @@ def main(args):
         return (df)
 
 
-    df_train = pd.read_pickle(join(CURRENT_DIR, "..", "data", "2splits", f"train_{split_method}{Data_suffix}_3S.pkl"))
+    df_train = pd.read_pickle(join(CURRENT_DIR, "..", "data", "2splits", f"train_{split_method}{Data_suffix}_2S.pkl"))
     df_train = df_train[df_train["ESM1b_ts"].apply(lambda x: len(x) > 0)]
     df_train = df_train.loc[df_train["type"] != "engqvist"]
     df_train = df_train[df_train[column_name].apply(lambda x: len(x) > 0)]
     df_train.reset_index(inplace=True, drop=True)
 
-    df_test = pd.read_pickle(join(CURRENT_DIR, "..", "data", "2splits", f"test_{split_method}{Data_suffix}_3S.pkl"))
+    df_test = pd.read_pickle(join(CURRENT_DIR, "..", "data", "2splits", f"test_{split_method}{Data_suffix}_2S.pkl"))
     df_test = df_test[df_test["ESM1b_ts"].apply(lambda x: len(x) > 0)]
     df_test = df_test.loc[df_test["type"] != "engqvist"]
     df_test = df_test[df_test[column_name].apply(lambda x: len(x) > 0)]
@@ -127,6 +127,14 @@ def main(args):
                 train_indices[i] = train_indices[i] + fold_indices[j]
 
         test_indices[i] = fold_indices[i]
+# Debugging prints
+    #print("Debugging train_indices before saving:")
+    #for i, indices in enumerate(train_indices):
+        #print(f"Fold {i+1}: {len(indices)} indices, first 5: {indices[:5]}")
+
+    #print("Debugging test_indices before saving:")
+    #for i, indices in enumerate(test_indices):
+        #print(f"Fold {i+1}: {len(indices)} indices, first 5: {indices[:5]}")
 
     np.save(join(CURRENT_DIR, "..", "data", "2splits", f"CV_train_indices_{split_method}{Data_suffix}.npy"), train_indices)
     np.save(join(CURRENT_DIR, "..", "data", "2splits", f"CV_test_indices_{split_method}{Data_suffix}.npy"), test_indices)
