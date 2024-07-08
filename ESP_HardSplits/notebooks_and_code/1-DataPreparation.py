@@ -41,8 +41,8 @@ train_set = train_set[~(train_set['GNN rep (pretrained)'].str.strip() == '')]
 test_set = test_set[~(test_set['GNN rep (pretrained)'].str.strip() == '')]
 train_set.reset_index(drop=True, inplace=True)
 test_set.reset_index(drop=True, inplace=True)
-data_ESP = pd.concat([train_set, test_set], ignore_index=True)
-data_ESP['substrate ID'] = data_ESP['substrate ID'].str.replace('CHEBI:', '')
+dataESP = pd.concat([train_set, test_set], ignore_index=True)
+dataESP['substrate ID'] = dataESP['substrate ID'].str.replace('CHEBI:', '')
 UNIPROT_df = pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "UNIPROT_df.pkl"))
 
 # Use the data in https://github.com/AlexanderKroll/ProSmith to map the molecule IDs
@@ -57,66 +57,66 @@ data_pro.reset_index(drop=True, inplace=True)
 # Map Uniprot Ids to  their corresponding protein sequence
 uniprot_id_to_seq = dict(zip(UNIPROT_df['Uniprot ID'], UNIPROT_df['Sequence']))
 mol_id_to_smiles = dict(zip(data_pro['molecule ID'], data_pro['SMILES']))
-data_ESP['Sequence'] = data_ESP['Uniprot ID'].map(uniprot_id_to_seq)
-data_ESP['SMILES'] = data_ESP['molecule ID'].map(mol_id_to_smiles)
-data_ESP.rename(columns={'GNN rep (pretrained)': 'PreGNN'})
-data_ESP.reset_index(drop=True, inplace=True)
-print(data_report(data_ESP))
+dataESP['Sequence'] = dataESP['Uniprot ID'].map(uniprot_id_to_seq)
+dataESP['SMILES'] = dataESP['molecule ID'].map(mol_id_to_smiles)
+dataESP.rename(columns={'GNN rep (pretrained)': 'PreGNN'},inplace=True)
+dataESP.reset_index(drop=True, inplace=True)
 
 ###########
 # Prepare data for split
 ###########
 
-# Add Ids column according to DataSAIL documentation for 1D split method:
-data_ESP['ids'] = ['ID' + str(index) for index in data_ESP.index]
-data_ESP.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP.pkl"))
-
+# Add Ids column according to DataSAIL documentation for split
+dataESP['ids'] = ['ID' + str(index) for index in dataESP.index]
+dataESP.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP.pkl"))
+print(data_report(dataESP))
 # Delete ATP
-data_ESP=pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP.pkl"))
+dataESP=pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP.pkl"))
 plot_top_keys_values(
-    data_ESP,
+    dataESP,
     key_column="molecule ID",
     xlabel='molecule ID',
     ylabel='Count',
-    title='Number of data point per molecule ID',
+    title='Number of data points per molecule ID in {df_name}',  # Use placeholder for df_name
     color="red",
     figsize=(14, 12),
     top_count=100
 )
+
 ATP_ids={'CHEBI:30616','C00002'}
 # Remove ATP
-data_ESP_NOATP = data_ESP[~data_ESP['molecule ID'].isin(ATP_ids)]
-print(f"number of ATP: {len(data_ESP[data_ESP['molecule ID'].isin(ATP_ids)])}")
+dataESP_NoATP = dataESP[~dataESP['molecule ID'].isin(ATP_ids)]
+print(f"number of ATP: {len(dataESP[dataESP['molecule ID'].isin(ATP_ids)])}")
 plot_top_keys_values(
-    data_ESP_NOATP,
+    dataESP_NoATP,
     key_column="molecule ID",
     xlabel='molecule ID',
     ylabel='Count',
-    title='Number of data point per molecule ID',
+    title='Number of data points per molecule ID in {df_name}',
     color="red",
     figsize=(14, 12),
     top_count=100
 )
-data_ESP_NOATP.reset_index(drop=True, inplace=True)
-data_ESP_NOATP.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP_NoATP.pkl"))
-print(data_report(data_ESP_NOATP))
+dataESP_NoATP.reset_index(drop=True, inplace=True)
+dataESP_NoATP.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP_NoATP.pkl"))
+print(data_report(dataESP_NoATP))
 # Random delete of 3408 data points
-data_ESP=pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP.pkl"))
+dataESP=pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP.pkl"))
 # 18313-14905=3408
 num_rows_to_delete = 3408
-rows_to_delete = data_ESP.sample(n=num_rows_to_delete).index
-data_ESP_D3408=data_ESP.drop(rows_to_delete)
-data_ESP_D3408.reset_index(drop=True, inplace=True)
-data_ESP_D3408.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP_D3408.pkl"))
+rows_to_delete = dataESP.sample(n=num_rows_to_delete).index
+dataESP_D3408=dataESP.drop(rows_to_delete)
+dataESP_D3408.reset_index(drop=True, inplace=True)
+dataESP_D3408.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP_D3408.pkl"))
 
 plot_top_keys_values(
-    data_ESP_D3408,
+    dataESP_D3408,
     key_column="molecule ID",
     xlabel='molecule ID',
     ylabel='Count',
-    title='Number of data point per molecule ID',
+    title='Number of data points per molecule ID in {df_name}',
     color="red",
     figsize=(14, 12),
     top_count=100
 )
-print(data_report(data_ESP_D3408))
+print(data_report(dataESP_D3408))

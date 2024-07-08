@@ -15,11 +15,15 @@ import warnings
 warnings.filterwarnings("ignore")
 
 sys.path.append('./additional_code')
-from splitByESP_method import *
+from split_by_esp_method import *
 
 CURRENT_DIR = os.getcwd()
 print(CURRENT_DIR)
 
+
+"""
+All functions in this script has been taken from ESP repository 
+"""
 df_UID_MID = pd.read_pickle(join(CURRENT_DIR, ".." ,"data","data_ESP", "df_UID_MID.pkl"))
 df_chebi_to_inchi = pd.read_csv(join(CURRENT_DIR, ".." ,"data", "data_ESP", "chebiID_to_inchi.tsv"), sep = "\t")
 CURRENT_DIR = os.getcwd()

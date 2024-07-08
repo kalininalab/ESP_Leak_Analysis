@@ -33,42 +33,30 @@ def remove_whitespace_end(s):
 
 def sub_protein_pair(dataframe, ID_Col, Protein_col, substrate_col):
     brenda = pd.read_pickle(dataframe)
-    # Create an empty list to store tuples
     data = []
-    # Iterate over each row
     for ind, row in brenda.iterrows():
-        # Extract protein IDs and substrates
         EC_IDs = row[ID_Col]
         protein_ids = row[Protein_col]
         substrates = row[substrate_col]
-        # Filter substrates that match the first element of protein IDs and do not contain 'more'
         matching_substrate = [(EC_IDs, protein_id[1], substrate[1]) for protein_id in protein_ids for substrate in
                               substrates if
                               protein_id[0] == substrate[0] and 'more' not in substrate[1]]
-        # Extend data list with matching substrates
         data.extend(matching_substrate)
-    # Create DataFrame from the list of tuples
     sub_Protein = pd.DataFrame(data, columns=['EC_ID', 'Uni_SwissProt', 'Substrate'])
     return sub_Protein
 
 
 def inh_protein_pair(dataframe, ID_Col, Protein_col, inhibitor_col):
     brenda = pd.read_pickle(dataframe)
-    # Create an empty list to store tuples
     data = []
-    # Iterate over each row
     for ind, row in brenda.iterrows():
-        # Extract protein IDs and substrates
         EC_IDs = row[ID_Col]
         protein_ids = row[Protein_col]
         inhibitors = row[inhibitor_col]
-        # Filter substrates that match the first element of protein IDs and do not contain 'more'
         matching_substrate = [(EC_IDs, protein_id[1], inhibitor[1]) for protein_id in protein_ids for inhibitor in
                               inhibitors if
                               protein_id[0] == inhibitor[0] and 'more' not in inhibitor[1]]
-        # Extend data list with matching substrates
         data.extend(matching_substrate)
-    # Create DataFrame from the list of tuples
     sub_Protein = pd.DataFrame(data, columns=['EC_ID', 'Uni_SwissProt', 'Inhibitors'])
     return sub_Protein
 
@@ -216,6 +204,21 @@ def map_embedded_smiles_to_mol_id(dataframe,path):
             print(f"File {file_path} does not exist")
     return embeddings_dict
 
+
+def map_negative_samples2embedding(df):
+        df['ESM1b_ts'] = df.groupby('Uniprot ID')['ESM1b_ts'].transform(
+            lambda x: x.fillna(method='ffill').fillna(method='bfill'))
+        df['Sequence'] = df.groupby('Uniprot ID')['Sequence'].transform(
+            lambda x: x.fillna(method='ffill').fillna(method='bfill'))
+        df['PreGNN'] = df.groupby('molecule ID')['PreGNN'].transform(
+            lambda x: x.fillna(method='ffill').fillna(method='bfill'))
+        df['ECFP'] = df.groupby('molecule ID')['ECFP'].transform(
+            lambda x: x.fillna(method='ffill').fillna(method='bfill'))
+        df['substrate ID'] = df.groupby('molecule ID')['substrate ID'].transform(
+            lambda x: x.fillna(method='ffill').fillna(method='bfill'))
+        df['SMILES'] = df.groupby('molecule ID')['SMILES'].transform(
+            lambda x: x.fillna(method='ffill').fillna(method='bfill'))
+        return df
 ##################################################################################
 
 
@@ -245,46 +248,37 @@ def data_report(df, display_limit=None):
 
 
 def two_split_report(train_set, test_set):
-    # Calculate NaN counts and empty string counts for train and test sets
     nan_check_train_set = train_set.isnull().sum()
     empty_check_train_set = train_set.applymap(lambda x: isinstance(x, str) and x == '').sum()
-
     nan_check_test_set = test_set.isnull().sum()
     empty_check_test_set = test_set.applymap(lambda x: isinstance(x, str) and x == '').sum()
-
-    # Concatenate results side by side
     result = pd.concat(
         [nan_check_train_set, empty_check_train_set, nan_check_test_set, empty_check_test_set], axis=1)
     result.columns = ['NaNTrain', 'NullTrain', 'NaNTest', 'NullTest']
     test_to_data = round(len(test_set) / (len(test_set) + len(train_set)), 2)
     number_data=len(train_set) + len(test_set)
-
     return result, number_data, test_to_data
 
 
 def three_split_report(train_set, test_set, val_set):
-    # Calculate NaN counts and empty string counts for train and test sets
     nan_check_train_set = train_set.isnull().sum()
     empty_check_train_set = train_set.applymap(lambda x: isinstance(x, str) and x == '').sum()
-
     nan_check_test_set = test_set.isnull().sum()
     empty_check_test_set = test_set.applymap(lambda x: isinstance(x, str) and x == '').sum()
-
     nan_check_val_set = val_set.isnull().sum()
     empty_check_val_set = val_set.applymap(lambda x: isinstance(x, str) and x == '').sum()
-
-    # Concatenate results side by side
     result = pd.concat(
         [nan_check_train_set, empty_check_train_set, nan_check_test_set, empty_check_test_set, nan_check_val_set, empty_check_val_set], axis=1)
     result.columns = ['nanTrain', 'NullTrain', 'NaNTest', 'NullTest', 'nanVal','NullVal']
     test_to_data = round(len(test_set) / (len(test_set) + len(train_set) + len(val_set)), 2)
     val_to_data = round(len(val_set) / (len(test_set) + len(train_set) + len(val_set)), 2)
     number_data=len(train_set) + len(test_set) + len(val_set)
-
     return result, number_data , test_to_data, val_to_data
 
 
 def plot_top_keys_values(df, key_column, xlabel, ylabel, title, color='blue', figsize=(12, 10), top_count=30):
+    caller_frame = inspect.currentframe().f_back
+    df_name = [var_name for var_name, var in caller_frame.f_locals.items() if var is df][0]
     counter = collections.Counter(df[key_column])
     top = counter.most_common(top_count)
     keys, values = zip(*top)
@@ -292,7 +286,7 @@ def plot_top_keys_values(df, key_column, xlabel, ylabel, title, color='blue', fi
     plt.bar(keys, values, color=color, alpha=0.8, label='Data Points')
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
-    plt.title(title)
+    plt.title(title.format(df_name=df_name))  # Format the title with df_name
     plt.xticks(rotation=90, fontsize='xx-small')
     plt.subplots_adjust(bottom=0.25)
     plt.legend()

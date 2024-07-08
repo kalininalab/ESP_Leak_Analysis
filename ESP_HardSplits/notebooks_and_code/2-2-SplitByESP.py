@@ -16,12 +16,17 @@ import torch
 from colorama import init, Fore, Style
 sys.path.append("./additional_code")
 from additional_code.helper_functions import *
-from additional_code.splitByESP_method import *
+from additional_code.split_by_esp_method import *
 from additional_code.negative_data_generator import *
 warnings.filterwarnings("ignore")
 CURRENT_DIR = os.getcwd()
 print(CURRENT_DIR)
 
+
+"""
+The related code to clustering and 2-split method (train:test) was sourced from the ESP repository. 
+We have made modifications to this code to accommodate a 3-split method (train:test:val).
+"""
 
 def main(args):
 
@@ -33,7 +38,7 @@ def main(args):
     if len(split_size) not in [2, 3]:
         raise ValueError("The split-size argument must be a list of either two or three integers.")
 
-    log_file = os.path.join(CURRENT_DIR, "..", "data", "Reports", f'Report_{len(split_size)}Splits_ESP({split_method}){Data_suffix}.log')
+    log_file = os.path.join(CURRENT_DIR, "..", "data", "Reports", f'Report_ESP({split_method}){Data_suffix}_{len(split_size)}S.log')
     if os.path.exists(log_file):
         os.remove(log_file)
     setup_logging(log_file)
@@ -119,7 +124,6 @@ def main(args):
 
     logging.info(f"Clustering the data with CD-HIT DONE")
 
-
     clusters = list(set(data["cluster"]))
     random.seed(1)
     random.shuffle(clusters)
@@ -199,7 +203,7 @@ def main(args):
             None
 
     data.to_pickle(join(CURRENT_DIR, "..", "data",f"{len(split_size)}splits",
-                              f"Uniprot_df_with_seq_identities{len(split_size)}S_ESP({split_method}.pkl"))
+                              f"Uniprot_df_with_seq_identities{len(split_size)}S_ESP({split_method}).pkl"))
 
     if len(split_size) == 2:
         result, total_samples, test_ratio = two_split_report(train, test)
@@ -221,69 +225,39 @@ def main(args):
         val.dropna(subset=['cluster'], inplace=True)
         val.reset_index(drop=True, inplace=True)
 
-    logging.info("Start to create negative data points for the training set...")
+    logging.info(f"Start to create negative data points for the train set...")
     train = drop_samples_without_mol_file(df=train)
     df_metabolites_train, similarity_matrix_train = get_metabolites_and_similarities(df=train)
-    logging.info(f"Number of metabolites in training set: {len(df_metabolites_train)}")
+    logging.info(f"Number of metabolites in train set: {len(df_metabolites_train)}")
     train["Binding"] = 1
     train.reset_index(inplace=True, drop=True)
     train = create_negative_samples(df=train, df_metabolites=df_metabolites_train,
                                     similarity_matrix=similarity_matrix_train)
-    train['ESM1b_ts'] = train.groupby('Uniprot ID')['ESM1b_ts'].transform(
-        lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-    train['Sequence'] = train.groupby('Uniprot ID')['Sequence'].transform(
-        lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-    train['PreGNN'] = train.groupby('molecule ID')['PreGNN'].transform(
-        lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-    train['ECFP'] = train.groupby('molecule ID')['ECFP'].transform(
-        lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-    train['substrate ID'] = train.groupby('molecule ID')['substrate ID'].transform(
-        lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-    train['SMILES'] = train.groupby('molecule ID')['SMILES'].transform(
-        lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-    logging.info("Creating negative data points for the train set DONE")
+    train=map_negative_samples2embedding(train)
+    logging.info(f"Creating negative data points for the train set DONE")
 
-    logging.info("Start to create negative data points for the test set...")
+    logging.info(f"Start to create negative data points for the test set...")
     test = drop_samples_without_mol_file(df=test)
     df_metabolites_test, similarity_matrix_test = get_metabolites_and_similarities(df=test)
     logging.info(f"Number of metabolites in test set: {len(df_metabolites_test)}")
     test["Binding"] = 1
     test.reset_index(inplace=True, drop=True)
-    test = create_negative_samples(df=test, df_metabolites=df_metabolites_test, similarity_matrix=similarity_matrix_test)
-    test['ESM1b_ts'] = test.groupby('Uniprot ID')['ESM1b_ts'].transform(
-        lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-    test['Sequence'] = test.groupby('Uniprot ID')['Sequence'].transform(
-        lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-    test['PreGNN'] = test.groupby('molecule ID')['PreGNN'].transform(
-        lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-    test['ECFP'] = test.groupby('molecule ID')['ECFP'].transform(
-        lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-    test['substrate ID'] = test.groupby('molecule ID')['substrate ID'].transform(
-        lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-    test['SMILES'] = test.groupby('molecule ID')['SMILES'].transform(
-        lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-    logging.info("Creating negative data points for the test set DONE")
+    test = create_negative_samples(df=test, df_metabolites=df_metabolites_test,
+                                    similarity_matrix=similarity_matrix_test)
+    test=map_negative_samples2embedding(test)
+    logging.info(f"Creating negative data points for the test set DONE")
+
     if len(split_size) == 3:
-        logging.info("Start to create negative data points for the val set...")
+        logging.info(f"Start to create negative data points for the val set...")
         val = drop_samples_without_mol_file(df=val)
         df_metabolites_val, similarity_matrix_val = get_metabolites_and_similarities(df=val)
-        logging.info(f"Number of metabolites in val set: {len(df_metabolites_val)}")
+        logging.info(f"Number of metabolites in training set: {len(df_metabolites_val)}")
         val["Binding"] = 1
         val.reset_index(inplace=True, drop=True)
-        val = create_negative_samples(df=val, df_metabolites=df_metabolites_val, similarity_matrix=similarity_matrix_val)
-        val['ESM1b_ts'] = val.groupby('Uniprot ID')['ESM1b_ts'].transform(
-            lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-        val['Sequence'] = val.groupby('Uniprot ID')['Sequence'].transform(
-            lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-        val['PreGNN'] = val.groupby('molecule ID')['PreGNN'].transform(
-            lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-        val['ECFP'] = val.groupby('molecule ID')['ECFP'].transform(
-            lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-        val['substrate ID'] = val.groupby('molecule ID')['substrate ID'].transform(
-            lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-        val['SMILES'] = val.groupby('molecule ID')['SMILES'].transform(
-            lambda x: x.fillna(method='ffill').fillna(method='bfill'))
-        logging.info("Creating negative data points for the val set DONE")
+        val = create_negative_samples(df=val, df_metabolites=df_metabolites_val,
+                                        similarity_matrix=similarity_matrix_val)
+        val=map_negative_samples2embedding(val)
+        logging.info(f"Creating negative data points for the val set DONE")
 
     if len(split_size) == 2:
         result, total_samples, test_ratio = two_split_report(train, test)
@@ -299,11 +273,11 @@ def main(args):
 
     dict_train = collections.Counter(train["Binding"])
     dict_test = collections.Counter(test["Binding"])
-    logging.info(f"the ratio of negative to positive data in train: {round(dict_train[0] / dict_train[1], 2)}")
-    logging.info(f"the ratio of negative to positive data in test: {round(dict_test[0] / dict_test[1], 2)}")
+    logging.info(f"The ratio of negative to positive data in train: {round(dict_train[0] / dict_train[1], 2)}")
+    logging.info(f"The ratio of negative to positive data in test: {round(dict_test[0] / dict_test[1], 2)}")
     if len(split_size) == 3:
         dict_val = collections.Counter(val["Binding"])
-        logging.info(f"the ratio of negative to positive data in val: {round(dict_val[0] / dict_val[1], 2)}")
+        logging.info(f"The ratio of negative to positive data in val: {round(dict_val[0] / dict_val[1], 2)}")
 
     train.reset_index(drop=True, inplace=True)
     test.reset_index(drop=True, inplace=True)
