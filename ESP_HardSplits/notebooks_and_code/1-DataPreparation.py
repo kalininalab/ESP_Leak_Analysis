@@ -18,18 +18,6 @@ warnings.filterwarnings("ignore")
 CURRENT_DIR = os.getcwd()
 print(CURRENT_DIR)
 
-"""
-Attention: to completely run this script the following files should be located in data_ESP folder
-
-UNIPROT_df.pkl			
-chebiID_to_inchi.tsv
-df_UID_MID.pkl
-df_test_with_ESM1b_ts_GNN.pkl
-df_train_with_ESM1b_ts_GNN.pkl
-
-Please download all of them from  ESP model repository:
-https://github.com/AlexanderKroll/ESP/tree/main/data/splits
-"""
 
 ######
 # Extract all experimental data point from train and test set

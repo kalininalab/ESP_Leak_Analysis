@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
 import xgboost as xgb
-from sklearn.metrics import roc_auc_score, matthews_corrcoef, confusion_matrix, precision_recall_curve, roc_curve, accuracy_score, log_loss, auc
+from sklearn.metrics import roc_auc_score, matthews_corrcoef, confusion_matrix, precision_recall_curve, roc_curve, \
+    accuracy_score, log_loss, auc
 from hyperopt import fmin, tpe, hp, Trials, rand, space_eval
 import logging
 from os.path import join
@@ -14,11 +15,12 @@ import warnings
 import argparse
 import os.path
 from colorama import init, Fore, Style
+
 sys.path.append("./additional_code")
 from additional_code.helper_functions import *
 from additional_code.negative_data_generator import *
-warnings.filterwarnings("ignore")
 
+warnings.filterwarnings("ignore")
 
 
 def main(args):
@@ -28,29 +30,29 @@ def main(args):
     Data_suffix = args.Data_suffix
     column_name = args.column_name
 
-    logging.basicConfig(filename=join(CURRENT_DIR,"..","data","Reports",f"HOP_ESM1bts_and_{column_name}_{split_method}{Data_suffix}_3S.log"), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    logging.basicConfig(filename=join(CURRENT_DIR, "..", "data", "Reports",
+                                      f"HOP_ESM1bts_and_{column_name}_{split_method}{Data_suffix}_3S.log"),
+                        level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     console_handler = logging.StreamHandler()
     console_handler.setLevel(logging.INFO)
     console_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
     logging.getLogger().addHandler(console_handler)
 
-
-    def load_data(file_path):
+    def load_data(file_path,column):
         try:
             df = pd.read_pickle(file_path)
             df = df[df["ESM1b_ts"].apply(lambda x: len(x) > 0)]
             df = df.loc[df["type"] != "engqvist"]
-            df = df[df["GNN rep (pretrained)"].apply(lambda x: len(x) > 0)]
-            df = df[df["ECFP"].apply(lambda x: len(x) > 0)]
+            df = df[df[column].apply(lambda x: len(x) > 0)]
             df.reset_index(inplace=True, drop=True)
             return df
         except Exception as e:
             logging.error(f"Error loading data from {file_path}: {e}")
             raise
 
-    df_train = load_data(join(CURRENT_DIR, "..", "data", "3splits", f"train_{split_method}{Data_suffix}_3S.pkl"))
-    df_test = load_data(join(CURRENT_DIR, "..", "data", "3splits", f"test_{split_method}{Data_suffix}_3S.pkl"))
-    df_val = load_data(join(CURRENT_DIR, "..", "data", "3splits", f"val_{split_method}{Data_suffix}_3S.pkl"))
+    df_train = load_data(join(CURRENT_DIR, "..", "data", "3splits", f"train_{split_method}{Data_suffix}_3S.pkl"),column=column_name)
+    df_test = load_data(join(CURRENT_DIR, "..", "data", "3splits", f"test_{split_method}{Data_suffix}_3S.pkl"),column=column_name)
+    df_val = load_data(join(CURRENT_DIR, "..", "data", "3splits", f"val_{split_method}{Data_suffix}_3S.pkl"),column=column_name)
 
     def create_input_and_output_data(df):
         X = []
@@ -67,14 +69,14 @@ def main(args):
     test_X, test_y = create_input_and_output_data(df_test)
     val_X, val_y = create_input_and_output_data(df_val)
 
-    if column_name=="ECFP":
-        feature_names = [column_name+"_" + str(i) for i in range(1024)] + ["ESM1b_ts_" + str(i) for i in range(1280)]
+    if column_name == "ECFP":
+        feature_names = [column_name + "_" + str(i) for i in range(1024)] + ["ESM1b_ts_" + str(i) for i in range(1280)]
     else:
         feature_names = [column_name + "_" + str(i) for i in range(50)] + ["ESM1b_ts_" + str(i) for i in range(1280)]
 
     def optimize_hyperparameters(param):
         num_round = int(param["num_rounds"])
-        #param["tree_method"] = "gpu_hist"
+        # param["tree_method"] = "gpu_hist"
         param["tree_method"] = "hist"
         param["device"] = "cuda"
         param["sampling_method"] = "gradient_based"
@@ -100,6 +102,11 @@ def main(args):
         logging.info(f"AUC-ROC: {roc_auc}")
         mcc = matthews_corrcoef(val_y, y_val_pred)
 
+        # Calculate loss
+        false_positive = 100 * (1 - np.mean(np.array(val_y)[y_val_pred == 1]))
+        false_negative = 100 * (np.mean(np.array(val_y)[y_val_pred == 0]))
+        loss = 2 * (false_negative ** 2) + false_positive ** 1.3
+
         # Log confusion matrix
         confusion_mat = confusion_matrix(val_y, y_val_pred)
         wandb.log({"confusion_matrix": confusion_mat.tolist()})
@@ -111,8 +118,9 @@ def main(args):
         precision, recall, _ = precision_recall_curve(val_y, bst.predict(dval))
         wandb.log({"precision_recall_curve": {"precision": precision.tolist(), "recall": recall.tolist()}})
 
-        # Return negative MCC as we want to maximize it
-        return -mcc
+        wandb.config.update(param, allow_val_change=True)
+        wandb.log({"loss": np.mean(loss), "roc_auc": roc_auc, "mcc": mcc, "hyperparameters": param})
+        return np.mean(loss)
 
     # Define search space for hyperparameter optimization
     space = {
@@ -128,13 +136,13 @@ def main(args):
 
     # Perform hyperparameter optimization
     trials = Trials()
-    for i in range(1, 501):
+    for i in range(1, 1001):
         try:
-            best = fmin(fn=optimize_hyperparameters,space=space,algo=rand.suggest,max_evals=i,
+            best = fmin(fn=optimize_hyperparameters, space=space, algo=rand.suggest, max_evals=i,
                         trials=trials)
 
             logging.info(f"Iteration {i}")
-            logging.info(f"Best -MCC so far: {trials.best_trial['result']['loss']}")
+            logging.info(f"Best loss so far: {trials.best_trial['result']['loss']}")
             logging.info(f"Best hyperparameters so far: {trials.argmin}")
         except Exception as e:
             logging.error(f"Error during hyperparameter optimization: {e}")
@@ -154,10 +162,9 @@ def main(args):
     bst_final = xgb.train(best_params, dtrain_final, int(trials.argmin['num_rounds']), verbose_eval=1)
     # Evaluate final model on validation set
     dval = xgb.DMatrix(val_X, label=val_y, feature_names=feature_names)
-    y_val_pred =np.round(bst_final.predict(dval))
+    y_val_pred = np.round(bst_final.predict(dval))
     roc_auc_val = roc_auc_score(val_y, bst_final.predict(dval))
     mcc_val = matthews_corrcoef(val_y, y_val_pred)
-
 
     # Calculate accuracy and loss for validation set
     accuracy_val = accuracy_score(val_y, y_val_pred)
@@ -170,12 +177,19 @@ def main(args):
     print("Loss: %.4f" % loss_val)
 
     # Save validation results
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S", f"y_val_pred_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), bst_final.predict(dval))
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S", f"y_val_true_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), val_y)
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S", f"roc_auc_val_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), roc_auc_val)
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S", f"mcc_val_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), mcc_val)
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S", f"accuracy_val_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), accuracy_val)
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S", f"loss_val_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), loss_val)
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
+                 f"y_val_pred_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"),
+            bst_final.predict(dval))
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
+                 f"y_val_true_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), val_y)
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
+                 f"roc_auc_val_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), roc_auc_val)
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
+                 f"mcc_val_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), mcc_val)
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
+                 f"accuracy_val_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), accuracy_val)
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
+                 f"loss_val_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), loss_val)
 
     # Evaluate final model on test set
     dtest = xgb.DMatrix(test_X, label=test_y, feature_names=feature_names)
@@ -194,12 +208,19 @@ def main(args):
     print("Loss: %.4f" % loss_test)
 
     # Save test results
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S", f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), bst_final.predict(dtest))
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S", f"y_test_true_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), test_y)
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S", f"roc_auc_test_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), roc_auc_test)
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S", f"mcc_test_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), mcc_test)
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S", f"accuracy_test_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), accuracy_test)
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S", f"loss_test_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), loss_test)
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
+                 f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"),
+            bst_final.predict(dtest))
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
+                 f"y_test_true_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), test_y)
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
+                 f"roc_auc_test_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), roc_auc_test)
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
+                 f"mcc_test_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), mcc_test)
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
+                 f"accuracy_test_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), accuracy_test)
+    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
+                 f"loss_test_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_3S.npy"), loss_test)
 
 
 if __name__ == "__main__":
@@ -209,7 +230,7 @@ if __name__ == "__main__":
                         help="The split method should be one of [C2,C1e, C1f, I1e, I1f, ESP]")
     parser.add_argument('--column-name', type=str, required=True,
                         help="The column name should be one of [ ECFP , PreGNN]")
-    parser.add_argument('--Data-suffix',default="", type=str, required=True,
+    parser.add_argument('--Data-suffix', default="", type=str, required=True,
                         help="The Dataframe suffix name should be one of [ _NoATP ,  _D3408 , ''] ")
     args = parser.parse_args()
     main(args)
