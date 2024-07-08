@@ -15,11 +15,9 @@ import warnings
 import argparse
 import os.path
 from colorama import init, Fore, Style
-
 sys.path.append("./additional_code")
 from additional_code.helper_functions import *
 from additional_code.negative_data_generator import *
-
 warnings.filterwarnings("ignore")
 
 
@@ -38,7 +36,7 @@ def main(args):
     console_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
     logging.getLogger().addHandler(console_handler)
 
-    def load_data(file_path,column):
+    def load_data(file_path, column):
         try:
             df = pd.read_pickle(file_path)
             df = df[df["ESM1b_ts"].apply(lambda x: len(x) > 0)]
@@ -50,9 +48,12 @@ def main(args):
             logging.error(f"Error loading data from {file_path}: {e}")
             raise
 
-    df_train = load_data(join(CURRENT_DIR, "..", "data", "3splits", f"train_{split_method}{Data_suffix}_3S.pkl"),column=column_name)
-    df_test = load_data(join(CURRENT_DIR, "..", "data", "3splits", f"test_{split_method}{Data_suffix}_3S.pkl"),column=column_name)
-    df_val = load_data(join(CURRENT_DIR, "..", "data", "3splits", f"val_{split_method}{Data_suffix}_3S.pkl"),column=column_name)
+    df_train = load_data(join(CURRENT_DIR, "..", "data", "3splits", f"train_{split_method}{Data_suffix}_3S.pkl"),
+                         column=column_name)
+    df_test = load_data(join(CURRENT_DIR, "..", "data", "3splits", f"test_{split_method}{Data_suffix}_3S.pkl"),
+                        column=column_name)
+    df_val = load_data(join(CURRENT_DIR, "..", "data", "3splits", f"val_{split_method}{Data_suffix}_3S.pkl"),
+                       column=column_name)
 
     def create_input_and_output_data(df):
         X = []
@@ -117,7 +118,6 @@ def main(args):
         # Log precision-recall curve
         precision, recall, _ = precision_recall_curve(val_y, bst.predict(dval))
         wandb.log({"precision_recall_curve": {"precision": precision.tolist(), "recall": recall.tolist()}})
-
         wandb.config.update(param, allow_val_change=True)
         wandb.log({"loss": np.mean(loss), "roc_auc": roc_auc, "mcc": mcc, "hyperparameters": param})
         return np.mean(loss)
@@ -136,7 +136,7 @@ def main(args):
 
     # Perform hyperparameter optimization
     trials = Trials()
-    for i in range(1, 1001):
+    for i in range(1, 501):
         try:
             best = fmin(fn=optimize_hyperparameters, space=space, algo=rand.suggest, max_evals=i,
                         trials=trials)

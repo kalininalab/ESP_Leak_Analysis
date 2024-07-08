@@ -284,14 +284,12 @@ def three_split_report(train_set, test_set, val_set):
     return result, number_data , test_to_data, val_to_data
 
 
-def plot_top_keys_values(df, key_column, value_column, xlabel, ylabel, title, color='blue', figsize=(12, 10),
-                         top_count=30):
-    dict = collections.Counter(df[key_column])
-    top = dict.most_common(top_count)
-    print(top)
+def plot_top_keys_values(df, key_column, xlabel, ylabel, title, color='blue', figsize=(12, 10), top_count=30):
+    counter = collections.Counter(df[key_column])
+    top = counter.most_common(top_count)
     keys, values = zip(*top)
     plt.figure(figsize=figsize)
-    plt.bar(keys, values, color=color, alpha=0.8)
+    plt.bar(keys, values, color=color, alpha=0.8, label='Data Points')
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.title(title)

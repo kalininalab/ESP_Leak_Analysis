@@ -29,32 +29,18 @@ train_set = pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "df_train
 test_set = pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "df_test_with_ESM1b_ts_GNN.pkl"))
 train_set=train_set[train_set["Binding"]==1]
 test_set=test_set[test_set["Binding"]==1]
-
 # Drop not used columns
 columns_to_drop = ['ECFP_2048', 'ECFP_512','ESM1b', 'GNN rep','ESM1b_ts_mean']
 train_set.drop(columns=columns_to_drop, inplace=True)
 test_set.drop(columns=columns_to_drop, inplace=True)
-
 # Drop for nan value
 train_set.dropna(subset=['ECFP','ESM1b_ts'], inplace=True)
 test_set.dropna(subset=['ECFP','ESM1b_ts'], inplace=True)
-
-result, total_samples, test_ratio = two_split_report(train_set, test_set)
-print(result.to_string())
-print(f"Total number of samples: {total_samples}")
-print(f"Ratio of test set to total dataset: {test_ratio}")
 # Drop for empty string
 train_set = train_set[~(train_set['GNN rep (pretrained)'].str.strip() == '')]
 test_set = test_set[~(test_set['GNN rep (pretrained)'].str.strip() == '')]
-
-result, total_samples, test_ratio = two_split_report(train_set, test_set)
-print(result.to_string())
-print(f"Total number of samples: {total_samples}")
-print(f"Ratio of test set to total dataset: {test_ratio}")
-
 train_set.reset_index(drop=True, inplace=True)
 test_set.reset_index(drop=True, inplace=True)
-
 data_ESP = pd.concat([train_set, test_set], ignore_index=True)
 data_ESP['substrate ID'] = data_ESP['substrate ID'].str.replace('CHEBI:', '')
 UNIPROT_df = pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "UNIPROT_df.pkl"))
@@ -73,8 +59,9 @@ uniprot_id_to_seq = dict(zip(UNIPROT_df['Uniprot ID'], UNIPROT_df['Sequence']))
 mol_id_to_smiles = dict(zip(data_pro['molecule ID'], data_pro['SMILES']))
 data_ESP['Sequence'] = data_ESP['Uniprot ID'].map(uniprot_id_to_seq)
 data_ESP['SMILES'] = data_ESP['molecule ID'].map(mol_id_to_smiles)
+data_ESP.rename(columns={'GNN rep (pretrained)': 'PreGNN'})
 data_ESP.reset_index(drop=True, inplace=True)
-
+print(data_report(data_ESP))
 
 ###########
 # Prepare data for split
@@ -89,7 +76,6 @@ data_ESP=pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP.pkl
 plot_top_keys_values(
     data_ESP,
     key_column="molecule ID",
-    value_column=None,
     xlabel='molecule ID',
     ylabel='Count',
     title='Number of data point per molecule ID',
@@ -100,11 +86,10 @@ plot_top_keys_values(
 ATP_ids={'CHEBI:30616','C00002'}
 # Remove ATP
 data_ESP_NOATP = data_ESP[~data_ESP['molecule ID'].isin(ATP_ids)]
-print(f"number of ATP Ids{len(data_ESP['molecule ID'].isin(ATP_ids))}")
+print(f"number of ATP: {len(data_ESP[data_ESP['molecule ID'].isin(ATP_ids)])}")
 plot_top_keys_values(
     data_ESP_NOATP,
     key_column="molecule ID",
-    value_column=None,
     xlabel='molecule ID',
     ylabel='Count',
     title='Number of data point per molecule ID',
@@ -114,7 +99,7 @@ plot_top_keys_values(
 )
 data_ESP_NOATP.reset_index(drop=True, inplace=True)
 data_ESP_NOATP.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP_NoATP.pkl"))
-
+print(data_report(data_ESP_NOATP))
 # Random delete of 3408 data points
 data_ESP=pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP.pkl"))
 # 18313-14905=3408
@@ -127,7 +112,6 @@ data_ESP_D3408.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP_D3
 plot_top_keys_values(
     data_ESP_D3408,
     key_column="molecule ID",
-    value_column=None,
     xlabel='molecule ID',
     ylabel='Count',
     title='Number of data point per molecule ID',
@@ -135,3 +119,4 @@ plot_top_keys_values(
     figsize=(14, 12),
     top_count=100
 )
+print(data_report(data_ESP_D3408))

@@ -9,6 +9,13 @@ from Bio import SeqIO
 from os.path import join, exists, abspath, isdir, dirname
 import subprocess
 
+
+"""
+Imprtant: All these funtion has been taken from ESP repository:
+https://github.com/AlexanderKroll/ESP
+Code for creating cluster of enzyme by enzyme sequence identity. Code was created by Martin Engqvist:
+
+"""
 def remove_header_gaps(folder, infile, outfile):
     '''
     CD-HIT truncates fasta record headers at whitespace,
@@ -305,86 +312,3 @@ def find_cluster_members_60(folder, filename):
     df = pd.DataFrame.from_dict(clusters_for_df, orient='columns')
 
     return df
-
-
-def kfold_by(df, key, k=5):
-    """K-Split dataset `df` by values in `key` into `k` groups.
-
-    Parameters
-    ----------
-    df: pandas.DataFrame
-    key: str
-        columns to use as splitting
-    k: int
-        number of groups.
-
-    Returns
-    -------
-    k*(groups): pandas.DataFrame
-        each df is the training set of the fold
-
-    """
-    kf = KFold(n_splits=k, random_state=4321, shuffle=True)
-    set_keys = np.unique(df[key])
-    return [
-        df[df[key].isin(set_keys[train_index])]
-        for train_index, _ in kf.split(set_keys)
-    ]
-
-
-def split_by(df, key, frac=0.8):
-    """Split dataset `df` by values in `key`.
-
-    Parameters
-    ----------
-    df: pandas.DataFrame
-    key: str
-        columns to use as splitting
-    frac: float
-        fraction of `key` groups into `df`.
-
-    Returns
-    -------
-    (train, test, valid): pandas.DataFrames
-
-    """
-    # shuffle the data frame
-    df = df.sample(frac=1, random_state=4321).reset_index(drop=True)
-
-    # get all the unique identifiers
-    set_keys = np.unique(df[key])
-
-    # get the training identifiers
-    train_clusters = np.random.choice(
-        set_keys, size=int(len(set_keys) * frac), replace=False
-    )
-    train = df[df[key].isin(train_clusters)]
-
-    # from the remaining ones, put half as validation and half as test
-    remaining = df[~df.index.isin(train.index)]
-    # valid and test sets will have equal sizes of 1-frac
-    # at this point we are not worried about `key` anymore
-    valid = remaining.sample(frac=1 / 2)
-    test = remaining[~remaining.index.isin(valid.index)]
-    return train, test, valid
-
-
-def make_splits(folder, df):
-    '''
-    Takes an input data frame with information on cluster
-    belongings and generates train/validation/test splits for DL.
-    '''
-    # make train/validation/test splits for DL
-    train, validation, test = split_by(df, "cluster", frac=0.8)
-
-    train.drop('cluster', axis=1).to_csv(join(folder, f"split_training.tsv"),
-                 sep="\t", index=False, header=False)
-
-    validation.drop('cluster', axis=1).to_csv(join(folder, f"split_validation.tsv"),
-                      sep="\t", index=False, header=False)
-
-    test.drop('cluster', axis=1).to_csv(join(folder, "split_test.tsv"),
-                sep="\t", index=False, header=False)
-
-
-

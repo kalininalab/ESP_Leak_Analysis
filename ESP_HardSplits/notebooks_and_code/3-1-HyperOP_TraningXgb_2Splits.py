@@ -52,9 +52,9 @@ def main(args):
         except Exception as e:
             logging.error(f"Error loading data from {file_path}: {e}")
             raise
+    df_train = load_data(join(CURRENT_DIR, "..", "data", "2splits", f"train_{split_method}{Data_suffix}_2S.pkl"),column=column_name)
 
-    df_train = pd.read_pickle(join(CURRENT_DIR, "..", "data", "2splits", f"train_{split_method}{Data_suffix}_2S.pkl"),column=column_name)
-    df_test = pd.read_pickle(join(CURRENT_DIR, "..", "data", "2splits", f"test_{split_method}{Data_suffix}_2S.pkl"),column=column_name)
+    df_test = load_data(join(CURRENT_DIR, "..", "data", "2splits", f"test_{split_method}{Data_suffix}_2S.pkl"),column=column_name)
 
     def split_dataframe(df, frac):
         df1 = pd.DataFrame(columns=list(df.columns))
@@ -164,8 +164,8 @@ def main(args):
     train_X, train_y = create_input_and_output_data(df=df_train, column=column_name)
     test_X, test_y = create_input_and_output_data(df=df_test, column=column_name)
 
-    if column_name == "ECFP":
-        feature_names = [column_name + "_" + str(i) for i in range(1024)] + ["ESM1b_ts_" + str(i) for i in range(1280)]
+    if column_name=="ECFP":
+        feature_names = [column_name+"_" + str(i) for i in range(1024)] + ["ESM1b_ts_" + str(i) for i in range(1280)]
     else:
         feature_names = [column_name + "_" + str(i) for i in range(50)] + ["ESM1b_ts_" + str(i) for i in range(1280)]
 
@@ -185,6 +185,8 @@ def main(args):
         del param["num_rounds"]
         del param["weight"]
 
+        roc_auc_values = []
+        mcc_values = []
         loss = []
         for i in range(5):
             train_index, test_index = train_indices[i], test_indices[i]
@@ -204,6 +206,10 @@ def main(args):
             logging.info(
                 "False positive rate: " + str(false_positive) + "; False negative rate: " + str(false_negative))
             loss.append(2 * (false_negative ** 2) + false_positive ** 1.3)
+
+            # Update metric lists
+            roc_auc_values.append(roc_auc)
+            mcc_values.append(mcc)
 
             # Log confusion matrix
             confusion_mat = confusion_matrix(validation_y, y_valid_pred)
