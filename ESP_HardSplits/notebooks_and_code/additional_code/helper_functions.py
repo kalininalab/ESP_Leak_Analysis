@@ -336,7 +336,7 @@ def datasail_wrapper(split_method, DataFrame, split_size):
             f_sim="cdhit",
             f_data=dict(DataFrame[["ids", "Sequence"]].values.tolist()),
             epsilon=0,
-            to_sec = 10000
+            to_sec="10000"
         )
     else:
         raise ValueError("Invalid split method provided. Use one of ['C2','C1e', 'C1f', 'I1e', 'I1f']")
