@@ -58,6 +58,7 @@ conda activate SIP
 conda install mamba -n SIP -c conda-forge
 mamba install -c kalininalab -c conda-forge -c bioconda datasail-lite
 pip install grakel
+conda install -c bioconda cd-hit
 conda install pytorch torchvision torchaudio pytorch-cuda -c pytorch -c nvidia
 conda install conda-forge::xgboost
 pip install biopython==1.84
@@ -80,12 +81,12 @@ After running this script, three different versions of the data will be generate
 
 #### 2- Run 2-1-SplitByDataSAIL.py
 ```
-python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e I1f] --split-number [8 2, 7 2 1] --Data-suffix ['', _NoATP ,_D3408]
+python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e I1f] --split-size [8 2, 7 2 1] --Data-suffix ['', _NoATP ,_D3408]
 ```
 Explanation of Arguments:
 
      --split-method [C2, C1e, C1f, I1e, I1f]: Specifies the methods used for splitting the data.
-     --split-number [8 2, 7 2 1]: Defines the number of splits for each method.
+     --split-size [8 2, 7 2 1]: Defines the number of splits for each method.
      --Data-suffix ['', _NoATP, _D3408]: Indicates which data files to parse.
 
 Data Suffix Details:
@@ -96,7 +97,7 @@ Data Suffix Details:
 
 ##### Example:
 ```
-python 2-1-SplitByDataSAIL.py --split-method C1e --split-number 8 2 --Data-suffix ''
+python 2-1-SplitByDataSAIL.py --split-method C1e --split-size 8 2 --Data-suffix ''
 ```
 Output files:
 ```
