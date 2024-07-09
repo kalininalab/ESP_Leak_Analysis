@@ -79,35 +79,17 @@ After running this script, three different versions of the data will be generate
     dataESP_D3408.pkl: This dataset randomly removes 3408 data points from dataESP (equivalent to the number of ATP points).
 
 
-| split          | 2splits  | training | 3splits  | training |
-|----------------|----------|----------|----------|----------|
-| C1e            | Yes      | ESM+PGNN | Yes      | ESM+PGNN |
-|                |          | ESM+ECFP |          | ESM+ECFP |
-|----------------|----------|----------|----------|----------|
-| C1f            | Yes      | ESM+PGNN | Yes      | ESM+PGNN |
-|                |          | ESM+ECFP |          | ESM+ECFP |
-|----------------|----------|----------|----------|----------|
-| I1e            | Yes      | ESM+PGNN | Yes      | ESM+PGNN |
-|                |          | ESM+ECFP |          | ESM+ECFP |
-|----------------|----------|----------|----------|----------|
-| I1f            | Yes      | ESM+PGNN | Yes      | ESM+PGNN |
-|                |          | ESM+ECFP |          | ESM+ECFP |
-|----------------|----------|----------|----------|----------|
-| C2             | Yes      | ESM+PGNN | No       |          |
-|                |          | ESM+ECFP |          |          |
-|----------------|----------|----------|----------|----------|
-| ESP(C1e)       | Yes      | ESM+PGNN | No       |          |
-|                |          | ESM+ECFP |          |          |
-|----------------|----------|----------|----------|----------|
-| ESP(C2)        | Yes      | ESM+PGNN | No       |          |
-|                |          | ESM+ECFP |          |          |
-|----------------|----------|----------|----------|----------|
-| ESP(C1e)_NoATP | Yes      | ESM+PGNN | No       |          |
-|                |          | ESM+ECFP |          |          |
-|----------------|----------|----------|----------|----------|
-| ESP(C1e)_D3408 | Yes      | ESM+PGNN | No       |          |
-|                |          | ESM+PGNN |          |          | 
-|----------------|----------|----------|----------|----------|
+| split          | 2splits  | training      | 3splits    | training       |
+|----------------|----------|---------------|------------|----------------|
+| C1e            | Yes      | ESM+PGNN/ECFP | Yes        | ESM+PGNN/ECFP  |
+| C1f            | Yes      | ESM+PGNN/ECFP | Yes        | ESM+PGNN/ECFP  |
+| I1e            | Yes      | ESM+PGNN/ECFP | Yes        | ESM+PGNN/ECFP  |
+| I1f            | Yes      | ESM+PGNN/ECFP | Yes        | ESM+PGNN/ECFP  |
+| C2             | Yes      | ESM+PGNN/ECFP | No         |                |
+| ESP(C1e)       | Yes      | ESM+PGNN/ECFP | No         |                |
+| ESP(C2)        | Yes      | ESM+PGNN/ECFP | No         |                |
+| ESP(C1e)_NoATP | Yes      | ESM+PGNN/ECFP | No         |                |
+| ESP(C1e)_D3408 | Yes      | ESM+PGNN/ECFP | No         |                |
 
 
 
