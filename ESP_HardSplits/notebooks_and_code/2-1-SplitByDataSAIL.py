@@ -130,11 +130,11 @@ def main(args):
 
     dict_train = collections.Counter(train["Binding"])
     dict_test = collections.Counter(test["Binding"])
-    logging.info(f"the ratio of negative to positive data in train: {round(dict_train[0] / dict_train[1], 2)}")
-    logging.info(f"the ratio of negative to positive data in test: {round(dict_test[0] / dict_test[1], 2)}")
+    logging.info(f"The ratio of negative to positive data in train: {round(dict_train[0] / dict_train[1], 2)}")
+    logging.info(f"The ratio of negative to positive data in test: {round(dict_test[0] / dict_test[1], 2)}")
     if len(split_size) == 3:
         dict_val = collections.Counter(val["Binding"])
-        logging.info(f"the ratio of negative to positive data in val: {round(dict_val[0] / dict_val[1], 2)}")
+        logging.info(f"The ratio of negative to positive data in val: {round(dict_val[0] / dict_val[1], 2)}")
 
     train.reset_index(drop=True, inplace=True)
     test.reset_index(drop=True, inplace=True)
