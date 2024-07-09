@@ -20,6 +20,10 @@ from additional_code.negative_data_generator import *
 warnings.filterwarnings("ignore")
 
 
+"""
+The related code to generate negative data points was sourced from the ESP repository. 
+"""
+
 def main(args):
     CURRENT_DIR = os.getcwd()
     split_method = args.split_method
