@@ -35,48 +35,48 @@ SIP/
 ```
 
 ### Setting up `SIP` Environment
-It is recommended to install the packages in order
+* It is recommended to install the packages in order
 
-For MacOSX M1 desktop 
-```bash
-conda create --name SIP python=3.12.0
-conda activate SIP
-conda install mamba -n SIP -c conda-forge
-mamba install -c kalininalab -c conda-forge -c bioconda datasail-lite
-pip install grakel
-pip install xgboost==2.1.0
-pip install biopython==1.84
-pip install torch==2.3.1
-pip install hyperopt==0.2.7
-pip install colorama==0.4.6
-pip install libchebipy==1.0.10
-```
-For server with linux OS
-```
-conda create --name SIP python=3.12.0
-conda activate SIP
-conda install mamba -n SIP -c conda-forge
-mamba install -c kalininalab -c conda-forge -c bioconda datasail-lite
-pip install grakel
-conda install -c bioconda cd-hit
-conda install pytorch torchvision torchaudio pytorch-cuda -c pytorch -c nvidia
-conda install conda-forge::xgboost
-pip install biopython==1.84
-pip install hyperopt==0.2.7
-pip install colorama==0.4.6
-pip install libchebipy==1.0.10
-pip install wandb
-```
-### Getting Started
+* For MacOSX M1 desktop 
 
-#### 1- Run 1-DataPreparation.py to generate all data set need to perform data split
-After running this script, three different versions of the data will be generated:
+      conda create --name SIP python=3.12.0
+      conda activate SIP
+      conda install mamba -n SIP -c conda-forge
+      mamba install -c kalininalab -c conda-forge -c bioconda datasail-lite
+      pip install grakel
+      pip install xgboost==2.1.0
+      pip install biopython==1.84
+      pip install torch==2.3.1
+      pip install hyperopt==0.2.7
+      pip install colorama==0.4.6
+      pip install libchebipy==1.0.10
 
-    dataESP.pkl: Original ESP data containing only positive data points with experimental evidence.
+* For server with linux OS
 
-    dataESP_NoATP.pkl: This dataset excludes all ATP data points from dataESP.
+      conda create --name SIP python=3.12.0
+      conda activate SIP
+      conda install mamba -n SIP -c conda-forge
+      mamba install -c kalininalab -c conda-forge -c bioconda datasail-lite
+      pip install grakel
+      conda install -c bioconda cd-hit
+      conda install pytorch torchvision torchaudio pytorch-cuda -c pytorch -c nvidia
+      conda install conda-forge::xgboost
+      pip install biopython==1.84
+      pip install hyperopt==0.2.7
+      pip install colorama==0.4.6
+      pip install libchebipy==1.0.10
+      pip install wandb
 
-    dataESP_D3408.pkl: This dataset randomly removes 3408 data points from dataESP (equivalent to the number of ATP points).
+### Data Preparation
+
+#### 1-DataPreparation.py 
+* to generate all data set need to perform data split  After running this script, three different versions of the data will be generated:
+
+      dataESP.pkl: Original ESP data containing only positive data points with experimental evidence.
+  
+      dataESP_NoATP.pkl: This dataset excludes all ATP data points from dataESP.
+  
+      dataESP_D3408.pkl: This dataset randomly removes 3408 data points from dataESP (equivalent to the number of ATP points).
 
 
 | split          | 2splits  | training      | 3splits    | training       |
@@ -94,29 +94,29 @@ After running this script, three different versions of the data will be generate
 
 
 
-#### 2- Run 2-1-SplitByDataSAIL.py
+#### 2-1-SplitByDataSAIL.py
 ```
 python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e I1f] --split-size [8 2, 7 2 1] --Data-suffix ['', _NoATP ,_D3408]
 ```
-Explanation of Arguments:
+* Explanation of Arguments:
 
-     --split-method [C2, C1e, C1f, I1e, I1f]: Specifies the methods used for splitting the data.
-     --split-size [8 2, 7 2 1]: Defines the number of splits for each method.
-     --Data-suffix ['', _NoATP, _D3408]: Indicates which data files to parse.
+       --split-method [C2, C1e, C1f, I1e, I1f]: Specifies the methods used for splitting the data.
+       --split-size [8 2, 7 2 1]: Defines the number of splits for each method.
+       --Data-suffix ['', _NoATP, _D3408]: Indicates which data files to parse.
 
-Data Suffix Details:
+* Data Suffix Details:
 
-     '': Parses the dataESP.pkl file.
-     _NoATP: Parses the dataESP_NoATP.pkl file.
-     _D3408: Parses the dataESP_D3408.pkl file.
+       '': Parses the dataESP.pkl file.
+       _NoATP: Parses the dataESP_NoATP.pkl file.
+       _D3408: Parses the dataESP_D3408.pkl file.
 
-##### Example:
-```
-python 2-1-SplitByDataSAIL.py --split-method C1e --split-size 8 2 --Data-suffix ''
-```
-Output files:
-```
-./SIP/data/2splits/train_C1e_2S.pkl
-./SIP/data/2splits/test_C1e_2S.pkl
-./SIP/data/Reports/Report_2Splits_C1e.log
-```
+* Example:
+
+        python 2-1-SplitByDataSAIL.py --split-method C1e --split-size 8 2 --Data-suffix ''
+
+* Output files:
+
+      ./SIP/data/2splits/train_C1e_2S.pkl
+      ./SIP/data/2splits/test_C1e_2S.pkl
+      ./SIP/data/Reports/Report_2Splits_C1e.log
+
