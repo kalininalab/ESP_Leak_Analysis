@@ -175,7 +175,8 @@ def main(args):
 
     train = data.loc[data["Uniprot ID"].isin(training_UIDs)]
     test = data.loc[data["Uniprot ID"].isin(test_UIDs)]
-    val = data.loc[data["Uniprot ID"].isin(validation_UIDs)]
+    if len(split_size) == 3:
+        val = data.loc[data["Uniprot ID"].isin(validation_UIDs)]
 
     df_80["identity"] = np.nan
     df_80["identity"].loc[df_80["split"].isin(["test"])] = "60-80%"
