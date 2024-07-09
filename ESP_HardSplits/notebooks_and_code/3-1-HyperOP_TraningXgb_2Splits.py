@@ -28,7 +28,7 @@ def main(args):
     Data_suffix = args.Data_suffix
     column_name = args.column_name
 
-    logging.basicConfig(filename=join(CURRENT_DIR, "..", "data", "Reports",
+    logging.basicConfig(filename=join(CURRENT_DIR, "..", "data", "Reports", "hyperOp_report",
                                       f"HOP_ESM1bts_and_{column_name}_{split_method}{Data_suffix}_2S.log"),
                         level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 

@@ -39,8 +39,8 @@ def main(args):
     if len(split_size) not in [2, 3]:
         raise ValueError("The split-size argument must be a list of either two or three integers.")
 
-    log_file = os.path.join(CURRENT_DIR, "..", "data", "Reports",
-                            f'Report_ESP({split_method}){Data_suffix}_{len(split_size)}S.log')
+    log_file = os.path.join(CURRENT_DIR, "..", "data", "Reports","split_report",
+                            f"Report_ESP({split_method}){Data_suffix}_{len(split_size)}S.log")
     if os.path.exists(log_file):
         os.remove(log_file)
     setup_logging(log_file)
