@@ -150,7 +150,7 @@ def main(args):
     init()
     logging.info(
         Fore.GREEN + f"***** PROCESS COMPLETED *****\nFor an overview,"
-                     f"please review the Report_{len(split_size)}Splits_{split_method}{Data_suffix}.log file in Reports folder. " + Style.RESET_ALL)
+                     f"please review the Report_{split_method}{Data_suffix}_{len(split_size)}S.log file in Reports folder. " + Style.RESET_ALL)
 
 
 if __name__ == "__main__":
