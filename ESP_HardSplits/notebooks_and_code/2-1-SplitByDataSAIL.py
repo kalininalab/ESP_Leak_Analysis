@@ -72,13 +72,13 @@ def main(args):
     if len(split_size) == 2:
         result, total_samples, test_ratio = two_split_report(train, test)
         logging.info(
-            f"Data report after splitting data by {split_method} split method and check for nan or null cells '\n'{result.to_string()}")
+            f"Data report after splitting data by {split_method} split method and check for NaN or null cells in the data\n{result.to_string()}")
         logging.info(f"Total number of samples: {total_samples}")
         logging.info(f"Ratio of test set to dataset: {test_ratio}")
     elif len(split_size) == 3:
         result, total_samples, test_ratio, val_ratio = three_split_report(train, test, val)
         logging.info(
-            f"Data report after splitting data by {split_method} split method and check for nan or null cells '\n'{result.to_string()}")
+            f"Data report after splitting data by {split_method} split method and check for NaN or null cells in the data\n{result.to_string()}")
         logging.info(f"Total number of samples: {total_samples}")
         logging.info(f"Ratio of test set to dataset: {test_ratio}")
         logging.info(f"Ratio of val set to dataset: {val_ratio}")
@@ -117,13 +117,13 @@ def main(args):
     if len(split_size) == 2:
         result, total_samples, test_ratio = two_split_report(train, test)
         logging.info(
-            f"Data report after adding negative data and check for nan or null data cells '\n'{result.to_string()}")
+            f"Data report after adding negative data and check for NaN or null cells in the data\n{result.to_string()}")
         logging.info(f"Total number of samples: {total_samples}")
         logging.info(f"Ratio of test set to total dataset: {test_ratio}")
     elif len(split_size) == 3:
         result, total_samples, test_ratio, val_ratio = three_split_report(train, test, val)
         logging.info(
-            f"Data report after adding negative data and check for nan or null data cells '\n'{result.to_string()}")
+            f"Data report after adding negative data and check for NaN or null cells in the data\n{result.to_string()}")
         logging.info(f"Total number of samples: {total_samples}")
         logging.info(f"Ratio of test set to dataset: {test_ratio}")
         logging.info(f"Ratio of val set to dataset: {val_ratio}")
@@ -150,7 +150,7 @@ def main(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run the data preprocessing and negative sample generation script.")
+    parser = argparse.ArgumentParser(description="Please check the DataSAL webpage: https://datasail.readthedocs.io/en/latest/index.html")
     parser.add_argument('--split-method', type=str, required=True,
                         help="The split method should be one of [C2,C1e, C1f, I1e, I1f]")
     parser.add_argument('--split-size', type=int, nargs='+', required=True,

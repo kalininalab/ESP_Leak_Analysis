@@ -14,22 +14,23 @@ from Bio import SeqIO
 import warnings
 import torch
 from colorama import init, Fore, Style
+
 sys.path.append("./additional_code")
 from additional_code.helper_functions import *
 from additional_code.split_by_esp_method import *
 from additional_code.negative_data_generator import *
+
 warnings.filterwarnings("ignore")
 CURRENT_DIR = os.getcwd()
 print(CURRENT_DIR)
-
 
 """
 The related code to clustering and 2-split method (train:test) was sourced from the ESP repository. 
 We have made modifications to this code to accommodate a 3-split method (train:test:val).
 """
 
-def main(args):
 
+def main(args):
     CURRENT_DIR = os.getcwd()
     split_method = args.split_method
     split_size = args.split_size
@@ -38,45 +39,54 @@ def main(args):
     if len(split_size) not in [2, 3]:
         raise ValueError("The split-size argument must be a list of either two or three integers.")
 
-    log_file = os.path.join(CURRENT_DIR, "..", "data", "Reports", f'Report_ESP({split_method}){Data_suffix}_{len(split_size)}S.log')
+    log_file = os.path.join(CURRENT_DIR, "..", "data", "Reports",
+                            f'Report_ESP({split_method}){Data_suffix}_{len(split_size)}S.log')
     if os.path.exists(log_file):
         os.remove(log_file)
     setup_logging(log_file)
     logging.info(f"Current Directory: {CURRENT_DIR}")
 
     logging.info(f"Reading the data for {split_method}{Data_suffix}_{len(split_size)}S")
-    train_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits", f"train_ESP({split_method}){Data_suffix}_{len(split_size)}S.pkl")
-    test_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits", f"test_ESP({split_method}){Data_suffix}_{len(split_size)}S.pkl")
-    val_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",f"val_ESP({split_method}){Data_suffix}_{len(split_size)}S.pkl")
+    train_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
+                                     f"train_ESP({split_method}){Data_suffix}_{len(split_size)}S.pkl")
+    test_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
+                                    f"test_ESP({split_method}){Data_suffix}_{len(split_size)}S.pkl")
+    val_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
+                                   f"val_ESP({split_method}){Data_suffix}_{len(split_size)}S.pkl")
 
     if len(split_size) == 2:
-        train = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits", f"train_{split_method}{Data_suffix}_{len(split_size)}S.pkl"))
-        test = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits", f"test_{split_method}{Data_suffix}_{len(split_size)}S.pkl"))
+        train = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
+                                    f"train_{split_method}{Data_suffix}_{len(split_size)}S.pkl"))
+        test = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
+                                   f"test_{split_method}{Data_suffix}_{len(split_size)}S.pkl"))
         data = pd.concat([train, test], ignore_index=True)
         data = data[data["Binding"] == 1]
         data.drop(columns=["ids"], inplace=True)
         data.reset_index(drop=True, inplace=True)
     elif len(split_size) == 3:
-        train = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits", f"train_{split_method}{Data_suffix}_{len(split_size)}S.pkl"))
-        test = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits", f"test_{split_method}{Data_suffix}_{len(split_size)}S.pkl"))
-        val = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",f"val_{split_method}{Data_suffix}_{len(split_size)}S.pkl"))
+        train = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
+                                    f"train_{split_method}{Data_suffix}_{len(split_size)}S.pkl"))
+        test = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
+                                   f"test_{split_method}{Data_suffix}_{len(split_size)}S.pkl"))
+        val = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
+                                  f"val_{split_method}{Data_suffix}_{len(split_size)}S.pkl"))
         data = pd.concat([train, test, val], ignore_index=True)
         data = data[data["Binding"] == 1]
         data.drop(columns=["ids"], inplace=True)
         data.reset_index(drop=True, inplace=True)
 
     logging.info(f"Start Clustering the data with CD-HIT")
-    ofile = open(join(CURRENT_DIR, "..","data", "clusters", f"all_sequences_{len(split_size)}S_ESP{split_method}.fasta"), "w")
+    ofile = open(
+        join(CURRENT_DIR, "..", "data", "clusters", f"all_sequences_{len(split_size)}S_ESP{split_method}.fasta"), "w")
     for ind in data.index:
         seq = data["Sequence"][ind]
         if not pd.isnull(seq):
             seq_end = seq.find("#")
             seq = seq[:seq_end]
-            ofile.write(">" + str(data["Uniprot ID"][ind]) + "\n" + seq  + "\n")
+            ofile.write(">" + str(data["Uniprot ID"][ind]) + "\n" + seq + "\n")
     ofile.close()
 
-
-    cluster_folder = join(CURRENT_DIR, ".." ,"data", "clusters")
+    cluster_folder = join(CURRENT_DIR, "..", "data", "clusters")
     start_folder = cluster_folder
     cluster_all_levels(start_folder,
                        cluster_folder,
@@ -92,16 +102,16 @@ def main(args):
 
     # collect cluster members
     df_80 = find_cluster_members_80(folder=cluster_folder,
-                                           filename=f"all_sequences_{len(split_size)}S_ESP{split_method}")
+                                    filename=f"all_sequences_{len(split_size)}S_ESP{split_method}")
     logging.info(f"Clustering report for 80% similarity'\n'{df_80.describe()}")
 
     cluster_all_levels_60(start_folder,
-                       cluster_folder,
-                       filename=f"all_sequences_{len(split_size)}S_ESP{split_method}")
+                          cluster_folder,
+                          filename=f"all_sequences_{len(split_size)}S_ESP{split_method}")
 
     # collect cluster members
     df_60 = find_cluster_members_60(folder=cluster_folder,
-                           filename=f"all_sequences_{len(split_size)}S_ESP{split_method}")
+                                    filename=f"all_sequences_{len(split_size)}S_ESP{split_method}")
     logging.info(f"Clustering report for 60% similarity'\n'{df_60.describe()}")
 
     # cluster the fasta files
@@ -111,10 +121,9 @@ def main(args):
 
     # collect cluster members
     df_40 = find_cluster_members(folder=cluster_folder,
-                              filename=f"all_sequences_{len(split_size)}S_ESP{split_method}")
+                                 filename=f"all_sequences_{len(split_size)}S_ESP{split_method}")
 
     logging.info(f"Clustering report for 40% similarity'\n'{df_40.describe()}")
-
 
     data["cluster"] = np.nan
     for ind in df_80.index:
@@ -129,23 +138,23 @@ def main(args):
     random.shuffle(clusters)
     print(len(clusters))
     logging.info(f"Start Splitting the data based one {split_size} split size ")
-    if len(split_size)==2:
+    if len(split_size) == 2:
         split_size = split_size[1]
         print(split_size)
         print(type(split_size))
-        n = int(len(clusters)*(split_size/10))
+        n = int(len(clusters) * (split_size / 10))
         train_clusters = clusters[:n]
         test_clusters = clusters[n:]
-    elif len(split_size)==3:
-        n_train = int(len(clusters) * (split_size[0]/10))
-        n_test = int(len(clusters) * (split_size[1]/10))
+    elif len(split_size) == 3:
+        n_train = int(len(clusters) * (split_size[0] / 10))
+        n_test = int(len(clusters) * (split_size[1] / 10))
         train_clusters = clusters[:n_train]
         test_clusters = clusters[n_train:n_train + n_test]
         val_clusters = clusters[n_train + n_test:]
 
     training_UIDs = data["Uniprot ID"].loc[data["cluster"].isin(train_clusters)]
     test_UIDs = data["Uniprot ID"].loc[data["cluster"].isin(test_clusters)]
-    if len(split_size)==3:
+    if len(split_size) == 3:
         validation_UIDs = data["Uniprot ID"].loc[data["cluster"].isin(val_clusters)]
 
     df_80["split"] = np.nan
@@ -156,22 +165,20 @@ def main(args):
     df_80["split"].loc[df_80["cluster"].isin(val_clusters)] = "validation"
     train_members = list(df_80["member"].loc[df_80["split"] == "train"])
     test_members = list(df_80["member"].loc[df_80["split"] == "test"])
-    if len(split_size)==3:
+    if len(split_size) == 3:
         validation_members = list(df_80["member"].loc[df_80["split"] == "validation"])
 
     df_60["split"].loc[df_60["member"].isin(train_members)] = "train"
     df_60["split"].loc[df_60["member"].isin(test_members)] = "test"
     df_40["split"].loc[df_40["member"].isin(train_members)] = "train"
     df_40["split"].loc[df_40["member"].isin(test_members)] = "test"
-    if len(split_size)==3:
+    if len(split_size) == 3:
         df_60["split"].loc[df_60["member"].isin(validation_members)] = "validation"
         df_40["split"].loc[df_40["member"].isin(validation_members)] = "validation"
-
 
     train = data.loc[data["Uniprot ID"].isin(training_UIDs)]
     test = data.loc[data["Uniprot ID"].isin(test_UIDs)]
     val = data.loc[data["Uniprot ID"].isin(validation_UIDs)]
-
 
     df_80["identity"] = np.nan
     df_80["identity"].loc[df_80["split"].isin(["test"])] = "60-80%"
@@ -202,17 +209,19 @@ def main(args):
         except:
             None
 
-    data.to_pickle(join(CURRENT_DIR, "..", "data",f"{len(split_size)}splits",
-                              f"Uniprot_df_with_seq_identities{len(split_size)}S_ESP({split_method}).pkl"))
+    data.to_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
+                        f"Uniprot_df_with_seq_identities{len(split_size)}S_ESP({split_method}).pkl"))
 
     if len(split_size) == 2:
         result, total_samples, test_ratio = two_split_report(train, test)
-        logging.info(f"Data Report after splitting data by ESP split method and check  for nan or null cells '\n'{result.to_string()}")
+        logging.info(
+            f"Data Report after splitting data by ESP split method and check for NaN or null cells in the data\n{result.to_string()}")
         logging.info(f"Total number of samples: {total_samples}")
         logging.info(f"Ratio of test set to total dataset: {test_ratio}")
     elif len(split_size) == 3:
         result, total_samples, test_ratio, val_ratio = three_split_report(train, test, val)
-        logging.info(f"Data Report after splitting data by ESP split method and check for  nan or null cells '\n'{result.to_string()}")
+        logging.info(
+            f"Data Report after splitting data by ESP split method and check for NaN or null cells in the data\n{result.to_string()}")
         logging.info(f"Total number of samples: {total_samples}")
         logging.info(f"Ratio of test set to dataset: {test_ratio}")
         logging.info(f"Ratio of val set to dataset: {val_ratio}")
@@ -221,7 +230,7 @@ def main(args):
     train.reset_index(drop=True, inplace=True)
     test.dropna(subset=['cluster'], inplace=True)
     test.reset_index(drop=True, inplace=True)
-    if len(split_size)==3:
+    if len(split_size) == 3:
         val.dropna(subset=['cluster'], inplace=True)
         val.reset_index(drop=True, inplace=True)
 
@@ -233,7 +242,7 @@ def main(args):
     train.reset_index(inplace=True, drop=True)
     train = create_negative_samples(df=train, df_metabolites=df_metabolites_train,
                                     similarity_matrix=similarity_matrix_train)
-    train=map_negative_samples2embedding(train)
+    train = map_negative_samples2embedding(train)
     logging.info(f"Creating negative data points for the train set DONE")
 
     logging.info(f"Start to create negative data points for the test set...")
@@ -243,8 +252,8 @@ def main(args):
     test["Binding"] = 1
     test.reset_index(inplace=True, drop=True)
     test = create_negative_samples(df=test, df_metabolites=df_metabolites_test,
-                                    similarity_matrix=similarity_matrix_test)
-    test=map_negative_samples2embedding(test)
+                                   similarity_matrix=similarity_matrix_test)
+    test = map_negative_samples2embedding(test)
     logging.info(f"Creating negative data points for the test set DONE")
 
     if len(split_size) == 3:
@@ -255,18 +264,20 @@ def main(args):
         val["Binding"] = 1
         val.reset_index(inplace=True, drop=True)
         val = create_negative_samples(df=val, df_metabolites=df_metabolites_val,
-                                        similarity_matrix=similarity_matrix_val)
-        val=map_negative_samples2embedding(val)
+                                      similarity_matrix=similarity_matrix_val)
+        val = map_negative_samples2embedding(val)
         logging.info(f"Creating negative data points for the val set DONE")
 
     if len(split_size) == 2:
         result, total_samples, test_ratio = two_split_report(train, test)
-        logging.info(f"Data report after adding negative data and check for nan or null cells '\n'{result.to_string()}")
+        logging.info(
+            f"Data report after adding negative data and check for NaN or null cells in the data\n{result.to_string()}")
         logging.info(f"Total number of samples: {total_samples}")
         logging.info(f"Ratio of test set to total dataset: {test_ratio}")
     elif len(split_size) == 3:
         result, total_samples, test_ratio, val_ratio = three_split_report(train, test, val)
-        logging.info(f"Data report after adding negative data and check for nan or null cells '\n'{result.to_string()}")
+        logging.info(
+            f"Data report after adding negative data and check for NaN or null cells in the data\n{result.to_string()}")
         logging.info(f"Total number of samples: {total_samples}")
         logging.info(f"Ratio of test set to dataset: {test_ratio}")
         logging.info(f"Ratio of val set to dataset: {val_ratio}")
@@ -293,12 +304,13 @@ def main(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="The split size in this script is set to 8:2 for two splits and 7:2:1 for three splits.")
+    parser = argparse.ArgumentParser(
+        description=f"This script generates a control case for each split method of DataSAIL by combining the related split results from DataSAIL and re-splitting them using the ESP method")
     parser.add_argument('--split-method', type=str, required=True,
                         help="The split method should be one of [C2,C1e, C1f, I1e, I1f]")
     parser.add_argument('--split-size', type=int, nargs='+', required=True,
                         help="List of integers for splitting, e.g., 8 2 or 7 2 1")
-    parser.add_argument('--Data-suffix',default="", type=str, required=True,
+    parser.add_argument('--Data-suffix', default="", type=str, required=True,
                         help="The Dataframe suffix name should be one of [ _NoATP ,  _D3408 , ''] ")
     args = parser.parse_args()
     main(args)

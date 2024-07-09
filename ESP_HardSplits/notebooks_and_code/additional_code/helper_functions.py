@@ -295,15 +295,15 @@ def plot_top_keys_values(df, key_column, xlabel, ylabel, title, color='blue', fi
 
 ###########################################################################################################
 
-def datasail_wrapper(split_method, DataFrame, split_number):
+def datasail_wrapper(split_method, DataFrame, split_size):
     names = ["train", "test"]
-    if len(split_number) == 3:
+    if len(split_size) == 3:
         names.append("val")
 
     if split_method in ["C1e", "I1e"]:
         e_splits, f_splits, inter_sp = datasail(
             techniques=[split_method],
-            splits=split_number,
+            splits=split_size,
             names=names,
             solver="SCIP",
             e_type="M",
@@ -314,7 +314,7 @@ def datasail_wrapper(split_method, DataFrame, split_number):
     elif split_method in ["C1f", "I1f"]:
         e_splits, f_splits, inter_sp = datasail(
             techniques=[split_method],
-            splits=split_number,
+            splits=split_size,
             names=names,
             solver="SCIP",
             f_type="P",
@@ -325,14 +325,17 @@ def datasail_wrapper(split_method, DataFrame, split_number):
     elif split_method in ["C2"]:
         e_splits, f_splits, inter_sp = datasail(
             techniques=[split_method],
-            splits=split_number,
+            splits=split_size,
             names=names,
             solver="SCIP",
             inter=[(x[0], x[0]) for x in DataFrame[["ids"]].values.tolist()],
             e_type="M",
+            e_sim="ecfp",
             e_data=dict(DataFrame[["ids", "SMILES"]].values.tolist()),
             f_type="P",
-            f_data=dict(DataFrame[["ids", "Sequence"]].values.tolist())
+            f_sim="cdhit",
+            f_data=dict(DataFrame[["ids", "Sequence"]].values.tolist()),
+            epsilon=0
         )
     else:
         raise ValueError("Invalid split method provided. Use one of ['C2','C1e', 'C1f', 'I1e', 'I1f']")
