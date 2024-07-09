@@ -158,7 +158,8 @@ def main(args):
     df_40["split"] = np.nan
     df_80["split"].loc[df_80["cluster"].isin(train_clusters)] = "train"
     df_80["split"].loc[df_80["cluster"].isin(test_clusters)] = "test"
-    df_80["split"].loc[df_80["cluster"].isin(val_clusters)] = "validation"
+    if len(split_size) == 3:
+        df_80["split"].loc[df_80["cluster"].isin(val_clusters)] = "validation"
     train_members = list(df_80["member"].loc[df_80["split"] == "train"])
     test_members = list(df_80["member"].loc[df_80["split"] == "test"])
     if len(split_size) == 3:
