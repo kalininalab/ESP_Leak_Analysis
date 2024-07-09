@@ -111,7 +111,7 @@ def main(args):
         logging.info(f"Start to create negative data points for the val set...")
         val = drop_samples_without_mol_file(df=val)
         df_metabolites_val, similarity_matrix_val = get_metabolites_and_similarities(df=val)
-        logging.info(f"Number of metabolites in training set: {len(df_metabolites_val)}")
+        logging.info(f"Number of metabolites in val set: {len(df_metabolites_val)}")
         val["Binding"] = 1
         val.reset_index(inplace=True, drop=True)
         val = create_negative_samples(df=val, df_metabolites=df_metabolites_val, similarity_matrix=similarity_matrix_val)
