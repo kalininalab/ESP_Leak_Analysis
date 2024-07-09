@@ -46,7 +46,7 @@ def main(args):
 
     data = pd.read_pickle(data_file)
     logging.info(
-        "*** Start running the dataSAIL***'\n'For more information about dataSAIL please check the dataSAIL documentation: https://datasail.readthedocs.io/en/latest/index.html")
+        "*** Start running the DataSAIL***'\n'For more information about DataSAIL please check it's webpage: https://datasail.readthedocs.io/en/latest/index.html")
     e_splits,f_splits, inter_sp = datasail_wrapper(split_method, data, split_size)
     if split_method in ["C1e", "I1e"]:
         for key in e_splits.keys():
