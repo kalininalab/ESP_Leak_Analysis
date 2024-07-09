@@ -136,13 +136,9 @@ def main(args):
     clusters = list(set(data["cluster"]))
     random.seed(1)
     random.shuffle(clusters)
-    print(len(clusters))
     logging.info(f"Start Splitting the data based one {split_size} split size ")
     if len(split_size) == 2:
-        split_size = split_size[1]
-        print(split_size)
-        print(type(split_size))
-        n = int(len(clusters) * (split_size / 10))
+        n = int(len(clusters) * (split_size[0] / 10))
         train_clusters = clusters[:n]
         test_clusters = clusters[n:]
     elif len(split_size) == 3:

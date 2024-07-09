@@ -323,7 +323,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="End to end Hyperparameter tuning and model training for train:test splits")
     parser.add_argument('--split-method', type=str, required=True,
-                        help="The split method should be one of [C2,C1e, C1f, I1e, I1f, ESP]")
+                        help="The split method should be one of [C2,C1e, C1f, I1e, I1f, ESP(X) where X is one the DataSAIL´s split methods]")
     parser.add_argument('--column-name', type=str, required=True,
                         help="The column name should be one of [ ECFP , PreGNN]")
     parser.add_argument('--Data-suffix', default="", type=str, required=True,
