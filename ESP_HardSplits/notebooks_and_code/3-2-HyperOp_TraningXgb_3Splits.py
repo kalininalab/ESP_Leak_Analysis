@@ -106,11 +106,9 @@ def main(args):
         # Calculate loss
         false_positive = 100 * (1 - np.mean(np.array(val_y)[y_val_pred == 1]))
         false_negative = 100 * (np.mean(np.array(val_y)[y_val_pred == 0]))
+        logging.info(
+            "False positive rate: " + str(false_positive) + "; False negative rate: " + str(false_negative))
         loss = 2 * (false_negative ** 2) + false_positive ** 1.3
-
-        # Log confusion matrix
-        confusion_mat = confusion_matrix(val_y, y_val_pred)
-        wandb.log({"confusion_matrix": confusion_mat.tolist()})
 
         # Log ROC curve
         fpr, tpr, _ = roc_curve(val_y, bst.predict(dval))
@@ -136,7 +134,7 @@ def main(args):
 
     # Perform hyperparameter optimization
     trials = Trials()
-    for i in range(1, 501):
+    for i in range(1, 1001):
         try:
             best = fmin(fn=optimize_hyperparameters, space=space, algo=rand.suggest, max_evals=i,
                         trials=trials)
