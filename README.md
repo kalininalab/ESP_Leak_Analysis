@@ -69,19 +69,10 @@ SIP/
       pip install wandb
 
 ### Data Preparation
-        
-  | data set     | split method         |
-  |--------------|----------------------|
-  | dataESP.pkl  | DataSAIL*, ESP+      |
-  | dataESP_NoATP| ESP                  |
-  | dataESP_D3408| ESP                  |
-
-* *DataSAIL can split data in 1 and 2 dimensions(1D,2D). The 1D splits are [C1e, C1f, I1e I1f] and the 2D splits are C2 and I2, we used C2 and all 1D splits in this project. To get more informeation please check the dataSAIL webpage(https://datasail.readthedocs.io/en/latest/index.html).
-* +In this project we refer to the split method that used in ESP paper as ESP split
 
 #### 1-DataPreparation.py 
-* to generate all data set need to perform data split  After running this script, three different versions of the data will be generated:
-* Download the original ESP train and test sets from ESP GitHub. After running this script, three different versions of the data will be generated:
+
+* After running this script, three different versions of the data will be generated:
 
         dataESP.pkl: Original ESP data containing only positive data points with experimental evidence.
         dataESP_NoATP.pkl: This dataset excludes all ATP data points from dataESP.pkl.
@@ -94,20 +85,22 @@ SIP/
 
 
 ### Splitting Data 
-* This table outlines the availability of different split methods and the corresponding concatenated embedding vector which was used for 2 splits and 3 splits.
+* This table outlines an overview of all  different split strategies we used in this project.
 
-| split          | 2splits  | training      | 3splits    | training       |
-|----------------|----------|---------------|------------|----------------|
-| C1e            | Yes      | ESM+PGNN/ECFP | Yes        | ESM+PGNN/ECFP  |
-| C1f            | Yes      | ESM+PGNN/ECFP | Yes        | ESM+PGNN/ECFP  |
-| I1e            | Yes      | ESM+PGNN/ECFP | Yes        | ESM+PGNN/ECFP  |
-| I1f            | Yes      | ESM+PGNN/ECFP | Yes        | ESM+PGNN/ECFP  |
-| C2             | Yes      | ESM+PGNN/ECFP | No         |                |
-| ESP(C1e)       | Yes      | ESM+PGNN/ECFP | No         |                |
-| ESP(C2)        | Yes      | ESM+PGNN/ECFP | No         |                |
-| ESP(C1e)_NoATP | Yes      | ESM+PGNN/ECFP | No         |                |
-| ESP(C1e)_D3408 | Yes      | ESM+PGNN/ECFP | No         |                |
+| split | DataFrame          | 2splits  | training      | 3splits    | training       |
+|-------|--------------------|----------|---------------|------------|----------------|
+| C1e*  | dataESP.pkl        | Yes      | ESM+PGNN/ECFP | Yes        | ESM+PGNN/ECFP  |
+| C1f   | dataESP.pkl        | Yes      | ESM+PGNN/ECFP | Yes        | ESM+PGNN/ECFP  |
+| I1e   | dataESP.pkl        | Yes      | ESM+PGNN/ECFP | Yes        | ESM+PGNN/ECFP  |
+| I1f   | dataESP.pkl        | Yes      | ESM+PGNN/ECFP | Yes        | ESM+PGNN/ECFP  |
+| C2    | dataESP.pkl        | Yes      | ESM+PGNN/ECFP | No         |                |
+| ESP+  | train&test_C1e.pkl | Yes      | ESM+PGNN/ECFP | No         |                |
+| ESP+  | train&test_C2.pkl  | Yes      | ESM+PGNN/ECFP | No         |                |
+| ESP   | dataESP_NoATP.pkl  | Yes      | ESM+PGNN/ECFP | No         |                |
+| ESP   | dataESP_D3408.pkl  | Yes      | ESM+PGNN/ECFP | No         |                |
 
+* *DataSAIL can split data in 1 and 2 dimensions(1D,2D). The 1D splits are [C1e, C1f, I1e I1f] and the 2D splits are C2 and I2, we used C2 and all 1D splits in this project. To get more information please check the dataSAIL webpage(https://datasail.readthedocs.io/en/latest/index.html).For the 1D split, we combine one of the hard split train and test sets and then split them using the method reported in the ESP paper. For the 2D split, we apply the same process to the C2 train and test sets. Since the 2D split is the hardest and we aim to minimize data leakage, some data points are not selected for the final splits. Thus, we combine the C2 split train and test sets and split them again using the ESP split methods.
+* +In this project we refer to the split method that used in ESP paper as ESP split
 #### 2-1-SplitByDataSAIL.py
 ```
 python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e I1f] --split-size [8 2, 7 2 1] --Data-suffix ['', _NoATP ,_D3408]
@@ -116,17 +109,16 @@ python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e I1f] --split-siz
 
        --split-method [C2, C1e, C1f, I1e, I1f]: Specifies the methods used for splitting the data.
        --split-size [8 2, 7 2 1]: Defines the number of splits for each method.
-       --Data-suffix ['', _NoATP, _D3408]: Indicates which data files to parse.
+       --Data-suffix [NoATP, D3408]: Indicates which data files to parse. It is an optinoal argument, if you dont use it,  the original data(data_ESP.pkl) will be parsed.
 
 * Data Suffix Details:
 
-       '': Parses the dataESP.pkl file.
-       _NoATP: Parses the dataESP_NoATP.pkl file.
-       _D3408: Parses the dataESP_D3408.pkl file.
+      NoATP: Parses the dataESP_NoATP.pkl file.
+      D3408: Parses the dataESP_D3408.pkl file.
 
 * Example:
 
-        python 2-1-SplitByDataSAIL.py --split-method C1e --split-size 8 2 --Data-suffix ''
+        python 2-1-SplitByDataSAIL.py --split-method C1e --split-size 8 2 
 
 * Output files:
 
@@ -134,24 +126,23 @@ python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e I1f] --split-siz
       ./SIP/data/2splits/test_C1e_2S.pkl
       ./SIP/data/Reports/Report_2Splits_C1e.log
 
-#### 2-2-SplitByESP.
+#### 2-2-SplitByESP.py
 * This script aims to generate a control set for each split produced by dataSAIL. The original ESP dataset contains some missing (NaN) data, and for some molecules, we couldn't find the SMILES string. Additionally, during parsing with dataSAIL, some molecules had invalid SMILES strings. Consequently, the size of the dataset is smaller than the original ESP dataset.
 
-* For the 1D split, we combine one of the hard split train and test sets and then split them using the method reported in the ESP paper. For the 2D split, we apply the same process to the C2 train and test sets. Since the 2D split is the hardest and we aim to minimize data leakage, some data points are not selected for the final splits. Thus, we combine the C2 split train and test sets and split them again using the ESP split methods.
 * This script accepts the same arguments as 2-1-SplitByDataSAIL.py:
 
-      python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e, I1f] --split-size [8 2, 7 2 1] --Data-suffix ['', _NoATP, _D3408]
+      python 2-1-SplitByDataSAIL.py --splitted-data [C2, C1e] --split-size [8 2, 7 2 1] --Data-suffix [NoATP, D3408]
 
-* However, as mentioned above, we use the data from the C2 split to create control data for the C2 split and for all 1D splits, since the number of data points is the same, we randomly choose C1e to create control data for all 1D hard splits (C1e, C1f, I1e, I1f).
+* However, `--splitted-data` takes string `C2` to get access to train and test sets generated  by  `C2` split method  to create control split for the `C2` split and same goes for `C1e`, since the number of data points is the same in all 1D splits, we randomly chose `C1e` to create control data for all 1D hard splits `(C1e, C1f, I1e, I1f)`.
 
 
 * Example:
 
-      python 2-2-SplitByESP_Method.py --split-method C1e --split-size 8 2 --Data-suffix ''
+      python 2-2-SplitByESP.py --split-method C1e --split-size 8 2 
 
 * Output files:
 
-      ./SIP/data/2splits/train_ESP(C1e)_2S.pkl
-      ./SIP/data/2splits/test_ESP(C1e)_2S.pkl
-      ./SIP/data/Reports/split_report/Report_ESP(C1e)_2S.log
-* The `ESP(C1e)` emphasizes that the combined data of `C1e are used to perform the ESP split.
+      ./SIP/data/2splits/train_ESP-C1e_2S.pkl
+      ./SIP/data/2splits/test_ESP-C1e_2S.pkl
+      ./SIP/data/Reports/split_report/Report_ESP-C1e_2S.log
+* The `ESP-C1e` emphasizes that the combined data of `C1e` are used to perform the `ESP` split.

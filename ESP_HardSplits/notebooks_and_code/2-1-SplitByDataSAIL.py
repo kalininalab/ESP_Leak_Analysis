@@ -28,7 +28,7 @@ def main(args):
     CURRENT_DIR = os.getcwd()
     split_method = args.split_method
     split_size = args.split_size
-    Data_suffix = args.Data_suffix
+    Data_suffix = f"_{args.Data_suffix}" if args.Data_suffix else ""
 
     if len(split_size) not in [2, 3]:
         raise ValueError("The split-size argument must be a list of either two or three integers.")
@@ -158,7 +158,6 @@ if __name__ == "__main__":
                         help="The split method should be one of [C2,C1e, C1f, I1e, I1f]")
     parser.add_argument('--split-size', type=int, nargs='+', required=True,
                         help="List of integers for splitting, e.g., 8 2 or 7 2 1")
-    parser.add_argument('--Data-suffix', default="", type=str, required=True,
-                        help="The Dataframe suffix name should be one of [ _NoATP ,  _D3408 , ''] ")
+    parser.add_argument('--Data-suffix', type=str, required=False, default="",help="The data_suffix is an optional argument. However, if specified, the suffix name for the dataframe should be one of the following: NoATP or D3408")
     args = parser.parse_args()
     main(args)
