@@ -58,6 +58,9 @@ def main(args):
     if len(split_size) == 2:
         if args.Data_suffix in ["NoATP", "D3408"]:
             data = pd.read_pickle(os.path.join(CURRENT_DIR, "..", "data", "data_ESP", f"dataESP{Data_suffix}.pkl"))
+            data = data[data["Binding"] == 1]
+            data.drop(columns=["ids"], inplace=True)
+            data.reset_index(drop=True, inplace=True)
         else:
             train = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
                                         f"train_{splitted_data}_{len(split_size)}S.pkl"))
@@ -70,6 +73,9 @@ def main(args):
     elif len(split_size) == 3:
         if args.Data_suffix in ["NoATP", "D3408"]:
             data = pd.read_pickle(os.path.join(CURRENT_DIR, "..", "data", "data_ESP", f"dataESP{Data_suffix}.pkl"))
+            data = data[data["Binding"] == 1]
+            data.drop(columns=["ids"], inplace=True)
+            data.reset_index(drop=True, inplace=True)
         else:
             train = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
                                         f"train_{splitted_data}_{len(split_size)}S.pkl"))
