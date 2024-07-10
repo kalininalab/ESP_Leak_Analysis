@@ -32,12 +32,12 @@ We have made modifications to this code to accommodate a 3-split method (train:t
 
 def main(args):
     CURRENT_DIR = os.getcwd()
-    splitted_data = f"-{args.splitted_data}" if args.splitted_data else ""
+    splitted_data = args.splitted_data if args.splitted_data else ""
     split_size = args.split_size
     Data_suffix = f"_{args.Data_suffix}" if args.Data_suffix else ""
     if len(split_size) not in [2, 3]:
         raise ValueError("The split-size argument must be a list of either two or three integers.")
-    if args.split_method not in ["C2", "C1e", ""]:
+    if args.splitted_data==True and args.splitted_data not in ["C2", "C1e", ""]:
         raise ValueError("To reproduce the results, use the C1e split method for 1D and the C2 split method for 2D. However, feel free to modify the code and experiment with other splitting methods.")
 
     log_file = os.path.join(CURRENT_DIR, "..", "data", "Reports","split_report",
@@ -60,9 +60,9 @@ def main(args):
             data = pd.read_pickle(os.path.join(CURRENT_DIR, "..", "data", "data_ESP", f"dataESP{Data_suffix}.pkl"))
         else:
             train = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                        f"train{splitted_data}_{len(split_size)}S.pkl"))
+                                        f"train_{splitted_data}_{len(split_size)}S.pkl"))
             test = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                       f"test{splitted_data}_{len(split_size)}S.pkl"))
+                                       f"test_{splitted_data}_{len(split_size)}S.pkl"))
             data = pd.concat([train, test], ignore_index=True)
             data = data[data["Binding"] == 1]
             data.drop(columns=["ids"], inplace=True)
@@ -72,11 +72,11 @@ def main(args):
             data = pd.read_pickle(os.path.join(CURRENT_DIR, "..", "data", "data_ESP", f"dataESP{Data_suffix}.pkl"))
         else:
             train = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                        f"train{splitted_data}_{len(split_size)}S.pkl"))
+                                        f"train_{splitted_data}_{len(split_size)}S.pkl"))
             test = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                       f"test{splitted_data}_{len(split_size)}S.pkl"))
+                                       f"test_{splitted_data}_{len(split_size)}S.pkl"))
             val = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                      f"val{splitted_data}_{len(split_size)}S.pkl"))
+                                      f"val_{splitted_data}_{len(split_size)}S.pkl"))
             data = pd.concat([train, test, val], ignore_index=True)
             data = data[data["Binding"] == 1]
             data.drop(columns=["ids"], inplace=True)
