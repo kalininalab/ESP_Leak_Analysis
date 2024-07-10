@@ -90,7 +90,7 @@ def main(args):
 
     logging.info(f"Start Clustering the data with CD-HIT")
     ofile = open(
-        join(CURRENT_DIR, "..", "data", "clusters", f"all_sequences_{len(split_size)}S_ESP{splitted_data}.fasta"), "w")
+        join(CURRENT_DIR, "..", "data", "clusters", f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S.fasta"), "w")
     for ind in data.index:
         seq = data["Sequence"][ind]
         if not pd.isnull(seq):
@@ -103,7 +103,7 @@ def main(args):
     start_folder = cluster_folder
     cluster_all_levels(start_folder,
                        cluster_folder,
-                       filename=f"all_sequences_{len(split_size)}S_ESP{splitted_data}")
+                       filename=f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S")
 
     cluster_folder = join(CURRENT_DIR, "..", "data", "clusters")
 
@@ -111,30 +111,30 @@ def main(args):
     start_folder = cluster_folder
     cluster_all_levels_80(start_folder,
                           cluster_folder,
-                          filename=f"all_sequences_{len(split_size)}S_ESP{splitted_data}")
+                          filename=f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S")
 
     # collect cluster members
     df_80 = find_cluster_members_80(folder=cluster_folder,
-                                    filename=f"all_sequences_{len(split_size)}S_ESP{splitted_data}")
+                                    filename=f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S")
     logging.info(f"Clustering report for 80% similarity\n{df_80.describe()}")
 
     cluster_all_levels_60(start_folder,
                           cluster_folder,
-                          filename=f"all_sequences_{len(split_size)}S_ESP{splitted_data}")
+                          filename=f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S")
 
     # collect cluster members
     df_60 = find_cluster_members_60(folder=cluster_folder,
-                                    filename=f"all_sequences_{len(split_size)}S_ESP{splitted_data}")
+                                    filename=f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S")
     logging.info(f"Clustering report for 60% similarity\n{df_60.describe()}")
 
     # cluster the fasta files
     cluster_all_levels(start_folder,
                        cluster_folder,
-                       filename=f"all_sequences_{len(split_size)}S_ESP{splitted_data}")
+                       filename=f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S")
 
     # collect cluster members
     df_40 = find_cluster_members(folder=cluster_folder,
-                                 filename=f"all_sequences_{len(split_size)}S_ESP{splitted_data}")
+                                 filename=f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S")
 
     logging.info(f"Clustering report for 40% similarity\n{df_40.describe()}")
 
