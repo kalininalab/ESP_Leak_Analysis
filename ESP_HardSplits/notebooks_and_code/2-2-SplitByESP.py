@@ -56,20 +56,20 @@ def main(args):
 
     if len(split_size) == 2:
         train = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                    f"train_{split_method}{Data_suffix}_{len(split_size)}S.pkl"))
+                                    f"train_{split_method}_{len(split_size)}S.pkl"))
         test = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                   f"test_{split_method}{Data_suffix}_{len(split_size)}S.pkl"))
+                                   f"test_{split_method}_{len(split_size)}S.pkl"))
         data = pd.concat([train, test], ignore_index=True)
         data = data[data["Binding"] == 1]
         data.drop(columns=["ids"], inplace=True)
         data.reset_index(drop=True, inplace=True)
     elif len(split_size) == 3:
         train = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                    f"train_{split_method}{Data_suffix}_{len(split_size)}S.pkl"))
+                                    f"train_{split_method}_{len(split_size)}S.pkl"))
         test = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                   f"test_{split_method}{Data_suffix}_{len(split_size)}S.pkl"))
+                                   f"test_{split_method}_{len(split_size)}S.pkl"))
         val = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                  f"val_{split_method}{Data_suffix}_{len(split_size)}S.pkl"))
+                                  f"val_{split_method}_{len(split_size)}S.pkl"))
         data = pd.concat([train, test, val], ignore_index=True)
         data = data[data["Binding"] == 1]
         data.drop(columns=["ids"], inplace=True)
@@ -208,7 +208,7 @@ def main(args):
             None
 
     data.to_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                        f"Uniprot_df_with_seq_identities{len(split_size)}S_ESP({split_method}).pkl"))
+                        f"Uniprot_df_with_seq_identities_ESP({split_method})_{len(split_size)}S.pkl"))
 
     if len(split_size) == 2:
         result, total_samples, test_ratio = two_split_report(train, test)
