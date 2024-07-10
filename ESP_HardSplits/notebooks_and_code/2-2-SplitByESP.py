@@ -110,7 +110,7 @@ def main(args):
     # collect cluster members
     df_80 = find_cluster_members_80(folder=cluster_folder,
                                     filename=f"all_sequences_{len(split_size)}S_ESP{splitted_data}")
-    logging.info(f"Clustering report for 80% similarity'\n'{df_80.describe()}")
+    logging.info(f"Clustering report for 80% similarity\n{df_80.describe()}")
 
     cluster_all_levels_60(start_folder,
                           cluster_folder,
@@ -119,7 +119,7 @@ def main(args):
     # collect cluster members
     df_60 = find_cluster_members_60(folder=cluster_folder,
                                     filename=f"all_sequences_{len(split_size)}S_ESP{splitted_data}")
-    logging.info(f"Clustering report for 60% similarity'\n'{df_60.describe()}")
+    logging.info(f"Clustering report for 60% similarity\n{df_60.describe()}")
 
     # cluster the fasta files
     cluster_all_levels(start_folder,
@@ -130,7 +130,7 @@ def main(args):
     df_40 = find_cluster_members(folder=cluster_folder,
                                  filename=f"all_sequences_{len(split_size)}S_ESP{splitted_data}")
 
-    logging.info(f"Clustering report for 40% similarity'\n'{df_40.describe()}")
+    logging.info(f"Clustering report for 40% similarity\n{df_40.describe()}")
 
     data["cluster"] = np.nan
     for ind in df_80.index:
