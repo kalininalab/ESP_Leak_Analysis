@@ -14,12 +14,10 @@ from Bio import SeqIO
 import warnings
 import torch
 from colorama import init, Fore, Style
-
 sys.path.append("./additional_code")
 from additional_code.helper_functions import *
 from additional_code.split_by_esp_method import *
 from additional_code.negative_data_generator import *
-
 warnings.filterwarnings("ignore")
 CURRENT_DIR = os.getcwd()
 print(CURRENT_DIR)
