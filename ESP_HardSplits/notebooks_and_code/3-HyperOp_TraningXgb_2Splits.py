@@ -13,13 +13,15 @@ from sklearn.model_selection import KFold
 from sklearn.metrics import roc_auc_score, matthews_corrcoef, confusion_matrix, precision_recall_curve, roc_curve
 from hyperopt import fmin, tpe, hp, Trials, rand, space_eval
 import xgboost as xgb
-
 sys.path.append("./additional_code")
 from additional_code.helper_functions import *
 from additional_code.negative_data_generator import *
-
 warnings.filterwarnings("ignore")
 
+
+"""
+All codes in this script has been taken from ESP repository 
+"""
 
 def main(args):
     wandb.init(project='SIP', entity='vahid-atabaigi')
