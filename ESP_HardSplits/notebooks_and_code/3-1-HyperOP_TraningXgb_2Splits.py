@@ -24,12 +24,12 @@ warnings.filterwarnings("ignore")
 def main(args):
     wandb.init(project='SIP', entity='vahid-atabaigi')
     CURRENT_DIR = os.getcwd()
-    split_method = args.split_method
-    Data_suffix = args.Data_suffix
+    splitted_data = args.splitted_data
+    Data_suffix = f"_{args.Data_suffix}" if args.Data_suffix else ""
     column_name = args.column_name
 
     logging.basicConfig(filename=join(CURRENT_DIR, "..", "data", "Reports", "hyperOp_report",
-                                      f"HOP_ESM1bts_and_{column_name}_{split_method}{Data_suffix}_2S.log"),
+                                      f"HOP_ESM1bts_and_{column_name}_{splitted_data}{Data_suffix}_2S.log"),
                         level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     console_handler = logging.StreamHandler()
@@ -52,9 +52,9 @@ def main(args):
         except Exception as e:
             logging.error(f"Error loading data from {file_path}: {e}")
             raise
-    df_train = load_data(join(CURRENT_DIR, "..", "data", "2splits", f"train_{split_method}{Data_suffix}_2S.pkl"),column=column_name)
+    df_train = load_data(join(CURRENT_DIR, "..", "data", "2splits", f"train_{splitted_data}{Data_suffix}_2S.pkl"),column=column_name)
 
-    df_test = load_data(join(CURRENT_DIR, "..", "data", "2splits", f"test_{split_method}{Data_suffix}_2S.pkl"),column=column_name)
+    df_test = load_data(join(CURRENT_DIR, "..", "data", "2splits", f"test_{splitted_data}{Data_suffix}_2S.pkl"),column=column_name)
 
     def split_dataframe(df, frac):
         df1 = pd.DataFrame(columns=list(df.columns))
@@ -132,20 +132,20 @@ def main(args):
         test_indices[i] = fold_indices[i]
 
     # Save indices using pickle
-    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_train_indices_{split_method}{Data_suffix}.pkl"),
+    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_train_indices_{splitted_data}{Data_suffix}.pkl"),
               'wb') as f:
         pickle.dump(train_indices, f)
 
-    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_test_indices_{split_method}{Data_suffix}.pkl"),
+    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_test_indices_{splitted_data}{Data_suffix}.pkl"),
               'wb') as f:
         pickle.dump(test_indices, f)
 
     # Load indices using pickle
-    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_train_indices_{split_method}{Data_suffix}.pkl"),
+    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_train_indices_{splitted_data}{Data_suffix}.pkl"),
               'rb') as f:
         train_indices = pickle.load(f)
 
-    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_test_indices_{split_method}{Data_suffix}.pkl"),
+    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_test_indices_{splitted_data}{Data_suffix}.pkl"),
               'rb') as f:
         test_indices = pickle.load(f)
 
@@ -199,6 +199,7 @@ def main(args):
 
             # Compute ROC AUC and MCC
             roc_auc = roc_auc_score(validation_y, bst.predict(dvalid))
+            logging.info(f"AUC-ROC: {roc_auc}")
             mcc = matthews_corrcoef(validation_y, y_valid_pred)
 
             false_positive = 100 * (1 - np.mean(np.array(validation_y)[y_valid_pred == 1]))
@@ -292,11 +293,11 @@ def main(args):
     print("ROC-AUC scores: %s" % ROC_AUC)
 
     np.save(join(CURRENT_DIR, "..", "data", "training_results_2S",
-                 f"acc_CV_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_2S.npy"), np.array(accuracy))
+                 f"acc_CV_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_2S.npy"), np.array(accuracy))
     np.save(join(CURRENT_DIR, "..", "data", "training_results_2S",
-                 f"loss_CV_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_2S.npy"), np.array(loss))
+                 f"loss_CV_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_2S.npy"), np.array(loss))
     np.save(join(CURRENT_DIR, "..", "data", "training_results_2S",
-                 f"ROC_AUC_CV_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_2S.npy"), np.array(ROC_AUC))
+                 f"ROC_AUC_CV_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_2S.npy"), np.array(ROC_AUC))
 
     dtrain = xgb.DMatrix(np.array(train_X), weight=weights, label=np.array(train_y),
                          feature_names=feature_names)
@@ -314,19 +315,19 @@ def main(args):
                f"Test MCC_ESM1bts_{column_name}": mcc})
 
     np.save(join(CURRENT_DIR, "..", "data", "training_results_2S",
-                 f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_2S.npy"), bst.predict(dtest))
+                 f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_2S.npy"), bst.predict(dtest))
     np.save(join(CURRENT_DIR, "..", "data", "training_results_2S",
-                 f"y_test_true_xgboost_ESM1b_ts_{column_name}_{split_method}{Data_suffix}_2S.npy"), test_y)
+                 f"y_test_true_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_2S.npy"), test_y)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="End to end Hyperparameter tuning and model training for train:test splits")
-    parser.add_argument('--split-method', type=str, required=True,
-                        help="The split method should be one of [C2,C1e, C1f, I1e, I1f, ESP(X) where X is one the DataSAIL´s split methods]")
+    parser.add_argument('--splitted-data', type=str, required=True,
+                        help="The splitted-data should be one of [C2,C1e, C1f, I1e, I1f, ESPC1e, ESPC2]")
     parser.add_argument('--column-name', type=str, required=True,
                         help="The column name should be one of [ ECFP , PreGNN]")
-    parser.add_argument('--Data-suffix', default="", type=str, required=True,
-                        help="The Dataframe suffix name should be one of [ _NoATP ,  _D3408 , ''] ")
+    parser.add_argument('--Data-suffix', default="", type=str, required=False,
+                        help="The Dataframe suffix name should be one of [ NoATP ,D3408] ")
     args = parser.parse_args()
     main(args)
