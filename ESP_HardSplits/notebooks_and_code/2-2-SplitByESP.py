@@ -311,7 +311,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description=f"This script generates a control case for each split method of DataSAIL by combining the related split results from DataSAIL and re-splitting them using the ESP method")
-    parser.add_argument('--splited-data', type=str, required=False,default="",
+    parser.add_argument('--splitted-data', type=str, required=False,default="",
                         help="The data-key is an optional argument. However, if specified, should be one of the following: [C2,C1e] to get access to train and test sets realted to C1e and C2")
     parser.add_argument('--split-size', type=int, nargs='+', required=True,
                         help="List of integers for splitting, e.g., 8 2 or 7 2 1")
