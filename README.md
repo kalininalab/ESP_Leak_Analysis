@@ -163,4 +163,4 @@ SIP/
 ### 3-2-HyperOp_TraningXgb_3Splits.py
 
 
-# ----------***Substrate Inhibitor prediction-SIP***-----------
+# -***Substrate Inhibitor prediction-SIP***-
