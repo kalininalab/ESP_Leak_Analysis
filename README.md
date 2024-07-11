@@ -1,21 +1,26 @@
 # Substrate Inhibitor Prediction (SIP)
 
 ## Table of Contents
-
 - [Introduction](#introduction)
-- [Setup Instructions](#setup-instructions)
-  - [Folder Structure](#folder-structure)
-  - [Setting up `SIP` Environment](#setting-up-sip-environment)
-- [Data Preparation](#data-preparation)
-  - [1-DataPreparation.py](#1-datapreparation.py)
-- [Splitting Data](#splitting-data-)
-  - [2-1-SplitByDataSAIL.py](#2-1-splitbydatasailpy)
-  - [2-2-SplitByESP.py](#2-2-splitbyesppy)
-- [Contact](#contact)
+  - [Setup Instructions](#setup-instructions)
+    - [Folder Structure](#folder-structure)
+    - [Setting up `SIP` Environment](#setting-up-sip-environment)
+- [ESP_Hard Split](#esp_hard-split)
+  - [Data Preparation](#data-preparation)
+    - [1-DataPreparation.py](#1-datapreparation.py)
+  - [Splitting Data](#splitting-data-)
+    - [2-1-SplitByDataSAIL.py](#2-1-splitbydatasailpy)
+    - [2-2-SplitByESP.py](#2-2-splitbyesppy)
+  - [Hyperparameter optimization and model training](#hyperparameter-optimization-and-model-training)
+    - [3-1-HyperOp_TraningXgb_2Splits.py](#3-1-hyperop_traningxgb_2splitspy)
+    - [3-2-HyperOp_TraningXgb_3Splits.py](#3-2-hyperop_traningxgb_3splitspy)
+- [Substrate Inhibitor prediction-SIP](#substrate-inhibitor-prediction-sip)
 
-## Introductions
 
-Welcome to the Substrate Inhibitor Prediction (SIP) project. This project addresses data leakage in the ESP and SIP models. 
+
+## Introduction
+
+This project was conducted in two parts. In first part we address data leakage in the ESP model by splitting data by a powerful tools named DataSAIL(short for Data Splitting Against Information Leakage). 
 
 ## Setup Instructions
 ###  Folder structure
@@ -68,6 +73,7 @@ SIP/
       pip install libchebipy==1.0.10
       pip install wandb
 
+# -------------------------------***ESP_Hard Split***---------------------------------------
 ## Data Preparation
 
 ### 1-DataPreparation.py 
@@ -148,3 +154,13 @@ SIP/
       ./SIP/data/2splits/test_ESP-C1e_2S.pkl
       ./SIP/data/Reports/split_report/Report_ESPC1f_2S.log
 * The `ESPC1f` emphasizes that the combined data of `C1f` are used to perform the `ESP` split.
+
+
+## Hyperparameter optimization and model training
+
+### 3-1-HyperOp_TraningXgb_2Splits.py
+
+### 3-2-HyperOp_TraningXgb_3Splits.py
+
+
+# -----------------------***Substrate Inhibitor prediction-SIP***---------------------
