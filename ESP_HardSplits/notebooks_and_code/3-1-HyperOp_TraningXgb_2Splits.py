@@ -29,6 +29,11 @@ def main(args):
     splitted_data = args.splitted_data
     Data_suffix = f"_{args.Data_suffix}" if args.Data_suffix else ""
     column_name = args.column_name
+    column_CV = None
+    if splitted_data in ["C1f", "I1f"]:
+        column_CV = "ESM1b_ts"
+    elif splitted_data in ["C1e", "I1e", "C2"]:
+        column_CV = "SMILES"
 
     logging.basicConfig(filename=join(CURRENT_DIR, "..", "data", "Reports", "hyperOp_report",
                                       f"HOP_ESM1bts_and_{column_name}_{splitted_data}{Data_suffix}_2S.log"),
@@ -80,9 +85,9 @@ def main(args):
                     while n_old != len(train_indices):
                         n_old = len(train_indices)
 
-                        training_seqs = list(set(df["ESM1b_ts"].loc[train_indices]))
+                        training_seqs = list(set(df[column_CV].loc[train_indices]))
 
-                        train_indices = train_indices + (list(df.loc[df["ESM1b_ts"].isin(training_seqs)].index))
+                        train_indices = train_indices + (list(df.loc[df[column_CV].isin(training_seqs)].index))
                         train_indices = list(set(train_indices))
 
                 else:
@@ -93,16 +98,16 @@ def main(args):
                     while n_old != len(test_indices):
                         n_old = len(test_indices)
 
-                        testing_seqs = list(set(df["ESM1b_ts"].loc[test_indices]))
+                        testing_seqs = list(set(df[column_CV].loc[test_indices]))
 
-                        test_indices = test_indices + (list(df.loc[df["ESM1b_ts"].isin(testing_seqs)].index))
+                        test_indices = test_indices + (list(df.loc[df[column_CV].isin(testing_seqs)].index))
                         test_indices = list(set(test_indices))
 
             ind += 1
         return (df.loc[train_indices], df.loc[test_indices])
 
     data_train2 = df_train.copy()
-    data_train2 = array_column_to_strings(data_train2, column="ESM1b_ts")
+    data_train2 = array_column_to_strings(data_train2, column=column_CV)
 
     data_train2, df_fold = split_dataframe(df=data_train2, frac=5)
     indices_fold1 = list(df_fold["index"])
@@ -183,12 +188,8 @@ def main(args):
         param["sampling_method"] = "gradient_based"
         param['objective'] = 'binary:logistic'
         weights = np.array([param["weight"] if binding == 0 else 1.0 for binding in df_train["Binding"]])
-
         del param["num_rounds"]
         del param["weight"]
-
-        roc_auc_values = []
-        mcc_values = []
         loss = []
         for i in range(5):
             train_index, test_index = train_indices[i], test_indices[i]
@@ -198,37 +199,13 @@ def main(args):
             bst = xgb.train(param, dtrain, int(num_round), verbose_eval=1)
             y_valid_pred = np.round(bst.predict(dvalid))
             validation_y = train_y[test_index]
-
-            # Compute ROC AUC and MCC
-            roc_auc = roc_auc_score(validation_y, bst.predict(dvalid))
-            logging.info(f"AUC-ROC: {roc_auc}")
-            mcc = matthews_corrcoef(validation_y, y_valid_pred)
-
             false_positive = 100 * (1 - np.mean(np.array(validation_y)[y_valid_pred == 1]))
             false_negative = 100 * (np.mean(np.array(validation_y)[y_valid_pred == 0]))
             logging.info(
                 "False positive rate: " + str(false_positive) + "; False negative rate: " + str(false_negative))
             loss.append(2 * (false_negative ** 2) + false_positive ** 1.3)
-
-            # Update metric lists
-            roc_auc_values.append(roc_auc)
-            mcc_values.append(mcc)
-
-            # Log confusion matrix
-            confusion_mat = confusion_matrix(validation_y, y_valid_pred)
-            wandb.log({"confusion_matrix": confusion_mat.tolist(), "fold": i})
-
-            # Log ROC curve
-            fpr, tpr, _ = roc_curve(validation_y, bst.predict(dvalid))
-            wandb.log({"roc_curve": {"fpr": fpr.tolist(), "tpr": tpr.tolist()}, "fold": i})
-
-            # Log precision-recall curve
-            precision, recall, _ = precision_recall_curve(validation_y, bst.predict(dvalid))
-            wandb.log(
-                {"precision_recall_curve": {"precision": precision.tolist(), "recall": recall.tolist()}, "fold": i})
-
         wandb.config.update(param, allow_val_change=True)
-        wandb.log({"loss": np.mean(loss), "roc_auc": roc_auc, "mcc": mcc, "hyperparameters": param})
+        wandb.log({"loss": np.mean(loss)})
         return np.mean(loss)
 
     # Defining search space for hyperparameter optimization
@@ -249,6 +226,8 @@ def main(args):
                         algo=rand.suggest, max_evals=i, trials=trials)
             logging.info(f"Iteration {i}")
             logging.info(f"Best loss so far: {trials.best_trial['result']['loss']}")
+            wandb.config.update( allow_val_change=True)
+            wandb.log({"loss": trials.best_trial['result']['loss']})
             logging.info(f"Best hyperparameters so far: {trials.argmin}")
         except Exception as e:
             logging.error(f"Error during hyperparameter optimization: {e}")
@@ -287,8 +266,6 @@ def main(args):
         accuracy.append(np.mean(y_valid_pred == np.array(validation_y)))
         # Calculate ROC-AUC score
         ROC_AUC.append(roc_auc_score(np.array(validation_y), bst.predict(dvalid)))
-        wandb.log({f"Test Fold_ESM1bts_{column_name}": i, f"Loss_ESM1bts_{column_name}": loss[i],
-                   f"Accuracy_ESM1bts_{column_name}": accuracy[i], f"ROC-AUC_ESM1bts_{column_name}": ROC_AUC[i]})
 
     print("Loss values: %s" % loss)
     print("Accuracies: %s" % accuracy)
@@ -313,8 +290,6 @@ def main(args):
     mcc = matthews_corrcoef(np.array(test_y), y_test_pred)
 
     print("Accuracy on test set: %s, ROC-AUC score for test set: %s, MCC: %s" % (acc_test, roc_auc, mcc))
-    wandb.log({f"Test Accuracy_ESM1bts_{column_name}": acc_test, f"Test ROC-AUC_ESM1bts_{column_name}": roc_auc,
-               f"Test MCC_ESM1bts_{column_name}": mcc})
 
     np.save(join(CURRENT_DIR, "..", "data", "training_results_2S",
                  f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_2S.npy"), bst.predict(dtest))

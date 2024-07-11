@@ -82,42 +82,25 @@ def main(args):
         param["device"] = "cuda"
         param["sampling_method"] = "gradient_based"
         param['objective'] = 'binary:logistic'
-
         # Define weights for imbalance
         weights = np.array([param["weight"] if binding == 0 else 1.0 for binding in df_train["Binding"]])
-
         # Remove hyperparameters not needed for training
         del param["num_rounds"]
         del param["weight"]
-
         # Train XGBoost model
         dtrain = xgb.DMatrix(train_X, weight=weights, label=train_y, feature_names=feature_names)
         dval = xgb.DMatrix(val_X, label=val_y, feature_names=feature_names)
         bst = xgb.train(param, dtrain, num_round, verbose_eval=False, evals=[(dval, 'eval')])
-
         # Predict on validation set
         y_val_pred = np.round(bst.predict(dval))
-
-        # Calculate metrics
-        roc_auc = roc_auc_score(val_y, bst.predict(dval))
-        logging.info(f"AUC-ROC: {roc_auc}")
-        mcc = matthews_corrcoef(val_y, y_val_pred)
-
         # Calculate loss
         false_positive = 100 * (1 - np.mean(np.array(val_y)[y_val_pred == 1]))
         false_negative = 100 * (np.mean(np.array(val_y)[y_val_pred == 0]))
         logging.info(
             "False positive rate: " + str(false_positive) + "; False negative rate: " + str(false_negative))
         loss = 2 * (false_negative ** 2) + false_positive ** 1.3
-
-        # Log ROC curve
-        fpr, tpr, _ = roc_curve(val_y, bst.predict(dval))
-        wandb.log({"roc_curve": {"fpr": fpr.tolist(), "tpr": tpr.tolist()}})
-        # Log precision-recall curve
-        precision, recall, _ = precision_recall_curve(val_y, bst.predict(dval))
-        wandb.log({"precision_recall_curve": {"precision": precision.tolist(), "recall": recall.tolist()}})
         wandb.config.update(param, allow_val_change=True)
-        wandb.log({"loss": np.mean(loss), "roc_auc": roc_auc, "mcc": mcc, "hyperparameters": param})
+        wandb.log({"loss": np.mean(loss)})
         return np.mean(loss)
 
     # Define search space for hyperparameter optimization
@@ -134,7 +117,7 @@ def main(args):
 
     # Perform hyperparameter optimization
     trials = Trials()
-    for i in range(1, 1001):
+    for i in range(1, 2000):
         try:
             best = fmin(fn=optimize_hyperparameters, space=space, algo=rand.suggest, max_evals=i,
                         trials=trials)
