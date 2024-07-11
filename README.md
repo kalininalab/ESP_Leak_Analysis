@@ -1,7 +1,7 @@
 # Substrate Inhibitor Prediction (SIP)
 
 ## Table of Contents
-- [Introduction](#-------------------introduction--------------------)
+- [Introduction](#---------------------introduction----------------------)
   - [Setup Instructions](#setup-instructions)
     - [Folder Structure](#folder-structure)
     - [Setting up `SIP` Environment](#setting-up-sip-environment)
@@ -14,12 +14,12 @@
   - [Hyperparameter optimization and model training](#hyperparameter-optimization-and-model-training)
     - [3-1-HyperOp_TraningXgb_2Splits.py](#3-1-hyperop_traningxgb_2splitspy)
     - [3-2-HyperOp_TraningXgb_3Splits.py](#3-2-hyperop_traningxgb_3splitspy)
-- [Substrate Inhibitor prediction(SIP)](#---------substrate-inhibitor-predictionsip--------------)
+- [Substrate Inhibitor prediction(SIP)](#---------substrate-inhibitor-predictionsip-------------)
 
 
-# -------------------***Introduction***--------------------
+# ---------------------***Introduction***----------------------
 
-This project was conducted in two parts. In first part we address data leakage in the ESP model by splitting data by a powerful tools named DataSAIL(short for Data Splitting Against Information Leakage). 
+This project was conducted in two parts. In first part we address data leakage in the ESP model by splitting data with a powerful tools named DataSAIL(short for Data Splitting Against Information Leakage). 
 
 ## Setup Instructions
 ###  Folder structure
@@ -162,4 +162,4 @@ SIP/
 ### 3-2-HyperOp_TraningXgb_3Splits.py
 
 
-# ---------***Substrate Inhibitor prediction(SIP)***--------------
+# ---------***Substrate Inhibitor prediction(SIP)***-------------
