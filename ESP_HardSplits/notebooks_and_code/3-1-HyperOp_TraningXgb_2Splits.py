@@ -141,20 +141,20 @@ def main(args):
         test_indices[i] = fold_indices[i]
 
     # Save indices using pickle
-    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_train_indices_{splitted_data}{Data_suffix}{column_name}.pkl"),
+    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_train_indices_{splitted_data}{Data_suffix}_{column_name}.pkl"),
               'wb') as f:
         pickle.dump(train_indices, f)
 
-    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_test_indices_{splitted_data}{column_name}.pkl"),
+    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_test_indices_{splitted_data}_{column_name}.pkl"),
               'wb') as f:
         pickle.dump(test_indices, f)
 
     # Load indices using pickle
-    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_train_indices_{splitted_data}{column_name}.pkl"),
+    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_train_indices_{splitted_data}_{column_name}.pkl"),
               'rb') as f:
         train_indices = pickle.load(f)
 
-    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_test_indices_{splitted_data}{column_name}.pkl"),
+    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_test_indices_{splitted_data}_{column_name}.pkl"),
               'rb') as f:
         test_indices = pickle.load(f)
 
