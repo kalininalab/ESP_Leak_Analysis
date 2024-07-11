@@ -73,7 +73,7 @@ SIP/
       pip install libchebipy==1.0.10
       pip install wandb
 
-# -------------------------------***ESP_Hard Split***---------------------------------------
+# -------------***ESP_Hard Split***-------------------
 ## Data Preparation
 
 ### 1-DataPreparation.py 
@@ -163,4 +163,4 @@ SIP/
 ### 3-2-HyperOp_TraningXgb_3Splits.py
 
 
-# -----------------------***Substrate Inhibitor prediction-SIP***---------------------
+# ----------***Substrate Inhibitor prediction-SIP***-----------
