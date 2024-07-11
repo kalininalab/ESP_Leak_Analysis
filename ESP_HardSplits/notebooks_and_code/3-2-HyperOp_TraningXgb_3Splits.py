@@ -15,21 +15,23 @@ import warnings
 import argparse
 import os.path
 from colorama import init, Fore, Style
+
 sys.path.append("./additional_code")
 from additional_code.helper_functions import *
 from additional_code.negative_data_generator import *
+
 warnings.filterwarnings("ignore")
 
 
 def main(args):
     wandb.init(project='SIP', entity='vahid-atabaigi')
-    CURRENT_DIR = os.getcwd()
+    current_dir = os.getcwd()
     splitted_data = args.splitted_data
-    Data_suffix = f"_{args.Data_suffix}" if args.Data_suffix else ""
+    data_suffix = f"_{args.Data_suffix}" if args.Data_suffix else ""
     column_name = args.column_name
 
-    logging.basicConfig(filename=join(CURRENT_DIR, "..", "data", "Reports","hyperOp_report",
-                                      f"HOP_ESM1bts_and_{column_name}_{splitted_data}{Data_suffix}_3S.log"),
+    logging.basicConfig(filename=join(current_dir, "..", "data", "Reports", "hyperOp_report",
+                                      f"HOP_ESM1bts_and_{column_name}_{splitted_data}{data_suffix}_3S.log"),
                         level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     console_handler = logging.StreamHandler()
     console_handler.setLevel(logging.INFO)
@@ -48,25 +50,25 @@ def main(args):
             logging.error(f"Error loading data from {file_path}: {e}")
             raise
 
-    df_train = load_data(join(CURRENT_DIR, "..", "data", "3splits", f"train_{splitted_data}{Data_suffix}_3S.pkl"),
+    df_train = load_data(join(current_dir, "..", "data", "3splits", f"train_{splitted_data}{data_suffix}_3S.pkl"),
                          column=column_name)
-    df_test = load_data(join(CURRENT_DIR, "..", "data", "3splits", f"test_{splitted_data}{Data_suffix}_3S.pkl"),
+    df_test = load_data(join(current_dir, "..", "data", "3splits", f"test_{splitted_data}{data_suffix}_3S.pkl"),
                         column=column_name)
-    df_val = load_data(join(CURRENT_DIR, "..", "data", "3splits", f"val_{splitted_data}{Data_suffix}_3S.pkl"),
+    df_val = load_data(join(current_dir, "..", "data", "3splits", f"val_{splitted_data}{data_suffix}_3S.pkl"),
                        column=column_name)
 
     def create_input_and_output_data(df):
-        X = []
+        x = []
         y = []
         for ind in df.index:
             emb = df["ESM1b_ts"][ind]
             ecfp = np.array(list(df[column_name][ind])).astype(int)
-            X.append(np.concatenate([ecfp, emb]))
+            x.append(np.concatenate([ecfp, emb]))
             y.append(df["Binding"][ind])
-        return np.array(X), np.array(y)
+        return np.array(x), np.array(y)
 
     # Prepare input and output data for train, validation, and test sets
-    train_X, train_y = create_input_and_output_data(df_train)
+    train_x, train_y = create_input_and_output_data(df_train)
     test_X, test_y = create_input_and_output_data(df_test)
     val_X, val_y = create_input_and_output_data(df_val)
 
@@ -78,7 +80,7 @@ def main(args):
     def optimize_hyperparameters(param):
         num_round = int(param["num_rounds"])
         param["tree_method"] = "gpu_hist"
-        #param["tree_method"] = "hist"
+        # param["tree_method"] = "hist"
         param["device"] = "cuda"
         param["sampling_method"] = "gradient_based"
         param['objective'] = 'binary:logistic'
@@ -88,7 +90,7 @@ def main(args):
         del param["num_rounds"]
         del param["weight"]
         # Train XGBoost model
-        dtrain = xgb.DMatrix(train_X, weight=weights, label=train_y, feature_names=feature_names)
+        dtrain = xgb.DMatrix(train_x, weight=weights, label=train_y, feature_names=feature_names)
         dval = xgb.DMatrix(val_X, label=val_y, feature_names=feature_names)
         bst = xgb.train(param, dtrain, num_round, verbose_eval=False, evals=[(dval, 'eval')])
         # Predict on validation set
@@ -132,9 +134,9 @@ def main(args):
     # Get best hyperparameters
     best_params = space_eval(space, trials.argmin)
 
-    # Train final model using best hyperparameters on training set
+    # Train final model using the best hyperparameters on training set
     weights_train = np.array([best_params["weight"] if binding == 0 else 1.0 for binding in df_train["Binding"]])
-    dtrain_final = xgb.DMatrix(train_X, weight=weights_train, label=train_y, feature_names=feature_names)
+    dtrain_final = xgb.DMatrix(train_x, weight=weights_train, label=train_y, feature_names=feature_names)
 
     # Removing unnecessary params for final training
     best_params.pop("weight")
@@ -158,19 +160,19 @@ def main(args):
     print("Loss: %.4f" % loss_val)
 
     # Save validation results
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
-                 f"y_val_pred_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_3S.npy"),
+    np.save(join(current_dir, "..", "data", "training_results_3S",
+                 f"y_val_pred_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"),
             bst_final.predict(dval))
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
-                 f"y_val_true_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_3S.npy"), val_y)
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
-                 f"roc_auc_val_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_3S.npy"), roc_auc_val)
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
-                 f"mcc_val_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_3S.npy"), mcc_val)
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
-                 f"accuracy_val_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_3S.npy"), accuracy_val)
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
-                 f"loss_val_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_3S.npy"), loss_val)
+    np.save(join(current_dir, "..", "data", "training_results_3S",
+                 f"y_val_true_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), val_y)
+    np.save(join(current_dir, "..", "data", "training_results_3S",
+                 f"roc_auc_val_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), roc_auc_val)
+    np.save(join(current_dir, "..", "data", "training_results_3S",
+                 f"mcc_val_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), mcc_val)
+    np.save(join(current_dir, "..", "data", "training_results_3S",
+                 f"accuracy_val_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), accuracy_val)
+    np.save(join(current_dir, "..", "data", "training_results_3S",
+                 f"loss_val_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), loss_val)
 
     # Evaluate final model on test set
     dtest = xgb.DMatrix(test_X, label=test_y, feature_names=feature_names)
@@ -189,19 +191,19 @@ def main(args):
     print("Loss: %.4f" % loss_test)
 
     # Save test results
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
-                 f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_3S.npy"),
+    np.save(join(current_dir, "..", "data", "training_results_3S",
+                 f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"),
             bst_final.predict(dtest))
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
-                 f"y_test_true_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_3S.npy"), test_y)
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
-                 f"roc_auc_test_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_3S.npy"), roc_auc_test)
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
-                 f"mcc_test_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_3S.npy"), mcc_test)
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
-                 f"accuracy_test_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_3S.npy"), accuracy_test)
-    np.save(join(CURRENT_DIR, "..", "data", "training_results_3S",
-                 f"loss_test_xgboost_ESM1b_ts_{column_name}_{splitted_data}{Data_suffix}_3S.npy"), loss_test)
+    np.save(join(current_dir, "..", "data", "training_results_3S",
+                 f"y_test_true_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), test_y)
+    np.save(join(current_dir, "..", "data", "training_results_3S",
+                 f"roc_auc_test_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), roc_auc_test)
+    np.save(join(current_dir, "..", "data", "training_results_3S",
+                 f"mcc_test_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), mcc_test)
+    np.save(join(current_dir, "..", "data", "training_results_3S",
+                 f"accuracy_test_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), accuracy_test)
+    np.save(join(current_dir, "..", "data", "training_results_3S",
+                 f"loss_test_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), loss_test)
 
 
 if __name__ == "__main__":
