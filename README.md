@@ -5,7 +5,7 @@
   - [Setup Instructions](#setup-instructions)
     - [Folder Structure](#folder-structure)
     - [Setting up `SIP` Environment](#setting-up-sip-environment)
-- [ESP_Hard Split](#esp_hard-split)
+- [ESP_Hard Split](#--------------------esp_hard-split---------------------)
   - [Data Preparation](#data-preparation)
     - [1-DataPreparation.py](#1-datapreparation.py)
   - [Splitting Data](#splitting-data-)
@@ -14,7 +14,7 @@
   - [Hyperparameter optimization and model training](#hyperparameter-optimization-and-model-training)
     - [3-1-HyperOp_TraningXgb_2Splits.py](#3-1-hyperop_traningxgb_2splitspy)
     - [3-2-HyperOp_TraningXgb_3Splits.py](#3-2-hyperop_traningxgb_3splitspy)
-- [Substrate Inhibitor prediction-SIP](#substrate-inhibitor-prediction-sip)
+- [Substrate Inhibitor prediction-SIP](#---------------substrate-inhibitor-prediction-sip------------------)
 
 
 
@@ -163,4 +163,4 @@ SIP/
 ### 3-2-HyperOp_TraningXgb_3Splits.py
 
 
-# -***Substrate Inhibitor prediction-SIP***-
+# ---------------***Substrate Inhibitor prediction-SIP***------------------
