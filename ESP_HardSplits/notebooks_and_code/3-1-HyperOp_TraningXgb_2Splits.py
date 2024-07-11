@@ -29,7 +29,7 @@ def main(args):
     data_suffix = f"_{args.Data_suffix}" if args.Data_suffix else ""
     column_name = args.column_name
     column_cv = None
-    if splitted_data in ["C1f", "I1f", "ESP", "ESPC1e", "ESPC2"]:
+    if splitted_data in ["C1f", "I1f", "ESP", "ESPC1f", "ESPC2"]:
         column_cv = "ESM1b_ts"
     elif splitted_data in ["C1e", "I1e", "C2"] and column_name == "PreGNN":
         column_cv = "PreGNN"

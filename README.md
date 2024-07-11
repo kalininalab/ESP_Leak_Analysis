@@ -99,7 +99,7 @@ SIP/
 | ESP   | dataESP_NoATP.pkl  | Yes     | ESM1bts+PreGNN/ECFP | No      |                     |
 | ESP   | dataESP_D3408.pkl  | Yes     | ESM1bts+PreGNN/ECFP | No      |                     |
 
-* *DataSAIL can split data in 1 and 2 dimensions(1D,2D). The 1D splits are [C1e, C1f, I1e I1f] and the 2D splits are C2 and I2, we used C2 and all 1D splits in this project. To get more information please check the dataSAIL webpage(https://datasail.readthedocs.io/en/latest/index.html).For the 1D split, we combine one of the hard split train and test sets and then split them using the method reported in the ESP paper. For the 2D split, we apply the same process to the C2 train and test sets. Since the 2D split is the hardest and we aim to minimize data leakage, some data points are not selected for the final splits. Thus, we combine the C2 split train and test sets and split them again using the ESP split methods.
+* *DataSAIL can split data in 1 and 2 dimensions(1D,2D). The 1D splits are [C1e, C1f, I1e I1f] and the 2D splits are C2 and I2, we used C2 and all 1D splits in this project. To get more information please check the dataSAIL webpage(https://datasail.readthedocs.io/en/latest/index.html).
 * +In this project we refer to the split method that used in ESP paper as ESP split
 ### 2-1-SplitByDataSAIL.py
 * This script aims to split (by DataSAIL) and generate negative data for each DataFrame explained in above.
@@ -135,7 +135,7 @@ SIP/
       python 2-2-SplitByESP.py --splitted-data [C2, C1e] --split-size [8 2, 7 2 1] --Data-suffix [NoATP, D3408]
 
 * The splitted-data is an optional argument. However, if specified, should be one of the following: [C2,C1f] to get access to train and test sets related to C1f and C2.
-* Since in ESP split method the CV has been done based on sequence's indices, we choose train and test resulted from "C1f" split, since this split is based on sequence.
+* Since in ESP paper the data have been split based on enzyme and also CV has been done based on sequence's indices(all related indices to an enzyme fall into same fold of CV), we choose train and test resulted to "C1f" split to create control case for all 1D splits.
 
 
 * Example:
