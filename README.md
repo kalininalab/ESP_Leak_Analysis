@@ -68,9 +68,9 @@ SIP/
       pip install libchebipy==1.0.10
       pip install wandb
 
-### Data Preparation
+## Data Preparation
 
-#### 1-DataPreparation.py 
+### 1-DataPreparation.py 
 
 * After running this script, three different versions of the data will be generated:
 
@@ -84,7 +84,7 @@ SIP/
 
 
 
-### Splitting Data 
+## Splitting Data 
 * This table outlines an overview of all  different split strategies we used in this project.
 
 | split | DataFrame          | 2splits  | training      | 3splits | training      |
@@ -101,10 +101,11 @@ SIP/
 
 * *DataSAIL can split data in 1 and 2 dimensions(1D,2D). The 1D splits are [C1e, C1f, I1e I1f] and the 2D splits are C2 and I2, we used C2 and all 1D splits in this project. To get more information please check the dataSAIL webpage(https://datasail.readthedocs.io/en/latest/index.html).For the 1D split, we combine one of the hard split train and test sets and then split them using the method reported in the ESP paper. For the 2D split, we apply the same process to the C2 train and test sets. Since the 2D split is the hardest and we aim to minimize data leakage, some data points are not selected for the final splits. Thus, we combine the C2 split train and test sets and split them again using the ESP split methods.
 * +In this project we refer to the split method that used in ESP paper as ESP split
-#### 2-1-SplitByDataSAIL.py
-```
-python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e I1f] --split-size [8 2, 7 2 1] --Data-suffix ['', _NoATP ,_D3408]
-```
+### 2-1-SplitByDataSAIL.py
+* This script aims to split (by DataSAIL) and generate negative data for each DataFrame explained in above.
+
+       python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e I1f] --split-size [8 2, 7 2 1] --Data-suffix ['', _NoATP ,_D3408]
+
 * Explanation of Arguments:
 
        --split-method [C2, C1e, C1f, I1e, I1f]: Specifies the methods used for splitting the data.
@@ -126,8 +127,8 @@ python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e I1f] --split-siz
       ./SIP/data/2splits/test_C1e_2S.pkl
       ./SIP/data/Reports/Report_2Splits_C1e.log
 
-#### 2-2-SplitByESP.py
-* This script aims to generate a control set for each split produced by dataSAIL. The original ESP dataset contains some missing (NaN) data, and for some molecules, we couldn't find the SMILES string. Additionally, during parsing with dataSAIL, some molecules had invalid SMILES strings. Consequently, the size of the dataset is smaller than the original ESP dataset.
+### 2-2-SplitByESP.py
+* This script aims to generate a control set for each split produced by dataSAIL and also create negative data for each split. The original ESP dataset contains some missing (NaN) data, and for some molecules, we couldn't find the SMILES string. Additionally, during parsing with dataSAIL, some molecules had invalid SMILES strings. Consequently, the size of the dataset is smaller than the original ESP dataset.
 
 * This script accepts the same arguments as 2-1-SplitByDataSAIL.py:
 
