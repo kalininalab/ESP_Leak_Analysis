@@ -29,11 +29,13 @@ def main(args):
     splitted_data = args.splitted_data
     Data_suffix = f"_{args.Data_suffix}" if args.Data_suffix else ""
     column_name = args.column_name
-    column_CV = "ESM1b_ts"
-    # if splitted_data in ["C1f", "I1f"]:
-    #     column_CV = "ESM1b_ts"
-    # elif splitted_data in ["C1e", "I1e", "C2"]:
-    #     column_CV = "SMILES"
+    column_CV = None
+    if splitted_data in ["C1f", "I1f", "ESP", "ESPC1e", "ESPC2"]:
+        column_CV = "ESM1b_ts"
+    elif splitted_data in ["C1e", "I1e", "C2"] and column_name=="PreGNN":
+        column_CV = "PreGNN"
+    elif splitted_data in ["C1e", "I1e", "C2"] and column_name=="ECFP":
+            column_CV = "ECFP"
 
     logging.basicConfig(filename=join(CURRENT_DIR, "..", "data", "Reports", "hyperOp_report",
                                       f"HOP_ESM1bts_and_{column_name}_{splitted_data}{Data_suffix}_2S.log"),
