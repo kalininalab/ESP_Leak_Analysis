@@ -87,17 +87,17 @@ SIP/
 ## Splitting Data 
 * This table outlines an overview of all  different split strategies we used in this project.
 
-| split | DataFrame          | 2splits | training      | 3splits | training      |
-|-------|--------------------|---------|---------------|---------|---------------|
-| C1e*  | dataESP.pkl        | Yes     | ESM+PGNN/ECFP | Yes     | ESM+PGNN/ECFP |
-| C1f   | dataESP.pkl        | Yes     | ESM+PGNN/ECFP | Yes     | ESM+PGNN/ECFP |
-| I1e   | dataESP.pkl        | Yes     | ESM+PGNN/ECFP | Yes     | ESM+PGNN/ECFP |
-| I1f   | dataESP.pkl        | Yes     | ESM+PGNN/ECFP | Yes     | ESM+PGNN/ECFP |
-| C2    | dataESP.pkl        | No      | ESM+PGNN/ECFP | No      |               |
-| ESP+  | train&test_C1f.pkl | Yes     | ESM+PGNN/ECFP | Yes     | ESM+PGNN/ECFP |
-| ESP+  | train&test_C2.pkl  | Yes     | ESM+PGNN/ECFP | No      |               |
-| ESP   | dataESP_NoATP.pkl  | Yes     | ESM+PGNN/ECFP | No      |               |
-| ESP   | dataESP_D3408.pkl  | Yes     | ESM+PGNN/ECFP | No      |               |
+| split | DataFrame          | 2splits | training            | 3splits | training            |
+|-------|--------------------|---------|---------------------|---------|---------------------|
+| C1e*  | dataESP.pkl        | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
+| C1f   | dataESP.pkl        | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
+| I1e   | dataESP.pkl        | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
+| I1f   | dataESP.pkl        | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
+| C2    | dataESP.pkl        | No      | ESM1bts+PreGNN/ECFP | No      |                     |
+| ESP+  | train&test_C1f.pkl | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
+| ESP+  | train&test_C2.pkl  | Yes     | ESM1bts+PreGNN/ECFP | No      |                     |
+| ESP   | dataESP_NoATP.pkl  | Yes     | ESM1bts+PreGNN/ECFP | No      |                     |
+| ESP   | dataESP_D3408.pkl  | Yes     | ESM1bts+PreGNN/ECFP | No      |                     |
 
 * *DataSAIL can split data in 1 and 2 dimensions(1D,2D). The 1D splits are [C1e, C1f, I1e I1f] and the 2D splits are C2 and I2, we used C2 and all 1D splits in this project. To get more information please check the dataSAIL webpage(https://datasail.readthedocs.io/en/latest/index.html).For the 1D split, we combine one of the hard split train and test sets and then split them using the method reported in the ESP paper. For the 2D split, we apply the same process to the C2 train and test sets. Since the 2D split is the hardest and we aim to minimize data leakage, some data points are not selected for the final splits. Thus, we combine the C2 split train and test sets and split them again using the ESP split methods.
 * +In this project we refer to the split method that used in ESP paper as ESP split
