@@ -94,7 +94,7 @@ SIP/
 | I1e   | dataESP.pkl        | Yes      | ESM+PGNN/ECFP | Yes     | ESM+PGNN/ECFP |
 | I1f   | dataESP.pkl        | Yes      | ESM+PGNN/ECFP | Yes     | ESM+PGNN/ECFP |
 | C2    | dataESP.pkl        | Yes      | ESM+PGNN/ECFP | No      |               |
-| ESP+  | train&test_C1e.pkl | Yes      | ESM+PGNN/ECFP | Yes     | ESM+PGNN/ECFP |
+| ESP+  | train&test_C1f.pkl | Yes      | ESM+PGNN/ECFP | Yes     | ESM+PGNN/ECFP |
 | ESP+  | train&test_C2.pkl  | Yes      | ESM+PGNN/ECFP | No      |               |
 | ESP   | dataESP_NoATP.pkl  | Yes      | ESM+PGNN/ECFP | No      |               |
 | ESP   | dataESP_D3408.pkl  | Yes      | ESM+PGNN/ECFP | No      |               |
@@ -131,18 +131,19 @@ python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e I1f] --split-siz
 
 * This script accepts the same arguments as 2-1-SplitByDataSAIL.py:
 
-      python 2-1-SplitByDataSAIL.py --splitted-data [C2, C1e] --split-size [8 2, 7 2 1] --Data-suffix [NoATP, D3408]
+      python 2-2-SplitByESP.py --splitted-data [C2, C1e] --split-size [8 2, 7 2 1] --Data-suffix [NoATP, D3408]
 
-* However, `--splitted-data` takes string `C2` to get access to train and test sets generated  by  `C2` split method  to create control split for the `C2` split and same goes for `C1e`, since the number of data points is equal in all 1D splits, we randomly chose `C1e` to create control data for all 1D hard splits `(C1e, C1f, I1e, I1f)`.
+* The splitted-data is an optional argument. However, if specified, should be one of the following: [C2,C1f] to get access to train and test sets related to C1f and C2.
+* Since in ESP split method the CV has been done based on sequence's indices, we choose train and test resulted from "C1f" split, since this split is based on sequence.
 
 
 * Example:
 
-      python 2-2-SplitByESP.py --split-method C1e --split-size 8 2 
+      python 2-2-SplitByESP.py --split-method C1f --split-size 8 2 
 
 * Output files:
 
       ./SIP/data/2splits/train_ESP-C1e_2S.pkl
       ./SIP/data/2splits/test_ESP-C1e_2S.pkl
-      ./SIP/data/Reports/split_report/Report_ESP-C1e_2S.log
-* The `ESP-C1e` emphasizes that the combined data of `C1e` are used to perform the `ESP` split.
+      ./SIP/data/Reports/split_report/Report_ESPC1f_2S.log
+* The `ESPC1f` emphasizes that the combined data of `C1f` are used to perform the `ESP` split.

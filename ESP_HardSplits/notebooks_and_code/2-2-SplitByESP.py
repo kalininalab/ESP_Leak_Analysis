@@ -14,10 +14,12 @@ from Bio import SeqIO
 import warnings
 import torch
 from colorama import init, Fore, Style
+
 sys.path.append("./additional_code")
 from additional_code.helper_functions import *
 from additional_code.split_by_esp_method import *
 from additional_code.negative_data_generator import *
+
 warnings.filterwarnings("ignore")
 CURRENT_DIR = os.getcwd()
 print(CURRENT_DIR)
@@ -35,10 +37,11 @@ def main(args):
     Data_suffix = f"_{args.Data_suffix}" if args.Data_suffix else ""
     if len(split_size) not in [2, 3]:
         raise ValueError("The split-size argument must be a list of either two or three integers.")
-    if args.splitted_data==True and args.splitted_data not in ["C2", "C1e", ""]:
-        raise ValueError("To reproduce the results, use the C1e split method for 1D and the C2 split method for 2D. However, feel free to modify the code and experiment with other splitting methods.")
+    if args.splitted_data == True and args.splitted_data not in ["C2", "C1e", ""]:
+        raise ValueError("To reproduce the results, use the C1e split method for 1D and the C2 split method for 2D. "
+                         "However, feel free to modify the code and experiment with other splitting methods.")
 
-    log_file = os.path.join(CURRENT_DIR, "..", "data", "Reports","split_report",
+    log_file = os.path.join(CURRENT_DIR, "..", "data", "Reports", "split_report",
                             f"Report_ESP{splitted_data}{Data_suffix}_{len(split_size)}S.log")
     if os.path.exists(log_file):
         os.remove(log_file)
@@ -88,7 +91,8 @@ def main(args):
 
     logging.info(f"Start Clustering the data with CD-HIT")
     ofile = open(
-        join(CURRENT_DIR, "..", "data", "clusters", f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S.fasta"), "w")
+        join(CURRENT_DIR, "..", "data", "clusters",
+             f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S.fasta"), "w")
     for ind in data.index:
         seq = data["Sequence"][ind]
         if not pd.isnull(seq):
@@ -309,17 +313,21 @@ def main(args):
     init()
     logging.info(
         Fore.GREEN + f"***** PROCESS COMPLETED: For an overview, "
-                     f"please review the Report_ESP{splitted_data}{Data_suffix}_{len(split_size)}S.log file in Reports folder. *****" + Style.RESET_ALL)
+                     f"please review the Report_ESP{splitted_data}{Data_suffix}_{len(split_size)}S.log file in "
+                     f"Reports folder. *****" + Style.RESET_ALL)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description=f"This script generates a control case for each split method of DataSAIL by combining the related split results from DataSAIL and re-splitting them using the ESP method")
-    parser.add_argument('--splitted-data', type=str, required=False,default="",
-                        help="The splitted-data is an optional argument. However, if specified, should be one of the following: [C2,C1e] to get access to train and test sets realted to C1e and C2")
+        description=f"This script generates a control case for each split method of DataSAIL by combining the related "
+                    f"split results from DataSAIL and re-splitting them using the ESP method")
+    parser.add_argument('--splitted-data', type=str, required=False, default="",
+                        help="The splitted-data is an optional argument. However, if specified, should be one of the "
+                             "following: [C2,C1f] to get access to train and test sets related to C1f and C2")
     parser.add_argument('--split-size', type=int, nargs='+', required=True,
                         help="List of integers for splitting, e.g., 8 2 or 7 2 1")
     parser.add_argument('--Data-suffix', type=str, required=False, default="",
-                        help="The data_suffix is an optional argument. However, if specified, the suffix name for the dataframe should be one of the following: NoATP or D3408")
+                        help="The data_suffix is an optional argument. However, if specified, the suffix name for the "
+                             "dataframe should be one of the following: NoATP or D3408")
     args = parser.parse_args()
     main(args)
