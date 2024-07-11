@@ -226,8 +226,6 @@ def main(args):
                         algo=rand.suggest, max_evals=i, trials=trials)
             logging.info(f"Iteration {i}")
             logging.info(f"Best loss so far: {trials.best_trial['result']['loss']}")
-            wandb.config.update( allow_val_change=True)
-            wandb.log({"loss": trials.best_trial['result']['loss']})
             logging.info(f"Best hyperparameters so far: {trials.argmin}")
         except Exception as e:
             logging.error(f"Error during hyperparameter optimization: {e}")
