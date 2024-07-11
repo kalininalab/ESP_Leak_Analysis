@@ -145,16 +145,16 @@ def main(args):
               'wb') as f:
         pickle.dump(train_indices, f)
 
-    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_test_indices_{splitted_data}_{column_CV}.pkl"),
+    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_test_indices_{splitted_data}{Data_suffix}_{column_CV}.pkl"),
               'wb') as f:
         pickle.dump(test_indices, f)
 
     # Load indices using pickle
-    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_train_indices_{splitted_data}_{column_CV}.pkl"),
+    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_train_indices_{splitted_data}{Data_suffix}_{column_CV}.pkl"),
               'rb') as f:
         train_indices = pickle.load(f)
 
-    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_test_indices_{splitted_data}_{column_CV}.pkl"),
+    with open(join(CURRENT_DIR, "..", "data", "2splits", f"CV_test_indices_{splitted_data}{Data_suffix}_{column_CV}.pkl"),
               'rb') as f:
         test_indices = pickle.load(f)
 
