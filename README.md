@@ -1,7 +1,7 @@
 # Substrate Inhibitor Prediction (SIP)
 
 ## Table of Contents
-- [Introduction](#-----------------------------introduction-----------------------------------)
+- [Introduction](#-------------introduction-------------)
   - [Setup Instructions](#setup-instructions)
     - [Folder Structure](#folder-structure)
     - [Setting up `SIP` Environment](#setting-up-sip-environment)
@@ -17,7 +17,7 @@
 - [Substrate Inhibitor prediction-SIP](#---------substrate-inhibitor-prediction-sip--------------)
 
 
-# -----------------------------***Introduction***-----------------------------------
+# -------------***Introduction***-------------
 
 This project was conducted in two parts. In first part we address data leakage in the ESP model by splitting data by a powerful tools named DataSAIL(short for Data Splitting Against Information Leakage). 
 
