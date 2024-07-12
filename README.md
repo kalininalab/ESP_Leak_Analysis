@@ -84,7 +84,7 @@ SIP/
         dataESP_D3408.pkl: This dataset randomly removes 3408 data points from dataESP.pkl (equivalent to the number of ATP points).
 
 
-* The reason for randomly deleting 3408 data points is to create a control case to understand the impact of ATP removal on model performance, as approximately 20% of the molecules are ATP. dataESP.pkl: Original ESP data containing only positive data points with experimental evidence.
+* The reason for randomly deleting 3408 data points is to create a control case to understand the impact of ATP removal on model performance, as approximately 20% of the molecules in the dataESP are ATP.
 
 
 
