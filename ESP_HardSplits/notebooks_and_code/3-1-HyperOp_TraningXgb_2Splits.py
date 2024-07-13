@@ -191,6 +191,7 @@ def main(args):
     def cross_validation_neg_acc_gradient_boosting(param):
         num_round = param["num_rounds"]
         param["tree_method"] = "gpu_hist"
+        param["device"] = "cuda"
         param["sampling_method"] = "gradient_based"
         param['objective'] = 'binary:logistic'
         weights = np.array([param["weight"] if binding == 0 else 1.0 for binding in df_train["Binding"]])
