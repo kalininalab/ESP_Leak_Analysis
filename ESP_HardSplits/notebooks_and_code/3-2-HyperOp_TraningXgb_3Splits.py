@@ -79,9 +79,9 @@ def main(args):
 
     def optimize_hyperparameters(param):
         num_round = int(param["num_rounds"])
-        param["tree_method"] = "gpu_hist"
-        # param["tree_method"] = "hist"
-        param["device"] = "cuda"
+        #param["tree_method"] = "gpu_hist"
+        param["tree_method"] = "hist"
+        #param["device"] = "cuda"
         param["sampling_method"] = "gradient_based"
         param['objective'] = 'binary:logistic'
         # Define weights for imbalance
