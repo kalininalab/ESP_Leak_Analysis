@@ -224,6 +224,10 @@ def main(args):
     #     wandb.log({"loss": np.mean(loss)})
     #     return np.mean(loss)
 
+    import numpy as np
+    import xgboost as xgb
+    import logging
+
     def cross_validation_neg_acc_gradient_boosting(param):
         num_round = param["num_rounds"]
         param["tree_method"] = "gpu_hist"
@@ -242,17 +246,17 @@ def main(args):
                                              10)  # Change the number of splits as needed
             train_y_batches = np.array_split(np.array(train_y[train_index]), 10)
 
-            bst = None
             for batch_x, batch_y in zip(train_x_batches, train_y_batches):
                 dtrain = xgb.DMatrix(batch_x, label=batch_y)
-                bst = xgb.train(param, dtrain, num_round, xgb_model=bst)
+                bst = xgb.train(param, dtrain, num_round)
 
-            dvalid = xgb.DMatrix(train_x[test_index], label=train_y[test_index])
-            y_valid_pred = np.round(bst.predict(dvalid))
-            validation_y = train_y[test_index]
+            dtest = xgb.DMatrix(train_x[test_index], label=train_y[test_index])
+            pred = bst.predict(dtest)
+            pred = [int(x >= 0.5) for x in pred]
+            y = dtest.get_label()
 
-            false_positive = 100 * (1 - np.mean(np.array(validation_y)[y_valid_pred == 1]))
-            false_negative = 100 * (np.mean(np.array(validation_y)[y_valid_pred == 0]))
+            false_positive = 100 * (1 - np.mean(np.array(y)[pred == 1]))
+            false_negative = 100 * (np.mean(np.array(y)[pred == 0]))
             logging.info(
                 "False positive rate: " + str(false_positive) + "; False negative rate: " + str(false_negative))
             custom_loss = 2 * (false_negative ** 2) + false_positive ** 1.3
