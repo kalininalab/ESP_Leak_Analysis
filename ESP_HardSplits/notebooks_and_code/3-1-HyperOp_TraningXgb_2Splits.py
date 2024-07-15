@@ -22,6 +22,15 @@ warnings.filterwarnings("ignore")
 All codes in this script has been taken from ESP repository 
 """
 
+logging.basicConfig(filename=join(current_dir, "..", "data", "Reports", "hyperOp_report",
+                                  f"HOP_ESM1bts_and_{column_name}_{splitted_data}{data_suffix}_2S.log"),
+                    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)
+console_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+logging.getLogger().addHandler(console_handler)
+
 
 def main(args):
     wandb.init(project='SIP', entity='vahid-atabaigi')
@@ -36,15 +45,6 @@ def main(args):
         column_cv = "PreGNN"
     elif splitted_data in ["C1e", "I1e", "C2"] and column_name == "ECFP":
         column_cv = "ECFP"
-
-    logging.basicConfig(filename=join(current_dir, "..", "data", "Reports", "hyperOp_report",
-                                      f"HOP_ESM1bts_and_{column_name}_{splitted_data}{data_suffix}_2S.log"),
-                        level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
-    console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.INFO)
-    console_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
-    logging.getLogger().addHandler(console_handler)
 
     def array_column_to_strings(df, column):
         df[column] = [str(list(df[column][ind])) for ind in df.index]
