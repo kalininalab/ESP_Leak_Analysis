@@ -6,6 +6,7 @@ import sys
 import os
 import logging
 import wandb
+import gc
 from os.path import join
 from sklearn.metrics import roc_auc_score, matthews_corrcoef
 from hyperopt import fmin, tpe, hp, Trials, rand, space_eval
@@ -188,6 +189,9 @@ def main(args):
     train_y = np.array(train_y)
     test_y = np.array(test_y)
 
+    # Force garbage collection before starting cross-validation
+    gc.collect()
+
     def cross_validation_neg_acc_gradient_boosting(param):
         num_round = param["num_rounds"]
         param["tree_method"] = "gpu_hist"
@@ -234,6 +238,8 @@ def main(args):
             logging.info(f"Iteration {i}")
             logging.info(f"Best loss so far: {trials.best_trial['result']['loss']}")
             logging.info(f"Best hyperparameters so far: {trials.argmin}")
+            # Force garbage collection at each iteration
+            gc.collect()
         except Exception as e:
             logging.error(f"Error during hyperparameter optimization: {e}")
             break
