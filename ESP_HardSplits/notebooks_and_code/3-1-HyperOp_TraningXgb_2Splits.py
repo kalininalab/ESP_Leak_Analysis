@@ -192,16 +192,43 @@ def main(args):
     # Force garbage collection before starting cross-validation
     gc.collect()
 
+    # def cross_validation_neg_acc_gradient_boosting(param):
+    #     num_round = param["num_rounds"]
+    #
+    #     # param["tree_method"] = "hist"
+    #     # param["sampling_method"] = "uniform"
+    #
+    #     param["tree_method"] = "gpu_hist"
+    #     param["device"] = "cuda"
+    #     param["sampling_method"] = "gradient_based"
+    #
+    #     param['objective'] = 'binary:logistic'
+    #     weights = np.array([param["weight"] if binding == 0 else 1.0 for binding in df_train["Binding"]])
+    #     del param["num_rounds"]
+    #     del param["weight"]
+    #     loss = []
+    #     for i in range(5):
+    #         train_index, test_index = train_indices[i], test_indices[i]
+    #         dtrain = xgb.DMatrix(np.array(train_x[train_index]), weight=weights[train_index],
+    #                              label=np.array(train_y[train_index]))
+    #         dvalid = xgb.DMatrix(np.array(train_x[test_index]))
+    #         bst = xgb.train(param, dtrain, int(num_round), verbose_eval=1)
+    #         y_valid_pred = np.round(bst.predict(dvalid))
+    #         validation_y = train_y[test_index]
+    #         false_positive = 100 * (1 - np.mean(np.array(validation_y)[y_valid_pred == 1]))
+    #         false_negative = 100 * (np.mean(np.array(validation_y)[y_valid_pred == 0]))
+    #         logging.info(
+    #             "False positive rate: " + str(false_positive) + "; False negative rate: " + str(false_negative))
+    #         loss.append(2 * (false_negative ** 2) + false_positive ** 1.3)
+    #     wandb.config.update(param, allow_val_change=True)
+    #     wandb.log({"loss": np.mean(loss)})
+    #     return np.mean(loss)
+
     def cross_validation_neg_acc_gradient_boosting(param):
         num_round = param["num_rounds"]
-
-        # param["tree_method"] = "hist"
-        # param["sampling_method"] = "uniform"
-
         param["tree_method"] = "gpu_hist"
         param["device"] = "cuda"
         param["sampling_method"] = "gradient_based"
-
         param['objective'] = 'binary:logistic'
         weights = np.array([param["weight"] if binding == 0 else 1.0 for binding in df_train["Binding"]])
         del param["num_rounds"]
@@ -209,20 +236,30 @@ def main(args):
         loss = []
         for i in range(5):
             train_index, test_index = train_indices[i], test_indices[i]
-            dtrain = xgb.DMatrix(np.array(train_x[train_index]), weight=weights[train_index],
-                                 label=np.array(train_y[train_index]))
-            dvalid = xgb.DMatrix(np.array(train_x[test_index]))
-            bst = xgb.train(param, dtrain, int(num_round), verbose_eval=1)
+
+            # Split train data into smaller batches
+            train_x_batches = np.array_split(np.array(train_x[train_index]),
+                                             10)  # Change the number of splits as needed
+            train_y_batches = np.array_split(np.array(train_y[train_index]), 10)
+
+            bst = None
+            for batch_x, batch_y in zip(train_x_batches, train_y_batches):
+                dtrain = xgb.DMatrix(batch_x, label=batch_y)
+                bst = xgb.train(param, dtrain, num_round, xgb_model=bst)
+
+            dvalid = xgb.DMatrix(train_x[test_index], label=train_y[test_index])
             y_valid_pred = np.round(bst.predict(dvalid))
             validation_y = train_y[test_index]
+
             false_positive = 100 * (1 - np.mean(np.array(validation_y)[y_valid_pred == 1]))
             false_negative = 100 * (np.mean(np.array(validation_y)[y_valid_pred == 0]))
             logging.info(
                 "False positive rate: " + str(false_positive) + "; False negative rate: " + str(false_negative))
-            loss.append(2 * (false_negative ** 2) + false_positive ** 1.3)
-        wandb.config.update(param, allow_val_change=True)
-        wandb.log({"loss": np.mean(loss)})
-        return np.mean(loss)
+            custom_loss = 2 * (false_negative ** 2) + false_positive ** 1.3
+            loss.append(custom_loss)
+            logging.info("Finished training the fold {}".format(i + 1))
+
+        return np.array(loss).mean()
 
     # Defining search space for hyperparameter optimization
     space = {"learning_rate": hp.uniform("learning_rate", 0.01, 0.5),
@@ -323,7 +360,7 @@ if __name__ == "__main__":
     parser.add_argument('--splitted-data', type=str, required=True,
                         help="The splitted-data should be one of [C2,C1e, C1f, I1e, I1f,ESP, ESPC1e, ESPC2]")
     parser.add_argument('--column-name', type=str, required=True,
-                        help="The column name should be one of [ ECFP , PreGNN]")
+                        help="This argument selects the embedded vector for molecules to concatenate with the ESM1bts. The column name should be one of [ ECFP , PreGNN]")
     parser.add_argument('--Data-suffix', default="", type=str, required=False,
                         help="The Dataframe suffix name should be one of [ NoATP ,D3408]")
     args = parser.parse_args()
