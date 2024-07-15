@@ -195,12 +195,12 @@ def main(args):
     def cross_validation_neg_acc_gradient_boosting(param):
         num_round = param["num_rounds"]
 
-        param["tree_method"] = "hist"
-        param["sampling_method"] = "uniform"
+        # param["tree_method"] = "hist"
+        # param["sampling_method"] = "uniform"
 
-        # param["tree_method"] = "gpu_hist"
-        # param["device"] = "cuda"
-        # param["sampling_method"] = "gradient_based"
+        param["tree_method"] = "gpu_hist"
+        param["device"] = "cuda"
+        param["sampling_method"] = "gradient_based"
 
         param['objective'] = 'binary:logistic'
         weights = np.array([param["weight"] if binding == 0 else 1.0 for binding in df_train["Binding"]])
@@ -251,12 +251,12 @@ def main(args):
 
     best_params = space_eval(space, trials.argmin)
     num_round = best_params["num_rounds"]
-    best_params["tree_method"] = "hist"
-    best_params["sampling_method"] = "uniform"
+    # best_params["tree_method"] = "hist"
+    # best_params["sampling_method"] = "uniform"
 
-    # best_params["tree_method"] = "gpu_hist"
-    # best_params["device"] = "cuda"
-    # best_params["sampling_method"] = "gradient_based"
+    best_params["tree_method"] = "gpu_hist"
+    best_params["device"] = "cuda"
+    best_params["sampling_method"] = "gradient_based"
 
     best_params['objective'] = 'binary:logistic'
     weights = np.array([best_params["weight"] if binding == 0 else 1.0 for binding in df_train["Binding"]])
