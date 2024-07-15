@@ -240,8 +240,8 @@ def main(args):
 
     best_params = space_eval(space, trials.argmin)
     num_round = best_params["num_rounds"]
-    best_params["tree_method"] = "hist"
-    best_params["device"] = "cuda"
+    param["tree_method"] = "gpu_hist"
+    param["device"] = "cuda"
     best_params["sampling_method"] = "gradient_based"
     best_params['objective'] = 'binary:logistic'
     weights = np.array([best_params["weight"] if binding == 0 else 1.0 for binding in df_train["Binding"]])
