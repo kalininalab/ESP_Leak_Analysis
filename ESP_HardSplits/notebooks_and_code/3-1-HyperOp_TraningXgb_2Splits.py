@@ -22,15 +22,6 @@ warnings.filterwarnings("ignore")
 All codes in this script has been taken from ESP repository 
 """
 
-logging.basicConfig(filename=join(current_dir, "..", "data", "Reports", "hyperOp_report",
-                                  f"HOP_ESM1bts_and_{column_name}_{splitted_data}{data_suffix}_2S.log"),
-                    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.INFO)
-console_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
-logging.getLogger().addHandler(console_handler)
-
 
 def main(args):
     wandb.init(project='SIP', entity='vahid-atabaigi')
@@ -45,6 +36,15 @@ def main(args):
         column_cv = "PreGNN"
     elif splitted_data in ["C1e", "I1e", "C2"] and column_name == "ECFP":
         column_cv = "ECFP"
+
+    logging.basicConfig(filename=join(current_dir, "..", "data", "Reports", "hyperOp_report",
+                                      f"HOP_ESM1bts_and_{column_name}_{splitted_data}{data_suffix}_2S.log"),
+                        level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+    console_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+    logging.getLogger().addHandler(console_handler)
 
     def array_column_to_strings(df, column):
         df[column] = [str(list(df[column][ind])) for ind in df.index]
@@ -192,47 +192,16 @@ def main(args):
     # Force garbage collection before starting cross-validation
     gc.collect()
 
-    # def cross_validation_neg_acc_gradient_boosting(param):
-    #     num_round = param["num_rounds"]
-    #
-    #     # param["tree_method"] = "hist"
-    #     # param["sampling_method"] = "uniform"
-    #
-    #     param["tree_method"] = "gpu_hist"
-    #     param["device"] = "cuda"
-    #     param["sampling_method"] = "gradient_based"
-    #
-    #     param['objective'] = 'binary:logistic'
-    #     weights = np.array([param["weight"] if binding == 0 else 1.0 for binding in df_train["Binding"]])
-    #     del param["num_rounds"]
-    #     del param["weight"]
-    #     loss = []
-    #     for i in range(5):
-    #         train_index, test_index = train_indices[i], test_indices[i]
-    #         dtrain = xgb.DMatrix(np.array(train_x[train_index]), weight=weights[train_index],
-    #                              label=np.array(train_y[train_index]))
-    #         dvalid = xgb.DMatrix(np.array(train_x[test_index]))
-    #         bst = xgb.train(param, dtrain, int(num_round), verbose_eval=1)
-    #         y_valid_pred = np.round(bst.predict(dvalid))
-    #         validation_y = train_y[test_index]
-    #         false_positive = 100 * (1 - np.mean(np.array(validation_y)[y_valid_pred == 1]))
-    #         false_negative = 100 * (np.mean(np.array(validation_y)[y_valid_pred == 0]))
-    #         logging.info(
-    #             "False positive rate: " + str(false_positive) + "; False negative rate: " + str(false_negative))
-    #         loss.append(2 * (false_negative ** 2) + false_positive ** 1.3)
-    #     wandb.config.update(param, allow_val_change=True)
-    #     wandb.log({"loss": np.mean(loss)})
-    #     return np.mean(loss)
-
-    import numpy as np
-    import xgboost as xgb
-    import logging
-
     def cross_validation_neg_acc_gradient_boosting(param):
         num_round = param["num_rounds"]
+
+        # param["tree_method"] = "hist"
+        # param["sampling_method"] = "uniform"
+
         param["tree_method"] = "gpu_hist"
         param["device"] = "cuda"
         param["sampling_method"] = "gradient_based"
+
         param['objective'] = 'binary:logistic'
         weights = np.array([param["weight"] if binding == 0 else 1.0 for binding in df_train["Binding"]])
         del param["num_rounds"]
@@ -240,30 +209,20 @@ def main(args):
         loss = []
         for i in range(5):
             train_index, test_index = train_indices[i], test_indices[i]
-
-            # Split train data into smaller batches
-            train_x_batches = np.array_split(np.array(train_x[train_index]),
-                                             10)  # Change the number of splits as needed
-            train_y_batches = np.array_split(np.array(train_y[train_index]), 10)
-
-            for batch_x, batch_y in zip(train_x_batches, train_y_batches):
-                dtrain = xgb.DMatrix(batch_x, label=batch_y)
-                bst = xgb.train(param, dtrain, num_round)
-
-            dtest = xgb.DMatrix(train_x[test_index], label=train_y[test_index])
-            pred = bst.predict(dtest)
-            pred = [int(x >= 0.5) for x in pred]
-            y = dtest.get_label()
-
-            false_positive = 100 * (1 - np.mean(np.array(y)[pred == 1]))
-            false_negative = 100 * (np.mean(np.array(y)[pred == 0]))
+            dtrain = xgb.DMatrix(np.array(train_x[train_index]), weight=weights[train_index],
+                                 label=np.array(train_y[train_index]))
+            dvalid = xgb.DMatrix(np.array(train_x[test_index]))
+            bst = xgb.train(param, dtrain, int(num_round), verbose_eval=1)
+            y_valid_pred = np.round(bst.predict(dvalid))
+            validation_y = train_y[test_index]
+            false_positive = 100 * (1 - np.mean(np.array(validation_y)[y_valid_pred == 1]))
+            false_negative = 100 * (np.mean(np.array(validation_y)[y_valid_pred == 0]))
             logging.info(
                 "False positive rate: " + str(false_positive) + "; False negative rate: " + str(false_negative))
-            custom_loss = 2 * (false_negative ** 2) + false_positive ** 1.3
-            loss.append(custom_loss)
-            logging.info("Finished training the fold {}".format(i + 1))
-
-        return np.array(loss).mean()
+            loss.append(2 * (false_negative ** 2) + false_positive ** 1.3)
+        wandb.config.update(param, allow_val_change=True)
+        wandb.log({"loss": np.mean(loss)})
+        return np.mean(loss)
 
     # Defining search space for hyperparameter optimization
     space = {"learning_rate": hp.uniform("learning_rate", 0.01, 0.5),
