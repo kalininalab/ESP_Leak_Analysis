@@ -19,7 +19,12 @@
 
 # ---------------------***Introduction***----------------------
 
-This project was conducted in two parts. In first part we address data leakage in the ESP model by splitting data with a powerful tools named DataSAIL(short for Data Splitting Against Information Leakage). 
+This project was conducted in two parts. In the first part, we addressed data leakage in the ESP model by splitting the data using a powerful tool named DataSAIL (Data Splitting Against Information Leakage).
+
+In the second part of the project, we extended the ESP dataset. To achieve this, we extracted 3,450 positive data points from the BRENDA database. Instead of generating negative data points, we used inhibitors as negative data points.
+
+Furthermore, we utilized the EMS1b model to embed the enzyme sequences, focusing on the residues on the enzyme's surface. Additionally, we used the ChemBERTa model to embed the structure of the molecules, paying attention to the functional groups.
+
 
 ## Setup Instructions
 ###  Folder structure
