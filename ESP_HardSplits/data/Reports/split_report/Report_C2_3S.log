@@ -1,0 +1,5 @@
+2024-07-09 17:40:26,398 - INFO - Current Directory: /scratch/SCRATCH_SAS/vahid/SIP/ESP_HardSplits/notebooks_and_code
+2024-07-09 17:40:26,552 - INFO - *** Start running the DataSAIL***
+For more information about DataSAIL please check it's webpage: https://datasail.readthedocs.io/en/latest/index.html
+2024-07-09 18:14:34,985 - WARNING - cdhit cannot optimally cluster the data. The minimal number of clusters is 5941.
+2024-07-09 18:17:17,587 - ERROR - Splitting failed for C2, try to increase the timelimit or the epsilon value.

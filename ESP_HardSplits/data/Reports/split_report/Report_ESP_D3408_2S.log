@@ -1,0 +1,77 @@
+2024-07-11 01:28:02,813 - INFO - Current Directory: /scratch/SCRATCH_SAS/vahid/SIP/ESP_HardSplits/notebooks_and_code
+2024-07-11 01:28:02,813 - INFO - Reading the data for _D3408_2S
+2024-07-11 01:28:02,949 - INFO - Start Clustering the data with CD-HIT
+2024-07-11 01:53:31,733 - INFO - Clustering report for 80% similarity
+            cluster
+count  14898.000000
+mean    4144.982078
+std     2389.591091
+min        0.000000
+25%     2137.250000
+50%     4097.500000
+75%     6190.000000
+max     8466.000000
+2024-07-11 01:53:31,846 - INFO - Clustering report for 60% similarity
+            cluster
+count  14898.000000
+mean    3538.472345
+std     2017.764772
+min        0.000000
+25%     1878.000000
+50%     3474.500000
+75%     5233.750000
+max     7273.000000
+2024-07-11 01:53:32,111 - INFO - Clustering report for 40% similarity
+            cluster
+count  14898.000000
+mean    2523.226809
+std     1442.284666
+min        0.000000
+25%     1341.250000
+50%     2417.000000
+75%     3716.000000
+max     5315.000000
+2024-07-11 01:54:06,033 - INFO - Clustering the data with CD-HIT DONE
+2024-07-11 01:54:06,040 - INFO - Start Splitting the data based one [8, 2] split size 
+2024-07-11 01:54:45,047 - INFO - Data Report after splitting data by ESP split method and check for NaN or null cells in the data
+              NaNTrain  NullTrain  NaNTest  NullTest
+Uniprot ID           0          0        0         0
+molecule ID          0          0        0         0
+evidence             0          0        0         0
+Binding              0          0        0         0
+type             11904          0     3008         0
+substrate ID         0          0        0         0
+ESM1b_ts             0          0        0         0
+PreGNN               0          0        0         0
+ECFP                 0          0        0         0
+Sequence             0          0        0         0
+SMILES               0          0        0         0
+cluster              7          0        7         0
+2024-07-11 01:54:45,048 - INFO - Total number of samples: 14912
+2024-07-11 01:54:45,048 - INFO - Ratio of test set to total dataset: 0.2
+2024-07-11 01:54:45,048 - INFO - Drop nan data based on cluster column, if exist
+2024-07-11 01:54:45,056 - INFO - Start to create negative data points for the train set...
+2024-07-11 01:55:26,156 - INFO - Number of metabolites in train set: 1174
+2024-07-11 02:14:54,556 - INFO - Creating negative data points for the train set DONE
+2024-07-11 02:14:54,557 - INFO - Start to create negative data points for the test set...
+2024-07-11 02:15:05,015 - INFO - Number of metabolites in test set: 625
+2024-07-11 02:19:07,983 - INFO - Creating negative data points for the test set DONE
+2024-07-11 02:19:08,192 - INFO - Data report after adding negative data and check for NaN or null cells in the data
+              NaNTrain  NullTrain  NaNTest  NullTest
+Uniprot ID           0          0        0         0
+molecule ID          0          0        0         0
+evidence         33152          0     8467         0
+Binding              0          0        0         0
+type             45049          0    11468         0
+substrate ID         0          0        0         0
+ESM1b_ts             0          0        0         0
+PreGNN               0          0        0         0
+ECFP                 0          0        0         0
+Sequence             0          0        0         0
+SMILES               0          0        0         0
+cluster          33152          0     8467         0
+2024-07-11 02:19:08,192 - INFO - Total number of samples: 56517
+2024-07-11 02:19:08,192 - INFO - Ratio of test set to total dataset: 0.2
+2024-07-11 02:19:08,201 - INFO - The ratio of negative to positive data in train: 2.79
+2024-07-11 02:19:08,202 - INFO - The ratio of negative to positive data in test: 2.82
+2024-07-11 02:19:08,612 - INFO - [32m***** PROCESS COMPLETED: For an overview, please review the Report_ESP_D3408_2S.log file in Reports folder. *****[0m

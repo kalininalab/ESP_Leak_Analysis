@@ -1,0 +1,54 @@
+2024-07-09 15:49:49,524 - INFO - Current Directory: /scratch/SCRATCH_SAS/vahid/SIP/ESP_HardSplits/notebooks_and_code
+2024-07-09 15:49:49,648 - INFO - *** Start running the DataSAIL***
+For more information about DataSAIL please check it's webpage: https://datasail.readthedocs.io/en/latest/index.html
+2024-07-09 15:50:10,466 - INFO - DataSAIL split the data successfully
+2024-07-09 15:50:10,549 - INFO - Data report after splitting data by I1e split method and check for NaN or null cells in the data
+              nanTrain  NullTrain  NaNTest  NullTest  nanVal  NullVal
+Uniprot ID           0          0        0         0       0        0
+molecule ID          0          0        0         0       0        0
+evidence             0          0        0         0       0        0
+Binding              0          0        0         0       0        0
+type             12819          0     3662         0    1832        0
+substrate ID         0          0        0         0       0        0
+ESM1b_ts             0          0        0         0       0        0
+PreGNN               0          0        0         0       0        0
+ECFP                 0          0        0         0       0        0
+Sequence             0          0        0         0       0        0
+SMILES               0          0        0         0       0        0
+ids                  0          0        0         0       0        0
+split                0          0        0         0       0        0
+2024-07-09 15:50:10,550 - INFO - Total number of samples: 18313
+2024-07-09 15:50:10,550 - INFO - Ratio of test set to dataset: 0.2
+2024-07-09 15:50:10,550 - INFO - Ratio of val set to dataset: 0.1
+2024-07-09 15:50:10,550 - INFO - Start to create negative data points for the train set...
+2024-07-09 15:50:34,779 - INFO - Number of metabolites in train set: 940
+2024-07-09 16:06:37,856 - INFO - Creating negative data points for the train set DONE
+2024-07-09 16:06:37,856 - INFO - Start to create negative data points for the test set...
+2024-07-09 16:06:41,666 - INFO - Number of metabolites in test set: 255
+2024-07-09 16:13:09,287 - INFO - Creating negative data points for the test set DONE
+2024-07-09 16:13:09,287 - INFO - Start to create negative data points for the val set...
+2024-07-09 16:13:13,318 - INFO - Number of metabolites in val set: 159
+2024-07-09 16:16:08,739 - INFO - Creating negative data points for the val set DONE
+2024-07-09 16:16:08,999 - INFO - Data report after adding negative data and check for NaN or null cells in the data
+              nanTrain  NullTrain  NaNTest  NullTest  nanVal  NullVal
+Uniprot ID           0          0        0         0       0        0
+molecule ID          0          0        0         0       0        0
+evidence         36119          0     8459         0    5134        0
+Binding              0          0        0         0       0        0
+type             48938          0    12121         0    6966        0
+substrate ID         0          0        0         0       0        0
+ESM1b_ts             0          0        0         0       0        0
+PreGNN               0          0        0         0       0        0
+ECFP                 0          0        0         0       0        0
+Sequence             0          0        0         0       0        0
+SMILES               0          0        0         0       0        0
+ids              36119          0     8459         0    5134        0
+split            36119          0     8459         0    5134        0
+2024-07-09 16:16:08,999 - INFO - Total number of samples: 68025
+2024-07-09 16:16:08,999 - INFO - Ratio of test set to dataset: 0.18
+2024-07-09 16:16:08,999 - INFO - Ratio of val set to dataset: 0.1
+2024-07-09 16:16:09,008 - INFO - The ratio of negative to positive data in train: 2.82
+2024-07-09 16:16:09,008 - INFO - The ratio of negative to positive data in test: 2.31
+2024-07-09 16:16:09,010 - INFO - The ratio of negative to positive data in val: 2.8
+2024-07-09 16:16:09,574 - INFO - [32m***** PROCESS COMPLETED *****
+For an overview,please review the Report_I1e_3S.log file in Reports folder. [0m

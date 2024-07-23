@@ -1,0 +1,79 @@
+2024-07-10 22:29:42,134 - INFO - Current Directory: /scratch/SCRATCH_SAS/vahid/SIP/ESP_HardSplits/notebooks_and_code
+2024-07-10 22:29:42,134 - INFO - Reading the data for C2_2S
+2024-07-10 22:29:42,297 - INFO - Start Clustering the data with CD-HIT
+2024-07-10 22:44:38,941 - INFO - Clustering report for 80% similarity
+            cluster
+count  10398.000000
+mean    3093.321696
+std     1808.454246
+min        0.000000
+25%     1549.250000
+50%     3073.500000
+75%     4645.000000
+max     6325.000000
+2024-07-10 22:44:39,041 - INFO - Clustering report for 60% similarity
+            cluster
+count  10398.000000
+mean    2642.393441
+std     1531.638448
+min        0.000000
+25%     1357.250000
+50%     2621.000000
+75%     3947.750000
+max     5435.000000
+2024-07-10 22:44:39,151 - INFO - Clustering report for 40% similarity
+            cluster
+count  10398.000000
+mean    1860.498557
+std     1082.633223
+min        0.000000
+25%      948.000000
+50%     1791.500000
+75%     2766.000000
+max     3936.000000
+2024-07-10 22:44:54,248 - INFO - Clustering the data with CD-HIT DONE
+2024-07-10 22:44:54,266 - INFO - Start Splitting the data based one [8, 2] split size 
+2024-07-10 22:45:19,359 - INFO - Data Report after splitting data by ESP split method and check for NaN or null cells in the data
+              NaNTrain  NullTrain  NaNTest  NullTest
+Uniprot ID           0          0        0         0
+molecule ID          0          0        0         0
+evidence             0          0        0         0
+Binding              0          0        0         0
+type              8326          0     2078         0
+substrate ID         0          0        0         0
+ESM1b_ts             0          0        0         0
+PreGNN               0          0        0         0
+ECFP                 0          0        0         0
+Sequence             0          0        0         0
+SMILES               0          0        0         0
+split                0          0        0         0
+cluster              6          0        0         0
+2024-07-10 22:45:19,360 - INFO - Total number of samples: 10404
+2024-07-10 22:45:19,360 - INFO - Ratio of test set to total dataset: 0.2
+2024-07-10 22:45:19,360 - INFO - Drop nan data based on cluster column, if exist
+2024-07-10 22:45:19,368 - INFO - Start to create negative data points for the train set...
+2024-07-10 22:45:50,390 - INFO - Number of metabolites in train set: 915
+2024-07-10 22:58:51,011 - INFO - Creating negative data points for the train set DONE
+2024-07-10 22:58:51,012 - INFO - Start to create negative data points for the test set...
+2024-07-10 22:59:01,954 - INFO - Number of metabolites in test set: 473
+2024-07-10 23:01:57,733 - INFO - Creating negative data points for the test set DONE
+2024-07-10 23:01:57,933 - INFO - Data report after adding negative data and check for NaN or null cells in the data
+              NaNTrain  NullTrain  NaNTest  NullTest
+Uniprot ID           0          0        0         0
+molecule ID          0          0        0         0
+evidence         23124          0     5855         0
+Binding              0          0        0         0
+type             31444          0     7933         0
+substrate ID         0          0        0         0
+ESM1b_ts             0          0        0         0
+PreGNN               0          0        0         0
+ECFP                 0          0        0         0
+Sequence             0          0        0         0
+SMILES               0          0        0         0
+split            23124          0     5855         0
+cluster          23124          0     5855         0
+2024-07-10 23:01:57,933 - INFO - Total number of samples: 39377
+2024-07-10 23:01:57,933 - INFO - Ratio of test set to total dataset: 0.2
+2024-07-10 23:01:57,940 - INFO - The ratio of negative to positive data in train: 2.78
+2024-07-10 23:01:57,940 - INFO - The ratio of negative to positive data in test: 2.82
+2024-07-10 23:01:58,307 - INFO - [32m***** PROCESS COMPLETED: For an overview, please review the Report_ESPC2_2S.log file in Reports folder. *****[0m

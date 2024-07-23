@@ -1,0 +1,55 @@
+2024-07-09 14:54:10,043 - INFO - Current Directory: /scratch/SCRATCH_SAS/vahid/SIP/ESP_HardSplits/notebooks_and_code
+2024-07-09 14:54:10,151 - INFO - *** Start running the DataSAIL***
+For more information about DataSAIL please check it's webpage: https://datasail.readthedocs.io/en/latest/index.html
+2024-07-09 15:21:53,341 - WARNING - cdhit cannot optimally cluster the data. The minimal number of clusters is 5941.
+2024-07-09 15:22:27,228 - INFO - DataSAIL split the data successfully
+2024-07-09 15:22:27,320 - INFO - Data report after splitting data by C1f split method and check for NaN or null cells in the data
+              nanTrain  NullTrain  NaNTest  NullTest  nanVal  NullVal
+Uniprot ID           0          0        0         0       0        0
+molecule ID          0          0        0         0       0        0
+evidence             0          0        0         0       0        0
+Binding              0          0        0         0       0        0
+type             12819          0     3663         0    1831        0
+substrate ID         0          0        0         0       0        0
+ESM1b_ts             0          0        0         0       0        0
+PreGNN               0          0        0         0       0        0
+ECFP                 0          0        0         0       0        0
+Sequence             0          0        0         0       0        0
+SMILES               0          0        0         0       0        0
+ids                  0          0        0         0       0        0
+split                0          0        0         0       0        0
+2024-07-09 15:22:27,321 - INFO - Total number of samples: 18313
+2024-07-09 15:22:27,321 - INFO - Ratio of test set to dataset: 0.2
+2024-07-09 15:22:27,321 - INFO - Ratio of val set to dataset: 0.1
+2024-07-09 15:22:27,321 - INFO - Start to create negative data points for the train set...
+2024-07-09 15:22:53,659 - INFO - Number of metabolites in train set: 1131
+2024-07-09 15:37:45,756 - INFO - Creating negative data points for the train set DONE
+2024-07-09 15:37:45,756 - INFO - Start to create negative data points for the test set...
+2024-07-09 15:37:54,049 - INFO - Number of metabolites in test set: 632
+2024-07-09 15:41:41,248 - INFO - Creating negative data points for the test set DONE
+2024-07-09 15:41:41,249 - INFO - Start to create negative data points for the val set...
+2024-07-09 15:41:45,207 - INFO - Number of metabolites in val set: 378
+2024-07-09 15:43:36,993 - INFO - Creating negative data points for the val set DONE
+2024-07-09 15:43:37,270 - INFO - Data report after adding negative data and check for NaN or null cells in the data
+              nanTrain  NullTrain  NaNTest  NullTest  nanVal  NullVal
+Uniprot ID           0          0        0         0       0        0
+molecule ID          0          0        0         0       0        0
+evidence         35678          0    10256         0    5110        0
+Binding              0          0        0         0       0        0
+type             48497          0    13919         0    6941        0
+substrate ID         0          0        0         0       0        0
+ESM1b_ts             0          0        0         0       0        0
+PreGNN               0          0        0         0       0        0
+ECFP                 0          0        0         0       0        0
+Sequence             0          0        0         0       0        0
+SMILES               0          0        0         0       0        0
+ids              35678          0    10256         0    5110        0
+split            35678          0    10256         0    5110        0
+2024-07-09 15:43:37,271 - INFO - Total number of samples: 69357
+2024-07-09 15:43:37,271 - INFO - Ratio of test set to dataset: 0.2
+2024-07-09 15:43:37,271 - INFO - Ratio of val set to dataset: 0.1
+2024-07-09 15:43:37,280 - INFO - The ratio of negative to positive data in train: 2.78
+2024-07-09 15:43:37,280 - INFO - The ratio of negative to positive data in test: 2.8
+2024-07-09 15:43:37,282 - INFO - The ratio of negative to positive data in val: 2.79
+2024-07-09 15:43:37,827 - INFO - [32m***** PROCESS COMPLETED *****
+For an overview,please review the Report_C1f_3S.log file in Reports folder. [0m

@@ -1,0 +1,46 @@
+2024-07-09 10:42:16,560 - INFO - Current Directory: /scratch/SCRATCH_SAS/vahid/SIP/ESP_HardSplits/notebooks_and_code
+2024-07-09 10:42:16,838 - INFO - *** Start running the dataSAIL***
+For more information about DataSAIL please check its  webpage: https://datasail.readthedocs.io/en/latest/index.html
+2024-07-09 10:42:40,435 - INFO - Data report after splitting data by C1e split method and check for NaN or null cells in the data
+              NaNTrain  NullTrain  NaNTest  NullTest
+Uniprot ID           0          0        0         0
+molecule ID          0          0        0         0
+evidence             0          0        0         0
+Binding              0          0        0         0
+type             14651          0     3662         0
+substrate ID         0          0        0         0
+ESM1b_ts             0          0        0         0
+PreGNN               0          0        0         0
+ECFP                 0          0        0         0
+Sequence             0          0        0         0
+SMILES               0          0        0         0
+ids                  0          0        0         0
+split                0          0        0         0
+2024-07-09 10:42:40,436 - INFO - Total number of samples: 18313
+2024-07-09 10:42:40,436 - INFO - Ratio of test set to dataset: 0.2
+2024-07-09 10:42:40,436 - INFO - Start to create negative data points for the train set...
+2024-07-09 10:43:12,540 - INFO - Number of metabolites in train set: 1040
+2024-07-09 10:58:26,750 - INFO - Creating negative data points for the train set DONE
+2024-07-09 10:58:26,750 - INFO - Start to create negative data points for the test set...
+2024-07-09 10:58:30,667 - INFO - Number of metabolites in test set: 314
+2024-07-09 11:04:21,780 - INFO - Creating negative data points for the test set DONE
+2024-07-09 11:04:22,042 - INFO - Data report after adding negative data and check for NaN or null cells in the data
+               NaNTrain  NullTrain  NaNTest  NullTest
+Uniprot ID           0          0        0         0
+molecule ID          0          0        0         0
+evidence         40779          0    10239         0
+Binding              0          0        0         0
+type             55430          0    13901         0
+substrate ID         0          0        0         0
+ESM1b_ts             0          0        0         0
+PreGNN               0          0        0         0
+ECFP                 0          0        0         0
+Sequence             0          0        0         0
+SMILES               0          0        0         0
+ids              40779          0    10239         0
+split            40779          0    10239         0
+2024-07-09 11:04:22,042 - INFO - Total number of samples: 69331
+2024-07-09 11:04:22,042 - INFO - Ratio of test set to total dataset: 0.2
+2024-07-09 11:04:22,053 - INFO - The ratio of negative to positive data in train: 2.78
+2024-07-09 11:04:22,053 - INFO - The ratio of negative to positive data in test: 2.8
+2024-07-09 11:04:22,601 - INFO - [32m***** PROCESS COMPLETED: For an overview, please review the Report_C1e_2S.log file in Reports folder. *****[0m

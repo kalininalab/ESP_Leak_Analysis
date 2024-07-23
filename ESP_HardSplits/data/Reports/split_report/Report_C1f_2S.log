@@ -1,0 +1,48 @@
+2024-07-09 11:22:46,340 - INFO - Current Directory: /scratch/SCRATCH_SAS/vahid/SIP/ESP_HardSplits/notebooks_and_code
+2024-07-09 11:22:46,428 - INFO - *** Start running the DataSAIL***
+For more information about DataSAIL please check it's webpage: https://datasail.readthedocs.io/en/latest/index.html
+2024-07-09 11:49:47,613 - WARNING - cdhit cannot optimally cluster the data. The minimal number of clusters is 5941.
+2024-07-09 11:50:20,983 - INFO - Data report after splitting data by C1f split method and check for NaN or null cells in the data
+               NaNTrain  NullTrain  NaNTest  NullTest
+Uniprot ID           0          0        0         0
+molecule ID          0          0        0         0
+evidence             0          0        0         0
+Binding              0          0        0         0
+type             14651          0     3662         0
+substrate ID         0          0        0         0
+ESM1b_ts             0          0        0         0
+PreGNN               0          0        0         0
+ECFP                 0          0        0         0
+Sequence             0          0        0         0
+SMILES               0          0        0         0
+ids                  0          0        0         0
+split                0          0        0         0
+2024-07-09 11:50:20,983 - INFO - Total number of samples: 18313
+2024-07-09 11:50:20,983 - INFO - Ratio of test set to dataset: 0.2
+2024-07-09 11:50:20,983 - INFO - Start to create negative data points for the train set...
+2024-07-09 11:50:50,794 - INFO - Number of metabolites in train set: 1228
+2024-07-09 12:08:17,216 - INFO - Creating negative data points for the train set DONE
+2024-07-09 12:08:17,216 - INFO - Start to create negative data points for the test set...
+2024-07-09 12:08:25,389 - INFO - Number of metabolites in test set: 599
+2024-07-09 12:12:15,947 - INFO - Creating negative data points for the test set DONE
+2024-07-09 12:12:16,199 - INFO - Data report after adding negative data and check for NaN or null cells in the data
+               NaNTrain  NullTrain  NaNTest  NullTest
+Uniprot ID           0          0        0         0
+molecule ID          0          0        0         0
+evidence         40871          0    10242         0
+Binding              0          0        0         0
+type             55522          0    13904         0
+substrate ID         0          0        0         0
+ESM1b_ts             0          0        0         0
+PreGNN               0          0        0         0
+ECFP                 0          0        0         0
+Sequence             0          0        0         0
+SMILES               0          0        0         0
+ids              40871          0    10242         0
+split            40871          0    10242         0
+2024-07-09 12:12:16,199 - INFO - Total number of samples: 69426
+2024-07-09 12:12:16,200 - INFO - Ratio of test set to total dataset: 0.2
+2024-07-09 12:12:16,210 - INFO - The ratio of negative to positive data in train: 2.79
+2024-07-09 12:12:16,210 - INFO - The ratio of negative to positive data in test: 2.8
+2024-07-09 12:12:16,723 - INFO - [32m***** PROCESS COMPLETED *****
+For an overview,please review the Report_C1f_2S.log file in Reports folder. [0m
