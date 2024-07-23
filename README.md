@@ -31,12 +31,13 @@ SIP/
 │ │ ├── 2splits/
 │ │ ├── 3splits/
 │ │ ├── data_ProSmith/
-│ │ └── Reports/
+│ │ ├── Reports/
+│ │ ├── training_results_2S
+│ │ └── training_results_3S
 │ └── notebooks_and_code/
 │   └── additional_code/
 ├── SIP/
-├── README.md
-└── requirements.txt
+└── README.md
 ```
 
 ### Setting up `SIP` Environment
@@ -133,24 +134,25 @@ SIP/
       ./SIP/data/Reports/Report_2Splits_C1e.log
 
 ### 2-2-SplitByESP.py
-* This script aims to generate a control set for each split produced by dataSAIL and also create negative data for each split. The original ESP dataset contains some missing (NaN) data, and for some molecules, we couldn't find the SMILES string. Additionally, during parsing with dataSAIL, some molecules had invalid SMILES strings. Consequently, the size of the dataset is smaller than the original ESP dataset.
+* This script aims to generate a control set for 1D abd 2D splits produced by dataSAIL and then creates negative data for each split. The original ESP dataset contains some missing (NaN) data, and for some molecules, we couldn't find the SMILES string. Additionally, during parsing with dataSAIL, some molecules had invalid SMILES strings. Consequently, the size of the dataset is smaller than the original ESP dataset.
 
-* This script accepts the same arguments as 2-1-SplitByDataSAIL.py:
+* Explanation of Arguments:
 
       python 2-2-SplitByESP.py --splitted-data [C2, C1e] --split-size [8 2, 7 2 1] --Data-suffix [NoATP, D3408]
 
-* The splitted-data is an optional argument. However, if specified, should be one of the following: [C2,C1f] to get access to train and test sets related to C1f and C2.
+* The --splitted-data should be one of the following: [C2,C1f] to get access to train and test sets related to C1f and C2.
 * Since in ESP paper the data have been split based on enzyme and also CV has been done based on sequence's indices(all related indices to an enzyme fall into same fold of CV), we choose train and test resulted to "C1f" split to create control case for all 1D splits.
+* `--split-size` and `--Data-suffix` are same as `2-1-SplitByDataSAIL.py`
 
 
 * Example:
 
-      python 2-2-SplitByESP.py --split-method C1f --split-size 8 2 
+      python 2-2-SplitByESP.py ---splitted-data C1f --split-size 8 2 
 
 * Output files:
 
-      ./SIP/data/2splits/train_ESP-C1e_2S.pkl
-      ./SIP/data/2splits/test_ESP-C1e_2S.pkl
+      ./SIP/data/2splits/train_ESPC1f_2S.pkl
+      ./SIP/data/2splits/test_ESPC1f_2S.pkl
       ./SIP/data/Reports/split_report/Report_ESPC1f_2S.log
 * The `ESPC1f` emphasizes that the combined data of `C1f` are used to perform the `ESP` split.
 
@@ -158,8 +160,16 @@ SIP/
 ## Hyperparameter optimization and model training
 
 ### 3-1-HyperOp_TraningXgb_2Splits.py
+* This script aims to tune the hyperparameters and train xgboost model for each split methods produced under 2 splits (train:test) scenario
 
+       python 3-1-HyperOp_TraningXgb_2Splits.py --splitted-data [C2,C1e, C1f, I1e, I1f,ESP, ESPC1f, ESPC2] --column-name [ECFP, PreGNN] --Data-suffix [NoATP, D3408]
+* Explanation of Arguments:
+* `--splitted-data` and `--Data-suffix` are same as before 
+* `--column-name` determines which embedded vector for the molecule should be concatenated with the ESMb1ts vector for hyperparameter optimization and training.
 ### 3-2-HyperOp_TraningXgb_3Splits.py
+* This script aims to tune the hyperparameters and train xgboost model for each split methods produced under 3 splits (train:test:val) scenario
+* Explanation of Arguments: The Arguments are same as `3-1-HyperOp_TraningXgb_2Splits.py`
+
 
 
 # ---------***Substrate Inhibitor prediction(SIP)***-------------

@@ -26,13 +26,13 @@ print(CURRENT_DIR)
 
 """
 The related code to clustering and 2-split method (train:test) was sourced from the ESP repository. 
-We have made modifications to this code to accommodate a 3-split method (train:test:val).
+We have modified it to accommodate a 3-split method (train:test:val).
 """
 
 
 def main(args):
     CURRENT_DIR = os.getcwd()
-    splitted_data = args.splitted_data if args.splitted_data else ""
+    splitted_data = args.splitted_data
     split_size = args.split_size
     Data_suffix = f"_{args.Data_suffix}" if args.Data_suffix else ""
     if len(split_size) not in [2, 3]:
@@ -322,7 +322,7 @@ if __name__ == "__main__":
         description=f"This script generates a control case for each split method of DataSAIL by combining the related "
                     f"split results from DataSAIL and re-splitting them using the ESP method")
     parser.add_argument('--splitted-data', type=str, required=False, default="",
-                        help="The splitted-data is an optional argument. However, if specified, should be one of the "
+                        help="The splitted-data should be one of the "
                              "following: [C2,C1f] to get access to train and test sets related to C1f and C2")
     parser.add_argument('--split-size', type=int, nargs='+', required=True,
                         help="List of integers for splitting, e.g., 8 2 or 7 2 1")
