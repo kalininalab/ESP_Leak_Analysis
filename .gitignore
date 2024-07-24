@@ -12,3 +12,8 @@ ESP_HardSplits/data/data_ESP/dataESP_NoATP.pkl
 ESP_HardSplits/notebooks_and_code/additional_code/__pycache__/splitByESP_method.cpython-312.pyc
 __pycache__/
 
+/ESP_HardSplits/notebooks_and_code/.ipynb_checkpoints
+ESP_HardSplits/notebooks_and_code/.ipynb_checkpoints/4-1 Plots and figures_1D_2S-checkpoint.ipynb
+ESP_HardSplits/notebooks_and_code/additional_code/.ipynb_checkpoints/helper_functions-checkpoint.py
+/ESP_HardSplits/notebooks_and_code/.ipynb_checkpoints
+ESP_HardSplits/notebooks_and_code/.ipynb_checkpoints/4-1 Plots and figures_1D_2S-checkpoint.ipynb
