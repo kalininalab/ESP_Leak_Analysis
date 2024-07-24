@@ -3,6 +3,7 @@ import inspect
 import re
 import sys
 import time
+import matplotlib as mpl
 import collections
 import requests
 import matplotlib.pyplot as plt
@@ -18,6 +19,10 @@ from libchebipy import ChebiEntity
 import os
 from datasail.sail import datasail
 import numpy as np
+plt.style.use('CCB_plot_style_0v4.mplstyle');
+c_styles      = mpl.rcParams['axes.prop_cycle'].by_key()['color']   # fetch the defined color styles
+high_contrast = ['#004488', '#DDAA33', '#BB5566', '#000000']
+
 
 
 def split_on_empty_lines(s):
@@ -290,6 +295,103 @@ def plot_top_keys_values(df, key_column, xlabel, ylabel, title, color='blue', fi
     plt.xticks(rotation=90, fontsize='xx-small')
     plt.subplots_adjust(bottom=0.25)
     plt.legend()
+    plt.show()
+
+
+def parse_log(file_path):
+    with open(file_path, 'r') as file:
+        log_lines = file.readlines()
+
+    iteration_data = []
+    unique_losses = set()
+
+    for line in log_lines:
+        match_iteration = re.search(r'Iteration (\d+)', line)
+        match_loss = re.search(r'Best loss so far: (\d+\.\d+)', line)
+
+        if match_iteration:
+            current_iteration = int(match_iteration.group(1))
+        elif match_loss:
+            current_loss = float(match_loss.group(1))
+
+            # Check for unique loss in the same iteration
+            if current_loss not in unique_losses:
+                iteration_data.append({'iteration': current_iteration, 'loss': current_loss})
+                unique_losses.add(current_loss)
+
+    return pd.DataFrame(iteration_data)
+
+
+def plotting(column, experiment=None, log_directory=None, color_map=None,split_number=None):
+    log_files = [f for f in os.listdir(log_directory) if f.endswith('.log')]
+    fig, ax = plt.subplots(figsize=(10, 6))
+    for log_file in log_files:
+        match = re.search(rf'HOP_ESM1bts_and_{column}_(\w+)_{split_number}S.log', log_file)
+        split_name = None
+
+        if experiment=="1D":
+            if match:
+                split_name = match.group(1)
+                if "NoATP" in split_name or "D3408" in split_name or "C2" in split_name:
+                    continue
+                else:
+                    split_name = match.group(1)
+            else:
+                continue
+        elif experiment == "2D":
+            if match:
+                split_name = match.group(1)
+                if "C2" in split_name or "ESPC2" in split_name:
+                    split_name = match.group(1)
+                else:
+                    continue
+            else:
+                continue
+        elif experiment == "NoATP":
+            if match:
+                split_name = match.group(1)
+                if "NoATP" in split_name or "D3408" in split_name:
+                    split_name = match.group(1)
+                else:
+                    continue
+            else:
+                continue
+
+        color = color_map.get(split_name, 'gray')
+        log_data = parse_log(os.path.join(log_directory, log_file))
+        # Smooth the data using moving average
+        window_size = min(20, max(1, len(log_data['iteration']) // 10))  # Adjust window size as needed
+        smooth_loss = np.convolve(log_data['loss'], np.ones(window_size) / window_size, mode='same')
+        smooth_iteration = log_data['iteration']
+        # Convert smooth_iteration and smooth_loss to Pandas Series
+        smooth_iteration = pd.Series(smooth_iteration)
+        smooth_loss = pd.Series(smooth_loss)
+        # Extend the curve to iteration 2000
+        last_iteration = smooth_iteration.iloc[-1]
+        remaining_iterations = np.arange(last_iteration + 1, 2001)
+        extension_loss = np.full_like(remaining_iterations, smooth_loss.iloc[-1])
+        smooth_iteration = pd.concat([smooth_iteration, pd.Series(remaining_iterations)], ignore_index=True)
+        smooth_loss = pd.concat([smooth_loss, pd.Series(extension_loss)], ignore_index=True)
+        # Plot smoothed data
+        ax.plot(smooth_iteration, smooth_loss, color=color, label=split_name, alpha=0.8)
+        # Find minimum loss point from original data
+        min_loss_index = log_data['loss'].idxmin()
+        min_loss_iteration = log_data['iteration'].iloc[min_loss_index]
+        min_loss = log_data['loss'].iloc[min_loss_index]
+        # Mark minimum loss point
+        ax.scatter(min_loss_iteration, min_loss, color=color, s=50, marker='o')
+        # Annotate minimum loss value
+        ax.annotate(f'{min_loss:.2f}', (min_loss_iteration, min_loss), textcoords="offset points", xytext=(5, 5),
+                    ha='center', fontsize=11)
+
+    ax.set_xlabel('Iteration', fontsize=12)
+    ax.set_ylabel('Loss', fontsize=12)
+    ax.set_title(f'Loss per Iteration for ESM1bts + {column}', fontsize=18, fontname='Arial')
+    ax.set_xlim(0, 2000)
+    # ax.grid(True)  # Add grid lines
+    ax.legend(loc='upper right', fontsize=10)  # Place legend outside the plot
+
+    plt.tight_layout()
     plt.show()
 
 
