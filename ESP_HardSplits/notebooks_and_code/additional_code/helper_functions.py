@@ -322,7 +322,7 @@ def parse_log(file_path):
     return pd.DataFrame(iteration_data)
 
 
-def plotting(column, experiment=None, log_directory=None, color_map=None,split_number=None):
+def plotting_loss(column, experiment=None, log_directory=None, color_map=None,split_number=None):
     log_files = [f for f in os.listdir(log_directory) if f.endswith('.log')]
     fig, ax = plt.subplots(figsize=(10, 6))
     for log_file in log_files:
