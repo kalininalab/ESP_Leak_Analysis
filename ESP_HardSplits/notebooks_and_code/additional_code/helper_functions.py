@@ -453,4 +453,22 @@ def setup_logging(log_file):
             logging.StreamHandler(sys.stdout)
         ]
     )
+#######################################################################
 
+
+def calculate_molecular_properties(smiles):
+    try:
+        mol = Chem.MolFromSmiles(smiles)
+        if mol is not None:
+            # Calculate molecular weight
+            molecular_weight = Descriptors.MolWt(mol)
+
+            # Calculate number of atoms
+            num_atoms = mol.GetNumAtoms()
+
+            return pd.Series([molecular_weight, int(num_atoms)])
+        else:
+            return pd.Series([None, None])
+    except Exception as e:
+        print(f"Error processing SMILES '{smiles}': {e}")
+        return pd.Series([None, None])
