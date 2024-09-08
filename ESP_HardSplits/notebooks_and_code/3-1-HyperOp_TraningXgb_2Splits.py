@@ -84,12 +84,9 @@ def main(args):
                     n_old = len(train_indices)
                     train_indices.append(ind)
                     train_indices = list(set(train_indices))
-
                     while n_old != len(train_indices):
                         n_old = len(train_indices)
-
                         training_seqs = list(set(df[column_cv].loc[train_indices]))
-
                         train_indices = train_indices + (list(df.loc[df[column_cv].isin(training_seqs)].index))
                         train_indices = list(set(train_indices))
 
