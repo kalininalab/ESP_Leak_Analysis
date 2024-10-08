@@ -297,6 +297,58 @@ def plot_top_keys_values(df, key_column, xlabel, ylabel, title, color='blue', fi
     plt.legend()
     plt.show()
 
+def plot_top_keys_values_multiple_df(dfs, df_names, key_column, xlabel, ylabel, title, figsize=(15, 10), top_count=30,
+                                     title_fontsize=10):
+    if not isinstance(dfs, list) or not isinstance(df_names, list):
+        raise ValueError("dfs and df_names must be lists.")
+
+    if len(dfs) != len(df_names):
+        raise ValueError("The length of dfs and df_names must be the same.")
+
+    # Step 1: Combine counters for all dataframes
+    combined_counter = collections.Counter()
+    for df in dfs:
+        combined_counter.update(df[key_column])
+
+    # Get top combined keys
+    top_combined = combined_counter.most_common(top_count)
+    keys, _ = zip(*top_combined)
+    keys = list(map(str, keys))
+
+    # Step 2: Find common keys between the first two dataframes (assuming 2 dataframes)
+    if len(dfs) >= 2:
+        common_keys = set(map(str, dfs[0][key_column])) & set(map(str, dfs[1][key_column]))
+    else:
+        common_keys = set()
+
+    np.random.seed(0)
+    # Assign random colors to each key
+    colors_map = {key: np.random.rand(3, ) for key in keys}
+
+    # Use a distinct color for common keys (red)
+    common_color = [1, 0, 0]  # Red for common keys
+
+    # Create subplots
+    fig, axes = plt.subplots(1, len(dfs), figsize=figsize)
+    if len(dfs) == 1:
+        axes = [axes]
+
+    # Step 3: Plot for each dataframe
+    for ax, df, df_name in zip(axes, dfs, df_names):
+        counter = collections.Counter(df[key_column])
+        values = [counter.get(key, 0) for key in keys]
+
+        # Set color for bars: red for common keys, otherwise use colors_map
+        bar_colors = [common_color if key in common_keys else colors_map[key] for key in keys]
+
+        ax.barh(keys, values, color=bar_colors, alpha=0.6, edgecolor='black')
+        ax.set_ylabel(ylabel)
+        ax.set_xlabel(xlabel)
+        ax.set_title(title.format(df_name=df_name, top_count=top_count), fontsize=title_fontsize)
+        ax.tick_params(axis='y', labelsize=6)
+
+    plt.tight_layout()
+    plt.show()
 
 def parse_log(file_path):
     with open(file_path, 'r') as file:
