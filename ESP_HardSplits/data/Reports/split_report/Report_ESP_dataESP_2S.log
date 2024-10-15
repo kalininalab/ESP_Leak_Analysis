@@ -1,0 +1,55 @@
+2024-10-15 17:44:40,511 - INFO - Current Directory: /Users/vahidatabaigi/SIP/ESP_HardSplits/notebooks_and_code
+2024-10-15 17:44:40,512 - INFO - Reading the data for _dataESP_2S
+2024-10-15 17:44:40,613 - INFO - Start Clustering the data with CD-HIT
+2024-10-15 18:02:24,181 - INFO - Clustering report for 80% similarity
+            cluster
+count  18304.000000
+mean    4662.106917
+std     2685.113635
+min        0.000000
+25%     2412.750000
+50%     4591.500000
+75%     6949.250000
+max     9548.000000
+2024-10-15 18:02:24,368 - INFO - Clustering report for 60% similarity
+            cluster
+count  18304.000000
+mean    3945.966510
+std     2249.698952
+min        0.000000
+25%     2100.000000
+50%     3865.000000
+75%     5831.250000
+max     8139.000000
+2024-10-15 18:02:24,440 - INFO - Clustering report for 40% similarity
+            cluster
+count  18304.000000
+mean    2779.037642
+std     1587.630281
+min        0.000000
+25%     1478.750000
+50%     2661.000000
+75%     4082.000000
+max     5880.000000
+2024-10-15 18:02:35,901 - INFO - Clustering the data with CD-HIT DONE
+2024-10-15 18:02:35,905 - INFO - Start Splitting the data based one [8, 2] split size 
+2024-10-15 18:02:49,255 - INFO - Data Report after splitting data by ESP split method and check for NaN or null cells in the data
+              NaNTrain  NullTrain  NaNTest  NullTest
+Uniprot ID           0          0        0         0
+molecule ID          0          0        0         0
+evidence             0          0        0         0
+Binding              0          0        0         0
+type             14710          0     3612         0
+substrate ID         0          0        0         0
+ESM1b_ts             0          0        0         0
+PreGNN               0          0        0         0
+ECFP                 0          0        0         0
+Sequence             0          0        0         0
+SMILES               0          0        0         0
+ids                  0          0        0         0
+cluster              9          0        9         0
+2024-10-15 18:02:49,255 - INFO - Total number of samples: 18322
+2024-10-15 18:02:49,255 - INFO - Ratio of test set to total dataset: 0.2
+2024-10-15 18:02:49,255 - INFO - Drop nan data based on cluster column, if exist
+2024-10-15 18:02:49,259 - INFO - Start to create negative data points for the train set...
+2024-10-15 18:02:59,813 - INFO - Number of metabolites in train set: 1266

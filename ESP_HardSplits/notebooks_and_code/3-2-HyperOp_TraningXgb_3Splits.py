@@ -210,9 +210,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Run the data preprocessing and negative sample generation script.")
     parser.add_argument('--splitted-data', type=str, required=True,
-                        help="The splitted-data should be one of [C2,C1e, C1f, I1e, I1f, ESPC1e, ESPC2]")
+                        help="The splitted-data should be one of [C2,C1e, C1f, I1e, I1f, ESP, ESPC2]")
     parser.add_argument('--column-name', type=str, required=True,
-                        help="The column name should be one of [ ECFP , PreGNN]")
+                        help="This argument selects the embedded vector for molecules to concatenate with the ESM1bts,"
+                             " column name should be one of [ ECFP , PreGNN]")
     parser.add_argument('--Data-suffix', default="", type=str, required=False,
                         help="The Dataframe suffix name should be one of [ NoATP , D3408] ")
     args = parser.parse_args()

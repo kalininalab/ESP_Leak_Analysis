@@ -25,11 +25,16 @@ warnings.filterwarnings("ignore")
 The related code to generate negative data points was sourced from the ESP repository. 
 """
 
+
 def main(args):
     CURRENT_DIR = os.getcwd()
     split_method = args.split_method
     split_size = args.split_size
-    Data_suffix = f"_{args.Data_suffix}" if args.Data_suffix else ""
+    input_path = args.input_path
+    df_name = input_path.split("/")[-1]
+    Data_suffix = ""
+    if "_" in df_name:
+        Data_suffix = "_" + df_name.split(".")[0].split("_")[-1]
 
     if len(split_size) not in [2, 3]:
         raise ValueError("The split-size argument must be a list of either two or three integers.")
@@ -41,7 +46,6 @@ def main(args):
     setup_logging(log_file)
     logging.info(f"Current Directory: {CURRENT_DIR}")
 
-    data_file = os.path.join(CURRENT_DIR, "..", "data", "data_ESP", f"dataESP{Data_suffix}.pkl")
     train_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
                                      f"train_{split_method}{Data_suffix}_{len(split_size)}S.pkl")
     test_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
@@ -49,7 +53,7 @@ def main(args):
     val_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
                                    f"val_{split_method}{Data_suffix}_{len(split_size)}S.pkl")
 
-    data = pd.read_pickle(data_file)
+    data = pd.read_pickle(input_path)
     logging.info(
         "*** Start running the DataSAIL***\nFor more information about DataSAIL please check it's webpage: "
         "https://datasail.readthedocs.io/en/latest/index.html")
@@ -169,8 +173,6 @@ if __name__ == "__main__":
                         help="The split method should be one of [C2,C1e, C1f, I1e, I1f]")
     parser.add_argument('--split-size', type=int, nargs='+', required=True,
                         help="List of integers for splitting, e.g., 8 2 or 7 2 1")
-    parser.add_argument('--Data-suffix', type=str, required=False, default="",
-                        help="The data_suffix is an optional argument. However, if specified, the suffix name for the "
-                             "dataframe should be one of the following: NoATP or D3408")
+    parser.add_argument("--input-path", type=str, required=True, help="Path to the input data (pickle file).")
     args = parser.parse_args()
     main(args)

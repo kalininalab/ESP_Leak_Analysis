@@ -32,67 +32,50 @@ We have modified it to accommodate a 3-split method (train:test:val).
 
 def main(args):
     CURRENT_DIR = os.getcwd()
-    splitted_data = args.splitted_data
+    input_path = args.input_path
+    df_name = input_path.split("/")[-1]
+    Data_suffix = ""
+    if "_" in df_name:
+        Data_suffix = "_" + df_name.split(".")[0].split("_")[-1]
     split_size = args.split_size
-    Data_suffix = f"_{args.Data_suffix}" if args.Data_suffix else ""
     if len(split_size) not in [2, 3]:
         raise ValueError("The split-size argument must be a list of either two or three integers.")
-    if args.splitted_data == True and args.splitted_data not in ["C2", "C1e", ""]:
-        raise ValueError("To reproduce the results, use the C1e split method for 1D and the C2 split method for 2D. "
-                         "However, feel free to modify the code and experiment with other splitting methods.")
 
     log_file = os.path.join(CURRENT_DIR, "..", "data", "Reports", "split_report",
-                            f"Report_ESP{splitted_data}{Data_suffix}_{len(split_size)}S.log")
+                            f"Report_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.log")
     if os.path.exists(log_file):
         os.remove(log_file)
     setup_logging(log_file)
     logging.info(f"Current Directory: {CURRENT_DIR}")
 
-    logging.info(f"Reading the data for {splitted_data}{Data_suffix}_{len(split_size)}S")
     train_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                     f"train_ESP{splitted_data}{Data_suffix}_{len(split_size)}S.pkl")
+                                     f"train_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.pkl")
     test_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                    f"test_ESP{splitted_data}{Data_suffix}_{len(split_size)}S.pkl")
+                                    f"test_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.pkl")
     val_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                   f"val_ESP{splitted_data}{Data_suffix}_{len(split_size)}S.pkl")
-
+                                   f"val_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.pkl")
+    data = None
     if len(split_size) == 2:
-        if args.Data_suffix in ["NoATP", "D3408"]:
-            data = pd.read_pickle(os.path.join(CURRENT_DIR, "..", "data", "data_ESP", f"dataESP{Data_suffix}.pkl"))
-            data = data[data["Binding"] == 1]
-            data.drop(columns=["ids"], inplace=True)
-            data.reset_index(drop=True, inplace=True)
-        else:
+        if "C2" in df_name:
             train = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                        f"train_{splitted_data}_{len(split_size)}S.pkl"))
+                                        f"train_C2_{len(split_size)}S.pkl"))
             test = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                       f"test_{splitted_data}_{len(split_size)}S.pkl"))
+                                       f"test_C2_{len(split_size)}S.pkl"))
             data = pd.concat([train, test], ignore_index=True)
-            data = data[data["Binding"] == 1]
-            data.drop(columns=["ids"], inplace=True)
-            data.reset_index(drop=True, inplace=True)
-    elif len(split_size) == 3:
-        if args.Data_suffix in ["NoATP", "D3408"]:
-            data = pd.read_pickle(os.path.join(CURRENT_DIR, "..", "data", "data_ESP", f"dataESP{Data_suffix}.pkl"))
-            data = data[data["Binding"] == 1]
             data.drop(columns=["ids"], inplace=True)
             data.reset_index(drop=True, inplace=True)
         else:
-            train = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                        f"train_{splitted_data}_{len(split_size)}S.pkl"))
-            test = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                       f"test_{splitted_data}_{len(split_size)}S.pkl"))
-            val = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                      f"val_{splitted_data}_{len(split_size)}S.pkl"))
-            data = pd.concat([train, test, val], ignore_index=True)
-            data = data[data["Binding"] == 1]
-            data.drop(columns=["ids"], inplace=True)
-            data.reset_index(drop=True, inplace=True)
-
+            data = pd.read_pickle(input_path)
+    elif len(split_size) == 3:
+        data = pd.read_pickle(input_path)
+        data.drop(columns=["ids"], inplace=True)
+        data.reset_index(drop=True, inplace=True)
     logging.info(f"Start Clustering the data with CD-HIT")
+
     ofile = open(
         join(CURRENT_DIR, "..", "data", "clusters",
-             f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S.fasta"), "w")
+             f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.fasta"), "w")
+
     for ind in data.index:
         seq = data["Sequence"][ind]
         if not pd.isnull(seq):
@@ -105,7 +88,7 @@ def main(args):
     start_folder = cluster_folder
     cluster_all_levels(start_folder,
                        cluster_folder,
-                       filename=f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S")
+                       filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S")
 
     cluster_folder = join(CURRENT_DIR, "..", "data", "clusters")
 
@@ -113,30 +96,30 @@ def main(args):
     start_folder = cluster_folder
     cluster_all_levels_80(start_folder,
                           cluster_folder,
-                          filename=f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S")
+                          filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S")
 
     # collect cluster members
     df_80 = find_cluster_members_80(folder=cluster_folder,
-                                    filename=f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S")
+                                    filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S")
     logging.info(f"Clustering report for 80% similarity\n{df_80.describe()}")
 
     cluster_all_levels_60(start_folder,
                           cluster_folder,
-                          filename=f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S")
+                          filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S")
 
     # collect cluster members
     df_60 = find_cluster_members_60(folder=cluster_folder,
-                                    filename=f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S")
+                                    filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S")
     logging.info(f"Clustering report for 60% similarity\n{df_60.describe()}")
 
     # cluster the fasta files
     cluster_all_levels(start_folder,
                        cluster_folder,
-                       filename=f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S")
+                       filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S")
 
     # collect cluster members
     df_40 = find_cluster_members(folder=cluster_folder,
-                                 filename=f"all_sequences_ESP{splitted_data}{Data_suffix}_{len(split_size)}S")
+                                 filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S")
 
     logging.info(f"Clustering report for 40% similarity\n{df_40.describe()}")
 
@@ -152,6 +135,9 @@ def main(args):
     random.seed(1)
     random.shuffle(clusters)
     logging.info(f"Start Splitting the data based one {split_size} split size ")
+    train_clusters = None
+    test_clusters = None
+    val_clusters = None
     if len(split_size) == 2:
         n = int(len(clusters) * (split_size[0] / 10))
         train_clusters = clusters[:n]
@@ -223,7 +209,7 @@ def main(args):
             None
 
     data.to_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                        f"SeqIdentities_ESP{splitted_data}{Data_suffix}_{len(split_size)}S.pkl"))
+                        f"SeqIdentities_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.pkl"))
 
     if len(split_size) == 2:
         result, total_samples, test_ratio = two_split_report(train, test)
@@ -313,7 +299,7 @@ def main(args):
     init()
     logging.info(
         Fore.GREEN + f"***** PROCESS COMPLETED: For an overview, "
-                     f"please review the Report_ESP{splitted_data}{Data_suffix}_{len(split_size)}S.log file in "
+                     f"please review the Report_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.log file in "
                      f"Reports folder. *****" + Style.RESET_ALL)
 
 
@@ -321,13 +307,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description=f"This script generates a control case for each split method of DataSAIL by combining the related "
                     f"split results from DataSAIL and re-splitting them using the ESP method")
-    parser.add_argument('--splitted-data', type=str, required=False, default="",
-                        help="The splitted-data should be one of the "
-                             "following: [C2,C1f] to get access to train and test sets related to C1f and C2")
+    parser.add_argument("--input-path", type=str, required=True, help="Path to the input data (pickle file).")
     parser.add_argument('--split-size', type=int, nargs='+', required=True,
                         help="List of integers for splitting, e.g., 8 2 or 7 2 1")
-    parser.add_argument('--Data-suffix', type=str, required=False, default="",
-                        help="The data_suffix is an optional argument. However, if specified, the suffix name for the "
-                             "dataframe should be one of the following: NoATP or D3408")
     args = parser.parse_args()
     main(args)
