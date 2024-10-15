@@ -98,39 +98,35 @@ SIP/
 ## Splitting Data 
 * This table outlines an overview of all  different split strategies we used in this project.
 
-| split | DataFrame          | 2splits | training            | 3splits | training            |
-|-------|--------------------|---------|---------------------|---------|---------------------|
-| C1e*  | dataESP.pkl        | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
-| C1f   | dataESP.pkl        | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
-| I1e   | dataESP.pkl        | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
-| I1f   | dataESP.pkl        | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
-| C2    | dataESP.pkl        | No      | ESM1bts+PreGNN/ECFP | No      |                     |
-| ESP+  | train&test_C1f.pkl | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
-| ESP+  | train&test_C2.pkl  | Yes     | ESM1bts+PreGNN/ECFP | No      |                     |
-| ESP   | dataESP_NoATP.pkl  | Yes     | ESM1bts+PreGNN/ECFP | No      |                     |
-| ESP   | dataESP_D3408.pkl  | Yes     | ESM1bts+PreGNN/ECFP | No      |                     |
+| split | DataFrame         | 2splits | training            | 3splits | training            |
+|------|-------------------|---------|---------------------|---------|---------------------|
+| C1e* | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
+| C1f  | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
+| I1e  | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
+| I1f  | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
+| C2   | dataESP.pkl       | No      | ESM1bts+PreGNN/ECFP | No      |                     |
+| ESP+ | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
+| ESP  | train&test_C2.pkl | Yes     | ESM1bts+PreGNN/ECFP | No      |                     |
+| ESP  | dataESP_NoATP.pkl | Yes     | ESM1bts+PreGNN/ECFP | No      |                     |
+| ESP  | dataESP_D3408.pkl | Yes     | ESM1bts+PreGNN/ECFP | No      |                     |
 
 * *DataSAIL can split data in 1 and 2 dimensions(1D,2D). The 1D splits are [C1e, C1f, I1e I1f] and the 2D splits are C2 and I2, we used C2 and all 1D splits in this project. To get more information please check the dataSAIL webpage(https://datasail.readthedocs.io/en/latest/index.html).
 * +In this project we refer to the split method that used in ESP paper as ESP split
 ### 2-1-SplitByDataSAIL.py
 * This script aims to split (by DataSAIL) and generate negative data for each DataFrame explained in above.
 
-       python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e I1f] --split-size [8 2, 7 2 1] --Data-suffix ['', _NoATP ,_D3408]
+       python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e I1f] --split-size [8 2, 7 2 1] --input-path 
 
 * Explanation of Arguments:
 
        --split-method [C2, C1e, C1f, I1e, I1f]: Specifies the methods used for splitting the data.
        --split-size [8 2, 7 2 1]: Defines the number of splits for each method.
-       --Data-suffix [NoATP, D3408]: Indicates which data files to parse. It is an optinoal argument, if you dont use it,  the original data(data_ESP.pkl) will be parsed.
+       --input-path  ./../data/data_ESP/dataESP.pkl
 
-* Data Suffix Details:
-
-      NoATP: Parses the dataESP_NoATP.pkl file.
-      D3408: Parses the dataESP_D3408.pkl file.
 
 * Example:
 
-        python 2-1-SplitByDataSAIL.py --split-method C1e --split-size 8 2 
+        python 2-1-SplitByDataSAIL.py --split-method C1e --split-size 8 2 --input-path  ./../data/data_ESP/dataESP.pkl
 
 * Output files:
 
@@ -143,23 +139,23 @@ SIP/
 
 * Explanation of Arguments:
 
-      python 2-2-SplitByESP.py --splitted-data [C2, C1e] --split-size [8 2, 7 2 1] --Data-suffix [NoATP, D3408]
+      python 2-2-SplitByESP.py --splitted-data [C2, C1e] --split-size [8 2, 7 2 1] --input-path 
 
 * The --splitted-data should be one of the following: [C2,C1f] to get access to train and test sets related to C1f and C2.
 * Since in ESP paper the data have been split based on enzyme and also CV has been done based on sequence's indices(all related indices to an enzyme fall into same fold of CV), we choose train and test resulted to "C1f" split to create control case for all 1D splits.
-* `--split-size` and `--Data-suffix` are same as `2-1-SplitByDataSAIL.py`
+* `--split-size` and `--input-path ` are same as `2-1-SplitByDataSAIL.py`
 
 
 * Example:
 
-      python 2-2-SplitByESP.py ---splitted-data C1f --split-size 8 2 
+      python 2-2-SplitByESP.py  --split-size 8 2 --input-path  ./../data/data_ESP/dataESP.pkl
 
 * Output files:
 
-      ./SIP/data/2splits/train_ESPC1f_2S.pkl
-      ./SIP/data/2splits/test_ESPC1f_2S.pkl
-      ./SIP/data/Reports/split_report/Report_ESPC1f_2S.log
-* The `ESPC1f` emphasizes that the combined data of `C1f` are used to perform the `ESP` split.
+      ./SIP/data/2splits/train_ESPC2_2S.pkl
+      ./SIP/data/2splits/test_ESPC2_2S.pkl
+      ./SIP/data/Reports/split_report/Report_ESPC2_2S.log
+* The `ESPC2` emphasizes that the combined data of `C2` are used to perform the `ESP` split.
 
 
 ## Hyperparameter optimization and model training

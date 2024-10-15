@@ -70,6 +70,7 @@ def main(args):
             data['split'] = data['ids'].map(inter_dict)
     data_filtered = data[(data['split'] == "train") | (data['split'] == "test") | (data['split'] == "val")]
     data_filtered.reset_index(drop=True, inplace=True)
+    data_filtered.to_pickle(join(CURRENT_DIR,"..","data","data_ESP","dataESPC2.pkl"))
     train = data_filtered[data_filtered["split"] == "train"]
     train.reset_index(drop=True, inplace=True)
     test = data_filtered[data_filtered["split"] == "test"]
