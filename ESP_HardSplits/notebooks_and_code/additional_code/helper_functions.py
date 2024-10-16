@@ -489,7 +489,7 @@ def datasail_wrapper(split_method, DataFrame, split_size):
             f_type="P",
             f_sim="cdhit",
             f_data=dict(DataFrame[["ids", "Sequence"]].values.tolist()),
-            epsilon=0,
+            epsilon=0.0,
         )
     else:
         raise ValueError("Invalid split method provided. Use one of ['C2','C1e', 'C1f', 'I1e', 'I1f']")
@@ -524,3 +524,22 @@ def calculate_molecular_properties(smiles):
     except Exception as e:
         print(f"Error processing SMILES '{smiles}': {e}")
         return pd.Series([None, None])
+
+
+def id_base_data_leakage_calculator(column_list, train, test, val=None):
+    total_leakage = 0
+    for column in column_list:
+        leak_1 = len(set(train[column]).intersection(set(test[column])))
+        total_leakage += leak_1
+        if val is not None:
+            leak_2 = len(set(train[column]).intersection(set(val[column])))
+            leak_3 = len(set(test[column]).intersection(set(val[column])))
+            total_leakage += leak_2
+            total_leakage += leak_3
+    total_data = len(train) + len(test)
+    leakage = total_leakage / total_data
+    return leakage
+
+
+
+

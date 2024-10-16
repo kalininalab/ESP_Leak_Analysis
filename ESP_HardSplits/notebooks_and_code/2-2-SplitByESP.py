@@ -54,15 +54,11 @@ def main(args):
                                     f"test_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.pkl")
     val_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
                                    f"val_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.pkl")
-    data = None
-    if len(split_size) == 2:
-        data = pd.read_pickle(input_path)
-        data.drop(columns=["ids"], inplace=True)
-        data.reset_index(drop=True, inplace=True)
-    elif len(split_size) == 3:
-        data = pd.read_pickle(input_path)
-        data.drop(columns=["ids"], inplace=True)
-        data.reset_index(drop=True, inplace=True)
+
+    data = pd.read_pickle(input_path)
+    data.drop(columns=["ids"], inplace=True)
+    data.reset_index(drop=True, inplace=True)
+
     logging.info(f"Start Clustering the data with CD-HIT")
     ofile = open(
         join(CURRENT_DIR, "..", "data", "clusters",

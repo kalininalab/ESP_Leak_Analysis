@@ -32,9 +32,7 @@ def main(args):
     split_size = args.split_size
     input_path = args.input_path
     df_name = input_path.split("/")[-1]
-    Data_suffix = ""
-    if "_" in df_name:
-        Data_suffix = "_" + df_name.split(".")[0].split("_")[-1]
+    Data_suffix = "_" + df_name.split(".")[0].split("_")[-1] if "_" in df_name else ""
 
     if len(split_size) not in [2, 3]:
         raise ValueError("The split-size argument must be a list of either two or three integers.")
@@ -54,8 +52,9 @@ def main(args):
                                    f"val_{split_method}{Data_suffix}_{len(split_size)}S.pkl")
 
     data = pd.read_pickle(input_path)
+    # Start running DataSAIL ###########################
     logging.info(
-        "*** Start running the DataSAIL***\nFor more information about DataSAIL please check it's webpage: "
+        "*** Start running DataSAIL***\nFor more information about DataSAIL please check it's webpage: "
         "https://datasail.readthedocs.io/en/latest/index.html")
     e_splits, f_splits, inter_sp = datasail_wrapper(split_method, data, split_size)
     if split_method in ["C1e", "I1e"]:
@@ -68,9 +67,11 @@ def main(args):
         for key in inter_sp.keys():
             inter_dict = {k[0]: v for k, v in inter_sp[key][0].items()}
             data['split'] = data['ids'].map(inter_dict)
+            data_C2 = data[(data['split'] == "train") | (data['split'] == "test") | (data['split'] == "val")]
+            data_C2.reset_index(drop=True, inplace=True)
+            data_C2.to_pickle(join(CURRENT_DIR, "..", "data", "data_ESP", "dataESPC2.pkl"))
     data_filtered = data[(data['split'] == "train") | (data['split'] == "test") | (data['split'] == "val")]
     data_filtered.reset_index(drop=True, inplace=True)
-    data_filtered.to_pickle(join(CURRENT_DIR,"..","data","data_ESP","dataESPC2.pkl"))
     train = data_filtered[data_filtered["split"] == "train"]
     train.reset_index(drop=True, inplace=True)
     test = data_filtered[data_filtered["split"] == "test"]
@@ -97,6 +98,7 @@ def main(args):
         logging.info(f"Ratio of test set to dataset: {test_ratio}")
         logging.info(f"Ratio of val set to dataset: {val_ratio}")
 
+    # Create negative data points ###########################
     logging.info(f"Start to create negative data points for the train set...")
     train = drop_samples_without_mol_file(df=train)
     df_metabolites_train, similarity_matrix_train = get_metabolites_and_similarities(df=train)
@@ -131,6 +133,7 @@ def main(args):
         val = map_negative_samples2embedding(val)
         logging.info(f"Creating negative data points for the val set DONE")
 
+    # Reports ###########################
     if len(split_size) == 2:
         result, total_samples, test_ratio = two_split_report(train, test)
         logging.info(

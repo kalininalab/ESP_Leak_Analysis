@@ -1,3 +1,354 @@
+2024-07-22 01:54:21,778 - INFO - False positive rate: 18.73385012919897; False negative rate: 6.855934762911507
+2024-07-22 01:54:39,348 - INFO - False positive rate: 17.1664493698392; False negative rate: 6.862745098039216
+2024-07-22 01:54:55,019 - INFO - False positive rate: 18.197802197802194; False negative rate: 7.226591482415788
+2024-07-22 01:55:11,659 - INFO - False positive rate: 17.83111873124732; False negative rate: 6.9264705882352935
+2024-07-22 01:55:27,113 - INFO - False positive rate: 18.776019983347215; False negative rate: 7.356678904264332
+2024-07-22 01:55:27,152 - INFO - Iteration 1
+2024-07-22 01:55:27,152 - INFO - Best loss so far: 142.65525964610381
+2024-07-22 01:55:27,152 - INFO - Best hyperparameters so far: {'learning_rate': 0.23060844642481462, 'max_delta_step': 3.766566830374038, 'max_depth': 3, 'min_child_weight': 8.188035141238364, 'num_rounds': 361.2554202632699, 'reg_alpha': 1.2239694843440663, 'reg_lambda': 4.628440577840253, 'weight': 0.2722688970426175}
+2024-07-22 01:55:40,790 - INFO - False positive rate: 28.128420284567678; False negative rate: 5.980976946638723
+2024-07-22 01:55:54,232 - INFO - False positive rate: 28.146047500886205; False negative rate: 5.511561609122585
+2024-07-22 01:56:07,470 - INFO - False positive rate: 28.265602322206096; False negative rate: 5.9284116331096195
+2024-07-22 01:56:21,388 - INFO - False positive rate: 28.47942754919499; False negative rate: 6.137582833701483
+2024-07-22 01:56:34,854 - INFO - False positive rate: 29.364005412719894; False negative rate: 5.88235294117647
+2024-07-22 01:56:34,911 - INFO - Iteration 2
+2024-07-22 01:56:34,911 - INFO - Best loss so far: 142.65525964610381
+2024-07-22 01:56:34,912 - INFO - Best hyperparameters so far: {'learning_rate': 0.23060844642481462, 'max_delta_step': 3.766566830374038, 'max_depth': 3, 'min_child_weight': 8.188035141238364, 'num_rounds': 361.2554202632699, 'reg_alpha': 1.2239694843440663, 'reg_lambda': 4.628440577840253, 'weight': 0.2722688970426175}
+2024-07-22 01:56:43,785 - INFO - False positive rate: 29.064220183486235; False negative rate: 6.560540279787746
+2024-07-22 01:56:53,661 - INFO - False positive rate: 26.376488095238095; False negative rate: 6.142391810144253
+2024-07-22 01:57:02,956 - INFO - False positive rate: 28.49244378916329; False negative rate: 6.475162672591653
+2024-07-22 01:57:11,562 - INFO - False positive rate: 28.40043525571273; False negative rate: 6.493099121706399
+2024-07-22 01:57:20,799 - INFO - False positive rate: 29.046951646811493; False negative rate: 6.742081447963801
+2024-07-22 01:57:20,839 - INFO - Iteration 3
+2024-07-22 01:57:20,840 - INFO - Best loss so far: 142.65525964610381
+2024-07-22 01:57:20,840 - INFO - Best hyperparameters so far: {'learning_rate': 0.23060844642481462, 'max_delta_step': 3.766566830374038, 'max_depth': 3, 'min_child_weight': 8.188035141238364, 'num_rounds': 361.2554202632699, 'reg_alpha': 1.2239694843440663, 'reg_lambda': 4.628440577840253, 'weight': 0.2722688970426175}
+2024-07-22 01:57:31,860 - INFO - False positive rate: 27.03412073490814; False negative rate: 6.2928150390313835
+2024-07-22 01:57:42,807 - INFO - False positive rate: 25.344036697247706; False negative rate: 6.473385488571867
+2024-07-22 01:57:52,868 - INFO - False positive rate: 25.977545489740617; False negative rate: 6.779661016949152
+2024-07-22 01:58:03,230 - INFO - False positive rate: 26.646593902898008; False negative rate: 6.778875849289685
+2024-07-22 01:58:12,597 - INFO - False positive rate: 27.868259138617447; False negative rate: 7.126915637553935
+2024-07-22 01:58:12,654 - INFO - Iteration 4
+2024-07-22 01:58:12,654 - INFO - Best loss so far: 142.65525964610381
+2024-07-22 01:58:12,655 - INFO - Best hyperparameters so far: {'learning_rate': 0.23060844642481462, 'max_delta_step': 3.766566830374038, 'max_depth': 3, 'min_child_weight': 8.188035141238364, 'num_rounds': 361.2554202632699, 'reg_alpha': 1.2239694843440663, 'reg_lambda': 4.628440577840253, 'weight': 0.2722688970426175}
+2024-07-22 01:58:21,315 - INFO - False positive rate: 38.55751673767498; False negative rate: 5.691056910569105
+2024-07-22 01:58:30,569 - INFO - False positive rate: 38.22021116138763; False negative rate: 5.618556701030928
+2024-07-22 01:58:40,271 - INFO - False positive rate: 38.69987849331713; False negative rate: 5.76721426074799
+2024-07-22 01:58:50,477 - INFO - False positive rate: 40.395233943621044; False negative rate: 5.920590302178496
+2024-07-22 01:59:00,555 - INFO - False positive rate: 39.20389461626576; False negative rate: 5.824432576769025
+2024-07-22 01:59:00,602 - INFO - Iteration 5
+2024-07-22 01:59:00,602 - INFO - Best loss so far: 142.65525964610381
+2024-07-22 01:59:00,603 - INFO - Best hyperparameters so far: {'learning_rate': 0.23060844642481462, 'max_delta_step': 3.766566830374038, 'max_depth': 3, 'min_child_weight': 8.188035141238364, 'num_rounds': 361.2554202632699, 'reg_alpha': 1.2239694843440663, 'reg_lambda': 4.628440577840253, 'weight': 0.2722688970426175}
+2024-07-22 01:59:15,814 - INFO - False positive rate: 26.407766990291258; False negative rate: 7.0026691788349815
+2024-07-22 01:59:32,160 - INFO - False positive rate: 25.386996904024773; False negative rate: 6.823385742634712
+2024-07-22 01:59:46,242 - INFO - False positive rate: 25.128407743974712; False negative rate: 6.987505784359092
+2024-07-22 01:59:59,864 - INFO - False positive rate: 26.17217524980784; False negative rate: 7.1505129382942885
+2024-07-22 02:00:14,515 - INFO - False positive rate: 26.960963152134255; False negative rate: 6.970191309506155
+2024-07-22 02:00:14,524 - INFO - Iteration 6
+2024-07-22 02:00:14,525 - INFO - Best loss so far: 142.65525964610381
+2024-07-22 02:00:14,525 - INFO - Best hyperparameters so far: {'learning_rate': 0.23060844642481462, 'max_delta_step': 3.766566830374038, 'max_depth': 3, 'min_child_weight': 8.188035141238364, 'num_rounds': 361.2554202632699, 'reg_alpha': 1.2239694843440663, 'reg_lambda': 4.628440577840253, 'weight': 0.2722688970426175}
+2024-07-22 02:00:28,097 - INFO - False positive rate: 19.48561464690497; False negative rate: 7.428571428571429
+2024-07-22 02:00:41,915 - INFO - False positive rate: 17.985300475572853; False negative rate: 7.006742890647903
+2024-07-22 02:00:54,482 - INFO - False positive rate: 18.94599303135889; False negative rate: 7.249181303959512
+2024-07-22 02:01:06,931 - INFO - False positive rate: 18.76083188908145; False negative rate: 7.5164835164835155
+2024-07-22 02:01:19,919 - INFO - False positive rate: 18.341708542713565; False negative rate: 7.356257046223225
+2024-07-22 02:01:19,953 - INFO - Iteration 7
+2024-07-22 02:01:19,954 - INFO - Best loss so far: 142.65525964610381
+2024-07-22 02:01:19,954 - INFO - Best hyperparameters so far: {'learning_rate': 0.23060844642481462, 'max_delta_step': 3.766566830374038, 'max_depth': 3, 'min_child_weight': 8.188035141238364, 'num_rounds': 361.2554202632699, 'reg_alpha': 1.2239694843440663, 'reg_lambda': 4.628440577840253, 'weight': 0.2722688970426175}
+2024-07-22 02:01:34,533 - INFO - False positive rate: 33.70455289878807; False negative rate: 5.381089797996944
+2024-07-22 02:01:47,912 - INFO - False positive rate: 33.83676092544987; False negative rate: 5.246554872986883
+2024-07-22 02:01:59,782 - INFO - False positive rate: 33.71447239464227; False negative rate: 5.35864270115908
+2024-07-22 02:02:12,726 - INFO - False positive rate: 33.52750809061489; False negative rate: 5.5270560979645875
+2024-07-22 02:02:25,311 - INFO - False positive rate: 34.4066237350506; False negative rate: 5.351116824682629
+2024-07-22 02:02:25,319 - INFO - Iteration 8
+2024-07-22 02:02:25,319 - INFO - Best loss so far: 142.65525964610381
+2024-07-22 02:02:25,319 - INFO - Best hyperparameters so far: {'learning_rate': 0.23060844642481462, 'max_delta_step': 3.766566830374038, 'max_depth': 3, 'min_child_weight': 8.188035141238364, 'num_rounds': 361.2554202632699, 'reg_alpha': 1.2239694843440663, 'reg_lambda': 4.628440577840253, 'weight': 0.2722688970426175}
+2024-07-22 02:02:49,153 - INFO - False positive rate: 14.627414903403867; False negative rate: 7.163958641063515
+2024-07-22 02:03:13,746 - INFO - False positive rate: 13.109475620975164; False negative rate: 6.981755494900158
+2024-07-22 02:03:39,415 - INFO - False positive rate: 14.159702878365831; False negative rate: 7.27405247813411
+2024-07-22 02:04:02,902 - INFO - False positive rate: 13.802559414990856; False negative rate: 7.22822174226062
+2024-07-22 02:04:24,845 - INFO - False positive rate: 14.16703104503717; False negative rate: 7.072391274142004
+2024-07-22 02:04:24,853 - INFO - Iteration 9
+2024-07-22 02:04:24,854 - INFO - Best loss so far: 132.92967224625554
+2024-07-22 02:04:24,854 - INFO - Best hyperparameters so far: {'learning_rate': 0.2071807680309832, 'max_delta_step': 2.78386197050604, 'max_depth': 4, 'min_child_weight': 0.8555458145522715, 'num_rounds': 387.0960703476861, 'reg_alpha': 0.10808553849352698, 'reg_lambda': 4.175280134014728, 'weight': 0.1829459131562724}
+2024-07-22 02:04:34,762 - INFO - False positive rate: 21.51260504201681; False negative rate: 7.205971968312006
+2024-07-22 02:04:43,888 - INFO - False positive rate: 20.587019429516328; False negative rate: 6.759976176295414
+2024-07-22 02:04:54,049 - INFO - False positive rate: 22.098765432098766; False negative rate: 6.910692588092345
+2024-07-22 02:05:04,469 - INFO - False positive rate: 21.604938271604933; False negative rate: 7.205728778159033
+2024-07-22 02:05:14,464 - INFO - False positive rate: 21.709194005670305; False negative rate: 7.683535281539558
+2024-07-22 02:05:14,473 - INFO - Iteration 10
+2024-07-22 02:05:14,474 - INFO - Best loss so far: 132.92967224625554
+2024-07-22 02:05:14,474 - INFO - Best hyperparameters so far: {'learning_rate': 0.2071807680309832, 'max_delta_step': 2.78386197050604, 'max_depth': 4, 'min_child_weight': 0.8555458145522715, 'num_rounds': 387.0960703476861, 'reg_alpha': 0.10808553849352698, 'reg_lambda': 4.175280134014728, 'weight': 0.1829459131562724}
+2024-07-22 02:05:26,258 - INFO - False positive rate: 20.367207514944496; False negative rate: 7.209936382914268
+2024-07-22 02:05:38,333 - INFO - False positive rate: 18.122555410691; False negative rate: 7.184664910740415
+2024-07-22 02:05:49,988 - INFO - False positive rate: 19.26565874730022; False negative rate: 7.150320943424392
+2024-07-22 02:06:02,525 - INFO - False positive rate: 18.641868512110726; False negative rate: 7.432927723207741
+2024-07-22 02:06:15,644 - INFO - False positive rate: 19.492934330839574; False negative rate: 7.558632382028822
+2024-07-22 02:06:15,655 - INFO - Iteration 11
+2024-07-22 02:06:15,656 - INFO - Best loss so far: 132.92967224625554
+2024-07-22 02:06:15,656 - INFO - Best hyperparameters so far: {'learning_rate': 0.2071807680309832, 'max_delta_step': 2.78386197050604, 'max_depth': 4, 'min_child_weight': 0.8555458145522715, 'num_rounds': 387.0960703476861, 'reg_alpha': 0.10808553849352698, 'reg_lambda': 4.175280134014728, 'weight': 0.1829459131562724}
+2024-07-22 02:06:29,676 - INFO - False positive rate: 29.525169582292044; False negative rate: 5.9742796679147
+2024-07-22 02:06:40,097 - INFO - False positive rate: 30.09371745921555; False negative rate: 5.772305724336425
+2024-07-22 02:06:50,023 - INFO - False positive rate: 30.50966608084359; False negative rate: 6.013940671097422
+2024-07-22 02:07:00,499 - INFO - False positive rate: 29.777463793712467; False negative rate: 6.34719136781974
+2024-07-22 02:07:10,720 - INFO - False positive rate: 29.813874788494076; False negative rate: 6.095879920355338
+2024-07-22 02:07:10,758 - INFO - Iteration 12
+2024-07-22 02:07:10,758 - INFO - Best loss so far: 132.92967224625554
+2024-07-22 02:07:10,759 - INFO - Best hyperparameters so far: {'learning_rate': 0.2071807680309832, 'max_delta_step': 2.78386197050604, 'max_depth': 4, 'min_child_weight': 0.8555458145522715, 'num_rounds': 387.0960703476861, 'reg_alpha': 0.10808553849352698, 'reg_lambda': 4.175280134014728, 'weight': 0.1829459131562724}
+2024-07-22 02:07:19,408 - INFO - False positive rate: 19.541720709035882; False negative rate: 7.238727190469009
+2024-07-22 02:07:28,610 - INFO - False positive rate: 18.3585313174946; False negative rate: 7.111436950146628
+2024-07-22 02:07:38,051 - INFO - False positive rate: 18.121983326020185; False negative rate: 7.156644394951744
+2024-07-22 02:07:47,162 - INFO - False positive rate: 19.46107784431138; False negative rate: 7.431935246504782
+2024-07-22 02:07:56,512 - INFO - False positive rate: 18.918918918918916; False negative rate: 7.3739228704619295
+2024-07-22 02:07:56,519 - INFO - Iteration 13
+2024-07-22 02:07:56,520 - INFO - Best loss so far: 132.92967224625554
+2024-07-22 02:07:56,520 - INFO - Best hyperparameters so far: {'learning_rate': 0.2071807680309832, 'max_delta_step': 2.78386197050604, 'max_depth': 4, 'min_child_weight': 0.8555458145522715, 'num_rounds': 387.0960703476861, 'reg_alpha': 0.10808553849352698, 'reg_lambda': 4.175280134014728, 'weight': 0.1829459131562724}
+2024-07-22 02:08:13,222 - INFO - False positive rate: 19.948849104859335; False negative rate: 7.017277963019097
+2024-07-22 02:08:28,008 - INFO - False positive rate: 18.177948063005534; False negative rate: 6.675508399646331
+2024-07-22 02:08:45,340 - INFO - False positive rate: 18.63166953528399; False negative rate: 6.8310911808669665
+2024-07-22 02:09:00,595 - INFO - False positive rate: 18.47918436703483; False negative rate: 6.918424546393273
+2024-07-22 02:09:15,280 - INFO - False positive rate: 18.215460526315784; False negative rate: 6.849120816789562
+2024-07-22 02:09:15,288 - INFO - Iteration 14
+2024-07-22 02:09:15,288 - INFO - Best loss so far: 132.92967224625554
+2024-07-22 02:09:15,288 - INFO - Best hyperparameters so far: {'learning_rate': 0.2071807680309832, 'max_delta_step': 2.78386197050604, 'max_depth': 4, 'min_child_weight': 0.8555458145522715, 'num_rounds': 387.0960703476861, 'reg_alpha': 0.10808553849352698, 'reg_lambda': 4.175280134014728, 'weight': 0.1829459131562724}
+2024-07-22 02:09:29,895 - INFO - False positive rate: 17.69991015274034; False negative rate: 7.576659720154807
+2024-07-22 02:09:44,188 - INFO - False positive rate: 15.027573529411764; False negative rate: 7.558557263974709
+2024-07-22 02:09:57,023 - INFO - False positive rate: 16.33119853613907; False negative rate: 7.601054481546574
+2024-07-22 02:10:10,561 - INFO - False positive rate: 16.809373591707978; False negative rate: 7.839166907723459
+2024-07-22 02:10:23,960 - INFO - False positive rate: 17.11322385479689; False negative rate: 7.726638772663877
+2024-07-22 02:10:23,969 - INFO - Iteration 15
+2024-07-22 02:10:23,969 - INFO - Best loss so far: 132.92967224625554
+2024-07-22 02:10:23,970 - INFO - Best hyperparameters so far: {'learning_rate': 0.2071807680309832, 'max_delta_step': 2.78386197050604, 'max_depth': 4, 'min_child_weight': 0.8555458145522715, 'num_rounds': 387.0960703476861, 'reg_alpha': 0.10808553849352698, 'reg_lambda': 4.175280134014728, 'weight': 0.1829459131562724}
+2024-07-22 02:10:34,440 - INFO - False positive rate: 29.80304719435154; False negative rate: 7.228530305453382
+2024-07-22 02:10:44,603 - INFO - False positive rate: 28.947368421052634; False negative rate: 7.4903474903474905
+2024-07-22 02:10:56,536 - INFO - False positive rate: 28.955336866010594; False negative rate: 7.391713747645951
+2024-07-22 02:11:06,791 - INFO - False positive rate: 31.115957833515083; False negative rate: 7.724851143842056
+2024-07-22 02:11:16,693 - INFO - False positive rate: 30.49469964664311; False negative rate: 7.589419897805831
+2024-07-22 02:11:16,701 - INFO - Iteration 16
+2024-07-22 02:11:16,701 - INFO - Best loss so far: 132.92967224625554
+2024-07-22 02:11:16,702 - INFO - Best hyperparameters so far: {'learning_rate': 0.2071807680309832, 'max_delta_step': 2.78386197050604, 'max_depth': 4, 'min_child_weight': 0.8555458145522715, 'num_rounds': 387.0960703476861, 'reg_alpha': 0.10808553849352698, 'reg_lambda': 4.175280134014728, 'weight': 0.1829459131562724}
+2024-07-22 02:11:27,067 - INFO - False positive rate: 24.0506329113924; False negative rate: 6.561720698254364
+2024-07-22 02:11:39,794 - INFO - False positive rate: 23.310944290794154; False negative rate: 6.571774682010903
+2024-07-22 02:11:51,655 - INFO - False positive rate: 24.930857368629; False negative rate: 6.91038099645226
+2024-07-22 02:12:03,002 - INFO - False positive rate: 23.508634222919934; False negative rate: 6.666666666666667
+2024-07-22 02:12:14,205 - INFO - False positive rate: 23.763894212341896; False negative rate: 7.025454545454545
+2024-07-22 02:12:14,212 - INFO - Iteration 17
+2024-07-22 02:12:14,213 - INFO - Best loss so far: 132.92967224625554
+2024-07-22 02:12:14,213 - INFO - Best hyperparameters so far: {'learning_rate': 0.2071807680309832, 'max_delta_step': 2.78386197050604, 'max_depth': 4, 'min_child_weight': 0.8555458145522715, 'num_rounds': 387.0960703476861, 'reg_alpha': 0.10808553849352698, 'reg_lambda': 4.175280134014728, 'weight': 0.1829459131562724}
+2024-07-22 02:12:23,350 - INFO - False positive rate: 22.693574958813834; False negative rate: 7.120933087783916
+2024-07-22 02:12:31,038 - INFO - False positive rate: 22.159090909090907; False negative rate: 6.8505471443561685
+2024-07-22 02:12:40,783 - INFO - False positive rate: 21.987577639751553; False negative rate: 7.031368389149871
+2024-07-22 02:12:49,851 - INFO - False positive rate: 22.70335896398219; False negative rate: 7.175022515761033
+2024-07-22 02:12:57,715 - INFO - False positive rate: 22.91504286827748; False negative rate: 7.140792136455623
+2024-07-22 02:12:57,722 - INFO - Iteration 18
+2024-07-22 02:12:57,722 - INFO - Best loss so far: 132.92967224625554
+2024-07-22 02:12:57,722 - INFO - Best hyperparameters so far: {'learning_rate': 0.2071807680309832, 'max_delta_step': 2.78386197050604, 'max_depth': 4, 'min_child_weight': 0.8555458145522715, 'num_rounds': 387.0960703476861, 'reg_alpha': 0.10808553849352698, 'reg_lambda': 4.175280134014728, 'weight': 0.1829459131562724}
+2024-07-22 02:13:10,883 - INFO - False positive rate: 18.577075098814234; False negative rate: 7.304634768261586
+2024-07-22 02:13:23,768 - INFO - False positive rate: 16.762240846934272; False negative rate: 7.105416423995341
+2024-07-22 02:13:36,627 - INFO - False positive rate: 17.3542600896861; False negative rate: 7.443985849056604
+2024-07-22 02:13:49,428 - INFO - False positive rate: 16.982796647551833; False negative rate: 7.369647538595981
+2024-07-22 02:14:02,227 - INFO - False positive rate: 17.793744716821635; False negative rate: 7.403765102556897
+2024-07-22 02:14:02,234 - INFO - Iteration 19
+2024-07-22 02:14:02,234 - INFO - Best loss so far: 132.92967224625554
+2024-07-22 02:14:02,234 - INFO - Best hyperparameters so far: {'learning_rate': 0.2071807680309832, 'max_delta_step': 2.78386197050604, 'max_depth': 4, 'min_child_weight': 0.8555458145522715, 'num_rounds': 387.0960703476861, 'reg_alpha': 0.10808553849352698, 'reg_lambda': 4.175280134014728, 'weight': 0.1829459131562724}
+2024-07-22 02:14:15,311 - INFO - False positive rate: 22.298387096774196; False negative rate: 6.40470297029703
+2024-07-22 02:14:16,775 - ERROR - job exception: [02:14:16] /home/conda/feedstock_root/build_artifacts/xgboost-split_1713397688861/work/src/tree/updater_gpu_hist.cu:781: Exception in gpu_hist: [02:14:16] /home/conda/feedstock_root/build_artifacts/xgboost-split_1713397688861/work/src/c_api/../data/../common/device_helpers.cuh:431: Memory allocation error on worker 0: std::bad_alloc: cudaErrorMemoryAllocation: out of memory
+- Free memory: 7079067648
+- Requested memory: 8589934592
+
+Stack trace:
+  [bt] (0) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(dmlc::LogMessageFatal::~LogMessageFatal()+0x6e) [0x7f954b70a64e]
+  [bt] (1) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(dh::detail::ThrowOOMError(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)+0x1f3) [0x7f954bcb2143]
+  [bt] (2) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(+0x2de112) [0x7f954b6c7112]
+  [bt] (3) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(thrust::detail::vector_base<long, dh::detail::XGBDefaultDeviceAllocatorImpl<long> >::append(unsigned long)+0x2ef) [0x7f954c01c27f]
+  [bt] (4) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::DeviceHistogramStorage<268435456ul>::AllocateHistograms(std::vector<int, std::allocator<int> > const&)+0x1da) [0x7f954c020afa]
+  [bt] (5) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::GPUHistMakerDevice::BuildHistLeftRight(std::vector<xgboost::tree::GPUExpandEntry, std::allocator<xgboost::tree::GPUExpandEntry> > const&, xgboost::RegTree const&)+0x347) [0x7f954c0213e7]
+  [bt] (6) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::GPUHistMakerDevice::UpdateTree(xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, xgboost::ObjInfo const*, xgboost::RegTree*, xgboost::HostDeviceVector<int>*)+0x868) [0x7f954c026dd8]
+  [bt] (7) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::GPUHistMaker::Update(xgboost::tree::TrainParam const*, xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, xgboost::common::Span<xgboost::HostDeviceVector<int>, 18446744073709551615ul>, std::vector<xgboost::RegTree*, std::allocator<xgboost::RegTree*> > const&)+0x179) [0x7f954c027e89]
+  [bt] (8) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::gbm::GBTree::BoostNewTrees(xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, int, std::vector<xgboost::HostDeviceVector<int>, std::allocator<xgboost::HostDeviceVector<int> > >*, std::vector<std::unique_ptr<xgboost::RegTree, std::default_delete<xgboost::RegTree> >, std::allocator<std::unique_ptr<xgboost::RegTree, std::default_delete<xgboost::RegTree> > > >*)+0x130b) [0x7f954b9c208b]
+
+
+
+Stack trace:
+  [bt] (0) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(dmlc::LogMessageFatal::~LogMessageFatal()+0x6e) [0x7f954b70a64e]
+  [bt] (1) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::GPUHistMaker::Update(xgboost::tree::TrainParam const*, xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, xgboost::common::Span<xgboost::HostDeviceVector<int>, 18446744073709551615ul>, std::vector<xgboost::RegTree*, std::allocator<xgboost::RegTree*> > const&)+0x3d0) [0x7f954c0280e0]
+  [bt] (2) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::gbm::GBTree::BoostNewTrees(xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, int, std::vector<xgboost::HostDeviceVector<int>, std::allocator<xgboost::HostDeviceVector<int> > >*, std::vector<std::unique_ptr<xgboost::RegTree, std::default_delete<xgboost::RegTree> >, std::allocator<std::unique_ptr<xgboost::RegTree, std::default_delete<xgboost::RegTree> > > >*)+0x130b) [0x7f954b9c208b]
+  [bt] (3) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::gbm::GBTree::DoBoost(xgboost::DMatrix*, xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::PredictionCacheEntry*, xgboost::ObjFunction const*)+0x797) [0x7f954b9c2a77]
+  [bt] (4) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::LearnerImpl::UpdateOneIter(int, std::shared_ptr<xgboost::DMatrix>)+0x2ec) [0x7f954ba0d3ac]
+  [bt] (5) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(XGBoosterUpdateOneIter+0x6d) [0x7f954b6ed11d]
+  [bt] (6) /home/vat23/miniconda3/envs/SIP/lib/python3.12/lib-dynload/../../libffi.so.8(+0x6a4a) [0x7f956c7e3a4a]
+  [bt] (7) /home/vat23/miniconda3/envs/SIP/lib/python3.12/lib-dynload/../../libffi.so.8(+0x5fea) [0x7f956c7e2fea]
+  [bt] (8) /home/vat23/miniconda3/envs/SIP/lib/python3.12/lib-dynload/_ctypes.cpython-312-x86_64-linux-gnu.so(+0x13474) [0x7f956c7fc474]
+
+
+2024-07-22 02:14:16,776 - ERROR - Error during hyperparameter optimization: [02:14:16] /home/conda/feedstock_root/build_artifacts/xgboost-split_1713397688861/work/src/tree/updater_gpu_hist.cu:781: Exception in gpu_hist: [02:14:16] /home/conda/feedstock_root/build_artifacts/xgboost-split_1713397688861/work/src/c_api/../data/../common/device_helpers.cuh:431: Memory allocation error on worker 0: std::bad_alloc: cudaErrorMemoryAllocation: out of memory
+- Free memory: 7079067648
+- Requested memory: 8589934592
+
+Stack trace:
+  [bt] (0) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(dmlc::LogMessageFatal::~LogMessageFatal()+0x6e) [0x7f954b70a64e]
+  [bt] (1) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(dh::detail::ThrowOOMError(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)+0x1f3) [0x7f954bcb2143]
+  [bt] (2) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(+0x2de112) [0x7f954b6c7112]
+  [bt] (3) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(thrust::detail::vector_base<long, dh::detail::XGBDefaultDeviceAllocatorImpl<long> >::append(unsigned long)+0x2ef) [0x7f954c01c27f]
+  [bt] (4) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::DeviceHistogramStorage<268435456ul>::AllocateHistograms(std::vector<int, std::allocator<int> > const&)+0x1da) [0x7f954c020afa]
+  [bt] (5) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::GPUHistMakerDevice::BuildHistLeftRight(std::vector<xgboost::tree::GPUExpandEntry, std::allocator<xgboost::tree::GPUExpandEntry> > const&, xgboost::RegTree const&)+0x347) [0x7f954c0213e7]
+  [bt] (6) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::GPUHistMakerDevice::UpdateTree(xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, xgboost::ObjInfo const*, xgboost::RegTree*, xgboost::HostDeviceVector<int>*)+0x868) [0x7f954c026dd8]
+  [bt] (7) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::GPUHistMaker::Update(xgboost::tree::TrainParam const*, xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, xgboost::common::Span<xgboost::HostDeviceVector<int>, 18446744073709551615ul>, std::vector<xgboost::RegTree*, std::allocator<xgboost::RegTree*> > const&)+0x179) [0x7f954c027e89]
+  [bt] (8) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::gbm::GBTree::BoostNewTrees(xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, int, std::vector<xgboost::HostDeviceVector<int>, std::allocator<xgboost::HostDeviceVector<int> > >*, std::vector<std::unique_ptr<xgboost::RegTree, std::default_delete<xgboost::RegTree> >, std::allocator<std::unique_ptr<xgboost::RegTree, std::default_delete<xgboost::RegTree> > > >*)+0x130b) [0x7f954b9c208b]
+
+
+
+Stack trace:
+  [bt] (0) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(dmlc::LogMessageFatal::~LogMessageFatal()+0x6e) [0x7f954b70a64e]
+  [bt] (1) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::GPUHistMaker::Update(xgboost::tree::TrainParam const*, xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, xgboost::common::Span<xgboost::HostDeviceVector<int>, 18446744073709551615ul>, std::vector<xgboost::RegTree*, std::allocator<xgboost::RegTree*> > const&)+0x3d0) [0x7f954c0280e0]
+  [bt] (2) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::gbm::GBTree::BoostNewTrees(xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, int, std::vector<xgboost::HostDeviceVector<int>, std::allocator<xgboost::HostDeviceVector<int> > >*, std::vector<std::unique_ptr<xgboost::RegTree, std::default_delete<xgboost::RegTree> >, std::allocator<std::unique_ptr<xgboost::RegTree, std::default_delete<xgboost::RegTree> > > >*)+0x130b) [0x7f954b9c208b]
+  [bt] (3) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::gbm::GBTree::DoBoost(xgboost::DMatrix*, xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::PredictionCacheEntry*, xgboost::ObjFunction const*)+0x797) [0x7f954b9c2a77]
+  [bt] (4) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::LearnerImpl::UpdateOneIter(int, std::shared_ptr<xgboost::DMatrix>)+0x2ec) [0x7f954ba0d3ac]
+  [bt] (5) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(XGBoosterUpdateOneIter+0x6d) [0x7f954b6ed11d]
+  [bt] (6) /home/vat23/miniconda3/envs/SIP/lib/python3.12/lib-dynload/../../libffi.so.8(+0x6a4a) [0x7f956c7e3a4a]
+  [bt] (7) /home/vat23/miniconda3/envs/SIP/lib/python3.12/lib-dynload/../../libffi.so.8(+0x5fea) [0x7f956c7e2fea]
+  [bt] (8) /home/vat23/miniconda3/envs/SIP/lib/python3.12/lib-dynload/_ctypes.cpython-312-x86_64-linux-gnu.so(+0x13474) [0x7f956c7fc474]
+
+
+2024-07-22 02:14:42,307 - INFO - False positive rate: 15.207581227436828; False negative rate: 6.866825208085612
+2024-07-22 02:15:07,685 - INFO - False positive rate: 12.867647058823529; False negative rate: 6.883172869665182
+2024-07-22 02:15:33,641 - INFO - False positive rate: 13.975011568718188; False negative rate: 7.135561068145338
+2024-07-22 02:15:57,510 - INFO - False positive rate: 13.972602739726025; False negative rate: 7.25910989485813
+2024-07-22 02:16:21,152 - INFO - False positive rate: 14.796819787985871; False negative rate: 7.520775623268698
+2024-07-22 14:06:02,255 - INFO - False positive rate: 23.09261525907793; False negative rate: 7.022947789927613
+2024-07-22 14:06:11,293 - INFO - False positive rate: 22.65593561368209; False negative rate: 6.8120300751879705
+2024-07-22 14:06:20,533 - INFO - False positive rate: 22.64229331117574; False negative rate: 7.355834720750718
+2024-07-22 14:06:30,371 - INFO - False positive rate: 23.468161794152987; False negative rate: 7.188065099457505
+2024-07-22 14:06:38,919 - INFO - False positive rate: 23.112840466926066; False negative rate: 7.1738501590974835
+2024-07-22 14:06:38,927 - INFO - Iteration 1
+2024-07-22 14:06:38,927 - INFO - Best loss so far: 160.08762129142661
+2024-07-22 14:06:38,927 - INFO - Best hyperparameters so far: {'learning_rate': 0.1392143549595273, 'max_delta_step': 0.7197935764736102, 'max_depth': 0, 'min_child_weight': 3.584984433822317, 'num_rounds': 204.20492576055497, 'reg_alpha': 3.7650925172264795, 'reg_lambda': 1.9807427777909097, 'weight': 0.3094697825015711}
+2024-07-22 14:06:53,372 - INFO - False positive rate: 30.352209944751387; False negative rate: 5.357142857142857
+2024-07-22 14:07:07,514 - INFO - False positive rate: 29.778534923339016; False negative rate: 5.064516129032258
+2024-07-22 14:07:22,765 - INFO - False positive rate: 30.247763248451477; False negative rate: 5.255402750491159
+2024-07-22 14:07:36,847 - INFO - False positive rate: 31.338264963012776; False negative rate: 5.617795096606592
+2024-07-22 14:07:51,028 - INFO - False positive rate: 30.867014341590615; False negative rate: 5.470698254364089
+2024-07-22 14:07:51,034 - INFO - Iteration 2
+2024-07-22 14:07:51,034 - INFO - Best loss so far: 142.48161190781593
+2024-07-22 14:07:51,034 - INFO - Best hyperparameters so far: {'learning_rate': 0.13900541352958046, 'max_delta_step': 1.9576713994625168, 'max_depth': 0, 'min_child_weight': 2.61321428002249, 'num_rounds': 354.95240546209277, 'reg_alpha': 1.8638917328857625, 'reg_lambda': 0.6720203949965103, 'weight': 0.10349970278543712}
+2024-07-22 14:08:01,227 - INFO - False positive rate: 21.959319219593187; False negative rate: 7.054322876817139
+2024-07-22 14:08:12,700 - INFO - False positive rate: 21.719641401792988; False negative rate: 6.795389911689867
+2024-07-22 14:08:21,797 - INFO - False positive rate: 21.19067443796836; False negative rate: 6.881427707199032
+2024-07-22 14:08:32,600 - INFO - False positive rate: 21.172100701609576; False negative rate: 7.123695976154992
+2024-07-22 14:08:41,839 - INFO - False positive rate: 21.81961402126822; False negative rate: 7.01223902087833
+2024-07-22 14:08:41,848 - INFO - Iteration 3
+2024-07-22 14:08:41,848 - INFO - Best loss so far: 142.48161190781593
+2024-07-22 14:08:41,848 - INFO - Best hyperparameters so far: {'learning_rate': 0.13900541352958046, 'max_delta_step': 1.9576713994625168, 'max_depth': 0, 'min_child_weight': 2.61321428002249, 'num_rounds': 354.95240546209277, 'reg_alpha': 1.8638917328857625, 'reg_lambda': 0.6720203949965103, 'weight': 0.10349970278543712}
+2024-07-22 14:08:52,233 - INFO - False positive rate: 26.75898203592815; False negative rate: 6.122448979591836
+2024-07-22 14:09:04,041 - INFO - False positive rate: 25.482771677394922; False negative rate: 6.267323683400061
+2024-07-22 14:09:14,232 - INFO - False positive rate: 26.401515151515152; False negative rate: 6.353937872607468
+2024-07-22 14:09:24,989 - INFO - False positive rate: 26.16541353383459; False negative rate: 6.550285802564498
+2024-07-22 14:09:37,298 - INFO - False positive rate: 26.55222790357925; False negative rate: 6.833679217313963
+2024-07-22 14:09:37,305 - INFO - Iteration 4
+2024-07-22 14:09:37,306 - INFO - Best loss so far: 142.48161190781593
+2024-07-22 14:09:37,306 - INFO - Best hyperparameters so far: {'learning_rate': 0.13900541352958046, 'max_delta_step': 1.9576713994625168, 'max_depth': 0, 'min_child_weight': 2.61321428002249, 'num_rounds': 354.95240546209277, 'reg_alpha': 1.8638917328857625, 'reg_lambda': 0.6720203949965103, 'weight': 0.10349970278543712}
+2024-07-22 14:09:51,434 - INFO - False positive rate: 30.174291938997822; False negative rate: 6.752827140549273
+2024-07-22 14:10:04,852 - INFO - False positive rate: 29.562433297758805; False negative rate: 6.246046805819102
+2024-07-22 14:10:18,001 - INFO - False positive rate: 29.58001448225923; False negative rate: 6.44593730006398
+2024-07-22 14:10:30,752 - INFO - False positive rate: 29.733621310295177; False negative rate: 6.8607395751376865
+2024-07-22 14:10:45,385 - INFO - False positive rate: 30.96620006828269; False negative rate: 6.864988558352403
+2024-07-22 14:10:45,393 - INFO - Iteration 5
+2024-07-22 14:10:45,394 - INFO - Best loss so far: 142.48161190781593
+2024-07-22 14:10:45,394 - INFO - Best hyperparameters so far: {'learning_rate': 0.13900541352958046, 'max_delta_step': 1.9576713994625168, 'max_depth': 0, 'min_child_weight': 2.61321428002249, 'num_rounds': 354.95240546209277, 'reg_alpha': 1.8638917328857625, 'reg_lambda': 0.6720203949965103, 'weight': 0.10349970278543712}
+2024-07-22 14:11:02,703 - INFO - False positive rate: 18.69037294015612; False negative rate: 7.020186803253992
+2024-07-22 14:11:19,590 - INFO - False positive rate: 16.110623353819143; False negative rate: 6.766807641825872
+2024-07-22 14:11:36,120 - INFO - False positive rate: 17.847769028871397; False negative rate: 6.985731272294887
+2024-07-22 14:11:52,839 - INFO - False positive rate: 17.461005199306754; False negative rate: 7.076923076923077
+2024-07-22 14:12:08,103 - INFO - False positive rate: 17.44627054361567; False negative rate: 7.214175221487835
+2024-07-22 14:12:08,112 - INFO - Iteration 6
+2024-07-22 14:12:08,112 - INFO - Best loss so far: 139.75279771316875
+2024-07-22 14:12:08,112 - INFO - Best hyperparameters so far: {'learning_rate': 0.20528085046454242, 'max_delta_step': 1.1782502025508856, 'max_depth': 1, 'min_child_weight': 2.069428847251227, 'num_rounds': 323.15464552436674, 'reg_alpha': 1.4732697126582779, 'reg_lambda': 4.666205423813615, 'weight': 0.22309511704238613}
+2024-07-22 14:12:20,116 - INFO - False positive rate: 33.442088091353995; False negative rate: 5.119918353461473
+2024-07-22 14:12:33,343 - INFO - False positive rate: 31.61764705882353; False negative rate: 5.3556894025720325
+2024-07-22 14:12:45,508 - INFO - False positive rate: 33.9622641509434; False negative rate: 5.353535353535353
+2024-07-22 14:12:56,126 - INFO - False positive rate: 35.15132408575031; False negative rate: 5.552759604093273
+2024-07-22 14:13:08,034 - INFO - False positive rate: 35.33007334963325; False negative rate: 5.730843528654217
+2024-07-22 14:13:08,042 - INFO - Iteration 7
+2024-07-22 14:13:08,042 - INFO - Best loss so far: 139.75279771316875
+2024-07-22 14:13:08,042 - INFO - Best hyperparameters so far: {'learning_rate': 0.20528085046454242, 'max_delta_step': 1.1782502025508856, 'max_depth': 1, 'min_child_weight': 2.069428847251227, 'num_rounds': 323.15464552436674, 'reg_alpha': 1.4732697126582779, 'reg_lambda': 4.666205423813615, 'weight': 0.22309511704238613}
+2024-07-22 14:13:23,772 - INFO - False positive rate: 17.184724689165186; False negative rate: 7.112970711297072
+2024-07-22 14:13:38,819 - INFO - False positive rate: 15.80601706331387; False negative rate: 7.2379849449913145
+2024-07-22 14:13:53,302 - INFO - False positive rate: 16.899504281207754; False negative rate: 7.417218543046358
+2024-07-22 14:14:08,021 - INFO - False positive rate: 17.040951122853365; False negative rate: 7.344797435150102
+2024-07-22 14:14:22,393 - INFO - False positive rate: 16.538131962296486; False negative rate: 7.328671328671328
+2024-07-22 14:14:22,402 - INFO - Iteration 8
+2024-07-22 14:14:22,403 - INFO - Best loss so far: 139.75279771316875
+2024-07-22 14:14:22,403 - INFO - Best hyperparameters so far: {'learning_rate': 0.20528085046454242, 'max_delta_step': 1.1782502025508856, 'max_depth': 1, 'min_child_weight': 2.069428847251227, 'num_rounds': 323.15464552436674, 'reg_alpha': 1.4732697126582779, 'reg_lambda': 4.666205423813615, 'weight': 0.22309511704238613}
+2024-07-22 14:14:33,903 - INFO - False positive rate: 22.171189979123174; False negative rate: 7.2835547411818595
+2024-07-22 14:14:44,864 - INFO - False positive rate: 20.66185829444209; False negative rate: 7.450575390970787
+2024-07-22 14:14:56,114 - INFO - False positive rate: 20.25806451612904; False negative rate: 7.385259381073404
+2024-07-22 14:15:06,561 - INFO - False positive rate: 21.404682274247488; False negative rate: 7.535973891114079
+2024-07-22 14:15:17,448 - INFO - False positive rate: 20.214964861513018; False negative rate: 7.671620665251239
+2024-07-22 14:15:17,466 - INFO - Iteration 9
+2024-07-22 14:15:17,466 - INFO - Best loss so far: 139.75279771316875
+2024-07-22 14:15:17,467 - INFO - Best hyperparameters so far: {'learning_rate': 0.20528085046454242, 'max_delta_step': 1.1782502025508856, 'max_depth': 1, 'min_child_weight': 2.069428847251227, 'num_rounds': 323.15464552436674, 'reg_alpha': 1.4732697126582779, 'reg_lambda': 4.666205423813615, 'weight': 0.22309511704238613}
+2024-07-22 14:15:18,654 - ERROR - job exception: [14:15:18] /home/conda/feedstock_root/build_artifacts/xgboost-split_1713397688861/work/src/tree/updater_gpu_hist.cu:781: Exception in gpu_hist: [14:15:18] /home/conda/feedstock_root/build_artifacts/xgboost-split_1713397688861/work/src/c_api/../data/../common/device_helpers.cuh:431: Memory allocation error on worker 0: std::bad_alloc: cudaErrorMemoryAllocation: out of memory
+- Free memory: 6988890112
+- Requested memory: 8589934592
+
+Stack trace:
+  [bt] (0) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(dmlc::LogMessageFatal::~LogMessageFatal()+0x6e) [0x7fc9de27864e]
+  [bt] (1) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(dh::detail::ThrowOOMError(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)+0x1f3) [0x7fc9de820143]
+  [bt] (2) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(+0x2de112) [0x7fc9de235112]
+  [bt] (3) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(thrust::detail::vector_base<long, dh::detail::XGBDefaultDeviceAllocatorImpl<long> >::append(unsigned long)+0x2ef) [0x7fc9deb8a27f]
+  [bt] (4) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::DeviceHistogramStorage<268435456ul>::AllocateHistograms(std::vector<int, std::allocator<int> > const&)+0x1da) [0x7fc9deb8eafa]
+  [bt] (5) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::GPUHistMakerDevice::BuildHistLeftRight(std::vector<xgboost::tree::GPUExpandEntry, std::allocator<xgboost::tree::GPUExpandEntry> > const&, xgboost::RegTree const&)+0x347) [0x7fc9deb8f3e7]
+  [bt] (6) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::GPUHistMakerDevice::UpdateTree(xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, xgboost::ObjInfo const*, xgboost::RegTree*, xgboost::HostDeviceVector<int>*)+0x868) [0x7fc9deb94dd8]
+  [bt] (7) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::GPUHistMaker::Update(xgboost::tree::TrainParam const*, xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, xgboost::common::Span<xgboost::HostDeviceVector<int>, 18446744073709551615ul>, std::vector<xgboost::RegTree*, std::allocator<xgboost::RegTree*> > const&)+0x179) [0x7fc9deb95e89]
+  [bt] (8) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::gbm::GBTree::BoostNewTrees(xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, int, std::vector<xgboost::HostDeviceVector<int>, std::allocator<xgboost::HostDeviceVector<int> > >*, std::vector<std::unique_ptr<xgboost::RegTree, std::default_delete<xgboost::RegTree> >, std::allocator<std::unique_ptr<xgboost::RegTree, std::default_delete<xgboost::RegTree> > > >*)+0x130b) [0x7fc9de53008b]
+
+
+
+Stack trace:
+  [bt] (0) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(dmlc::LogMessageFatal::~LogMessageFatal()+0x6e) [0x7fc9de27864e]
+  [bt] (1) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::GPUHistMaker::Update(xgboost::tree::TrainParam const*, xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, xgboost::common::Span<xgboost::HostDeviceVector<int>, 18446744073709551615ul>, std::vector<xgboost::RegTree*, std::allocator<xgboost::RegTree*> > const&)+0x3d0) [0x7fc9deb960e0]
+  [bt] (2) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::gbm::GBTree::BoostNewTrees(xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, int, std::vector<xgboost::HostDeviceVector<int>, std::allocator<xgboost::HostDeviceVector<int> > >*, std::vector<std::unique_ptr<xgboost::RegTree, std::default_delete<xgboost::RegTree> >, std::allocator<std::unique_ptr<xgboost::RegTree, std::default_delete<xgboost::RegTree> > > >*)+0x130b) [0x7fc9de53008b]
+  [bt] (3) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::gbm::GBTree::DoBoost(xgboost::DMatrix*, xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::PredictionCacheEntry*, xgboost::ObjFunction const*)+0x797) [0x7fc9de530a77]
+  [bt] (4) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::LearnerImpl::UpdateOneIter(int, std::shared_ptr<xgboost::DMatrix>)+0x2ec) [0x7fc9de57b3ac]
+  [bt] (5) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(XGBoosterUpdateOneIter+0x6d) [0x7fc9de25b11d]
+  [bt] (6) /home/vat23/miniconda3/envs/SIP/lib/python3.12/lib-dynload/../../libffi.so.8(+0x6a4a) [0x7fc9ff351a4a]
+  [bt] (7) /home/vat23/miniconda3/envs/SIP/lib/python3.12/lib-dynload/../../libffi.so.8(+0x5fea) [0x7fc9ff350fea]
+  [bt] (8) /home/vat23/miniconda3/envs/SIP/lib/python3.12/lib-dynload/_ctypes.cpython-312-x86_64-linux-gnu.so(+0x13474) [0x7fc9ff36a474]
+
+
+2024-07-22 14:15:18,655 - ERROR - Error during hyperparameter optimization: [14:15:18] /home/conda/feedstock_root/build_artifacts/xgboost-split_1713397688861/work/src/tree/updater_gpu_hist.cu:781: Exception in gpu_hist: [14:15:18] /home/conda/feedstock_root/build_artifacts/xgboost-split_1713397688861/work/src/c_api/../data/../common/device_helpers.cuh:431: Memory allocation error on worker 0: std::bad_alloc: cudaErrorMemoryAllocation: out of memory
+- Free memory: 6988890112
+- Requested memory: 8589934592
+
+Stack trace:
+  [bt] (0) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(dmlc::LogMessageFatal::~LogMessageFatal()+0x6e) [0x7fc9de27864e]
+  [bt] (1) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(dh::detail::ThrowOOMError(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)+0x1f3) [0x7fc9de820143]
+  [bt] (2) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(+0x2de112) [0x7fc9de235112]
+  [bt] (3) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(thrust::detail::vector_base<long, dh::detail::XGBDefaultDeviceAllocatorImpl<long> >::append(unsigned long)+0x2ef) [0x7fc9deb8a27f]
+  [bt] (4) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::DeviceHistogramStorage<268435456ul>::AllocateHistograms(std::vector<int, std::allocator<int> > const&)+0x1da) [0x7fc9deb8eafa]
+  [bt] (5) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::GPUHistMakerDevice::BuildHistLeftRight(std::vector<xgboost::tree::GPUExpandEntry, std::allocator<xgboost::tree::GPUExpandEntry> > const&, xgboost::RegTree const&)+0x347) [0x7fc9deb8f3e7]
+  [bt] (6) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::GPUHistMakerDevice::UpdateTree(xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, xgboost::ObjInfo const*, xgboost::RegTree*, xgboost::HostDeviceVector<int>*)+0x868) [0x7fc9deb94dd8]
+  [bt] (7) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::GPUHistMaker::Update(xgboost::tree::TrainParam const*, xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, xgboost::common::Span<xgboost::HostDeviceVector<int>, 18446744073709551615ul>, std::vector<xgboost::RegTree*, std::allocator<xgboost::RegTree*> > const&)+0x179) [0x7fc9deb95e89]
+  [bt] (8) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::gbm::GBTree::BoostNewTrees(xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, int, std::vector<xgboost::HostDeviceVector<int>, std::allocator<xgboost::HostDeviceVector<int> > >*, std::vector<std::unique_ptr<xgboost::RegTree, std::default_delete<xgboost::RegTree> >, std::allocator<std::unique_ptr<xgboost::RegTree, std::default_delete<xgboost::RegTree> > > >*)+0x130b) [0x7fc9de53008b]
+
+
+
+Stack trace:
+  [bt] (0) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(dmlc::LogMessageFatal::~LogMessageFatal()+0x6e) [0x7fc9de27864e]
+  [bt] (1) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::tree::GPUHistMaker::Update(xgboost::tree::TrainParam const*, xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, xgboost::common::Span<xgboost::HostDeviceVector<int>, 18446744073709551615ul>, std::vector<xgboost::RegTree*, std::allocator<xgboost::RegTree*> > const&)+0x3d0) [0x7fc9deb960e0]
+  [bt] (2) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::gbm::GBTree::BoostNewTrees(xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::DMatrix*, int, std::vector<xgboost::HostDeviceVector<int>, std::allocator<xgboost::HostDeviceVector<int> > >*, std::vector<std::unique_ptr<xgboost::RegTree, std::default_delete<xgboost::RegTree> >, std::allocator<std::unique_ptr<xgboost::RegTree, std::default_delete<xgboost::RegTree> > > >*)+0x130b) [0x7fc9de53008b]
+  [bt] (3) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::gbm::GBTree::DoBoost(xgboost::DMatrix*, xgboost::HostDeviceVector<xgboost::detail::GradientPairInternal<float> >*, xgboost::PredictionCacheEntry*, xgboost::ObjFunction const*)+0x797) [0x7fc9de530a77]
+  [bt] (4) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(xgboost::LearnerImpl::UpdateOneIter(int, std::shared_ptr<xgboost::DMatrix>)+0x2ec) [0x7fc9de57b3ac]
+  [bt] (5) /home/vat23/miniconda3/envs/SIP/lib/libxgboost.so(XGBoosterUpdateOneIter+0x6d) [0x7fc9de25b11d]
+  [bt] (6) /home/vat23/miniconda3/envs/SIP/lib/python3.12/lib-dynload/../../libffi.so.8(+0x6a4a) [0x7fc9ff351a4a]
+  [bt] (7) /home/vat23/miniconda3/envs/SIP/lib/python3.12/lib-dynload/../../libffi.so.8(+0x5fea) [0x7fc9ff350fea]
+  [bt] (8) /home/vat23/miniconda3/envs/SIP/lib/python3.12/lib-dynload/_ctypes.cpython-312-x86_64-linux-gnu.so(+0x13474) [0x7fc9ff36a474]
+
+
+2024-07-22 14:15:35,261 - INFO - False positive rate: 18.69037294015612; False negative rate: 7.020186803253992
+2024-07-22 14:15:52,292 - INFO - False positive rate: 16.110623353819143; False negative rate: 6.766807641825872
+2024-07-22 14:16:08,185 - INFO - False positive rate: 17.36842105263158; False negative rate: 6.89040689040689
+2024-07-22 14:16:24,222 - INFO - False positive rate: 17.811158798283266; False negative rate: 6.952814934587683
+2024-07-22 14:16:39,359 - INFO - False positive rate: 17.44627054361567; False negative rate: 7.214175221487835
 2024-07-23 12:01:29,537 - INFO - False positive rate: 26.94046721929163; False negative rate: 6.391096979332274
 2024-07-23 12:01:34,173 - INFO - False positive rate: 26.015951386251423; False negative rate: 6.567210089203322
 2024-07-23 12:01:38,665 - INFO - False positive rate: 25.760492876395848; False negative rate: 6.545114539504442
