@@ -56,22 +56,14 @@ def main(args):
                                    f"val_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.pkl")
     data = None
     if len(split_size) == 2:
-        if "C2" in df_name:
-            train = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                        f"train_C2_{len(split_size)}S.pkl"))
-            test = pd.read_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                       f"test_C2_{len(split_size)}S.pkl"))
-            data = pd.concat([train, test], ignore_index=True)
-            data.drop(columns=["ids"], inplace=True)
-            data.reset_index(drop=True, inplace=True)
-        else:
-            data = pd.read_pickle(input_path)
+        data = pd.read_pickle(input_path)
+        data.drop(columns=["ids"], inplace=True)
+        data.reset_index(drop=True, inplace=True)
     elif len(split_size) == 3:
         data = pd.read_pickle(input_path)
         data.drop(columns=["ids"], inplace=True)
         data.reset_index(drop=True, inplace=True)
     logging.info(f"Start Clustering the data with CD-HIT")
-
     ofile = open(
         join(CURRENT_DIR, "..", "data", "clusters",
              f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.fasta"), "w")
