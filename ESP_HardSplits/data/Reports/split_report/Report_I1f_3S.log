@@ -17,7 +17,6 @@ Sequence             0          0        0         0       0        0
 SMILES               0          0        0         0       0        0
 ids                  0          0        0         0       0        0
 split                0          0        0         0       0        0
-2024-07-09 16:25:19,088 - INFO - Total number of samples: 18313
 2024-07-09 16:25:19,088 - INFO - Ratio of test set to dataset: 0.2
 2024-07-09 16:25:19,089 - INFO - Ratio of val set to dataset: 0.1
 2024-07-09 16:25:19,089 - INFO - Start to create negative data points for the train set...

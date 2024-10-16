@@ -47,7 +47,6 @@ ECFP                 0          0        0         0
 Sequence             0          0        0         0
 SMILES               0          0        0         0
 cluster              7          0        7         0
-2024-07-11 01:54:45,048 - INFO - Total number of samples: 14912
 2024-07-11 01:54:45,048 - INFO - Ratio of test set to total dataset: 0.2
 2024-07-11 01:54:45,048 - INFO - Drop nan data based on cluster column, if exist
 2024-07-11 01:54:45,056 - INFO - Start to create negative data points for the train set...

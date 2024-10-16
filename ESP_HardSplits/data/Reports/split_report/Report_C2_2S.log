@@ -17,7 +17,6 @@ Sequence             0          0        0         0
 SMILES               0          0        0         0
 ids                  0          0        0         0
 split                0          0        0         0
-2024-07-09 14:09:39,606 - INFO - Total number of samples: 10404
 2024-07-09 14:09:39,606 - INFO - Ratio of test set to dataset: 0.18
 2024-07-09 14:09:39,606 - INFO - Start to create negative data points for the train set...
 2024-07-09 14:09:57,532 - INFO - Number of metabolites in train set: 637
