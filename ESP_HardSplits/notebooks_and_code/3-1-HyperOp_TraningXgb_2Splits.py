@@ -26,19 +26,19 @@ All codes in this script has been taken from ESP repository
 def main(args):
     wandb.init(project='SIP', entity='vahid-atabaigi')
     current_dir = os.getcwd()
-    splitted_data = args.splitted_data
-    data_suffix = f"_{args.Data_suffix}" if args.Data_suffix else ""
+    split_data = args.split_data
+    Data_ATP = f"_{args.Data_ATP}" if args.Data_ATP else ""
     column_name = args.column_name
     column_cv = None
-    if splitted_data in ["C1f", "I1f", "ESP", "ESPC1f", "ESPC2"]:
+    if split_data in ["C1f", "I1f", "ESP", "ESPC1f", "ESPC2"]:
         column_cv = "ESM1b_ts"
-    elif splitted_data in ["C1e", "I1e", "C2"] and column_name == "PreGNN":
+    elif split_data in ["C1e", "I1e", "C2"] and column_name == "PreGNN":
         column_cv = "PreGNN"
-    elif splitted_data in ["C1e", "I1e", "C2"] and column_name == "ECFP":
+    elif split_data in ["C1e", "I1e", "C2"] and column_name == "ECFP":
         column_cv = "ECFP"
 
     logging.basicConfig(filename=join(current_dir, "..", "data", "Reports", "hyperOp_report",
-                                      f"HOP_ESM1bts_and_{column_name}_{splitted_data}{data_suffix}_2S.log"),
+                                      f"HOP_ESM1bts_and_{column_name}_{split_data}{Data_ATP}_2S.log"),
                         level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     console_handler = logging.StreamHandler()
@@ -62,10 +62,10 @@ def main(args):
             logging.error(f"Error loading data from {file_path}: {e}")
             raise
 
-    df_train = load_data(join(current_dir, "..", "data", "2splits", f"train_{splitted_data}{data_suffix}_2S.pkl"),
+    df_train = load_data(join(current_dir, "..", "data", "2splits", f"train_{split_data}{Data_ATP}_2S.pkl"),
                          column=column_name)
 
-    df_test = load_data(join(current_dir, "..", "data", "2splits", f"test_{splitted_data}{data_suffix}_2S.pkl"),
+    df_test = load_data(join(current_dir, "..", "data", "2splits", f"test_{split_data}{Data_ATP}_2S.pkl"),
                         column=column_name)
 
     def split_dataframe(df, frac):
@@ -140,23 +140,23 @@ def main(args):
 
     # Save indices using pickle
     with open(join(current_dir, "..", "data", "2splits",
-                   f"CV_train_indices_{splitted_data}{data_suffix}_{column_cv}.pkl"),
+                   f"CV_train_indices_{split_data}{Data_ATP}_{column_cv}.pkl"),
               'wb') as f:
         pickle.dump(train_indices, f)
 
     with open(
-            join(current_dir, "..", "data", "2splits", f"CV_test_indices_{splitted_data}{data_suffix}_{column_cv}.pkl"),
+            join(current_dir, "..", "data", "2splits", f"CV_test_indices_{split_data}{Data_ATP}_{column_cv}.pkl"),
             'wb') as f:
         pickle.dump(test_indices, f)
 
     # Load indices using pickle
     with open(join(current_dir, "..", "data", "2splits",
-                   f"CV_train_indices_{splitted_data}{data_suffix}_{column_cv}.pkl"),
+                   f"CV_train_indices_{split_data}{Data_ATP}_{column_cv}.pkl"),
               'rb') as f:
         train_indices = pickle.load(f)
 
     with open(
-            join(current_dir, "..", "data", "2splits", f"CV_test_indices_{splitted_data}{data_suffix}_{column_cv}.pkl"),
+            join(current_dir, "..", "data", "2splits", f"CV_test_indices_{split_data}{Data_ATP}_{column_cv}.pkl"),
             'rb') as f:
         test_indices = pickle.load(f)
 
@@ -289,11 +289,11 @@ def main(args):
     print("ROC-AUC scores: %s" % roc_auc)
 
     np.save(join(current_dir, "..", "data", "training_results_2S",
-                 f"acc_CV_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_2S.npy"), np.array(accuracy))
+                 f"acc_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_2S.npy"), np.array(accuracy))
     np.save(join(current_dir, "..", "data", "training_results_2S",
-                 f"loss_CV_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_2S.npy"), np.array(loss))
+                 f"loss_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_2S.npy"), np.array(loss))
     np.save(join(current_dir, "..", "data", "training_results_2S",
-                 f"ROC_AUC_CV_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_2S.npy"), np.array(roc_auc))
+                 f"ROC_AUC_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_2S.npy"), np.array(roc_auc))
 
     dtrain = xgb.DMatrix(np.array(train_x), weight=weights, label=np.array(train_y),
                          feature_names=feature_names)
@@ -309,20 +309,21 @@ def main(args):
     print("Accuracy on test set: %s, ROC-AUC score for test set: %s, MCC: %s" % (acc_test, roc_auc, mcc))
 
     np.save(join(current_dir, "..", "data", "training_results_2S",
-                 f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_2S.npy"), bst.predict(dtest))
+                 f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_2S.npy"), bst.predict(dtest))
     np.save(join(current_dir, "..", "data", "training_results_2S",
-                 f"y_test_true_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_2S.npy"), test_y)
+                 f"y_test_true_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_2S.npy"), test_y)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="End to end Hyperparameter tuning and model training for train:test splits")
-    parser.add_argument('--splitted-data', type=str, required=True,
-                        help="The splitted-data should be one of [C2,C1e, C1f, I1e, I1f,ESP, ESPC2]")
+    parser.add_argument('--split-data', type=str, required=True,
+                        help="The split-data should be one of [C2,C1e, C1f, I1e, I1f,ESP, ESPC2] to load train,test "
+                             "or validation sets for each split method")
     parser.add_argument('--column-name', type=str, required=True,
                         help="This argument selects the embedded vector for molecules to concatenate with the ESM1bts,"
                              " column name should be one of [ ECFP , PreGNN]")
-    parser.add_argument('--Data-suffix', default="", type=str, required=False,
-                        help="The Dataframe suffix name should be one of [ NoATP , D3408] ")
+    parser.add_argument('--Data-ATP', default="", type=str, required=False,
+                        help="The Dataframe ATP name should be one of [ NoATP , D3408] ")
     args = parser.parse_args()
     main(args)

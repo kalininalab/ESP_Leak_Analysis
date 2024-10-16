@@ -26,12 +26,12 @@ warnings.filterwarnings("ignore")
 def main(args):
     wandb.init(project='SIP', entity='vahid-atabaigi')
     current_dir = os.getcwd()
-    splitted_data = args.splitted_data
-    data_suffix = f"_{args.Data_suffix}" if args.Data_suffix else ""
+    split_data = args.split_data
+    Data_ATP = f"_{args.Data_ATP}" if args.Data_ATP else ""
     column_name = args.column_name
 
     logging.basicConfig(filename=join(current_dir, "..", "data", "Reports", "hyperOp_report",
-                                      f"HOP_ESM1bts_and_{column_name}_{splitted_data}{data_suffix}_3S.log"),
+                                      f"HOP_ESM1bts_and_{column_name}_{split_data}{Data_ATP}_3S.log"),
                         level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     console_handler = logging.StreamHandler()
     console_handler.setLevel(logging.INFO)
@@ -50,11 +50,11 @@ def main(args):
             logging.error(f"Error loading data from {file_path}: {e}")
             raise
 
-    df_train = load_data(join(current_dir, "..", "data", "3splits", f"train_{splitted_data}{data_suffix}_3S.pkl"),
+    df_train = load_data(join(current_dir, "..", "data", "3splits", f"train_{split_data}{Data_ATP}_3S.pkl"),
                          column=column_name)
-    df_test = load_data(join(current_dir, "..", "data", "3splits", f"test_{splitted_data}{data_suffix}_3S.pkl"),
+    df_test = load_data(join(current_dir, "..", "data", "3splits", f"test_{split_data}{Data_ATP}_3S.pkl"),
                         column=column_name)
-    df_val = load_data(join(current_dir, "..", "data", "3splits", f"val_{splitted_data}{data_suffix}_3S.pkl"),
+    df_val = load_data(join(current_dir, "..", "data", "3splits", f"val_{split_data}{Data_ATP}_3S.pkl"),
                        column=column_name)
 
     def create_input_and_output_data(df):
@@ -161,18 +161,18 @@ def main(args):
 
     # Save validation results
     np.save(join(current_dir, "..", "data", "training_results_3S",
-                 f"y_val_pred_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"),
+                 f"y_val_pred_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_3S.npy"),
             bst_final.predict(dval))
     np.save(join(current_dir, "..", "data", "training_results_3S",
-                 f"y_val_true_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), val_y)
+                 f"y_val_true_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_3S.npy"), val_y)
     np.save(join(current_dir, "..", "data", "training_results_3S",
-                 f"roc_auc_val_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), roc_auc_val)
+                 f"roc_auc_val_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_3S.npy"), roc_auc_val)
     np.save(join(current_dir, "..", "data", "training_results_3S",
-                 f"mcc_val_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), mcc_val)
+                 f"mcc_val_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_3S.npy"), mcc_val)
     np.save(join(current_dir, "..", "data", "training_results_3S",
-                 f"accuracy_val_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), accuracy_val)
+                 f"accuracy_val_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_3S.npy"), accuracy_val)
     np.save(join(current_dir, "..", "data", "training_results_3S",
-                 f"loss_val_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), loss_val)
+                 f"loss_val_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_3S.npy"), loss_val)
 
     # Evaluate final model on test set
     dtest = xgb.DMatrix(test_X, label=test_y, feature_names=feature_names)
@@ -192,29 +192,30 @@ def main(args):
 
     # Save test results
     np.save(join(current_dir, "..", "data", "training_results_3S",
-                 f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"),
+                 f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_3S.npy"),
             bst_final.predict(dtest))
     np.save(join(current_dir, "..", "data", "training_results_3S",
-                 f"y_test_true_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), test_y)
+                 f"y_test_true_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_3S.npy"), test_y)
     np.save(join(current_dir, "..", "data", "training_results_3S",
-                 f"roc_auc_test_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), roc_auc_test)
+                 f"roc_auc_test_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_3S.npy"), roc_auc_test)
     np.save(join(current_dir, "..", "data", "training_results_3S",
-                 f"mcc_test_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), mcc_test)
+                 f"mcc_test_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_3S.npy"), mcc_test)
     np.save(join(current_dir, "..", "data", "training_results_3S",
-                 f"accuracy_test_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), accuracy_test)
+                 f"accuracy_test_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_3S.npy"), accuracy_test)
     np.save(join(current_dir, "..", "data", "training_results_3S",
-                 f"loss_test_xgboost_ESM1b_ts_{column_name}_{splitted_data}{data_suffix}_3S.npy"), loss_test)
+                 f"loss_test_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_3S.npy"), loss_test)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Run the data preprocessing and negative sample generation script.")
-    parser.add_argument('--splitted-data', type=str, required=True,
-                        help="The splitted-data should be one of [C2,C1e, C1f, I1e, I1f, ESP, ESPC2]")
+    parser.add_argument('--split-data', type=str, required=True,
+                        help="The split-data should be one of [C2,C1e, C1f, I1e, I1f,ESP, ESPC2] to load train,test "
+                             "or validation sets for each split method")
     parser.add_argument('--column-name', type=str, required=True,
                         help="This argument selects the embedded vector for molecules to concatenate with the ESM1bts,"
                              " column name should be one of [ ECFP , PreGNN]")
-    parser.add_argument('--Data-suffix', default="", type=str, required=False,
-                        help="The Dataframe suffix name should be one of [ NoATP , D3408] ")
+    parser.add_argument('--Data-ATP', default="", type=str, required=False,
+                        help="The Dataframe ATP name should be one of [ NoATP , D3408] ")
     args = parser.parse_args()
     main(args)

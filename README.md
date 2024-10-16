@@ -139,10 +139,8 @@ SIP/
 
 * Explanation of Arguments:
 
-      python 2-2-SplitByESP.py --splitted-data [C2, C1e] --split-size [8 2, 7 2 1] --input-path 
+      python 2-2-SplitByESP.py  --split-size [8 2, 7 2 1] --input-path 
 
-* The --splitted-data should be one of the following: [C2,C1f] to get access to train and test sets related to C1f and C2.
-* Since in ESP paper the data have been split based on enzyme and also CV has been done based on sequence's indices(all related indices to an enzyme fall into same fold of CV), we choose train and test resulted to "C1f" split to create control case for all 1D splits.
 * `--split-size` and `--input-path ` are same as `2-1-SplitByDataSAIL.py`
 
 
@@ -163,9 +161,9 @@ SIP/
 ### 3-1-HyperOp_TraningXgb_2Splits.py
 * This script aims to tune the hyperparameters and train xgboost model for each split methods produced under 2 splits (train:test) scenario
 
-       python 3-1-HyperOp_TraningXgb_2Splits.py --splitted-data [C2,C1e, C1f, I1e, I1f,ESP, ESPC1f, ESPC2] --column-name [ECFP, PreGNN] --Data-suffix [NoATP, D3408]
+       python 3-1-HyperOp_TraningXgb_2Splits.py --split-data [C2,C1e, C1f, I1e, I1f,ESP, ESPC1f, ESPC2] --column-name [ECFP, PreGNN] --Data-ATP [NoATP, D3408]
 * Explanation of Arguments:
-* `--splitted-data` and `--Data-suffix` are same as before 
+* `--split-data` and `--Data-ATP` are same as before 
 * `--column-name` determines which embedded vector for the molecule should be concatenated with the ESMb1ts vector for hyperparameter optimization and training.
 ### 3-2-HyperOp_TraningXgb_3Splits.py
 * This script aims to tune the hyperparameters and train xgboost model for each split methods produced under 3 splits (train:test:val) scenario
