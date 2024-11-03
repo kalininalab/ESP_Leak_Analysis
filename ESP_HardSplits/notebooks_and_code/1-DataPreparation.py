@@ -77,10 +77,10 @@ plot_top_keys_values(
     key_column="molecule ID",
     xlabel='molecule ID',
     ylabel='Count',
-    title='Number of data points per molecule ID in {df_name}',  # Use placeholder for df_name
+    title='A',  # Use placeholder for df_name
     color="red",
     figsize=(14, 12),
-    top_count=100
+    top_count=50
 )
 
 ATP_ids={'CHEBI:30616','C00002'}
@@ -92,10 +92,10 @@ plot_top_keys_values(
     key_column="molecule ID",
     xlabel='molecule ID',
     ylabel='Count',
-    title='Number of data points per molecule ID in {df_name}',
+    title='B',
     color="red",
     figsize=(14, 12),
-    top_count=100
+    top_count=50
 )
 dataESP_NoATP.reset_index(drop=True, inplace=True)
 dataESP_NoATP.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP_NoATP.pkl"))
@@ -114,9 +114,9 @@ plot_top_keys_values(
     key_column="molecule ID",
     xlabel='molecule ID',
     ylabel='Count',
-    title='Number of data points per molecule ID in {df_name}',
+    title='C',
     color="red",
     figsize=(14, 12),
-    top_count=100
+    top_count=50
 )
 print(data_report(dataESP_D3408))
