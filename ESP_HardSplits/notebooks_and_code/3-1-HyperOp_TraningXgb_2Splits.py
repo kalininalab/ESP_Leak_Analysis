@@ -11,6 +11,7 @@ from os.path import join
 from sklearn.metrics import roc_auc_score, matthews_corrcoef
 from hyperopt import fmin, tpe, hp, Trials, rand, space_eval
 import xgboost as xgb
+import argparse
 
 sys.path.append("./additional_code")
 from additional_code.helper_functions import *
@@ -30,7 +31,7 @@ def main(args):
     Data_ATP = f"_{args.Data_ATP}" if args.Data_ATP else ""
     column_name = args.column_name
     column_cv = None
-    if split_data in ["C1f", "I1f", "ESP", "ESPC1f", "ESPC2"]:
+    if split_data in ["C1f", "I1f", "ESP", "ESPC2"]:
         column_cv = "ESM1b_ts"
     elif split_data in ["C1e", "I1e", "C2"] and column_name == "PreGNN":
         column_cv = "PreGNN"

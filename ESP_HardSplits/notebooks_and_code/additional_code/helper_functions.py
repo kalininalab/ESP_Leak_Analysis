@@ -15,24 +15,23 @@ from os.path import join
 warnings.filterwarnings("ignore")
 import inspect
 import shutil
+from collections import Counter
 from libchebipy import ChebiEntity
 import os
 from datasail.sail import datasail
 import numpy as np
 plt.style.use('CCB_plot_style_0v4.mplstyle');
-c_styles      = mpl.rcParams['axes.prop_cycle'].by_key()['color']   # fetch the defined color styles
+c_styles      = mpl.rcParams['axes.prop_cycle'].by_key()['color']
 high_contrast = ['#004488', '#DDAA33', '#BB5566', '#000000']
 
 
 
 def split_on_empty_lines(s):
-    # greedily match 2 or more new-lines
     blank_line_regex = r"(?:\r?\n){2,}"
     return re.split(blank_line_regex, s.strip())
 
 
 def remove_whitespace_end(s):
-    # Remove occurrences of \n, \t, or space, or a combination of them from the end of the string
     return re.sub(r'[\n\t\s]+$', '', s)
 
 
@@ -87,7 +86,6 @@ def create_empty_path(path):
 ###############################################################################
 
 
-# Function to read UniProt IDs from a file or DataFrame
 def read_uniprot_ids(file_path=None, df=None):
     if file_path:
         with open(file_path, 'r') as file:
@@ -97,15 +95,11 @@ def read_uniprot_ids(file_path=None, df=None):
     else:
         raise ValueError("Either file_path or df must be provided")
 
-
-# Function to write UniProt IDs to a file
 def write_uniprot_ids(file_path, uniprot_ids):
     with open(file_path, 'w') as file:
         for uniprot_id in uniprot_ids:
             file.write(f"{uniprot_id}\n")
 
-
-# Function to get PDB entries for a given UniProt ID
 def get_pdb_entries(uniprot_id, retries=3, backoff_factor=1.0):
     url = f'https://www.ebi.ac.uk/pdbe/api/mappings/best_structures/{uniprot_id}'
     for attempt in range(retries):
@@ -121,8 +115,6 @@ def get_pdb_entries(uniprot_id, retries=3, backoff_factor=1.0):
             time.sleep(backoff_factor * (2 ** attempt))
     return []
 
-
-# Function to select the best PDB entry
 def select_best_experimental_pdb(pdb_entries):
     experimental_entries = [entry for entry in pdb_entries if entry['experimental_method'] != 'Computational Model']
     if not experimental_entries:
@@ -133,8 +125,6 @@ def select_best_experimental_pdb(pdb_entries):
                        x['experimental_method'] != 'X-ray'))
     return sorted_entries[0]['pdb_id'] if sorted_entries else None
 
-
-# Function to download a PDB file
 def download_pdb(pdb_id, output_dir, uniprot_id):
     pdb_url = f'https://files.rcsb.org/download/{pdb_id}.pdb'
     for attempt in range(3):
@@ -152,14 +142,11 @@ def download_pdb(pdb_id, output_dir, uniprot_id):
             time.sleep(1 * (2 ** attempt))
     return None
 
-
-# Class to remove ligands from PDB files
 class ProteinSelect(PDB.Select):
     def accept_residue(self, residue):
         return PDB.is_aa(residue)
 
 
-# Function to remove ligands from a PDB file
 def remove_ligands(pdb_file_path):
     parser = PDB.PDBParser(QUIET=True)
     structure = parser.get_structure('', pdb_file_path)
@@ -280,7 +267,6 @@ def three_split_report(train_set, test_set, val_set):
     number_data=len(train_set) + len(test_set) + len(val_set)
     return result, number_data , test_to_data, val_to_data
 
-
 def plot_top_keys_values(df, key_column, xlabel, ylabel, title, color='blue', figsize=(12, 10), top_count=30):
     caller_frame = inspect.currentframe().f_back
     df_name = [var_name for var_name, var in caller_frame.f_locals.items() if var is df][0]
@@ -291,11 +277,12 @@ def plot_top_keys_values(df, key_column, xlabel, ylabel, title, color='blue', fi
     plt.bar(keys, values, color=color, alpha=0.8, label='Data Points')
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
-    plt.title(title.format(df_name=df_name))  # Format the title with df_name
-    plt.xticks(rotation=90, fontsize='xx-small')
+    plt.title(title.format(df_name=df_name))
+    plt.xticks(rotation=90, fontsize=12)  # Set fontsize to 12 or any other value you prefer
     plt.subplots_adjust(bottom=0.25)
     plt.legend()
     plt.show()
+
 
 def plot_top_keys_values_multiple_df(dfs, df_names, key_column, xlabel, ylabel, title, figsize=(15, 10), top_count=30,
                                      title_fontsize=10):
@@ -304,49 +291,31 @@ def plot_top_keys_values_multiple_df(dfs, df_names, key_column, xlabel, ylabel, 
 
     if len(dfs) != len(df_names):
         raise ValueError("The length of dfs and df_names must be the same.")
-
-    # Step 1: Combine counters for all dataframes
     combined_counter = collections.Counter()
     for df in dfs:
         combined_counter.update(df[key_column])
-
-    # Get top combined keys
     top_combined = combined_counter.most_common(top_count)
     keys, _ = zip(*top_combined)
     keys = list(map(str, keys))
-
-    # Step 2: Find common keys between the first two dataframes (assuming 2 dataframes)
     if len(dfs) >= 2:
         common_keys = set(map(str, dfs[0][key_column])) & set(map(str, dfs[1][key_column]))
     else:
         common_keys = set()
-
     np.random.seed(0)
-    # Assign random colors to each key
     colors_map = {key: np.random.rand(3, ) for key in keys}
-
-    # Use a distinct color for common keys (red)
-    common_color = [1, 0, 0]  # Red for common keys
-
-    # Create subplots
+    common_color = [1, 0, 0]
     fig, axes = plt.subplots(1, len(dfs), figsize=figsize)
     if len(dfs) == 1:
         axes = [axes]
-
-    # Step 3: Plot for each dataframe
     for ax, df, df_name in zip(axes, dfs, df_names):
         counter = collections.Counter(df[key_column])
         values = [counter.get(key, 0) for key in keys]
-
-        # Set color for bars: red for common keys, otherwise use colors_map
         bar_colors = [common_color if key in common_keys else colors_map[key] for key in keys]
-
         ax.barh(keys, values, color=bar_colors, alpha=0.6, edgecolor='black')
         ax.set_ylabel(ylabel)
         ax.set_xlabel(xlabel)
         ax.set_title(title.format(df_name=df_name, top_count=top_count), fontsize=title_fontsize)
         ax.tick_params(axis='y', labelsize=6)
-
     plt.tight_layout()
     plt.show()
 
@@ -365,8 +334,6 @@ def parse_log(file_path):
             current_iteration = int(match_iteration.group(1))
         elif match_loss:
             current_loss = float(match_loss.group(1))
-
-            # Check for unique loss in the same iteration
             if current_loss not in unique_losses:
                 iteration_data.append({'iteration': current_iteration, 'loss': current_loss})
                 unique_losses.add(current_loss)
@@ -411,37 +378,29 @@ def plotting_loss(column, experiment=None, log_directory=None, color_map=None,sp
 
         color = color_map.get(split_name, 'gray')
         log_data = parse_log(os.path.join(log_directory, log_file))
-        # Smooth the data using moving average
-        window_size = min(20, max(1, len(log_data['iteration']) // 10))  # Adjust window size as needed
+        window_size = min(20, max(1, len(log_data['iteration']) // 10))
         smooth_loss = np.convolve(log_data['loss'], np.ones(window_size) / window_size, mode='same')
         smooth_iteration = log_data['iteration']
-        # Convert smooth_iteration and smooth_loss to Pandas Series
         smooth_iteration = pd.Series(smooth_iteration)
         smooth_loss = pd.Series(smooth_loss)
-        # Extend the curve to iteration 2000
         last_iteration = smooth_iteration.iloc[-1]
         remaining_iterations = np.arange(last_iteration + 1, 2001)
         extension_loss = np.full_like(remaining_iterations, smooth_loss.iloc[-1])
         smooth_iteration = pd.concat([smooth_iteration, pd.Series(remaining_iterations)], ignore_index=True)
         smooth_loss = pd.concat([smooth_loss, pd.Series(extension_loss)], ignore_index=True)
-        # Plot smoothed data
         ax.plot(smooth_iteration, smooth_loss, color=color, label=split_name, alpha=0.8)
-        # Find minimum loss point from original data
         min_loss_index = log_data['loss'].idxmin()
         min_loss_iteration = log_data['iteration'].iloc[min_loss_index]
-        min_loss = log_data['loss'].iloc[min_loss_index]
-        # Mark minimum loss point
+        min_loss = int(log_data['loss'].iloc[min_loss_index])
         ax.scatter(min_loss_iteration, min_loss, color=color, s=50, marker='o')
-        # Annotate minimum loss value
-        ax.annotate(f'{min_loss:.2f}', (min_loss_iteration, min_loss), textcoords="offset points", xytext=(5, 5),
-                    ha='center', fontsize=11)
-
+        ax.annotate(f'{round(min_loss)}', (min_loss_iteration, min_loss), textcoords="offset points", xytext=(5, 5),
+            ha='center', fontsize=10)
     ax.set_xlabel('Iteration', fontsize=12)
     ax.set_ylabel('Loss', fontsize=12)
-    ax.set_title(f'Loss per Iteration for ESM1bts + {column}', fontsize=18, fontname='Arial')
+    ax.set_title(f'Loss per Iteration for ESM1bts + {column}', fontsize=10, fontname='Arial', pad=30)
+
     ax.set_xlim(0, 2000)
-    # ax.grid(True)  # Add grid lines
-    ax.legend(loc='upper right', fontsize=10)  # Place legend outside the plot
+    ax.legend(loc='upper right', fontsize=10, bbox_to_anchor=(1.2, 1))
 
     plt.tight_layout()
     plt.show()
@@ -507,38 +466,113 @@ def setup_logging(log_file):
     )
 #######################################################################
 
+def identity_based_leakage_calculator(column_list, train, test, val=None):
+    total_data_protein_occurrences = 0
+    train_test_protein_leakage = 0
+    train_val_protein_leakage = 0
+    test_val_protein_leakage = 0
 
-def calculate_molecular_properties(smiles):
-    try:
-        mol = Chem.MolFromSmiles(smiles)
-        if mol is not None:
-            # Calculate molecular weight
-            molecular_weight = Descriptors.MolWt(mol)
+    total_data_smiles_occurrences = 0
+    train_test_smiles_leakage = 0
+    train_val_smiles_leakage = 0
+    test_val_smiles_leakage = 0
 
-            # Calculate number of atoms
-            num_atoms = mol.GetNumAtoms()
-
-            return pd.Series([molecular_weight, int(num_atoms)])
-        else:
-            return pd.Series([None, None])
-    except Exception as e:
-        print(f"Error processing SMILES '{smiles}': {e}")
-        return pd.Series([None, None])
-
-
-def id_base_data_leakage_calculator(column_list, train, test, val=None):
-    total_leakage = 0
     for column in column_list:
-        leak_1 = len(set(train[column]).intersection(set(test[column])))
-        total_leakage += leak_1
+        train_counts = Counter(train[column])
+        test_counts = Counter(test[column])
+        val_counts = Counter(val[column]) if val is not None else Counter()
+        if column == "molecule ID":
+            total_data_smiles_occurrences += sum(train_counts.values()) + sum(test_counts.values()) + sum(val_counts.values())
+        else:
+            total_data_protein_occurrences += sum(train_counts.values()) + sum(test_counts.values()) + sum(val_counts.values())
+
         if val is not None:
-            leak_2 = len(set(train[column]).intersection(set(val[column])))
-            leak_3 = len(set(test[column]).intersection(set(val[column])))
-            total_leakage += leak_2
-            total_leakage += leak_3
-    total_data = len(train) + len(test)
-    leakage = total_leakage / total_data
-    return leakage
+            for id_ in set(train_counts.keys()).intersection(test_counts.keys()):
+                leakage_count = max([train_counts[id_],test_counts[id_]])
+                if column =="molecule ID":
+                    train_test_smiles_leakage += leakage_count
+                elif column== "Uniprot ID":
+                    train_test_protein_leakage += leakage_count
+            for id_ in set(train_counts.keys()).intersection(val_counts.keys()):
+                leakage_count = max([train_counts[id_],val_counts[id_]])
+                if column == "molecule ID":
+                    train_val_smiles_leakage += leakage_count
+                elif column == "Uniprot ID":
+                    train_val_protein_leakage += leakage_count
+            for id_ in set(test_counts.keys()).intersection(val_counts.keys()):
+                leakage_count = max([test_counts[id_],val_counts[id_]])
+                if column == "molecule ID":
+                    test_val_smiles_leakage += leakage_count
+                elif column == "Uniprot ID":
+                    test_val_protein_leakage += leakage_count
+        else:
+            for id_ in set(train_counts.keys()).intersection(test_counts.keys()):
+                leakage_count = max([train_counts[id_],test_counts[id_]])
+                if column == "molecule ID":
+                    train_test_smiles_leakage += leakage_count
+                elif column == "Uniprot ID":
+                    train_test_protein_leakage += leakage_count
+
+    train_test_smiles_percentage = (train_test_smiles_leakage / total_data_smiles_occurrences) * 100 if total_data_smiles_occurrences > 0 else 0
+    train_test_protein_percentage = (train_test_protein_leakage / total_data_protein_occurrences) * 100 if total_data_protein_occurrences> 0 else 0
+    if val is None:
+        return {'train_test_smiles_leakage': round(train_test_smiles_percentage,2),
+                'train_test_protein_leakage': round(train_test_protein_percentage,2)}
+    train_val_protein_percentage = (train_val_protein_leakage / total_data_protein_occurrences) * 100 if total_data_protein_occurrences> 0 else 0
+    train_val_smiles_percentage = (train_val_smiles_leakage / total_data_smiles_occurrences) * 100 if total_data_smiles_occurrences > 0 else 0
+    test_val_smiles_percentage = (test_val_smiles_leakage / total_data_smiles_occurrences) * 100 if total_data_smiles_occurrences > 0 else 0
+    test_val_protein_percentage = (test_val_protein_leakage / total_data_protein_occurrences) * 100 if total_data_protein_occurrences > 0 else 0
+    return {'train_test_smiles_leakage': round(train_test_smiles_percentage, 2),
+            'train_val_smiles_leakage': round(train_val_smiles_percentage, 2),
+            'test_val_smiles_leakage': round(test_val_smiles_percentage, 2),
+            'train_test_protein_leakage': round(train_test_protein_percentage, 2),
+            'train_val_protein_leakage': round(train_val_protein_percentage, 2),
+            'test_val_protein_leakage': round(test_val_protein_percentage, 2)}
+
+
+
+
+def identity_based_leakage_calculator_2(column_list, train, test, val=None):
+    total_leakage = 0
+    total_data_occurrences = 0
+    train_test_leakage = 0
+    train_val_leakage = 0
+    test_val_leakage = 0
+
+    for column in column_list:
+        train_counts = Counter(train[column])
+        test_counts = Counter(test[column])
+        val_counts = Counter(val[column]) if val is not None else Counter()
+        total_data_occurrences += sum(train_counts.values()) + sum(test_counts.values()) + sum(val_counts.values())
+        if val is not None:
+            for id_ in set(train_counts.keys()).intersection(test_counts.keys()):
+                leakage_count = max([train_counts[id_],test_counts[id_]])
+                train_test_leakage += leakage_count
+                total_leakage += leakage_count
+
+            for id_ in set(train_counts.keys()).intersection(val_counts.keys()):
+                leakage_count = max([train_counts[id_],val_counts[id_]])
+                train_val_leakage += leakage_count
+                total_leakage += leakage_count
+            for id_ in set(test_counts.keys()).intersection(val_counts.keys()):
+                leakage_count = max([test_counts[id_],val_counts[id_]])
+                test_val_leakage += leakage_count
+                total_leakage += leakage_count
+        else:
+            for id_ in set(train_counts.keys()).intersection(test_counts.keys()):
+                leakage_count = train_counts[id_]
+                train_test_leakage += leakage_count
+    total_leakage_percentage = (total_leakage / total_data_occurrences) * 100
+    train_test_percentage = (train_test_leakage / total_data_occurrences) * 100
+    if val is None:
+        return {'train_test_leakage': round(train_test_percentage,2)}
+    train_val_percentage = (train_val_leakage / total_data_occurrences) * 100
+    test_val_percentage = (test_val_leakage / total_data_occurrences) * 100
+    return {'train_test_leakage': round(train_test_percentage,2),
+            'train_val_leakage': round(train_val_percentage,2),
+            'test_val_leakage': round(test_val_percentage,2),
+            'total_leakage': round(total_leakage_percentage,2)}
+
 
 
 

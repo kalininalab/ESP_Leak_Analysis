@@ -87,7 +87,6 @@ def main(args):
         logging.info(
             f"Data report after splitting data by {split_method} split method and check for NaN or null cells in the "
             f"data\n{result.to_string()}")
-        logging.info(f"Total number of samples: {total_samples}")
         logging.info(f"Ratio of test set to dataset: {test_ratio}")
     elif len(split_size) == 3:
         result, total_samples, test_ratio, val_ratio = three_split_report(train, test, val)

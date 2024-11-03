@@ -209,7 +209,6 @@ def main(args):
         result, total_samples, test_ratio, val_ratio = three_split_report(train, test, val)
         logging.info(
             f"Data Report after splitting data by ESP split method and check for NaN or null cells in the data\n{result.to_string()}")
-        logging.info(f"Total number of samples: {total_samples}")
         logging.info(f"Ratio of test set to dataset: {test_ratio}")
         logging.info(f"Ratio of val set to dataset: {val_ratio}")
     logging.info(f"Drop nan data based on cluster column, if exist")
