@@ -83,12 +83,17 @@ plot_top_keys_values(
     top_count=50
 )
 
-ATP_ids={'CHEBI:30616','C00002'}
+
+energy_IDs =["CHEBI:16761", "CHEBI:15422","CHEBI:30616", "CHEBI:16474", "CHEBI:16908",
+                       "CHEBI:15846", "CHEBI:18009","CHEBI:58349","CHEBI:17659","CHEBI:57540",
+                       "CHEBI:17552", "CHEBI:15996","CHEBI:37565","CHEBI:57783""CHEBI:13390",
+                       "C00008","C00002","C00004","C00005","C00003","C00006","C00044","C00035",
+                       "5957","6022","439153","5892","5885","5884","135398633","135398619"]
 # Remove ATP
-dataESP_NoATP = dataESP[~dataESP['molecule ID'].isin(ATP_ids)]
-print(f"number of ATP: {len(dataESP[dataESP['molecule ID'].isin(ATP_ids)])}")
+dataESP_NoEnergy = dataESP[~dataESP['molecule ID'].isin(energy_IDs)]
+print(f"number of Energy molecules: {len(dataESP[dataESP['molecule ID'].isin(energy_IDs)])}")
 plot_top_keys_values(
-    dataESP_NoATP,
+    dataESP_NoEnergy,
     key_column="molecule ID",
     xlabel='molecule ID',
     ylabel='Count',
@@ -97,20 +102,20 @@ plot_top_keys_values(
     figsize=(14, 12),
     top_count=50
 )
-dataESP_NoATP.reset_index(drop=True, inplace=True)
-dataESP_NoATP.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP_NoATP.pkl"))
-print(data_report(dataESP_NoATP))
+dataESP_NoEnergy.reset_index(drop=True, inplace=True)
+dataESP_NoEnergy.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP_NoEng.pkl"))
+print(data_report(dataESP_NoEnergy))
 # Random delete of 3408 data points
 dataESP=pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP.pkl"))
-# 18313-14905=3408
-num_rows_to_delete = 3408
+# 18313-13055=5258
+num_rows_to_delete = 5258
 rows_to_delete = dataESP.sample(n=num_rows_to_delete).index
-dataESP_D3408=dataESP.drop(rows_to_delete)
-dataESP_D3408.reset_index(drop=True, inplace=True)
-dataESP_D3408.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP_D3408.pkl"))
+dataESP_D5258=dataESP.drop(rows_to_delete)
+dataESP_D5258.reset_index(drop=True, inplace=True)
+dataESP_D5258.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP_D5258.pkl"))
 
 plot_top_keys_values(
-    dataESP_D3408,
+    dataESP_D5258,
     key_column="molecule ID",
     xlabel='molecule ID',
     ylabel='Count',
@@ -119,4 +124,4 @@ plot_top_keys_values(
     figsize=(14, 12),
     top_count=50
 )
-print(data_report(dataESP_D3408))
+print(data_report(dataESP_D5258))
