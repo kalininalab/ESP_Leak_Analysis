@@ -28,7 +28,7 @@ def main(args):
     wandb.init(project='SIP', entity='vahid-atabaigi')
     current_dir = os.getcwd()
     split_data = args.split_data
-    Data_ATP = f"_{args.Data_ATP}" if args.Data_ATP else ""
+    Data_Eng = f"_{args.Data_Eng}" if args.Data_Eng else ""
     column_name = args.column_name
     column_cv = None
     if split_data in ["C1f", "I1f", "ESP", "ESPC2"]:
@@ -324,7 +324,7 @@ if __name__ == "__main__":
     parser.add_argument('--column-name', type=str, required=True,
                         help="This argument selects the embedded vector for molecules to concatenate with the ESM1bts,"
                              " column name should be one of [ ECFP , PreGNN]")
-    parser.add_argument('--Data-ATP', default="", type=str, required=False,
-                        help="The Dataframe ATP name should be one of [ NoATP , D3408] ")
+    parser.add_argument('--Data-Eng', default="", type=str, required=False,
+                        help="The Dataframe without energy (NoEng) and its ground true D5258 ")
     args = parser.parse_args()
     main(args)
