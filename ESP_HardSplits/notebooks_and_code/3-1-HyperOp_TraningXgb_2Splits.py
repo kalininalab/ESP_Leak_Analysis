@@ -39,7 +39,7 @@ def main(args):
         column_cv = "ECFP"
 
     logging.basicConfig(filename=join(current_dir, "..", "data", "Reports", "hyperOp_report",
-                                      f"HOP_ESM1bts_and_{column_name}_{split_data}{Data_ATP}_2S.log"),
+                                      f"HOP_ESM1bts_and_{column_name}_{split_data}{Data_Eng}_2S.log"),
                         level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     console_handler = logging.StreamHandler()
@@ -63,10 +63,10 @@ def main(args):
             logging.error(f"Error loading data from {file_path}: {e}")
             raise
 
-    df_train = load_data(join(current_dir, "..", "data", "2splits", f"train_{split_data}{Data_ATP}_2S.pkl"),
+    df_train = load_data(join(current_dir, "..", "data", "2splits", f"train_{split_data}{Data_Eng}_2S.pkl"),
                          column=column_name)
 
-    df_test = load_data(join(current_dir, "..", "data", "2splits", f"test_{split_data}{Data_ATP}_2S.pkl"),
+    df_test = load_data(join(current_dir, "..", "data", "2splits", f"test_{split_data}{Data_Eng}_2S.pkl"),
                         column=column_name)
 
     def split_dataframe(df, frac):
@@ -141,23 +141,23 @@ def main(args):
 
     # Save indices using pickle
     with open(join(current_dir, "..", "data", "2splits",
-                   f"CV_train_indices_{split_data}{Data_ATP}_{column_cv}.pkl"),
+                   f"CV_train_indices_{split_data}{Data_Eng}_{column_cv}.pkl"),
               'wb') as f:
         pickle.dump(train_indices, f)
 
     with open(
-            join(current_dir, "..", "data", "2splits", f"CV_test_indices_{split_data}{Data_ATP}_{column_cv}.pkl"),
+            join(current_dir, "..", "data", "2splits", f"CV_test_indices_{split_data}{Data_Eng}_{column_cv}.pkl"),
             'wb') as f:
         pickle.dump(test_indices, f)
 
     # Load indices using pickle
     with open(join(current_dir, "..", "data", "2splits",
-                   f"CV_train_indices_{split_data}{Data_ATP}_{column_cv}.pkl"),
+                   f"CV_train_indices_{split_data}{Data_Eng}_{column_cv}.pkl"),
               'rb') as f:
         train_indices = pickle.load(f)
 
     with open(
-            join(current_dir, "..", "data", "2splits", f"CV_test_indices_{split_data}{Data_ATP}_{column_cv}.pkl"),
+            join(current_dir, "..", "data", "2splits", f"CV_test_indices_{split_data}{Data_Eng}_{column_cv}.pkl"),
             'rb') as f:
         test_indices = pickle.load(f)
 
@@ -290,11 +290,11 @@ def main(args):
     print("ROC-AUC scores: %s" % roc_auc)
 
     np.save(join(current_dir, "..", "data", "training_results_2S",
-                 f"acc_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_2S.npy"), np.array(accuracy))
+                 f"acc_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"), np.array(accuracy))
     np.save(join(current_dir, "..", "data", "training_results_2S",
-                 f"loss_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_2S.npy"), np.array(loss))
+                 f"loss_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"), np.array(loss))
     np.save(join(current_dir, "..", "data", "training_results_2S",
-                 f"ROC_AUC_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_2S.npy"), np.array(roc_auc))
+                 f"ROC_AUC_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"), np.array(roc_auc))
 
     dtrain = xgb.DMatrix(np.array(train_x), weight=weights, label=np.array(train_y),
                          feature_names=feature_names)
@@ -310,9 +310,9 @@ def main(args):
     print("Accuracy on test set: %s, ROC-AUC score for test set: %s, MCC: %s" % (acc_test, roc_auc, mcc))
 
     np.save(join(current_dir, "..", "data", "training_results_2S",
-                 f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_2S.npy"), bst.predict(dtest))
+                 f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"), bst.predict(dtest))
     np.save(join(current_dir, "..", "data", "training_results_2S",
-                 f"y_test_true_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_ATP}_2S.npy"), test_y)
+                 f"y_test_true_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"), test_y)
 
 
 if __name__ == "__main__":
