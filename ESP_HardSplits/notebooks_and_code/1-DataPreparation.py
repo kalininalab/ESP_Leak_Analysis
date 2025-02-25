@@ -18,7 +18,6 @@ warnings.filterwarnings("ignore")
 CURRENT_DIR = os.getcwd()
 print(CURRENT_DIR)
 
-
 ######
 # Extract all experimental data point from train and test set
 ######

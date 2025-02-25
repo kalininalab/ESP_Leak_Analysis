@@ -341,17 +341,27 @@ def parse_log(file_path):
     return pd.DataFrame(iteration_data)
 
 
-def plotting_loss(column, experiment=None, log_directory=None, color_map=None,split_number=None):
+def plotting_loss(column, experiment=None, log_directory=None, color_map=None, split_number=None, title=None):
     log_files = [f for f in os.listdir(log_directory) if f.endswith('.log')]
-    fig, ax = plt.subplots(figsize=(10, 6))
+    label_map = {
+        "C2": "S2",
+        "C1f": "S1$_{p}$",
+        "C1e": "S1$_{l}$",
+        "I1e": "I1$_{l}$",
+        "I1f": "I1$_{p}$",
+        "ESPC2": r'ESP$_{S2}$'
+    }
+
+    fig, ax = plt.subplots(figsize=(8, 6))
     for log_file in log_files:
         match = re.search(rf'HOP_ESM1bts_and_{column}_(\w+)_{split_number}S.log', log_file)
         split_name = None
 
-        if experiment=="1D":
+        if experiment == "1D":
             if match:
                 split_name = match.group(1)
-                if "NoATP" in split_name or "D3408" in split_name or "C2" in split_name:
+                if "NoEng" in split_name or "D5258" in split_name or "C2" in split_name:
+                    exp="Eng"
                     continue
                 else:
                     split_name = match.group(1)
@@ -366,17 +376,20 @@ def plotting_loss(column, experiment=None, log_directory=None, color_map=None,sp
                     continue
             else:
                 continue
-        elif experiment == "NoATP":
+        elif experiment == "NoEng":
             if match:
                 split_name = match.group(1)
-                if "NoATP" in split_name or "D3408" in split_name:
+                if "NoEng" in split_name or "D5258" in split_name:
                     split_name = match.group(1)
                 else:
                     continue
             else:
                 continue
 
-        color = color_map.get(split_name, 'gray')
+        # Apply label mapping for display name and color
+        display_name = label_map.get(split_name, split_name)
+        color = color_map.get(display_name, 'gray')
+
         log_data = parse_log(os.path.join(log_directory, log_file))
         window_size = min(20, max(1, len(log_data['iteration']) // 10))
         smooth_loss = np.convolve(log_data['loss'], np.ones(window_size) / window_size, mode='same')
@@ -388,22 +401,29 @@ def plotting_loss(column, experiment=None, log_directory=None, color_map=None,sp
         extension_loss = np.full_like(remaining_iterations, smooth_loss.iloc[-1])
         smooth_iteration = pd.concat([smooth_iteration, pd.Series(remaining_iterations)], ignore_index=True)
         smooth_loss = pd.concat([smooth_loss, pd.Series(extension_loss)], ignore_index=True)
-        ax.plot(smooth_iteration, smooth_loss, color=color, label=split_name, alpha=0.8)
+        ax.plot(smooth_iteration, smooth_loss, color=color, label=display_name, alpha=0.8)
         min_loss_index = log_data['loss'].idxmin()
         min_loss_iteration = log_data['iteration'].iloc[min_loss_index]
         min_loss = int(log_data['loss'].iloc[min_loss_index])
         ax.scatter(min_loss_iteration, min_loss, color=color, s=50, marker='o')
         ax.annotate(f'{round(min_loss)}', (min_loss_iteration, min_loss), textcoords="offset points", xytext=(5, 5),
             ha='center', fontsize=10)
+
     ax.set_xlabel('Iteration', fontsize=12)
     ax.set_ylabel('Loss', fontsize=12)
-    ax.set_title(f'Loss per Iteration for ESM1bts + {column}', fontsize=10, fontname='Arial', pad=30)
+
+    # Use the title argument or a default if not provided
+    ax.set_title(title, fontsize=14, fontname='Arial', pad=30)
 
     ax.set_xlim(0, 2000)
-    ax.legend(loc='upper right', fontsize=10, bbox_to_anchor=(1.2, 1))
-
+    ax.legend(loc='upper right', fontsize=12, bbox_to_anchor=(1.2, 1))
+    #plt.savefig(f'/Users/vahidatabaigi/Desktop/Thesis/thesis-template/Figures/{column}-{experiment}-{split_number}.png', dpi=600, bbox_inches='tight')
+    plt.savefig(f'/Users/vahidatabaigi/Desktop/{column}-{experiment}-{split_number}.png', dpi=600, bbox_inches='tight')
     plt.tight_layout()
     plt.show()
+
+
+
 
 
 ###########################################################################################################
@@ -455,6 +475,63 @@ def datasail_wrapper(split_method, DataFrame, split_size):
     return e_splits, f_splits, inter_sp
 
 
+def datasail_wrapper_v2(split_method, DataFrame, split_size, stratification=False, epsilon=0, delta=0):
+    names = ["train", "test"]
+    if len(split_size) == 3:
+        names.append("val")
+
+    if split_method in ["C1e", "I1e"]:
+        e_splits, f_splits, inter_sp = datasail(
+            techniques=[split_method],
+            splits=split_size,
+            names=names,
+            solver="GUROBI",
+            e_type="M",
+            e_data=dict(DataFrame[["ids", "SMILES"]].values.tolist()),
+            e_strat=dict(DataFrame[["ids", "Binding"]].values.tolist()) if stratification else None,
+            e_sim="ecfp",
+            epsilon=epsilon,
+            delta=delta,
+            max_sec = 100000
+        )
+    elif split_method in ["C1f", "I1f"]:
+        e_splits, f_splits, inter_sp = datasail(
+            techniques=[split_method],
+            splits=split_size,
+            names=names,
+            solver="GUROBI",
+            f_type="P",
+            f_data=dict(DataFrame[["ids", "Sequence"]].values.tolist()),
+            f_strat=dict(DataFrame[["ids", "Binding"]].values.tolist()) if stratification else None,
+            f_sim="cdhit",
+            epsilon=epsilon,
+            delta=delta,
+            max_sec=100000
+        )
+    elif split_method in ["C2","I2"]:
+        e_splits, f_splits, inter_sp = datasail(
+            techniques=[split_method],
+            splits=split_size,
+            names=names,
+            solver="GUROBI",
+            inter=[(x[0], x[0]) for x in DataFrame[["ids"]].values.tolist()],
+            e_type="M",
+            e_sim="ecfp",
+            e_data=dict(DataFrame[["ids", "SMILES"]].values.tolist()),
+            e_strat=dict(DataFrame[["ids", "Binding"]].values.tolist()) if stratification else None,
+            f_type="P",
+            f_sim="cdhit",
+            f_data=dict(DataFrame[["ids", "Sequence"]].values.tolist()),
+            f_strat=dict(DataFrame[["ids", "Binding"]].values.tolist()) if stratification else None,
+            epsilon=epsilon,
+            delta=delta,
+            max_sec=100000
+        )
+    else:
+        raise ValueError("Invalid split method provided. Use one of ['C2','C1e', 'C1f', 'I1e', 'I1f','I2']")
+    return e_splits, f_splits, inter_sp
+
+##########################################################################
 def setup_logging(log_file):
     logging.basicConfig(
         level=logging.INFO,
@@ -465,113 +542,6 @@ def setup_logging(log_file):
         ]
     )
 #######################################################################
-
-def identity_based_leakage_calculator(column_list, train, test, val=None):
-    total_data_protein_occurrences = 0
-    train_test_protein_leakage = 0
-    train_val_protein_leakage = 0
-    test_val_protein_leakage = 0
-
-    total_data_smiles_occurrences = 0
-    train_test_smiles_leakage = 0
-    train_val_smiles_leakage = 0
-    test_val_smiles_leakage = 0
-
-    for column in column_list:
-        train_counts = Counter(train[column])
-        test_counts = Counter(test[column])
-        val_counts = Counter(val[column]) if val is not None else Counter()
-        if column == "molecule ID":
-            total_data_smiles_occurrences += sum(train_counts.values()) + sum(test_counts.values()) + sum(val_counts.values())
-        else:
-            total_data_protein_occurrences += sum(train_counts.values()) + sum(test_counts.values()) + sum(val_counts.values())
-
-        if val is not None:
-            for id_ in set(train_counts.keys()).intersection(test_counts.keys()):
-                leakage_count = max([train_counts[id_],test_counts[id_]])
-                if column =="molecule ID":
-                    train_test_smiles_leakage += leakage_count
-                elif column== "Uniprot ID":
-                    train_test_protein_leakage += leakage_count
-            for id_ in set(train_counts.keys()).intersection(val_counts.keys()):
-                leakage_count = max([train_counts[id_],val_counts[id_]])
-                if column == "molecule ID":
-                    train_val_smiles_leakage += leakage_count
-                elif column == "Uniprot ID":
-                    train_val_protein_leakage += leakage_count
-            for id_ in set(test_counts.keys()).intersection(val_counts.keys()):
-                leakage_count = max([test_counts[id_],val_counts[id_]])
-                if column == "molecule ID":
-                    test_val_smiles_leakage += leakage_count
-                elif column == "Uniprot ID":
-                    test_val_protein_leakage += leakage_count
-        else:
-            for id_ in set(train_counts.keys()).intersection(test_counts.keys()):
-                leakage_count = max([train_counts[id_],test_counts[id_]])
-                if column == "molecule ID":
-                    train_test_smiles_leakage += leakage_count
-                elif column == "Uniprot ID":
-                    train_test_protein_leakage += leakage_count
-
-    train_test_smiles_percentage = (train_test_smiles_leakage / total_data_smiles_occurrences) * 100 if total_data_smiles_occurrences > 0 else 0
-    train_test_protein_percentage = (train_test_protein_leakage / total_data_protein_occurrences) * 100 if total_data_protein_occurrences> 0 else 0
-    if val is None:
-        return {'train_test_smiles_leakage': round(train_test_smiles_percentage,2),
-                'train_test_protein_leakage': round(train_test_protein_percentage,2)}
-    train_val_protein_percentage = (train_val_protein_leakage / total_data_protein_occurrences) * 100 if total_data_protein_occurrences> 0 else 0
-    train_val_smiles_percentage = (train_val_smiles_leakage / total_data_smiles_occurrences) * 100 if total_data_smiles_occurrences > 0 else 0
-    test_val_smiles_percentage = (test_val_smiles_leakage / total_data_smiles_occurrences) * 100 if total_data_smiles_occurrences > 0 else 0
-    test_val_protein_percentage = (test_val_protein_leakage / total_data_protein_occurrences) * 100 if total_data_protein_occurrences > 0 else 0
-    return {'train_test_smiles_leakage': round(train_test_smiles_percentage, 2),
-            'train_val_smiles_leakage': round(train_val_smiles_percentage, 2),
-            'test_val_smiles_leakage': round(test_val_smiles_percentage, 2),
-            'train_test_protein_leakage': round(train_test_protein_percentage, 2),
-            'train_val_protein_leakage': round(train_val_protein_percentage, 2),
-            'test_val_protein_leakage': round(test_val_protein_percentage, 2)}
-
-
-
-
-def identity_based_leakage_calculator_2(column_list, train, test, val=None):
-    total_leakage = 0
-    total_data_occurrences = 0
-    train_test_leakage = 0
-    train_val_leakage = 0
-    test_val_leakage = 0
-
-    for column in column_list:
-        train_counts = Counter(train[column])
-        test_counts = Counter(test[column])
-        val_counts = Counter(val[column]) if val is not None else Counter()
-        total_data_occurrences += sum(train_counts.values()) + sum(test_counts.values()) + sum(val_counts.values())
-        if val is not None:
-            for id_ in set(train_counts.keys()).intersection(test_counts.keys()):
-                leakage_count = max([train_counts[id_],test_counts[id_]])
-                train_test_leakage += leakage_count
-                total_leakage += leakage_count
-
-            for id_ in set(train_counts.keys()).intersection(val_counts.keys()):
-                leakage_count = max([train_counts[id_],val_counts[id_]])
-                train_val_leakage += leakage_count
-                total_leakage += leakage_count
-            for id_ in set(test_counts.keys()).intersection(val_counts.keys()):
-                leakage_count = max([test_counts[id_],val_counts[id_]])
-                test_val_leakage += leakage_count
-                total_leakage += leakage_count
-        else:
-            for id_ in set(train_counts.keys()).intersection(test_counts.keys()):
-                leakage_count = train_counts[id_]
-                train_test_leakage += leakage_count
-    total_leakage_percentage = (total_leakage / total_data_occurrences) * 100
-    train_test_percentage = (train_test_leakage / total_data_occurrences) * 100
-    if val is None:
-        return {'train_test_leakage': round(train_test_percentage,2)}
-    train_val_percentage = (train_val_leakage / total_data_occurrences) * 100
-    test_val_percentage = (test_val_leakage / total_data_occurrences) * 100
-    return {'train_test_leakage': round(train_test_percentage,2),
-            'train_val_leakage': round(train_val_percentage,2),
-            'test_val_leakage': round(test_val_percentage,2),
-            'total_leakage': round(total_leakage_percentage,2)}
 
 
 

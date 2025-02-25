@@ -201,7 +201,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="End to end Hyperparameter tuning and model training for train:test splits")
+        description="Calculate data leakage between subsets")
     parser.add_argument('--split-scenario', type=int, required=True, help="THe --split-scenario is must be 2 or 3")
 
     args = parser.parse_args()
