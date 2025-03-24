@@ -6,6 +6,8 @@ import time
 import matplotlib as mpl
 import collections
 import requests
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 import matplotlib.pyplot as plt
 from Bio import PDB
 import warnings
@@ -390,6 +392,14 @@ def plotting_loss(column, experiment=None, log_directory=None, color_map=None, s
         display_name = label_map.get(split_name, split_name)
         color = color_map.get(display_name, 'gray')
 
+        # Set line style based on the column name
+        if column == "PreGNN":
+            line_style = '--'  # Dashed line for PreGNN
+        elif column == "ECFP":
+            line_style = '-'   # Solid line for ECFP
+        else:
+            line_style = '-'   # Default to solid line
+
         log_data = parse_log(os.path.join(log_directory, log_file))
         window_size = min(20, max(1, len(log_data['iteration']) // 10))
         smooth_loss = np.convolve(log_data['loss'], np.ones(window_size) / window_size, mode='same')
@@ -401,7 +411,7 @@ def plotting_loss(column, experiment=None, log_directory=None, color_map=None, s
         extension_loss = np.full_like(remaining_iterations, smooth_loss.iloc[-1])
         smooth_iteration = pd.concat([smooth_iteration, pd.Series(remaining_iterations)], ignore_index=True)
         smooth_loss = pd.concat([smooth_loss, pd.Series(extension_loss)], ignore_index=True)
-        ax.plot(smooth_iteration, smooth_loss, color=color, label=display_name, alpha=0.8)
+        ax.plot(smooth_iteration, smooth_loss, color=color, label=display_name, alpha=0.8, linestyle=line_style)
         min_loss_index = log_data['loss'].idxmin()
         min_loss_iteration = log_data['iteration'].iloc[min_loss_index]
         min_loss = int(log_data['loss'].iloc[min_loss_index])
@@ -543,6 +553,36 @@ def setup_logging(log_file):
     )
 #######################################################################
 
+
+def get_protein_sequences_with_retry(uniprot_ids, retries=3, backoff_factor=0.5):
+    base_url = 'https://www.uniprot.org/uniprot/'
+    session = requests.Session()
+    retry_strategy = Retry(
+        total=retries,
+        backoff_factor=backoff_factor,
+        status_forcelist=[429, 500, 502, 503, 504],
+    )
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    session.mount("https://", adapter)
+
+    sequences = {}
+    found_count = 0
+    not_found_count = 0
+
+    for uniprot_id in uniprot_ids:
+        response = session.get(f'{base_url}{uniprot_id}.fasta')
+        if response.status_code == 200:
+            lines = response.text.split('\n')
+            sequence = ''.join(lines[1:])
+            sequences[uniprot_id] = sequence
+            found_count += 1
+            print(f"Sequence found for UniProt ID {uniprot_id}. Total found: {found_count}")
+        else:
+            sequences[uniprot_id] = None
+            not_found_count += 1
+            print(f"No sequence found for UniProt ID {uniprot_id}. Total not found: {not_found_count}")
+
+    return sequences
 
 
 

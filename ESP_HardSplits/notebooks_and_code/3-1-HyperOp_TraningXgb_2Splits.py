@@ -171,9 +171,9 @@ def cross_validation_neg_acc_gradient_boosting(param, train_indices, test_indice
 def main(args):
     current_dir = os.getcwd()
     split_data = args.split_data
-    Data_Eng = f"_{args.Data_Eng}" if args.Data_Eng else ""
+    Data_Eng = f"_{args.Data_EnCof}" if args.Data_EnCof else ""
     column_name = args.column_name
-    wandb.init(project='SIP', entity='vahid-atabaigi', name=f"ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S_SIP")
+    wandb.init(project='ESP', entity='vahid-atabaigi', name=f"ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S_SIP")
     column_cv = None
     if split_data in ["C1f", "I1f", "ESP", "ESPC2"]:
         column_cv = "ESM1b_ts"
@@ -254,7 +254,7 @@ def main(args):
     loss = []
     accuracy = []
     roc_auc = []
-    for i in range(5):
+    for i in range(2000):
         train_index, test_index = train_indices[i], test_indices[i]
         dtrain = xgb.DMatrix(np.array(train_x[train_index]), weight=weights[train_index],
                              label=np.array(train_y[train_index]))
@@ -305,7 +305,7 @@ if __name__ == "__main__":
     parser.add_argument('--column-name', type=str, required=True,
                         help="This argument selects the embedded vector for molecules to concatenate with the ESM1bts,"
                              " column name should be one of [ ECFP , PreGNN]")
-    parser.add_argument('--Data-Eng', default="", type=str, required=False,
-                        help="The Dataframe without energy (NoEng) and its ground true D5258 ")
+    parser.add_argument('--Data-EnCof', default="", type=str, required=False,
+                        help="The Dataframe without energy (NoEnCof) and its ground true D6964 ")
     args = parser.parse_args()
     main(args)
