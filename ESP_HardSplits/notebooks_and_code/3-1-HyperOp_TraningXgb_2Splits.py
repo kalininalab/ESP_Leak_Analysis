@@ -254,7 +254,7 @@ def main(args):
     loss = []
     accuracy = []
     roc_auc = []
-    for i in range(2000):
+    for i in range(5):
         train_index, test_index = train_indices[i], test_indices[i]
         dtrain = xgb.DMatrix(np.array(train_x[train_index]), weight=weights[train_index],
                              label=np.array(train_y[train_index]))
