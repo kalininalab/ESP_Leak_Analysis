@@ -105,7 +105,7 @@ print(data_report(dataESP_NoEnCof))
 # Random delete of 3408 data points
 dataESP=pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP.pkl"))
 
-num_rows_to_delete = len(dataESP)-len(dataESP_NoEnCof)
+num_rows_to_delete = int(len(dataESP)-len(dataESP_NoEnCof))
 rows_to_delete = dataESP.sample(n=num_rows_to_delete,random_state=42).index
 dataESP_randomDelete=dataESP.drop(rows_to_delete)
 dataESP_randomDelete.reset_index(drop=True, inplace=True)
