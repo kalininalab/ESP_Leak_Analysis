@@ -31,45 +31,48 @@ def main(args):
     split_method = args.split_method
     split_size = args.split_size
     input_path = args.input_path
+    epsilon = args.epsilon_value
+    delta = args.delta_value
+    strat = args.strat
     df_name = input_path.split("/")[-1]
     Data_suffix = "_" + df_name.split(".")[0].split("_")[-1] if "_" in df_name else ""
 
     if len(split_size) not in [2, 3]:
         raise ValueError("The split-size argument must be a list of either two or three integers.")
 
-    log_file = os.path.join(CURRENT_DIR, "..", "data", "Reports", "split_report",
+    log_file = os.path.join(CURRENT_DIR, "..", "data", "Reports", f"split_report",
                             f"Report_{split_method}{Data_suffix}_{len(split_size)}S.log")
     if os.path.exists(log_file):
         os.remove(log_file)
     setup_logging(log_file)
     logging.info(f"Current Directory: {CURRENT_DIR}")
 
-    train_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                     f"train_{split_method}{Data_suffix}_{len(split_size)}S.pkl")
-    test_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                    f"test_{split_method}{Data_suffix}_{len(split_size)}S.pkl")
-    val_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                   f"val_{split_method}{Data_suffix}_{len(split_size)}S.pkl")
+    output_dir = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits")
+    os.makedirs(output_dir, exist_ok=True)
+    train_output_file = os.path.join(output_dir, f"train_{split_method}{Data_suffix}_{len(split_size)}S.pkl")
+    test_output_file = os.path.join(output_dir, f"test_{split_method}{Data_suffix}_{len(split_size)}S.pkl")
+    val_output_file = os.path.join(output_dir, f"val_{split_method}{Data_suffix}_{len(split_size)}S.pkl")
 
     data = pd.read_pickle(input_path)
     # Start running DataSAIL ###########################
     logging.info(
         "*** Start running DataSAIL***\nFor more information about DataSAIL please check it's webpage: "
         "https://datasail.readthedocs.io/en/latest/index.html")
-    e_splits, f_splits, inter_sp = datasail_wrapper(split_method, data, split_size)
+    e_splits, f_splits, inter_sp = datasail_wrapper(split_method, data, split_size, stratification=strat,
+                                                       epsilon=epsilon, delta=delta)
     if split_method in ["C1e", "I1e"]:
         for key in e_splits.keys():
             data['split'] = data['ids'].map(e_splits[key][0])
     elif split_method in ["C1f", "I1f"]:
         for key in f_splits.keys():
             data['split'] = data['ids'].map(f_splits[key][0])
-    elif split_method in ["C2"]:
+    elif split_method in ["C2","I2"]:
         for key in inter_sp.keys():
             inter_dict = {k[0]: v for k, v in inter_sp[key][0].items()}
             data['split'] = data['ids'].map(inter_dict)
             data_C2 = data[(data['split'] == "train") | (data['split'] == "test") | (data['split'] == "val")]
             data_C2.reset_index(drop=True, inplace=True)
-            data_C2.to_pickle(join(CURRENT_DIR, "..", "data", "data_ESP", "dataESPC2.pkl"))
+            data_C2.to_pickle(join(CURRENT_DIR, "..", "data", "data_ESP", f"dataESPC2_{len(split_size)}S.pkl"))
     data_filtered = data[(data['split'] == "train") | (data['split'] == "test") | (data['split'] == "val")]
     data_filtered.reset_index(drop=True, inplace=True)
     train = data_filtered[data_filtered["split"] == "train"]
@@ -165,7 +168,7 @@ def main(args):
     init()
     logging.info(
         Fore.GREEN + f"***** PROCESS COMPLETED *****\nFor an overview,"
-                     f"please review the Report_{split_method}{Data_suffix}_{len(split_size)}S.log file in Reports "
+                     f"please review the Report_{split_method}{Data_suffix}_{len(split_size)}S.log file in Reports"
                      f"folder. " + Style.RESET_ALL)
 
 
@@ -174,8 +177,22 @@ if __name__ == "__main__":
         description="Please check the DataSAL webpage: https://datasail.readthedocs.io/en/latest/index.html")
     parser.add_argument('--split-method', type=str, required=True,
                         help="The split method should be one of [C2,C1e, C1f, I1e, I1f]")
+
     parser.add_argument('--split-size', type=int, nargs='+', required=True,
                         help="List of integers for splitting, e.g., 8 2 or 7 2 1")
+
+    parser.add_argument("--strat", type=str, choices=['True', 'False'], required=True, default=False,
+                        help="If True, use stratification method to split the data.")
+
+    parser.add_argument('--epsilon-value', type=float, required=True,
+                        help="A multiplicative factor by how much the limits "
+                             "(as defined in the -s / –splits argument defined) of the splits can be exceeded.")
+
+    parser.add_argument('--delta-value', type=float, required=False,
+                        help="A multiplicative factor by how much the limits "
+                             "(as defined in the -s / –splits argument defined) of the stratification can be exceeded.")
     parser.add_argument("--input-path", type=str, required=True, help="Path to the input data (pickle file).")
+
     args = parser.parse_args()
+    args.strat = args.strat == 'True'
     main(args)

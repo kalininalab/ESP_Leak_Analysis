@@ -10,6 +10,10 @@ import gc
 from os.path import join
 from sklearn.metrics import roc_auc_score, matthews_corrcoef
 from hyperopt import fmin, tpe, hp, Trials, rand, space_eval
+from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import StratifiedKFold
+import seaborn as sns
+import matplotlib.pyplot as plt
 import xgboost as xgb
 import argparse
 sys.path.append("./additional_code")
@@ -31,7 +35,7 @@ def load_data(file_path, column):
     try:
         df = pd.read_pickle(file_path)
         df = df[df["ESM1b_ts"].apply(lambda x: len(x) > 0)]
-        df = df.loc[df["type"] != "engqvist"]
+        # df = df.loc[df["type"] != "engqvist"]
         df = df[df[column].apply(lambda x: len(x) > 0)]
         df.reset_index(inplace=True, drop=True)
         return df
@@ -92,12 +96,12 @@ def create_input_and_output_data(df, column):
     return x, y
 
 
-def customized_cross_validation(train_set, CV_col,split_data,Data_Eng, save_indices=True):
+def customized_cross_validation(train_set, CV_col,split_data,Data_Eng, save_indices=True, ndp=None):
     current_dir = os.getcwd()
     train_indices = [[], [], [], [], []]
     test_indices = [[], [], [], [], []]
-    split_file_train = os.path.join(current_dir, "..", "data", "2splits", f"CV_train_indices_{split_data}{Data_Eng}_{CV_col}.pkl")
-    split_file_val = os.path.join(current_dir, "..", "data", "2splits", f"CV_test_indices_{split_data}{Data_Eng}_{CV_col}.pkl")
+    split_file_train = os.path.join(current_dir, "..", "data", f"2splits_{ndp}", f"CV_train_indices_{split_data}{Data_Eng}_{CV_col}.pkl")
+    split_file_val = os.path.join(current_dir, "..", "data", f"2splits_{ndp}", f"CV_test_indices_{split_data}{Data_Eng}_{CV_col}.pkl")
     if save_indices:
         data_train2 = train_set.copy()
         data_train2 = array_column_to_strings(data_train2, column=CV_col)
@@ -125,6 +129,12 @@ def customized_cross_validation(train_set, CV_col,split_data,Data_Eng, save_indi
                     train_indices[i] = train_indices[i] + fold_indices[j]
 
             test_indices[i] = fold_indices[i]
+        # Save the indices to files
+        os.makedirs(os.path.dirname(split_file_train), exist_ok=True)
+        with open(split_file_train, 'wb') as f:
+            pickle.dump(train_indices, f)
+        with open(split_file_val, 'wb') as f:
+            pickle.dump(test_indices, f)
     else:
         # Load previously saved indices
         with open(split_file_train, 'rb') as f:
@@ -173,25 +183,27 @@ def main(args):
     split_data = args.split_data
     Data_Eng = f"_{args.Data_EnCof}" if args.Data_EnCof else ""
     column_name = args.column_name
-    wandb.init(project='ESP', entity='vahid-atabaigi', name=f"ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S_SIP")
+    wandb.init(project='ESP', entity='vahid-atabaigi', name=f"ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S")
     column_cv = None
     if split_data in ["C1f", "I1f", "ESP", "ESPC2"]:
         column_cv = "ESM1b_ts"
-    elif split_data in ["C1e", "I1e", "C2"] and column_name == "PreGNN":
+    elif split_data in ["C1e", "I1e", "C2", "I2"] and column_name == "PreGNN":
         column_cv = "PreGNN"
-    elif split_data in ["C1e", "I1e", "C2"] and column_name == "ECFP":
+    elif split_data in ["C1e", "I1e", "C2", "I2"] and column_name == "ECFP":
         column_cv = "ECFP"
-
-    logging.basicConfig(filename=join(current_dir, "..", "data", "Reports", "hyperOp_report",
-                                      f"HOP_ESM1bts_and_{column_name}_{split_data}{Data_Eng}_2S.log"),
+    report_path = join(current_dir, "..", "data", "Reports", f"hyperOp_report")
+    os.makedirs(report_path, exist_ok=True)
+    logging.basicConfig(filename=join(report_path, f"HOP_ESM1bts_and_{column_name}_{split_data}{Data_Eng}_2S.log"),
                         level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     console_handler = logging.StreamHandler()
     console_handler.setLevel(logging.INFO)
     console_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
     logging.getLogger().addHandler(console_handler)
-    df_train = load_data(join(current_dir, "..", "data", "2splits", f"train_{split_data}{Data_Eng}_2S.pkl"), column=column_name)
-    df_test = load_data(join(current_dir, "..", "data", "2splits", f"test_{split_data}{Data_Eng}_2S.pkl"), column=column_name)
+    split_path = join(current_dir, "..", "data", f"2splits")
+    os.makedirs(split_path, exist_ok=True)
+    df_train = load_data(join(split_path, f"train_{split_data}{Data_Eng}_2S.pkl"), column=column_name)
+    df_test = load_data(join(split_path, f"test_{split_data}{Data_Eng}_2S.pkl"), column=column_name)
 
     train_x, train_y = create_input_and_output_data(df=df_train, column=column_name)
     test_x, test_y = create_input_and_output_data(df=df_test, column=column_name)
@@ -210,8 +222,10 @@ def main(args):
 
     # Load or save CV indices once
     save_indices = not os.path.exists(
-        os.path.join(current_dir, "..", "data", "2splits", f"CV_train_indices_{split_data}{Data_Eng}_{column_cv}.pkl"))
+        os.path.join(split_path, f"CV_train_indices_{split_data}{Data_Eng}_{column_cv}.pkl"))
     train_indices, test_indices = customized_cross_validation(df_train, column_cv,split_data, Data_Eng, save_indices)
+
+
     # Defining search space for hyperparameter optimization
     space = {"learning_rate": hp.uniform("learning_rate", 0.01, 0.5),
              "max_depth": hp.choice("max_depth", [9, 10, 11, 12, 13]),
@@ -224,7 +238,7 @@ def main(args):
 
     # Hyperparameter optimization function
     trials = Trials()
-    for i in range(1, 2000):
+    for i in range(1, 20):
         try:
             best = fmin(
                 fn=lambda param: cross_validation_neg_acc_gradient_boosting(param, train_indices, test_indices, train_x,
@@ -262,6 +276,19 @@ def main(args):
         bst = xgb.train(best_params, dtrain, int(num_round), verbose_eval=1)
         y_valid_pred = np.round(bst.predict(dvalid))
         validation_y = train_y[test_index]
+
+        # Add confusion matrix for each fold
+        cm = confusion_matrix(validation_y, y_valid_pred)
+        plt.figure(figsize=(8, 6))
+        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+                    xticklabels=['Non-binding', 'Binding'],
+                    yticklabels=['Non-binding', 'Binding'])
+        plt.xlabel('Predicted')
+        plt.ylabel('True')
+        plt.title(f'Confusion Matrix - Fold {i + 1}')
+        wandb.log({f"confusion_matrix_fold_{i + 1}": wandb.Image(plt)})
+        plt.close()
+
         false_positive = 100 * (1 - np.mean(np.array(validation_y)[y_valid_pred == 1]))
         false_negative = 100 * (np.mean(np.array(validation_y)[y_valid_pred == 0]))
         logging.info("False positive rate: " + str(false_positive) + "; False negative rate: " + str(false_negative))
@@ -271,12 +298,17 @@ def main(args):
     print("Loss values: %s" % loss)
     print("Accuracies: %s" % accuracy)
     print("ROC-AUC scores: %s" % roc_auc)
-    np.save(join(current_dir, "..", "data", "training_results_2S",
-                 f"acc_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"), np.array(accuracy))
-    np.save(join(current_dir, "..", "data", "training_results_2S",
-                 f"loss_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"), np.array(loss))
-    np.save(join(current_dir, "..", "data", "training_results_2S",
-                 f"ROC_AUC_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"), np.array(roc_auc))
+
+
+
+    results_path = join(current_dir, "..", "data", f"training_results_2S")
+    os.makedirs(results_path, exist_ok=True)
+    np.save(join(results_path, f"acc_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"),
+            np.array(accuracy))
+    np.save(join(results_path, f"loss_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"),
+            np.array(loss))
+    np.save(join(results_path, f"ROC_AUC_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"),
+            np.array(roc_auc))
     dtrain = xgb.DMatrix(np.array(train_x), weight=weights, label=np.array(train_y),
                          feature_names=feature_names)
     dtest = xgb.DMatrix(np.array(test_x), label=np.array(test_y),
@@ -290,10 +322,10 @@ def main(args):
 
     print("Accuracy on test set: %s, ROC-AUC score for test set: %s, MCC: %s" % (acc_test, roc_auc, mcc))
 
-    np.save(join(current_dir, "..", "data", "training_results_2S",
-                 f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"), bst.predict(dtest))
-    np.save(join(current_dir, "..", "data", "training_results_2S",
-                 f"y_test_true_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"), test_y)
+    np.save(join(results_path, f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"),
+            bst.predict(dtest))
+    np.save(join(results_path, f"y_test_true_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"),
+            test_y)
 
 
 if __name__ == "__main__":

@@ -18,7 +18,6 @@ import gc
 from colorama import init, Fore, Style
 import torch
 
-
 sys.path.append("./additional_code")
 from additional_code.helper_functions import *
 from additional_code.negative_data_generator import *
@@ -32,7 +31,7 @@ def main(args):
     split_data = args.split_data
     Data_ATP = f"_{args.Data_ATP}" if args.Data_ATP else ""
     column_name = args.column_name
-    report_path =join(current_dir, "..", "data", "Reports", f"hyperOp_report")
+    report_path = join(current_dir, "..", "data", "Reports", f"hyperOp_report")
     report_file = f"HOP_ESM1bts_and_{column_name}_{split_data}{Data_ATP}_3S.log"
     full_report_file = os.path.join(report_path, report_file)
     os.makedirs(os.path.dirname(full_report_file), exist_ok=True)
@@ -44,6 +43,26 @@ def main(args):
     console_handler.setLevel(logging.INFO)
     console_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
     logging.getLogger().addHandler(console_handler)
+
+    # Device configuration
+    def configure_device(device_preference):
+        """Configure device settings based on preference and availability."""
+        if device_preference.lower() == 'auto':
+            if torch.cuda.is_available():
+                device = 'cuda'
+                logging.info("GPU detected. Using CUDA for XGBoost.")
+            else:
+                device = 'cpu'
+                logging.info("No GPU detected. Using CPU for XGBoost.")
+        else:
+            device = device_preference.lower()
+            if device == 'cuda' and not torch.cuda.is_available():
+                logging.warning("GPU requested but not available. Falling back to CPU.")
+                device = 'cpu'
+
+        return device
+
+    device = configure_device(args.device)
 
     def load_data(file_path, column):
         try:
@@ -86,11 +105,17 @@ def main(args):
 
     def optimize_hyperparameters(param):
         num_round = int(param["num_rounds"])
-        param["tree_method"] = "gpu_hist"
-        param["device"] = "cuda"
-        #param["tree_method"] = "hist"
-        param["sampling_method"] = "gradient_based"
+
+        # Set device-specific parameters
+        if device == 'cuda':
+            param["tree_method"] = "gpu_hist"
+            param["sampling_method"] = "gradient_based"
+        else:
+            param["tree_method"] = "hist"
+
+        param["device"] = device
         param['objective'] = 'binary:logistic'
+
         # Define weights for imbalance
         weights = np.array([param["weight"] if binding == 0 else 1.0 for binding in df_train["Binding"]])
         # Remove hyperparameters not needed for training
@@ -110,7 +135,8 @@ def main(args):
         loss = 2 * (false_negative ** 2) + false_positive ** 1.3
         wandb.config.update(param, allow_val_change=True)
         wandb.log({"loss": np.mean(loss)})
-        torch.cuda.empty_cache()
+        if device == 'cuda':
+            torch.cuda.empty_cache()
         del dtrain, dval, bst
         gc.collect()
         return np.mean(loss)
@@ -137,7 +163,8 @@ def main(args):
             logging.info(f"Iteration {i}")
             logging.info(f"Best loss so far: {trials.best_trial['result']['loss']}")
             logging.info(f"Best hyperparameters so far: {trials.argmin}")
-            torch.cuda.empty_cache()
+            if device == 'cuda':
+                torch.cuda.empty_cache()
             gc.collect()
         except Exception as e:
             logging.error(f"Error during hyperparameter optimization: {e}")
@@ -153,6 +180,14 @@ def main(args):
     # Removing unnecessary params for final training
     best_params.pop("weight")
     best_params.pop("num_rounds")
+
+    # Set device-specific parameters for final training
+    if device == 'cuda':
+        best_params["tree_method"] = "gpu_hist"
+        best_params["sampling_method"] = "gradient_based"
+    else:
+        best_params["tree_method"] = "hist"
+    best_params["device"] = device
 
     bst_final = xgb.train(best_params, dtrain_final, int(trials.argmin['num_rounds']), verbose_eval=1)
     # Evaluate final model on validation set
@@ -229,5 +264,8 @@ if __name__ == "__main__":
                              " column name should be one of [ ECFP , PreGNN]")
     parser.add_argument('--Data-ATP', default="", type=str, required=False,
                         help="The Dataframe ATP name should be one of [ NoATP , D3408] ")
+    parser.add_argument('--device', type=str, default='auto',
+                        help="Device to use for training: 'cpu', 'cuda', or 'auto' (default). "
+                             "Auto will use GPU if available.")
     args = parser.parse_args()
     main(args)

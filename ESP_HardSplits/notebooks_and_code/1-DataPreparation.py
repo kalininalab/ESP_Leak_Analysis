@@ -67,20 +67,10 @@ dataESP.reset_index(drop=True, inplace=True)
 
 # Add Ids column according to DataSAIL documentation for split
 dataESP['ids'] = ['ID' + str(index) for index in dataESP.index]
-dataESP.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP.pkl"))
+# dataESP.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP.pkl"))
 print(data_report(dataESP))
 # Delete ATP
 dataESP=pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP.pkl"))
-plot_top_keys_values(
-    dataESP,
-    key_column="molecule ID",
-    xlabel='molecule ID',
-    ylabel='Count',
-    title='A',  # Use placeholder for df_name
-    color="red",
-    figsize=(14, 12),
-    top_count=50
-)
 
 
 # check additional_code folder to see how cofactors_list.txt has been created
@@ -89,16 +79,6 @@ with open(join(CURRENT_DIR, "..", "data","cofactors_list.txt"), "r") as f:
 # Remove ATP
 dataESP_NoEnCof = dataESP[~dataESP['molecule ID'].isin(remove_cofactor_energy_ids)]
 print(f"number of Energy molecules: {len(dataESP[dataESP['molecule ID'].isin(remove_cofactor_energy_ids)])}")
-plot_top_keys_values(
-    dataESP_NoEnCof,
-    key_column="molecule ID",
-    xlabel='molecule ID',
-    ylabel='Count',
-    title='B',
-    color="red",
-    figsize=(14, 12),
-    top_count=50
-)
 dataESP_NoEnCof.reset_index(drop=True, inplace=True)
 dataESP_NoEnCof.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "dataESP_NoEnCof.pkl"))
 print(data_report(dataESP_NoEnCof))
@@ -111,14 +91,5 @@ dataESP_randomDelete=dataESP.drop(rows_to_delete)
 dataESP_randomDelete.reset_index(drop=True, inplace=True)
 dataESP_randomDelete.to_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", f"dataESP_D{num_rows_to_delete}.pkl"))
 
-plot_top_keys_values(
-    dataESP_randomDelete,
-    key_column="molecule ID",
-    xlabel='molecule ID',
-    ylabel='Count',
-    title='C',
-    color="red",
-    figsize=(14, 12),
-    top_count=50
-)
 print(data_report(dataESP_randomDelete))
+#################################################

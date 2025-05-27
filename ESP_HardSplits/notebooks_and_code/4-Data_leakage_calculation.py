@@ -127,19 +127,19 @@ def similarity_based_leakage_calculator(train_df, test_df, val_df=None):
     total_smiles_similarity = np.sum(smiles_similarity_matrix[upper_indices])
     total_protein_similarity = np.sum(protein_similarity_matrix[upper_indices])
 
-    train_test_smiles_leakage = np.sum(smiles_similarity_matrix[train_test_mask]) / total_smiles_similarity * 100
-    train_test_protein_leakage = np.sum(protein_similarity_matrix[train_test_mask]) / total_protein_similarity * 100
-    test_val_protein_leakage = np.sum(protein_similarity_matrix[test_val_mask]) / total_protein_similarity * 100
-    train_val_protein_leakage = np.sum(protein_similarity_matrix[train_val_mask]) / total_protein_similarity * 100
-    test_val_smiles_leakage = np.sum(smiles_similarity_matrix[test_val_mask]) / total_smiles_similarity * 100
-    train_val_smiles_leakage = np.sum(smiles_similarity_matrix[train_val_mask]) / total_smiles_similarity * 100
+    train_test_smiles_leakage = np.sum(smiles_similarity_matrix[train_test_mask]) / total_smiles_similarity
+    train_test_protein_leakage = np.sum(protein_similarity_matrix[train_test_mask]) / total_protein_similarity
+    test_val_protein_leakage = np.sum(protein_similarity_matrix[test_val_mask]) / total_protein_similarity
+    train_val_protein_leakage = np.sum(protein_similarity_matrix[train_val_mask]) / total_protein_similarity
+    test_val_smiles_leakage = np.sum(smiles_similarity_matrix[test_val_mask]) / total_smiles_similarity
+    train_val_smiles_leakage = np.sum(smiles_similarity_matrix[train_val_mask]) / total_smiles_similarity
 
-    return {'train_test_smiles_leakage': round(train_test_smiles_leakage, 2),
-            'train_test_protein_leakage': round(train_test_protein_leakage, 2),
-            'train_val_smiles_leakage': round(train_val_smiles_leakage, 2),
-            'train_val_protein_leakage': round(train_val_protein_leakage, 2),
-            'test_val_smiles_leakage': round(test_val_smiles_leakage, 2),
-            'test_val_protein_leakage': round(test_val_protein_leakage, 2)
+    return {'train_test_smiles_leakage': round(train_test_smiles_leakage, 3),
+            'train_test_protein_leakage': round(train_test_protein_leakage, 3),
+            'train_val_smiles_leakage': round(train_val_smiles_leakage, 3),
+            'train_val_protein_leakage': round(train_val_protein_leakage, 3),
+            'test_val_smiles_leakage': round(test_val_smiles_leakage, 3),
+            'test_val_protein_leakage': round(test_val_protein_leakage, 3)
             }
 
 
@@ -180,7 +180,7 @@ def main(args):
                 leakage['Fold_number'] = i
                 results.append(leakage)
     elif args.split_scenario == 3:
-        splits = ["C1e", "I1e", "C1f", "I1f", "ESP"]
+        splits = ["C1e", "I1e", "C1f", "I1f", "ESP","C2", "ESPC2"]
         for s in splits:
             print(f"Start leakage calculation for {s}")
             train_ESP = pd.read_pickle(join("..", "data", f"{args.split_scenario}splits", f"train_{s}_{args.split_scenario}S.pkl"))
@@ -196,7 +196,7 @@ def main(args):
             index=False)
     elif args.split_scenario == 3:
         df_results.to_csv(
-            join("..", "data", f"{args.split_scenario}splits", f"Similarity_leakage_{args.split_scenario}S.csv"),
+            join("..", "data", f"{args.split_scenario}splits", f"Similarity_leakage_{args.molecule_column}_{args.split_scenario}S.csv"),
             index=False)
     print("Processed  finished successfully ")
     print(f"Results are saved in folder {args.split_scenario}splits")
