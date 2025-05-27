@@ -1,0 +1,81 @@
+2025-05-09 23:14:37,609 - INFO - Current Directory: /Users/vahidatabaigi/SIP/ESP_HardSplits/notebooks_and_code
+2025-05-09 23:14:37,696 - INFO - Start Clustering the data with CD-HIT
+2025-05-09 23:20:23,258 - INFO - Clustering report for 80% similarity
+           cluster
+count  8251.000000
+mean   2543.521997
+std    1495.058357
+min       0.000000
+25%    1239.500000
+50%    2505.000000
+75%    3844.500000
+max    5190.000000
+2025-05-09 23:20:23,294 - INFO - Clustering report for 60% similarity
+           cluster
+count  8251.000000
+mean   2174.647921
+std    1266.745242
+min       0.000000
+25%    1079.500000
+50%    2126.000000
+75%    3265.500000
+max    4470.000000
+2025-05-09 23:20:23,352 - INFO - Clustering report for 40% similarity
+           cluster
+count  8251.000000
+mean   1537.274391
+std     909.560277
+min       0.000000
+25%     769.000000
+50%    1479.000000
+75%    2295.000000
+max    3264.000000
+2025-05-09 23:20:26,533 - INFO - Clustering the data with CD-HIT DONE
+2025-05-09 23:20:26,535 - INFO - Start Splitting the data based one [7, 2, 1] split size 
+2025-05-09 23:20:30,788 - INFO - Data Report after splitting data by ESP split method and check for NaN or null cells in the data
+              nanTrain  NullTrain  NaNTest  NullTest  nanVal  NullVal
+Uniprot ID           0          0        0         0       0        0
+molecule ID          0          0        0         0       0        0
+evidence             0          0        0         0       0        0
+Binding              0          0        0         0       0        0
+type              5806          0     1661         0     794        0
+substrate ID         0          0        0         0       0        0
+ESM1b_ts             0          0        0         0       0        0
+PreGNN               0          0        0         0       0        0
+ECFP                 0          0        0         0       0        0
+Sequence             0          0        0         0       0        0
+SMILES               0          0        0         0       0        0
+cluster              5          0        5         0       0        0
+2025-05-09 23:20:30,790 - INFO - Ratio of test set to dataset: 0.2
+2025-05-09 23:20:30,790 - INFO - Ratio of val set to dataset: 0.1
+2025-05-09 23:20:30,790 - INFO - Drop nan data based on cluster column, if exist
+2025-05-09 23:20:30,794 - INFO - Start to create negative data points for the train set...
+2025-05-09 23:20:35,119 - INFO - Number of metabolites in train set: 638
+2025-05-09 23:23:49,001 - INFO - Creating negative data points for the train set DONE
+2025-05-09 23:23:49,002 - INFO - Start to create negative data points for the test set...
+2025-05-09 23:23:50,497 - INFO - Number of metabolites in test set: 360
+2025-05-09 23:24:36,336 - INFO - Creating negative data points for the test set DONE
+2025-05-09 23:24:36,337 - INFO - Start to create negative data points for the val set...
+2025-05-09 23:24:37,063 - INFO - Number of metabolites in training set: 231
+2025-05-09 23:24:59,394 - INFO - Creating negative data points for the val set DONE
+2025-05-09 23:24:59,449 - INFO - Data report after adding negative data and check for NaN or null cells in the data
+              nanTrain  NullTrain  NaNTest  NullTest  nanVal  NullVal
+Uniprot ID           0          0        0         0       0        0
+molecule ID          0          0        0         0       0        0
+evidence         16327          0     4688         0    2301        0
+Binding              0          0        0         0       0        0
+type             22128          0     6344         0    3095        0
+substrate ID         0          0        0         0       0        0
+ESM1b_ts             0          0        0         0       0        0
+PreGNN               0          0        0         0       0        0
+ECFP                 0          0        0         0       0        0
+Sequence             0          0        0         0       0        0
+SMILES               0          0        0         0       0        0
+cluster          16327          0     4688         0    2301        0
+2025-05-09 23:24:59,449 - INFO - Total number of samples: 31567
+2025-05-09 23:24:59,449 - INFO - Ratio of test set to dataset: 0.2
+2025-05-09 23:24:59,449 - INFO - Ratio of val set to dataset: 0.1
+2025-05-09 23:24:59,451 - INFO - The ratio of negative to positive data in train: 2.81
+2025-05-09 23:24:59,451 - INFO - The ratio of negative to positive data in test: 2.83
+2025-05-09 23:24:59,452 - INFO - The ratio of negative to positive data in val: 2.9
+2025-05-09 23:24:59,517 - INFO - [32m***** PROCESS COMPLETED: For an overview, please review the Report_ESPC2_3S.log file in Reports folder. *****[0m

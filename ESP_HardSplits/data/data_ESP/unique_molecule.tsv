@@ -1,0 +1,1374 @@
+molecule ID	molecule_name	uniprot_number
+C00002	ATP	1674
+CHEBI:30616	ATP(4-)	1657
+CHEBI:57540	NAD(1-)	651
+CHEBI:58349	NADP(3-)	564
+CHEBI:37565	GTP(4-)	458
+CHEBI:57288	acetyl-CoA(4-)	341
+C00019	S-Adenosyl-L-methionine	312
+CHEBI:59789	S-adenosyl-L-methionine zwitterion	296
+CHEBI:57287	coenzyme A(4-)	208
+CHEBI:16810	2-oxoglutarate(2-)	191
+CHEBI:57783	NADPH(4-)	159
+CHEBI:58885	UDP-alpha-D-glucose(2-)	152
+CHEBI:17544	hydrogencarbonate	136
+CHEBI:16240	hydrogen peroxide	133
+CHEBI:29985	L-glutamate(1-)	131
+CHEBI:58052	UDP-alpha-D-glucuronate(3-)	129
+C00024	Acetyl-CoA	126
+CHEBI:43474	hydrogenphosphate	117
+C00001	H2O	117
+C00677	Deoxynucleoside triphosphate	116
+CHEBI:57925	glutathionate(1-)	116
+CHEBI:57618	FMNH2(2-)	115
+CHEBI:57705	UDP-N-acetyl-alpha-D-glucosamine(2-)	112
+CHEBI:57945	NADH(2-)	104
+C00026	2-Oxoglutarate	94
+CHEBI:17815	1,2-diacyl-sn-glycerol	90
+CHEBI:29991	L-aspartate(1-)	90
+CHEBI:58359	L-glutamine zwitterion	87
+C00201	Nucleoside triphosphate	86
+CHEBI:33384	L-serine zwitterion	85
+CHEBI:128769	isopentenyl diphosphate(3-)	79
+C00005	NADPH	78
+CHEBI:57305	glycine zwitterion	75
+CHEBI:35681	secondary alcohol	73
+CHEBI:17855	triglyceride	72
+CHEBI:175763	2-trans,6-trans-farnesyl diphosphate(3-)	69
+CHEBI:59776	D-glyceraldehyde 3-phosphate(2-)	69
+CHEBI:16452	oxaloacetate(2-)	68
+CHEBI:57880	1-phosphatidyl-1D-myo-inositol(1-)	67
+CHEBI:456215	adenosine 5'-monophosphate(2-)	66
+CHEBI:15361	pyruvate	66
+CHEBI:37563	CTP(4-)	65
+CHEBI:46398	UTP(4-)	63
+CHEBI:17336	all-trans-retinol	63
+CHEBI:32682	L-argininium(1+)	62
+CHEBI:17478	aldehyde	61
+CHEBI:15589	(S)-malate(2-)	61
+CHEBI:29748	chorismate(2-)	59
+CHEBI:35235	L-cysteine zwitterion	58
+C00017	Protein	57
+C00080	H+	57
+CHEBI:58315	L-tyrosine zwitterion	57
+CHEBI:52639	N-acylsphingosine	57
+CHEBI:18421	superoxide	56
+CHEBI:57972	L-alanine zwitterion	55
+CHEBI:58601	alpha-D-glucose 1-phosphate(2-)	52
+CHEBI:16389	ubiquinones	52
+CHEBI:15636	(6R)-5,10-methylenetetrahydrofolate(2-)	51
+CHEBI:58053	IMP(2-)	51
+C00003	NAD+	49
+C00157	Phosphatidylcholine	48
+C00007	Oxygen	48
+CHEBI:58702	phosphonatoenolpyruvate	48
+CHEBI:58339	3'-phosphonato-5'-adenylyl sulfate(4-)	48
+CHEBI:58057	geranyl diphosphate(3-)	46
+CHEBI:57384	malonyl-CoA(5-)	46
+CHEBI:57379	palmitoyl-CoA(4-)	46
+CHEBI:32966	beta-D-fructofuranose 1,6-bisphosphate(4-)	46
+CHEBI:58289	2-phosphonato-D-glycerate(3-)	45
+CHEBI:4167	D-glucopyranose	45
+CHEBI:456216	ADP(3-)	43
+CHEBI:15562	D-threo-isocitrate(3-)	41
+CHEBI:57756	sphingosine(1+)	40
+CHEBI:35759	1-monoglyceride	39
+CHEBI:57597	sn-glycerol 3-phosphate(2-)	39
+CHEBI:57634	beta-D-fructofuranose 6-phosphate(2-)	39
+C00053	3'-Phosphoadenylyl sulfate	39
+CHEBI:57812	CMP-N-acetyl-beta-neuraminate(2-)	38
+CHEBI:58165	3',5'-cyclic AMP(1-)	37
+CHEBI:16947	citrate(3-)	37
+CHEBI:57926	L-threonine zwitterion	36
+CHEBI:58756	2-trans,6-trans,10-trans-geranylgeranyl diphosphate(3-)	36
+CHEBI:58429	alpha,alpha-trehalose 6-phosphate(2-)	36
+CHEBI:32395	arachidonate	35
+C00535	Testosterone	35
+CHEBI:30031	succinate(2-)	34
+CHEBI:57912	L-tryptophan zwitterion	34
+CHEBI:66914	UDP-alpha-D-galactose(2-)	34
+C00203	UDP-N-acetyl-D-galactosamine	33
+CHEBI:15354	choline	33
+CHEBI:57453	(6S)-5,6,7,8-tetrahydrofolate(2-)	33
+CHEBI:58199	L-homocysteine zwitterion	33
+CHEBI:29919	hydrosulfide	32
+C00040	Acyl-CoA	32
+CHEBI:16335	adenosine	32
+CHEBI:57392	propionyl-CoA(4-)	32
+CHEBI:57527	GDP-alpha-D-mannose(2-)	31
+CHEBI:60039	L-proline zwitterion	31
+CHEBI:17029	chitin	31
+CHEBI:4194	D-hexose	31
+CHEBI:59560	sapropterin	30
+CHEBI:46911	L-ornithinium(1+)	30
+CHEBI:18407	hydrogen cyanide	29
+CHEBI:57844	L-methionine zwitterion	29
+CHEBI:326268	1,4-butanediammonium	29
+CHEBI:57292	succinyl-CoA(5-)	28
+CHEBI:58095	L-phenylalanine zwitterion	28
+CHEBI:30089	acetate	27
+CHEBI:30245	linoleate	27
+CHEBI:57474	(R)-S-lactoylglutathionate(1-)	26
+CHEBI:37721	D-fructofuranose	25
+CHEBI:36655	glyoxylate	25
+CHEBI:32551	L-lysinium(1+)	25
+CHEBI:17347	testosterone	25
+CHEBI:17767	D-mannonate	25
+CHEBI:58340	O-acetyl-L-serine zwitterion	24
+CHEBI:15734	primary alcohol	24
+CHEBI:58805	c-di-GMP(2-)	24
+CHEBI:57692	FAD(3-)	24
+CHEBI:15441	(S)-2,3-epoxysqualene	24
+CHEBI:58048	L-asparagine zwitterion	24
+C01245	D-myo-Inositol 1,4,5-trisphosphate	23
+CHEBI:57595	L-histidine zwitterion	23
+CHEBI:57394	stearoyl-CoA(4-)	23
+CHEBI:35627	beta-lactam	23
+C02189	[Protein]-L-serine	23
+CHEBI:57834	spermidine(3+)	23
+CHEBI:16551	alpha,alpha-trehalose	22
+C00052	UDP-alpha-D-galactose	22
+CHEBI:36208	shikimate	22
+CHEBI:58409	alpha-D-mannose 1-phosphate(2-)	22
+CHEBI:16301	nitrite	22
+CHEBI:58189	GDP(3-)	22
+CHEBI:57405	prostaglandin H2(1-)	22
+CHEBI:57746	3',5'-cyclic GMP(1-)	22
+CHEBI:203600	1D-myo-inositol 1,4,5-trisphosphate(6-)	21
+CHEBI:17992	sucrose	21
+CHEBI:29032	(R)-pantothenate	20
+CHEBI:16347	(R)-carnitine	20
+CHEBI:55376	ferriheme b(1-)	20
+CHEBI:16113	cholesterol	20
+CHEBI:16704	uridine	20
+CHEBI:30864	(S)-dihydroorotate	20
+CHEBI:57502	nicotinate D-ribonucleotide(2-)	20
+CHEBI:36707	2-acetyl-1-alkyl-sn-glycero-3-phosphocholine	20
+CHEBI:17562	cytidine	20
+CHEBI:57476	L-homoserine zwitterion	20
+CHEBI:57443	S-adenosylmethioninaminium	19
+CHEBI:17268	myo-inositol	19
+C00004	NADH	19
+CHEBI:58272	3-phosphonato-D-glycerate(3-)	19
+CHEBI:57930	nucleoside 5'-diphosphate(3-)	19
+CHEBI:17594	hydroquinone	19
+CHEBI:58243	5'-adenylyl sulfate(2-)	18
+CHEBI:38290	L-ascorbate	18
+CHEBI:58115	guanosine 5'-monophosphate(2-)	18
+CHEBI:17522	alditol	18
+CHEBI:16189	sulfate	18
+CHEBI:17509	5'-S-methyl-5'-thioadenosine	18
+CHEBI:16659	D-glycerate	18
+CHEBI:17590	octane	17
+CHEBI:58223	UDP(3-)	17
+CHEBI:57538	orotidine 5'-phosphate(3-)	17
+CHEBI:29805	glycolate	17
+CHEBI:246422	dUMP(2-)	17
+CHEBI:57454	10-formyltetrahydrofolate(2-)	17
+CHEBI:15901	5,6-dihydrouracil	17
+C00173	Acyl-[acyl-carrier protein]	17
+CHEBI:14649	NMN(-)	17
+CHEBI:32955	epoxide	17
+CHEBI:58228	carbamoyl phosphate(2-)	17
+C00422	Triacylglycerol	17
+CHEBI:57959	L-kynurenine zwitterion	17
+CHEBI:33227	(E)-cinnamyl alcohol	16
+C00029	UDP-glucose	16
+CHEBI:78346	D-ribofuranose 5-phosphate(2-)	16
+CHEBI:15698	2'-deoxycytidine	16
+CHEBI:57776	N-acetyl-alpha-D-glucosamine 1-phosphate(2-)	16
+CHEBI:15740	formate	15
+CHEBI:36464	(R)-mevalonate	15
+CHEBI:17754	glycerol	15
+CHEBI:1722	3beta-hydroxy-Delta(5)-steroid	15
+CHEBI:18391	D-gluconate	15
+CHEBI:18135	catechol	15
+CHEBI:16269	N,N-dimethylaniline	15
+CHEBI:29067	carboxylic acid anion	15
+CHEBI:15035	retinal	15
+CHEBI:17135	long-chain fatty alcohol	14
+CHEBI:18011	androstane-3alpha,17beta-diol	14
+CHEBI:61555	dUTP(4-)	14
+CHEBI:295975	choline phosphate(1-)	14
+CHEBI:58319	coenzyme M(1-)	14
+C01997	Histone N6-acetyl-L-lysine	14
+C00212	Adenosine	14
+C03862	Dolichyl phosphate D-mannose	14
+CHEBI:17272	propionate	14
+CHEBI:58180	L-arogenate(1-)	14
+CHEBI:33853	phenols	13
+CHEBI:17748	thymidine	13
+CHEBI:29934	(1s,4s)-prephenate(2-)	13
+CHEBI:11851	3-methyl-2-oxobutanoate	13
+CHEBI:22801	beta-D-glucosyl-N-acylsphingosine	13
+CHEBI:57309	coproporphyrinogen III(4-)	13
+CHEBI:58161	L-cystathionine dizwitterion	13
+CHEBI:12876	trans-4-coumarate	13
+CHEBI:35121	(2R,3S)-3-isopropylmalate(2-)	13
+CHEBI:67138	UDP-N-acetyl-alpha-D-galactosamine(2-)	13
+CHEBI:58273	aldehydo-D-ribose 5-phosphate(2-)	13
+CHEBI:16199	urea	13
+CHEBI:58336	alpha-D-galactose 1-phosphate(2-)	13
+CHEBI:57967	ADP-D-ribose(2-)	13
+CHEBI:16897	D-erythrose 4-phosphate(2-)	13
+CHEBI:57865	uridine 5'-monophosphate(2-)	13
+CHEBI:58375	trans-4-hydroxy-L-proline zwitterion	12
+CHEBI:30623	oxalate(2-)	12
+C00020	AMP	12
+CHEBI:17151	xylitol	12
+CHEBI:60119	sphingosine 1-phosphate(1-)	12
+CHEBI:57433	sarcosine zwitterion	12
+CHEBI:17596	inosine	12
+CHEBI:57642	glycerone phosphate(2-)	12
+CHEBI:57603	ethanolaminium(1+)	12
+CHEBI:16520	R'C(R)SH	12
+CHEBI:18276	dihydrogen	12
+CHEBI:58543	cis-dodec-3-enoyl-CoA(4-)	12
+CHEBI:58343	adenosine 3',5'-bismonophosphate(4-)	12
+C00063	CTP	12
+CHEBI:16382	iodide	12
+InChI=1S/C8H16O3/c1-2-3-4-5-6-7(9)8(10)11/h7,9H,2-6H2,1H3,(H,10,11)		12
+CHEBI:17154	nicotinamide	12
+CHEBI:16763	2-oxobutanoate	12
+CHEBI:17615	1,2-diacyl-3-beta-D-galactosyl-sn-glycerol	12
+CHEBI:17359	sulfite	12
+CHEBI:58121	D-ribulose 5-phosphate(2-)	12
+CHEBI:57584	aldehydo-D-glucose 6-phosphate(2-)	12
+CHEBI:61631	N-acetyl-beta-D-glucosaminide	11
+CHEBI:17158	methylglyoxal	11
+C02630	2-Hydroxyglutarate	11
+CHEBI:59888	gamma-aminobutyric acid zwitterion	11
+CHEBI:58011	(1R,2R,3R)-prephytoene diphosphate(3-)	11
+CHEBI:64716	1,2-diacyl-sn-glycero-3-phospho-(1'-sn-glycerol)(1-)	11
+CHEBI:57817	sphinganine(1+)	11
+CHEBI:57429	(2S,3R)-3-hydroxybutane-1,2,3-tricarboxylate	11
+CHEBI:57856	S-adenosyl-L-homocysteine zwitterion	11
+CHEBI:57805	N(2)-acetyl-L-ornithine zwitterion	11
+CHEBI:17176	long-chain fatty aldehyde	11
+CHEBI:58759	6-phosphonatooxy-D-gluconate	11
+CHEBI:15669	trans-cinnamate	11
+CHEBI:533015	3,3',5-triiodo-L-thyronine zwitterion	11
+CHEBI:28061	alpha-D-galactose	11
+CHEBI:58433	1D-myo-inositol 1-phosphate(2-)	11
+CHEBI:17045	dinitrogen oxide	11
+CHEBI:58190	O-phosphonatoethanaminium(1-)	11
+CHEBI:29746	glycocholate	11
+CHEBI:17245	carbon monoxide	11
+CHEBI:18364	14-demethyllanosterol	11
+InChI=1S/C8H8O3/c9-7(8(10)11)6-4-2-1-3-5-6/h1-5,7,9H,(H,10,11)/p-1		11
+CHEBI:58116	5-methyl-5,6,7,8-tetrahydromethanopterin(3-)	11
+CHEBI:17950	beta-D-galactosyl-(1->4)-beta-D-glucosyl-(1<->1)-N-acylsphingosine	10
+CHEBI:16651	(S)-lactate	10
+CHEBI:57762	L-valine zwitterion	10
+CHEBI:58579	beta-D-fructofuranose 2,6-bisphosphate(4-)	10
+CHEBI:15343	acetaldehyde	10
+CHEBI:58735	D-mannopyranose 6-phosphate(2-)	10
+CHEBI:58451	pyridoxamine 5'-phosphate(1-)	10
+CHEBI:57385	myristoyl-CoA(4-)	10
+CHEBI:57344	3-methylbut-2-enoyl-CoA(4-)	10
+CHEBI:16899	D-mannitol	10
+CHEBI:18608	(6S)-5-methyltetrahydrofolate(2-)	10
+InChI=1S/C3H6O3/c1-2(4)3(5)6/h2,4H,1H3,(H,5,6)/p-1		10
+CHEBI:58681	5-phospho-beta-D-ribosylaminium(1-)	10
+C00440	5-Methyltetrahydrofolate	10
+CHEBI:17750	glycine betaine	10
+CHEBI:506227	N-acetyl-D-glucosamine	10
+CHEBI:57464	5'-xanthylate(2-)	10
+CHEBI:356416	5-ammoniolevulinate	10
+CHEBI:18202	L-iditol	10
+C00182	Glycogen	10
+CHEBI:57308	uroporphyrinogen III(8-)	10
+CHEBI:43074	(3S)-3-hydroxy-3-methylglutaryl-CoA(5-)	10
+CHEBI:73183	1-(5-phospho-beta-D-ribosyl)-ATP(6-)	10
+C00353	Geranylgeranyl diphosphate	10
+CHEBI:29101	sodium(1+)	9
+CHEBI:32364	3-dehydroquinate	9
+CHEBI:59458	N-[(R)-4-phosphonatopantothenoyl]-L-cysteinate(3-)	9
+CHEBI:58553	5beta,9alpha,10alpha-labda-8(20),13-dien-15-yl diphosphate(3-)	9
+CHEBI:58866	(1S,2R)-1-C-(indol-3-yl)glycerol 3-phosphate(2-)	9
+CHEBI:37568	dTTP(4-)	9
+C00154	Palmitoyl-CoA	9
+C00058	Formate	9
+CHEBI:57711	all-trans-octaprenyl diphosphate(3-)	9
+CHEBI:57973	leukotriene C4(2-)	9
+CHEBI:57947	creatine zwitterion	9
+CHEBI:17579	beta-carotene	9
+CHEBI:22191	acetyl phosphate(2-)	9
+C00498	ADP-glucose	9
+CHEBI:58278	D-erythro-1-(imidazol-4-yl)glycerol 3-phosphate(2-)	9
+CHEBI:58145	agmatinium(2+)	9
+CHEBI:17310	pyridoxal	9
+CHEBI:57955	6-O-phosphonato-D-glucono-1,5-lactone(2-)	9
+CHEBI:17697	N-acetylserotonin	9
+CHEBI:57694	quercetin-7-olate	9
+C10646	Lariciresinol	9
+CHEBI:537519	L-aspartic acid 4-semialdehyde zwitterion	9
+CHEBI:58596	coenzyme B(3-)	9
+CHEBI:16150	benzoate	9
+CHEBI:15355	acetylcholine	9
+CHEBI:32544	nicotinate	9
+CHEBI:57427	L-leucine zwitterion	9
+CHEBI:16870	choline alfoscerate	9
+CHEBI:72950	(7,8-dihydropterin-6-yl)methyl diphosphate(3-)	8
+CHEBI:17712	9H-xanthine	8
+CHEBI:85033	cobalt(1+)	8
+CHEBI:17389	2-monoglyceride	8
+CHEBI:30762	salicylate	8
+CHEBI:58251	N,N-dimethylglycine zwitterion	8
+CHEBI:58672	L-2-aminoadipate(1-)	8
+CHEBI:17172	2'-deoxyguanosine	8
+C00185	Cellobiose	8
+C05851	Coumarin	8
+CHEBI:16480	nitric oxide	8
+CHEBI:58629	N-formyl-L-kynurenine zwitterion	8
+CHEBI:17587	L-gulono-1,4-lactone	8
+CHEBI:18385	thiamine(1+)	8
+C03428	Presqualene diphosphate	8
+CHEBI:76590	1-organyl-2-lyso-sn-glycero-3-phospholipid(1-)	8
+CHEBI:16469	17beta-estradiol	8
+C00954	Indole-3-acetate	8
+C00083	Malonyl-CoA	8
+CHEBI:57483	sedoheptulose 7-phosphate(2-)	8
+CHEBI:18036	triphosphate(5-)	8
+CHEBI:58725	2-ammonio-2-deoxy-D-glucopyranose 6-phosphate(1-)	8
+C04375	4-N-(N-Acetyl-D-glucosaminyl)-protein	8
+CHEBI:18378	4alpha-methyl-5alpha-cholest-7-en-3beta-ol	8
+CHEBI:31488	N-acylsphinganine	8
+CHEBI:35247	D-serine zwitterion	8
+C00160	Glycolate	8
+CHEBI:57843	L-selenocysteine zwitterion	8
+CHEBI:57383	linoleoyl-CoA(4-)	8
+CHEBI:16016	dihydroxyacetone	8
+CHEBI:17252	17alpha-hydroxyprogesterone	8
+CHEBI:57980	L-histidinol phosphate(1-)	8
+CHEBI:37569	(+)-abscisate	8
+CHEBI:17616	all-trans-retinyl palmitate	8
+CHEBI:57706	4-oxobutanoate	8
+CHEBI:17836	4-aminobenzoate	8
+C00025	L-Glutamate	8
+CHEBI:17775	7,9-dihydro-1H-purine-2,6,8(3H)-trione	8
+CHEBI:57504	L-dopa zwitterion	8
+C00006	NADP+	8
+CHEBI:29256	thiol	8
+CHEBI:58462	7,8-dihydroneopterin 3'-triphosphate(4-)	8
+CHEBI:57472	(N(omega)-L-arginino)succinate(1-)	8
+CHEBI:57845	preuroporphyrinogen(8-)	8
+CHEBI:58779	CDP-choline(1-)	8
+CHEBI:57509	L-dopachromate	8
+CHEBI:15889	sterol	7
+CHEBI:58130	myo-inositol hexakisphosphate(12-)	7
+InChI=1S/C18H36O3/c1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17(19)18(20)21/h17,19H,2-16H2,1H3,(H,20,21)		7
+CHEBI:63528	dTMP(2-)	7
+CHEBI:57569	2-dehydro-3-deoxy-6-phosphonato-D-gluconate(3-)	7
+CHEBI:143553	8-oxo-GTP(4-)	7
+CHEBI:58549	kanamycin B(5+)	7
+CHEBI:58173	L-gamma-glutamyl-L-cysteinate(1-)	7
+CHEBI:4208	D-mannopyranose	7
+CHEBI:57938	trans-3-hydroxy-L-proline zwitterion	7
+CHEBI:37671	(1->3)-beta-D-glucan	7
+CHEBI:13705	acetoacetate	7
+C00043	UDP-N-acetyl-alpha-D-glucosamine	7
+CHEBI:58414	1D-myo-inositol 1,3,4-trisphosphate(6-)	7
+C00232	Succinate semialdehyde	7
+CHEBI:58045	L-isoleucine zwitterion	7
+CHEBI:61382	dITP(4-)	7
+CHEBI:58210	FMN(3-)	7
+CHEBI:28349	alpha-L-fucoside	7
+CHEBI:15980	(R)-pantoate	7
+CHEBI:18277	N-(5-phosphonato-beta-D-ribosyl)anthranilate	7
+CHEBI:57328	3'-dephospho-CoA(2-)	7
+C00044	GTP	7
+CHEBI:29118	methanophenazine	7
+CHEBI:76533	NDP-alpha-D-glucose(2-)	7
+CHEBI:11892	N-carbamoyl-beta-alaninate	7
+CHEBI:58475	5-amino-1-(5-phospho-D-ribosyl)imidazole-4-carboxamide(2-)	7
+CHEBI:35287	acylcholine	7
+CHEBI:57632	UDP-alpha-D-xylose(2-)	7
+CHEBI:16708	adenine	7
+CHEBI:57966	beta-alanine zwitterion	7
+CHEBI:57719	D-tryptophan zwitterion	7
+CHEBI:57524	O-phosphonato-L-serine(2-)	7
+C00088	Nitrite	7
+CHEBI:78847	UDP-2,3-bis[(3R)-3-hydroxytetradecanoyl]-alpha-D-glucosamine(2-)	7
+CHEBI:47907	3-oxo-Delta(5)-steroid	7
+CHEBI:58421	5-amino-6-(5-phosphoribitylamino)uracil(2-)	7
+C12145	Phytoceramide	6
+CHEBI:61381	D-mannitol 1-phosphate(2-)	6
+C00897	alpha-Maltose	6
+CHEBI:17745	coniferol	6
+CHEBI:2181	L-fucopyranose	6
+CHEBI:18390	N-acyl-beta-D-galactosylsphingosine	6
+CHEBI:57416	D-alanine zwitterion	6
+CHEBI:41595	(+)-germacrene A	6
+CHEBI:83242	1D-myo-inositol 1,3-biphosphate(4-)	6
+CHEBI:15720	8-[(1R,2R)-3-oxo-2-{(Z)-pent-2-en-1-yl}cyclopentyl]octanoate	6
+CHEBI:78435	[GlcNAc-(1->4)-Mur2Ac(oyl-L-Ala-gamma-D-Glu-L-Lys-D-Ala-D-Ala)]n-diphospho-ditrans,polycis-undecaprenol polyanion	6
+CHEBI:58033	2-phosphonatoglycolate(3-)	6
+CHEBI:57609	(2S,6S)-2,6-diaminopimelic acid dizwitterion	6
+C00073	L-Methionine	6
+CHEBI:17263	estrone	6
+CHEBI:57791	meso-2,6-diaminopimelic acid dizwitterion	6
+C00355	3,4-Dihydroxy-L-phenylalanine	6
+C14180	S-(Hydroxymethyl)glutathione	6
+CHEBI:17388	(S)-1-pyrroline-5-carboxylate	6
+CHEBI:16782	(S)-2-hydroxyglutarate(2-)	6
+CHEBI:57545	luteolin-7-olate	6
+CHEBI:62230	GDP-alpha-D-glucose(2-)	6
+CHEBI:57693	aldehydo-D-arabinose 5-phosphate(2-)	6
+CHEBI:57461	leukotriene B4(1-)	6
+CHEBI:57770	trans-caffeate	6
+CHEBI:57557	(R)-5-diphosphonatomevalonate(4-)	6
+C00070	Copper	6
+CHEBI:16004	(R)-lactate	6
+CHEBI:4139	D-galactopyranose	6
+CHEBI:58262	2-C-methyl-D-erythritol 4-phosphate(2-)	6
+CHEBI:40799	androsta-1,4-diene-3,17-dione	6
+CHEBI:57586	biotinate	6
+CHEBI:47622	acetate ester	6
+CHEBI:59905	dopaminium(1+)	6
+CHEBI:57316	(S)-3-hydroxybutanoyl-CoA(4-)	6
+C12305	Methyl salicylate	6
+CHEBI:61723	D-pantetheine 4'-phosphate(2-)	6
+CHEBI:30043	terephthalate(2-)	6
+CHEBI:17256	2'-deoxyadenosine	6
+CHEBI:16169	homogentisate	6
+CHEBI:35341	steroid	6
+CHEBI:58326	N(omega),N(omega)-dimethyl-L-argininium(1+)	6
+CHEBI:58516	alpha-D-glucosamine 1-phosphate(1-)	6
+CHEBI:57307	protoporphyrinogen(2-)	6
+CHEBI:57345	isovaleryl-CoA(4-)	6
+CHEBI:57567	N(6)-(1,2-dicarboxylatoethyl)-AMP(4-)	6
+CHEBI:147286	N(2)-formyl-N(1)-(5-phospho-beta-D-ribosyl)glycinamide(2-)	6
+CHEBI:58126	porphobilinogen(1-)	6
+CHEBI:58201	6,7-dimethyl-8-(1-D-ribityl)lumazine(1-)	6
+C00136	Butanoyl-CoA	6
+CHEBI:58853	(2S,3S)-2-methylcitrate(3-)	6
+CHEBI:57286	acetoacetyl-CoA(4-)	6
+CHEBI:17169	benzaldehyde	6
+CHEBI:57871	codeine(1+)	6
+CHEBI:18067	phylloquinone	6
+C00681	1-Acyl-sn-glycerol 3-phosphate	6
+CHEBI:13115	L-gulonate	6
+CHEBI:27714	6-acetyl-2-amino-3,7,8,9-tetrahydropyrimido[4,5-b][1,4]diazepin-4-one	6
+CHEBI:58298	6-phosphonato-2-dehydro-3-deoxy-D-galactate(3-)	6
+CHEBI:17933	calcidiol	6
+C03758	Dopamine	6
+CHEBI:18379	nitrile	6
+CHEBI:58938	thiamine(1+) triphosphate(4-)	6
+CHEBI:17791	obtusifoliol	6
+CHEBI:58297	glutathione disulfide(2-)	6
+CHEBI:15801	(R)-2-hydroxyglutarate(2-)	6
+CHEBI:57990	2-dehydro-3-deoxy-D-gluconate	6
+CHEBI:17536	allantoate	6
+CHEBI:17495	cholesteryl beta-D-glucoside	5
+CHEBI:36656	phenylglyoxylate	5
+CHEBI:57477	dTDP-alpha-D-glucose(2-)	5
+CHEBI:57743	L-citrulline zwitterion	5
+CHEBI:16827	corticosterone	5
+CHEBI:57485	carnosine zwitterion	5
+CHEBI:29990	D-aspartate(1-)	5
+C00219	Arachidonate	5
+CHEBI:57678	3-mercaptopyruvate	5
+CHEBI:59996	1,2-diacyl-sn-glycerol 3-diphosphate(3-)	5
+CHEBI:58437	deamido-NAD(2-)	5
+CHEBI:57369	benzoyl-CoA(4-)	5
+CHEBI:17957	5-(2-hydroxyethyl)-4-methylthiazole	5
+CHEBI:57539	1D-myo-inositol 3,4,5,6-tetrakisphosphate(8-)	5
+CHEBI:15710	betaine aldehyde	5
+C16502	Farnesoic acid	5
+CHEBI:57457	(6S)-5-formyltetrahydrofolate(2-)	5
+CHEBI:597326	pyridoxal 5'-phosphate(2-)	5
+CHEBI:87136	trans-caffeoyl-CoA(4-)	5
+C04212	3',5'-Cyclic nucleotide	5
+CHEBI:18401	phenylacetate	5
+CHEBI:57661	O-succinyl-L-homoserinate(1-)	5
+C21004	Norspermine	5
+C15778		5
+CHEBI:70757	UDP-N-acetyl-alpha-D-muramate(3-)	5
+CHEBI:17640	3-(indol-3-yl)pyruvate	5
+CHEBI:57876	CDP-ethanolamine(1-)	5
+CHEBI:18072	5-hydroxyisouric acid	5
+CHEBI:17140	D-xylulose	5
+CHEBI:57338	isobutyryl-CoA(4-)	5
+CHEBI:29986	D-glutamate(1-)	5
+CHEBI:16892	4-amino-5-hydroxymethyl-2-methylpyrimidine	5
+CHEBI:16220	coniferin	5
+C00942	3',5'-Cyclic GMP	5
+CHEBI:57940	3-sulfonatopyruvate(2-)	5
+C00221	beta-D-Glucose	5
+CHEBI:16457	S,S-dimethyl-beta-propiothetin	5
+C00151	L-Amino acid	5
+CHEBI:58432	histaminium	5
+CHEBI:58535	N(8)-acetylspermidinium(2+)	5
+CHEBI:57649	dTDP-4-dehydro-6-deoxy-alpha-D-glucose(2-)	5
+CHEBI:57455	(6R)-5,10-methenyltetrahydrofolate	5
+C00712	(9Z)-Octadecenoic acid	5
+CHEBI:57513	N-acetyl-D-glucosamine 6-phosphate(2-)	5
+CHEBI:58179	all-trans-hexaprenyl diphosphate(3-)	5
+CHEBI:45725	spermine(4+)	5
+CHEBI:16482	naphthalene	5
+CHEBI:18403	L-arabinitol	5
+C00227	Acetyl phosphate	5
+C00311	Isocitrate	5
+C00156	4-Hydroxybenzoate	5
+CHEBI:58307	FADH2(2-)	5
+CHEBI:30879	alcohol	5
+CHEBI:61463	UDP-beta-L-arabinofuranose(2-)	5
+C01432	Lactate	5
+CHEBI:18005	keto-phenylpyruvate	5
+CHEBI:16235	guanine	5
+CHEBI:57951	L-saccharopinate(1-)	5
+C01272	1D-myo-Inositol 1,3,4,5-tetrakisphosphate	5
+CHEBI:16537	galactarate(2-)	5
+CHEBI:17898	all-trans-retinal	5
+CHEBI:58146	(R)-5-phosphonatomevalonate(3-)	5
+CHEBI:60084	D-glucitol 6-phosphate(2-)	5
+CHEBI:63715	8-oxo-dGDP(3-)	5
+CHEBI:10986	(R)-4'-phosphonatopantothenate(3-)	5
+C08491	(-)-Jasmonic acid	5
+C01081	Thiamin monophosphate	5
+CHEBI:18086	indol-3-ylacetaldehyde	5
+C00283	Hydrogen sulfide	5
+C04088	Octadecanoyl-[acyl-carrier protein]	5
+CHEBI:57326	(R)-methylmalonyl-CoA(5-)	5
+CHEBI:61481	dCTP(4-)	5
+CHEBI:18329	5alpha-androstane-3beta,17beta-diol	5
+CHEBI:17057	cellobiose	5
+C01793	Chlorophyll	5
+CHEBI:17378	D-glyceraldehyde	5
+CHEBI:16455	4,4-dimethyl-5alpha-cholest-7-en-3beta-ol	5
+CHEBI:58529	P(1),P(3)-bis(5'-adenosyl) triphosphate(3-)	5
+CHEBI:61527	D-fructofuranose 6-phosphate(2-)	5
+CHEBI:16217	D-glucono-1,5-lactone	5
+CHEBI:46570	cis-zeatin	5
+CHEBI:30854	indole-3-acetate	4
+CHEBI:27689	decanoate	4
+CHEBI:16731	(E)-cinnamaldehyde	4
+CHEBI:16753	pantetheine	4
+CHEBI:57939	sphinganine 1-phosphate(1-)	4
+CHEBI:58321	L-allysine zwitterion	4
+CHEBI:15678	(S)-(+)-allantoin	4
+CHEBI:59457	1-(5-phosphonato-beta-D-ribosyl)-5'-AMP(4-)	4
+CHEBI:16816	flavonol 3-O-beta-D-glucoside	4
+CHEBI:17839	7,8-dihydropteroate	4
+CHEBI:57386	octanoyl-CoA(4-)	4
+CHEBI:63410	all-trans-retinyl ester	4
+CHEBI:57701	5-O-(1-carboxylatovinyl)-3-phosphonatoshikimate	4
+CHEBI:57995	all-trans-undecaprenyl diphosphate(3-)	4
+C15485	2'-Deoxymugineic acid	4
+CHEBI:58585	L-allothreonine zwitterion	4
+CHEBI:77674	queuine(1+)	4
+CHEBI:57986	riboflavin(1-)	4
+CHEBI:57510	dTDP-6-deoxy-beta-L-mannose(2-)	4
+CHEBI:15404	(-)-homoisocitrate(3-)	4
+CHEBI:35267	quaternary ammonium ion	4
+CHEBI:58399	isopenicillin N(1-)	4
+CHEBI:149469	(7R,8S)-7,8-diammoniononanoate	4
+CHEBI:57373	choloyl-CoA(4-)	4
+CHEBI:17129	(S)-scoulerine	4
+CHEBI:59338	methylammonium	4
+CHEBI:57364	4-(2-carboxyphenyl)-4-oxobutanoyl-CoA(5-)	4
+C00570	CDP-ethanolamine	4
+CHEBI:58080	N(4)-(beta-N-acetyl-D-glucosaminyl)-L-asparagine zwitterion	4
+C00343	Thioredoxin disulfide	4
+CHEBI:16510	3-hydroxypropionate	4
+CHEBI:58226	L-ribulose 5-phosphate(2-)	4
+CHEBI:44841	2-amino-6-(hydroxymethyl)-7,8-dihydropteridin-4-one	4
+C03319	dTDP-L-rhamnose	4
+CHEBI:57699	L-histidinol(1+)	4
+CHEBI:18252	zymosterol	4
+CHEBI:58668	(3S)-citramalyl-CoA(5-)	4
+CHEBI:58207	5-methyltetrahydropteroyltri-L-glutamate(4-)	4
+C00120	Biotin	4
+CHEBI:16040	cytosine	4
+CHEBI:58613	1-(2-carboxylatophenylamino)-1-deoxy-D-ribulose 5-phosphate(3-)	4
+CHEBI:74264	(8Z,11Z,14Z)-icosatrienoyl-CoA(4-)	4
+CHEBI:143788	N(1)-(5-phospho-beta-D-ribosyl)glycinamide(1-)	4
+CHEBI:61429	dGTP(4-)	4
+CHEBI:58282	1D-myo-inositol 1,4-bisphosphate(4-)	4
+CHEBI:12931	D-galactonate	4
+CHEBI:356010	5-aminopentanoic acid zwitterion	4
+CHEBI:57841	4-amino-2-methyl-5-diphosphonatooxymethylpyrimidine(3-)	4
+CHEBI:58394	7-phospho-2-dehydro-3-deoxy-D-arabino-heptonate	4
+C00179	Agmatine	4
+CHEBI:70758	UDP-N-acetyl-alpha-D-muramoyl-L-alanyl-gamma-D-glutamyl-L-lysyl-D-alanyl-D-alaninate(3-)	4
+CHEBI:606564	prostaglandin E2(1-)	4
+CHEBI:60052	siroheme(8-)	4
+CHEBI:145989	3-phosphonatoshikimate(3-)	4
+CHEBI:58290	trypanothione(1+)	4
+CHEBI:15440	squalene	4
+CHEBI:57688	S-formylglutathionate(1-)	4
+CHEBI:36559	3-hydroxyanthranilate	4
+C07481	Caffeine	4
+CHEBI:16750	guanosine	4
+CHEBI:57590	O-phosphonato-L-homoserine(2-)	4
+CHEBI:27827	paraoxon	4
+CHEBI:17173	D-ribulose	4
+CHEBI:15447	(1->4)-beta-D-xylan	4
+CHEBI:61457	UDP-beta-L-arabinopyranose(2-)	4
+CHEBI:60392	ditrans,polycis-undecaprenyl phosphate(2-)	4
+CHEBI:149468	(8S)-8-amino-7-oxononanoic acid zwitterion	4
+CHEBI:53455	D-xylopyranose	4
+CHEBI:61314	XTP(4-)	4
+C00016	FAD	4
+C00568	4-Aminobenzoate	4
+CHEBI:58389	trimethylammonium	4
+CHEBI:29751	(-)-quinate	4
+CHEBI:11424	2,3-dihydroxy-3-methylbutanoate	4
+CHEBI:17505	alpha-D-galactosyl-(1->3)-1D-myo-inositol	4
+C01137	S-Adenosylmethioninamine	4
+CHEBI:2700	anandamide	4
+CHEBI:17566	indole-3-acetonitrile	4
+CHEBI:57296	(-)-ureidoglycolate	4
+CHEBI:58069	CDP(3-)	4
+CHEBI:57327	(S)-methylmalonyl-CoA(5-)	4
+CHEBI:16522	trans-zeatin	4
+CHEBI:77896	8-oxo-dGTP(4-)	4
+CHEBI:57501	(S)-4-amino-5-oxopentanoic acid zwitterion	4
+CHEBI:17001	7,8-dihydroneopterin	4
+CHEBI:57997	6-(alpha-D-glucosaminyl)-1-phosphatidyl-1D-myo-inositol zwitterion	4
+CHEBI:16933	ergosterol	4
+C01469	ADP-sugar	4
+CHEBI:17742	4-hydroxy-2-oxoglutarate(2-)	4
+CHEBI:17976	ubiquinol	4
+CHEBI:58296	4-methyl-5-(2-phosphonatooxyethyl)thiazole(2-)	4
+CHEBI:15934	5-amino-6-(D-ribitylamino)uracil	4
+CHEBI:57905	dehydroepiandrosterone sulfate(1-)	4
+CHEBI:16175	cholest-4-en-3-one	4
+CHEBI:17996	chloride	4
+CHEBI:57627	1D-myo-inositol 1,4,5,6-tetrakisphosphate(8-)	4
+CHEBI:47013	D-ribofuranose	4
+CHEBI:35418	N-acetylneuraminate	4
+CHEBI:57317	(3S)-3-carboxy-3-hydroxypropanoyl-CoA(5-)	4
+CHEBI:147287	2-formamido-N(1)-(5-O-phosphonato-beta-D-ribosyl)acetamidine	4
+CHEBI:29195	cyanate	3
+CHEBI:17306	maltose	3
+CHEBI:58100	N(6),N(6),N(6)-trimethyl-L-lysine zwitterion	3
+CHEBI:35146	(S)-3-methyl-2-oxovalerate	3
+CHEBI:16813	galactitol	3
+CHEBI:60049	cobalt-sirohydrochlorin(8-)	3
+CHEBI:57684	beta-D-glucose 1-phosphate(2-)	3
+CHEBI:16233	(S)-cheilanthifoline	3
+CHEBI:29780	isochorismate(2-)	3
+CHEBI:17327	phytol	3
+C00877	Crotonoyl-CoA	3
+CHEBI:44337	N-acetyl-L-glutamate(2-)	3
+CHEBI:15927	N-ribosylnicotinamide	3
+C03972	2,3,4,5-Tetrahydrodipicolinate	3
+CHEBI:30023	trans-sinapate	3
+C00708	Iodide	3
+C02938	3-Indoleacetonitrile	3
+CHEBI:84760	2-deoxy-D-glucopyranose 6-phosphate(2-)	3
+CHEBI:29917	thiol group	3
+CHEBI:35288	all-trans-violaxanthin	3
+C00216	D-Arabinose	3
+C00486	Bilirubin	3
+C00641	1,2-Diacyl-sn-glycerol	3
+CHEBI:59947	(S)-2-ureidoglycine zwitterion	3
+CHEBI:58635	5alpha,9alpha,10beta-labda-8(20),13-dien-15-yl diphosphate(3-)	3
+CHEBI:62877	2-deoxy-D-ribofuranose 5-phosphate(2-)	3
+CHEBI:16193	3-hydroxybenzoate	3
+C05813	2-Octaprenyl-6-methoxy-1,4-benzoquinone	3
+CHEBI:28952	5alpha-pregnane-3,20-dione	3
+CHEBI:58312	6-phosphonato-beta-D-glucosyl-(1->4)-D-glucose(2-)	3
+CHEBI:15075	selenate	3
+C00345	6-Phospho-D-gluconate	3
+CHEBI:17925	alpha-D-glucose	3
+CHEBI:15832	urea-1-carboxylate	3
+CHEBI:30909	1-alkyl-sn-glycero-3-phosphocholine	3
+CHEBI:16292	D-arabinono-1,4-lactone	3
+CHEBI:74387	Ala-Gln zwitterion	3
+CHEBI:17105	4-maleylacetoacetate	3
+CHEBI:18041	(S)-lactaldehyde	3
+C00640	(3S)-3-Hydroxyacyl-CoA	3
+CHEBI:15621	(4-hydroxyphenyl)acetaldehyde	3
+CHEBI:16244	4-(trimethylammonio)butanoate	3
+C00695	Cholic acid	3
+C00180	Benzoate	3
+CHEBI:15683	(R)-10-hydroxyoctadecanoate	3
+CHEBI:57297	ent-kaur-16-en-19-oate	3
+CHEBI:17861	4-chlorobenzoate	3
+CHEBI:71573	UDP-3-O-[(3R)-3-hydroxytetradecanoyl]-alpha-D-glucosamine(1-)	3
+CHEBI:17167	(R)-lactaldehyde	3
+CHEBI:43029	L-erythro-7,8-dihydrobiopterin	3
+CHEBI:58066	L-glutamic 5-semialdehyde zwitterion	3
+CHEBI:58373	3-hexaprenyl-4,5-dihydroxybenzoate	3
+CHEBI:64074	(S)-NADHX(2-)	3
+CHEBI:64075	(R)-NADHX(2-)	3
+CHEBI:17568	uracil	3
+C00093	sn-Glycerol 3-phosphate	3
+CHEBI:17660	N(6)-dimethylallyladenine	3
+CHEBI:36242	3-(4-hydroxyphenyl)pyruvate	3
+CHEBI:58406	4-amino-4-deoxychorismate(1-)	3
+CHEBI:58435	1-(5-phospho-beta-D-ribosyl)-5-[(5-phospho-beta-D-ribosylamino)methylideneamino]imidazole-4-carboxamide(4-)	3
+CHEBI:62787	1,5-dihydroflavin	3
+CHEBI:18246	(1->4)-beta-D-glucan	3
+CHEBI:58264	4-ammoniobutanal	3
+CHEBI:29123	2-acetamido-5-oxopentanoate	3
+CHEBI:16062	N-acyl-D-mannosamine	3
+C01167	Protein tyrosine phosphate	3
+CHEBI:58007	streptomycin(3+)	3
+CHEBI:138881	beta-D-fructofuranose 1-phosphate(2-)	3
+CHEBI:18262	dodecanoate	3
+CHEBI:58031	2-(3-amino-3-carboxypropyl)-L-histidine dizwitterion	3
+CHEBI:58622	5alpha,9beta,10alpha-labda-8(20),13-dien-15-yl diphosphate(3-)	3
+CHEBI:49072	(R)-2,3-dihydroxy-3-methylbutanoate	3
+C00705	dCDP	3
+CHEBI:58286	methyl-CoM(1-)	3
+CHEBI:57376	formyl-CoA(4-)	3
+CHEBI:73143	(S)-4-hydroxy-2-oxopentanoate	3
+CHEBI:11805	3-hydroxyisobutyrate	3
+CHEBI:28100	(1->3)-alpha-D-glucan	3
+C18094	UDP-L-arabinofuranose	3
+CHEBI:58248	2,3-bisphosphonato-D-glycerate(5-)	3
+CHEBI:16918	gallate	3
+CHEBI:58677	(25R)-3alpha,7alpha,12alpha-trihydroxy-5beta-cholestan-26-oyl-CoA(4-)	3
+C20658	O-Acetyl-ADP-ribose	3
+CHEBI:128753	(2E)-4-hydroxy-3-methylbut-2-enyl diphosphate(3-)	3
+CHEBI:15383	(4S)-limonene	3
+CHEBI:149473	(4R,5S)-dethiobiotin(1-)	3
+CHEBI:57700	2-methyl-3-oxopropanoate	3
+CHEBI:35236	D-cysteine zwitterion	3
+C18167	Secoisolariciresinol	3
+CHEBI:15759	2,3-epoxyphylloquinone	3
+C11422	Phenanthrene	3
+CHEBI:57404	prostaglandin F2alpha(1-)	3
+CHEBI:58720	D-glucopyranuronate	3
+C00249	Hexadecanoic acid	3
+CHEBI:47788	3-oxo steroid	3
+CHEBI:15347	acetone	3
+CHEBI:57720	alpha-D-ribose 1-phosphate(2-)	3
+CHEBI:57261	3,3',5'-triiodo-L-thyronine zwitterion	3
+CHEBI:58639	5-hydroxy-2-oxo-4-ureido-2,5-dihydro-1H-imidazole-5-carboxylate	3
+CHEBI:57716	O-acetyl-L-homoserine zwitterion	3
+CHEBI:17997	dinitrogen	3
+CHEBI:58101	N(1)-acetylsperminium(3+)	3
+CHEBI:16424	phenylacetaldehyde	3
+C00165	Diacylglycerol	3
+CHEBI:16842	formaldehyde	3
+C00611	N-Acetyllactosamine	3
+CHEBI:75989	alpha-D-glucosamine 6-phosphate(1-)	3
+CHEBI:63740	P(1),P(6)-bis(5'-adenosyl)hexaphosphate(6-)	3
+CHEBI:58280	IDP(3-)	3
+CHEBI:61402	ITP(4-)	3
+CHEBI:57360	pimeloyl-CoA(5-)	3
+CHEBI:15708	trans-aconitate(3-)	3
+CHEBI:18034	4-fumarylacetoacetate(2-)	3
+C05752	Octanoyl-[acp]	3
+CHEBI:57340	3-hydroxy-2-methylpropanoyl-CoA(4-)	3
+CHEBI:36654	2,3-dihydroxybenzoate	3
+CHEBI:28645	beta-D-fructofuranose	3
+CHEBI:16007	methanethiol	3
+CHEBI:58040	dimethylaminium	2
+CHEBI:17684	N-formyl-L-glutamate(2-)	2
+C11101	5-Hydroxymethyl-2-furaldehyde	2
+CHEBI:58687	pheophorbide a(2-)	2
+C01179	3-(4-Hydroxyphenyl)pyruvate	2
+CHEBI:16688	ecdysone	2
+C00301	ADP-ribose	2
+CHEBI:71682	cyanidin(1-)	2
+CHEBI:48597	arsenate(2-)	2
+CHEBI:60491	magnesium protoporphyrin 13-monomethyl ester(1-)	2
+C04800	D-Glucuronyl-N-acetyl-1,3-beta-D-galactosaminylproteoglycan	2
+CHEBI:15581	juvenile hormone II	2
+CHEBI:58694	D-tagatofuranose 1,6-bisphosphate(4-)	2
+CHEBI:143274	indole-3-butyrate	2
+CHEBI:17019	(R)-amygdalin	2
+C00369	Starch	2
+CHEBI:59350	2-hydroxychromene-2-carboxylate	2
+C01079	Protoporphyrinogen IX	2
+CHEBI:58122	N(6)-acetyl-N(6)-hydroxy-L-lysine zwitterion	2
+C00235	Dimethylallyl diphosphate	2
+CHEBI:16709	pyridoxine	2
+CHEBI:57919	4-CDP-2-C-methyl-D-erythritol 2-phosphate(4-)	2
+CHEBI:21291	L-fuconate	2
+CHEBI:58335	sedoheptulose 1,7-bisphosphate(4-)	2
+CHEBI:15783	N,N-dimethyl-1,4-phenylenediamine	2
+CHEBI:18346	vanillin	2
+CHEBI:17524	6-alkylaminopurine	2
+CHEBI:16304	cob(II)alamin	2
+CHEBI:57463	leukotriene A4(1-)	2
+C01012	(R)-Pantolactone	2
+CHEBI:71492	(2R)-3-(3,4-dihydroxyphenyl)lactate	2
+CHEBI:17746	D-xylonate	2
+CHEBI:17897	L-rhamnulose	2
+CHEBI:58548	S-methyl-5-thio-D-ribulose 1-phosphate(2-)	2
+CHEBI:50004	cis-stilbene oxide	2
+CHEBI:35491	L-cystine zwitterion	2
+CHEBI:17500	7alpha-hydroxycholesterol	2
+CHEBI:84167	2-methoxy-5-methyl-6-all-trans-polyprenylhydroquinone	2
+CHEBI:16120	5-oxopentanoate	2
+CHEBI:61970	N-acetyl-alpha-D-galactosamine 1-phosphate(2-)	2
+CHEBI:58772	L-methionine (S)-S-oxide zwitterion	2
+CHEBI:57846	L-fuculose 1-phosphate(2-)	2
+CHEBI:57989	2-dehydro-3-deoxy-D-galactonate	2
+CHEBI:63328	4'-hydroxyisoflavones	2
+CHEBI:30927	D-tartrate(2-)	2
+CHEBI:58738	(R)-3-sulfolactate	2
+CHEBI:57356	4-hydroxybenzoyl-CoA(4-)	2
+C00323	Caffeoyl-CoA	2
+CHEBI:16374	menaquinone	2
+CHEBI:57456	5-formimidoyltetrahydrofolate(2-)	2
+CHEBI:18325	2-succinatobenzoate	2
+CHEBI:17968	butyrate	2
+C01358	NH4OH	2
+CHEBI:16802	sedoheptulose	2
+C19678	Germacrene A acid	2
+CHEBI:57957	lipid X(2-)	2
+CHEBI:10702	(1R,2R)-cyclohexa-3,5-diene-1,2-diol	2
+CHEBI:29242	arsenite(1-)	2
+CHEBI:83900	UDP-N-acetyl-alpha-D-muramoyl-L-alanyl-D-glutamate(4-)	2
+C01042	N-Acetyl-L-aspartate	2
+CHEBI:17296	aniline	2
+CHEBI:350546	serotonin(1+)	2
+CHEBI:61301	germacra-1(10),4,11(13)-trien-12-oate	2
+CHEBI:143554	8-oxo-GDP(3-)	2
+CHEBI:58360	1-aminocyclopropanecarboxylic acid zwitterion	2
+CHEBI:58928	N-formimidoyl-L-glutamate(1-)	2
+C00257	D-Gluconic acid	2
+CHEBI:58087	N-(3-carboxylatopropionyl)-LL-2,6-diaminopimelate(2-)	2
+CHEBI:58937	thiamine(1+) diphosphate(3-)	2
+C11143	Dimethyl sulfoxide	2
+C00448	trans,trans-Farnesyl diphosphate	2
+CHEBI:35346	11beta-hydroxy steroid	2
+CHEBI:16692	diphthamide residue	2
+CHEBI:15792	malonate(2-)	2
+CHEBI:10642	scyllo-inositol	2
+CHEBI:71302	Mo(VI)O2(OH)-molybdopterin cofactor(4-)	2
+CHEBI:57660	myo-inositol 1,3,4,6-tetrakisphosphate(8-)	2
+C16464	Citronellyl-CoA	2
+CHEBI:58103	5,6,7,8-tetrahydromethanopterin(3-)	2
+C00714	Pectin	2
+CHEBI:15882	phenol	2
+C00492	Raffinose	2
+C03117	GDP-6-deoxy-D-mannose	2
+CHEBI:52020	6-decylubiquinone	2
+CHEBI:16144	selenophosphate	2
+CHEBI:17772	(S)-tetrahydrocolumbamine	2
+CHEBI:58444	1-(sn-glycero-3-O-phosphonato)-1D-myo-inositol	2
+CHEBI:58774	3-dehydro-L-gulonate 6-phosphate	2
+CHEBI:75659	O-acyl-L-carnitine	2
+CHEBI:68687	5-phosphonato-alpha-D-ribose cyclic-1,2-phosphate(3-)	2
+CHEBI:33190	3-oxopropanoate	2
+C09382	Costunolide	2
+CHEBI:75920	(R,R)-2-methyl-6-phytylhydroquinone	2
+CHEBI:58252	S-methyl-L-methionine zwitterion	2
+CHEBI:58905	S-sulfanylglutathionate(1-)	2
+C04732	5-Amino-6-(1-D-ribitylamino)uracil	2
+CHEBI:57478	alpha-maltose 6'-phosphate(2-)	2
+CHEBI:61506	ADP-L-glycero-beta-D-manno-heptose(2-)	2
+CHEBI:58136	2,5-dioxopentanoate	2
+C01040	L-Gulono-1,4-lactone	2
+CHEBI:78440	S-methyl-5-thio-D-ribofuranose	2
+CHEBI:57777	1,4,5,6-tetrahydro-6-oxonicotinate	2
+CHEBI:58443	SAICAR(4-)	2
+CHEBI:57635	UDP-alpha-D-galacturonate(3-)	2
+CHEBI:58470	apigenin-7-olate	2
+CHEBI:52075	all-trans-13,14-dihydroretinol	2
+CHEBI:17194	bromochloromethane	2
+CHEBI:37575	thiamine(1+) monophosphate(2-)	2
+CHEBI:57251	(3S)-3-hydroxy-L-aspartate(1-)	2
+CHEBI:58354	4-amino-2-methyl-5-phosphonatooxymethylpyrimidine(2-)	2
+CHEBI:18048	DIMBOA	2
+CHEBI:57378	glutaryl-CoA(5-)	2
+CHEBI:57390	phenylacetyl-CoA(4-)	2
+CHEBI:29747	cholate	2
+CHEBI:37257	phytanate	2
+CHEBI:57537	N-acylneuraminate 9-phosphate(3-)	2
+CHEBI:58044	2,5-dihydroxybenzoate	2
+CHEBI:58767	N-acetyl-LL-2,6-diaminopimelate(1-)	2
+C01180	4-Methylthio-2-oxobutanoic acid	2
+CHEBI:17464	L-galactono-1,4-lactone	2
+CHEBI:7896	hexadecanoate	2
+CHEBI:17126	carnitine	2
+CHEBI:136180	N-[(+)-7-isojasmonyl]-L-isoleucinate	2
+CHEBI:18020	4-trimethylammoniobutanal	2
+CHEBI:57917	4-nitrophenolate	2
+CHEBI:17026	progesterone	2
+CHEBI:142409	S-alkyl-L-cysteine S-oxide zwitterion	2
+CHEBI:16854	3-fumarylpyruvate(2-)	2
+CHEBI:131766	(8S)-3',8-cyclo-7,8-dihydroguanosine 5'-triphosphate(4-)	2
+CHEBI:57486	4-guanidinobutanoic acid zwitterion	2
+CHEBI:16615	biotin amide	2
+CHEBI:75525	D-galactopyranuronate	2
+CHEBI:507393	taurine zwitterion	2
+CHEBI:16845	(S)-2,3,4,5-tetrahydrodipicolinate(2-)	2
+CHEBI:27957	hydroxyacetone	2
+CHEBI:58827	precorrin-2(7-)	2
+CHEBI:16945	scytalone	2
+CHEBI:58318	N-carbamoylputrescinium(1+)	2
+CHEBI:18259	N-acetyl-beta-D-galactosaminyl-(1->3)-alpha-D-galactosyl-(1->4)-beta-D-galactosyl-(1->4)-beta-D-glucosylceramide	2
+C00466	Acetoin	2
+C13309	2-Phytyl-1,4-naphthoquinone	2
+CHEBI:85986	3-deoxy-alpha-D-manno-oct-2-ulosonate	2
+CHEBI:63325	(2R,3S)-2,4',7-trihydroxyisoflavanone	2
+CHEBI:58466	2,3,2',3'-tetrakis(3-hydroxytetradecanoyl)-alpha-D-glucosaminyl-1,6-beta-D-glucosamine 1-phosphate(2-)	2
+CHEBI:64077	(R)-NADPHX(4-)	2
+CHEBI:58402	5-oxo-L-prolinate	2
+CHEBI:57377	cis-geranoyl-CoA(4-)	2
+CHEBI:60208	D-glycero-beta-D-manno-heptose 1,7-bisphosphate(4-)	2
+CHEBI:58276	4-hydroxy-4-methyl-2-oxoglutarate(2-)	2
+CHEBI:57742	guanidinoacetic acid zwitterion	2
+CHEBI:15642	4a-hydroxy-L-erythro-5,6,7,8-tetrahydrobiopterin	2
+CHEBI:57342	3-hydroxybenzoyl-CoA(4-)	2
+CHEBI:16383	cis-aconitate(3-)	2
+CHEBI:18274	2'-deoxyribonucleoside	2
+C02666	Coniferyl aldehyde	2
+CHEBI:27693	sitosterol	2
+CHEBI:58395	myricetin(1-)	2
+CHEBI:10980	(R)-3-(4-hydroxyphenyl)lactate	2
+CHEBI:57354	4-chlorobenzoyl-CoA(4-)	2
+CHEBI:58249	(S,S,S)-nicotianamine trizwitterion	2
+CHEBI:57388	oxalyl-CoA(5-)	2
+CHEBI:58708	UDP-4-amino-4-deoxy-beta-L-arabinopyranose(1-)	2
+CHEBI:48946	2-methylbutyrate	2
+C00344	Phosphatidylglycerol	2
+CHEBI:58337	5,10-(methanylylidene)tetrahydromethanopterin(2-)	2
+C00035	GDP	2
+CHEBI:138664	N-(omega-hydroxytriacontanoyl)sphingosine	2
+C00096	GDP-mannose	2
+CHEBI:18333	D-arabinitol	2
+CHEBI:50060	ent-cassa-12,15-diene	2
+CHEBI:58474	3,6-dioxocyclohexa-1,4-dien-1-olate	2
+C06424	Tetradecanoic acid	2
+CHEBI:57498	ADP alpha-D-glucoside(2-)	2
+CHEBI:17501	3,3'-dimethoxystilbene-4,4'-diol	2
+CHEBI:57695	D-ribitol 5-phosphate(2-)	2
+CHEBI:16634	raffinose	2
+C00846	3-Oxoadipate	2
+CHEBI:61185	L-pipecolic acid zwitterion	2
+C00721	Dextrin	1
+CHEBI:71402	3-phosphonatopyruvate(2-)	1
+CHEBI:44485	N-ethylmaleimide	1
+CHEBI:60721	all-trans-decaprenyl diphosphate(3-)	1
+CHEBI:16567	anthranilate	1
+CHEBI:65078	isopentenyl phosphate(2-)	1
+CHEBI:15386	(3S,4R)-3,4-dihydrophenanthrene-3,4-diol	1
+C00770	L-Idonate	1
+C17244	3-Methylthiopropyl-desulfoglucosinolate	1
+C02679	Dodecanoic acid	1
+CHEBI:5768	(1E,4E,8E)-alpha-humulene	1
+CHEBI:1617	4-hydroxy-3-octaprenylbenzoate	1
+C02133	Acyl phosphate	1
+CHEBI:35291	all-trans-retinoate	1
+C12308	Gibberellin A44	1
+CHEBI:16364	pyridine-2,5-diol	1
+CHEBI:32387	alpha-linolenate	1
+C00089	Sucrose	1
+C01710	Indan-1-ol	1
+CHEBI:58757	(9Z,11E,13S,15Z)-13-hydroperoxyoctadeca-9,11,15-trienoate	1
+CHEBI:61449	(2E,4Z)-2-hydroxy-6-oxonona-2,4-dienedioate(2-)	1
+CHEBI:17399	L-xylulose	1
+CHEBI:47291	3-chloro-D-alanine zwitterion	1
+CHEBI:75522	beta-L-galactose 1-phosphate(2-)	1
+CHEBI:58487	2'-deoxymugineate	1
+C00510	Oleoyl-CoA	1
+CHEBI:16130	DDT	1
+CHEBI:17037	(19E)-geissoschizine	1
+CHEBI:17698	chloramphenicol	1
+CHEBI:28824	stigmasterol	1
+C06239	alpha-L-Arabinose 1-phosphate	1
+CHEBI:142139	indole-3-carbonyl nitrile	1
+CHEBI:16630	3-dehydroshikimate	1
+CHEBI:83898	UDP-N-acetyl-alpha-D-muramoyl-L-alaninate(3-)	1
+CHEBI:28646	ammeline	1
+CHEBI:16450	2'-deoxyuridine	1
+CHEBI:17681	pyridine-2,6-diol	1
+CHEBI:52052	phenylacetone	1
+C00061	FMN	1
+C04563	D-myo-Inositol 1,2,4,5,6-pentakisphosphate	1
+CHEBI:57367	acryloyl-CoA(4-)	1
+CHEBI:58380	pseudouridine 5'-phosphate(2-)	1
+CHEBI:58266	5-hydroxy-L-tryptophan zwitterion	1
+C01944	Octanoyl-CoA	1
+CHEBI:58090	L-cysteate(1-)	1
+CHEBI:58502	adenosylcobinamide phosphate(1-)	1
+CHEBI:57449	(5Z,9E,14Z)-(8xi,11R,12S)-11,12-epoxy-8-hydroxyicosa-5,9,14-trienoate	1
+C00307	CDP-choline	1
+C02477	alpha-Tocopherol	1
+C00186	(S)-Lactate	1
+CHEBI:48716	9,9'-di-cis-zeta-carotene	1
+C14519	1-Hydroxypyrene	1
+CHEBI:15389	(-)-trans-carveol	1
+CHEBI:48999	4-hydroxyphenylacetate	1
+CHEBI:58640	pelargonidin 3-O-(6-O-caffeoyl-beta-D-glucoside) 5-O-beta-D-glucoside betaine	1
+CHEBI:5411	gluconapin(1-)	1
+CHEBI:77620	5-oxido-6-methylpyridinium-3,4-dicarboxylate	1
+C00261	Benzaldehyde	1
+C02110	11-cis-Retinal	1
+CHEBI:71685	L-4-hydroxy-2-oxoglutarate(2-)	1
+CHEBI:63664	taxusin	1
+CHEBI:16512	(S)-N-methylcanadine	1
+CHEBI:16699	2-dehydro-3-deoxy-D-arabinonate	1
+C00049	L-Aspartate	1
+CHEBI:47693	keto-D-tagatose	1
+CHEBI:57822	D-alanyl-D-alanine zwitterion	1
+C03875	Myosin light chain phosphate	1
+CHEBI:58698	molybdopterin(3-)	1
+CHEBI:73933	dTDP-alpha-D-fucose(2-)	1
+C00170	5'-Methylthioadenosine	1
+CHEBI:58766	4-O-phosphonato-D-erythronate(3-)	1
+CHEBI:133752	epsilon-(gamma-glutamyl)lysine dizwitterion	1
+CHEBI:36702	2-acyl-1-alkyl-sn-glycero-3-phosphocholine	1
+CHEBI:58083	glycerol 2-phosphate(2-)	1
+CHEBI:18313	alpha-D-galactosyl-(1->4)-beta-D-galactosyl-(1->4)-beta-D-glucosylceramide	1
+CHEBI:2311	Oplophorus luciferin	1
+CHEBI:77268	pristanate	1
+C00777	Retinoate	1
+CHEBI:17360	D-altronate	1
+CHEBI:17325	3-hydroxy-3-methylglutarate(2-)	1
+C00346	Ethanolamine phosphate	1
+CHEBI:58176	phenylthioacetohydroximate	1
+CHEBI:57555	L-2-amino-4-chloropent-4-enoic acid zwitterion	1
+CHEBI:18370	7-deoxyloganin	1
+CHEBI:61593	D-glycero-beta-D-manno-heptose 1-phosphate(2-)	1
+CHEBI:31157	(+)-abscisic aldehyde	1
+C21746	8-Methylthiooctyl-desulfoglucosinolate	1
+CHEBI:57823	4-CDP-2-C-methyl-D-erythritol(2-)	1
+CHEBI:15420	perillyl alcohol	1
+CHEBI:50067	9beta-pimara-7,15-diene	1
+CHEBI:32304	2-cis,4-trans-xanthoxin	1
+CHEBI:57993	(S)-N-methylcoclaurinium(1+)	1
+C00262	Hypoxanthine	1
+C11863	Gibberellin A9	1
+CHEBI:42677	(2R)-2-hydroxypropylammonium	1
+C09094	Geranylgeraniol	1
+CHEBI:60189	4-(4-deoxy-alpha-D-gluc-4-enosyluronic acid)-D-galacturonate(2-)	1
+C03808	[Pyruvate kinase] phosphate	1
+C19846	Pimeloyl-[acyl-carrier protein] methyl ester	1
+CHEBI:58141	P(1),P(4)-bis(5'-adenosyl) tetraphosphate(4-)	1
+CHEBI:41117	N-benzylformamide	1
+CHEBI:18298	3-hydroxy-2-methyl-3-phytyl-2,3-dihydro-1,4-naphthoquinone	1
+CHEBI:61085	3-sulfino-L-alanine(1-)	1
+C04145	all-trans-Nonaprenyl diphosphate	1
+CHEBI:58572	N-[(5S)-5-ammonio-5-carboxylatopentanoyl]-L-cysteinyl-D-valinate	1
+C00253	Nicotinate	1
+CHEBI:58311	(2R)-CDP-glycerol(2-)	1
+CHEBI:15903	beta-D-glucose	1
+C00143	5,10-Methylenetetrahydrofolate	1
+CHEBI:57792	1-deoxy-D-xylulose 5-phosphate(2-)	1
+CHEBI:16727	3-maleylpyruvate(2-)	1
+C00047	L-Lysine	1
+C02280	GDP-L-galactose	1
+CHEBI:16190	cis-cyclohexa-3,5-diene-1,2-diol	1
+CHEBI:16880	L-ribulose	1
+C08060	Carbazole	1
+CHEBI:62510	2-O-(alpha-D-glucopyranosyl)-D-glycerate	1
+CHEBI:76819	demethylmacrocin(1+)	1
+C00843	(-)-Menthone	1
+CHEBI:59904	7,8-didemethyl-8-hydroxy-5-deazariboflavin(1-)	1
+CHEBI:76820	macrocin(1+)	1
+C07098	2,4,6-Trichlorophenol	1
+C00148	L-Proline	1
+CHEBI:16737	creatinine	1
+CHEBI:17512	methyl 2-O-alpha-L-fucopyranosyl-beta-D-galactoside	1
+CHEBI:85312	beta-D-galacturonate	1
+CHEBI:68688	alpha-D-ribose 1,5-bisphosphate(4-)	1
+C00738	D-Hexose	1
+CHEBI:60365	(KDO)2-lipid IVA(6-)	1
+CHEBI:16415	protopine	1
+CHEBI:57559	alpha-D-xylose 1-phosphate(2-)	1
+CHEBI:142464	8beta-hydroxygermacra-1(10),4,11(13)-trien-12-oate	1
+CHEBI:77862	gossypetin(1-)	1
+CHEBI:60492	magnesium protoporphyrin(2-)	1
+CHEBI:16546	1-O-sinapoyl-beta-D-glucose	1
+CHEBI:15588	(R)-malate(2-)	1
+CHEBI:18112	2-aminophenol	1
+C03169	Pyrimidine nucleoside	1
+C15668	1-Pyrroline	1
+C00119	5-Phospho-alpha-D-ribose 1-diphosphate	1
+C07086	Phenylacetic acid	1
+CHEBI:58703	7-ammoniomethyl-7-deazaguanine	1
+CHEBI:36234	chenodeoxycholate	1
+CHEBI:143701	enolpyruvoyl-2-diphospho-5'-guanosine(3-)	1
+CHEBI:17100	L-arabinono-1,4-lactone	1
+CHEBI:18052	loganate	1
+CHEBI:57518	1-palmitoyl-sn-glycerol 3-phosphate(2-)	1
+CHEBI:60083	galactitol 1-phosphate(2-)	1
+CHEBI:16408	vomilenine	1
+CHEBI:57604	3-phosphonato-D-glyceroyl phosphate(4-)	1
+CHEBI:36165	pimelate(2-)	1
+CHEBI:57268	beta-L-fucose 1-phosphate(2-)	1
+CHEBI:16808	2-dehydro-D-gluconate	1
+CHEBI:77133	6-deoxy-6-sulfo-D-fructofuranose(1-)	1
+CHEBI:58239	16-hydroxytabersoninium	1
+CHEBI:17168	5alpha-cholest-7-en-3beta-ol	1
+CHEBI:17179	taurolithocholate	1
+CHEBI:17907	styrene oxide	1
+CHEBI:57897	1-phosphonato-alpha-D-glucuronate(3-)	1
+CHEBI:65244	zeinoxanthin	1
+CHEBI:58709	UDP-4-deoxy-4-formamido-beta-L-arabinopyranose(2-)	1
+C01087	(R)-2-Hydroxyglutarate	1
+CHEBI:15429	hydroxylamine	1
+CHEBI:18107	xanthosine	1
+C07328	3-Methylbutanol	1
+CHEBI:137981	5-amino-1-(5-phosphonato-beta-D-ribosyl)imidazol-3-ium	1
+CHEBI:60204	D-glycero-beta-D-manno-heptose 7-phosphate(2-)	1
+CHEBI:55458	1-(beta-D-ribofuranosyl)-1,4-dihydronicotinamide	1
+C05803	2-Hexaprenyl-6-methoxy-1,4-benzoquinone	1
+CHEBI:58730	5-carboxylatoamino-1-(5-O-phosphonato-D-ribosyl)imidazole(3-)	1
+CHEBI:17319	5'-deoxyadenosine	1
+CHEBI:16881	1H-indole	1
+CHEBI:28818	(24R)-24,25-dihydroxycalciol	1
+CHEBI:58225	alpha-D-glucose 6-phosphate(2-)	1
+CHEBI:15992	1-hydroxy-2-naphthoate	1
+CHEBI:62417	arabidiol	1
+CHEBI:11173	1,4-dihydroxy-2-naphthoate	1
+CHEBI:16095	sepiapterin	1
+CHEBI:57279	3-ammonio-2-oxopropyl phosphate(1-)	1
+CHEBI:40822	aldehydo-D-allose	1
+CHEBI:16569	3-hydroxyquinolin-4(1H)-one	1
+CHEBI:75434	phytyl diphosphate(3-)	1
+CHEBI:57922	coenzyme gamma-F420-2(5-)	1
+C11811	1-Hydroxy-2-methyl-2-butenyl 4-diphosphate	1
+CHEBI:58828	5-(methylsulfanyl)-2,3-dioxopentyl phosphate(2-)	1
+CHEBI:27789	1,2-dichloroethane	1
+CHEBI:58056	2-methylideneglutarate(2-)	1
+CHEBI:58763	N-(3-carboxylatopropanoyl)-L-glutamate(3-)	1
+CHEBI:15771	loganin	1
+C00449	N6-(L-1,3-Dicarboxypropyl)-L-lysine	1
+CHEBI:58533	S-methyl-5-thio-alpha-D-ribose 1-phosphate(2-)	1
+CHEBI:50783	ent-isokaurene	1
+CHEBI:1235	2-methoxy-6-(all-trans-octaprenyl)phenol	1
+CHEBI:50436	10beta-hydroxytaxa-4(20),11-dien-5alpha-yl acetate	1
+CHEBI:16456	2-(2-hydroxyacyl)sphingosine	1
+CHEBI:58125	3-hydroxy-L-kynurenine zwitterion	1
+CHEBI:58821	terpentedienyl diphosphate(3-)	1
+CHEBI:16425	16-epivellosimine	1
+CHEBI:17352	(R)-mandelamide	1
+C02737	Phosphatidylserine	1
+CHEBI:28802	flavonols	1
+CHEBI:17529	kievitone hydrate	1
+C00118	D-Glyceraldehyde 3-phosphate	1
+CHEBI:15402	(+)-neomenthol	1
+CHEBI:83905	UDP-N-acetyl-alpha-D-muramoyl-L-alanyl-D-gamma-glutamyl-meso-2,6-diaminoheptanedioate(4-)	1
+C15992	Cholesterol-5alpha,6alpha-epoxide	1
+C21650	7-Methylthioheptyl-desulfoglucosinolate	1
+C18218	16-Hydroxypalmitate	1
+CHEBI:17184	chlordecone alcohol	1
+C00583	Propane-1,2-diol	1
+CHEBI:58029	cysteaminium	1
+CHEBI:143285	L-propargylglycine zwitterion	1
+C02035	Gibberellin A20	1
+CHEBI:35173	2-dehydro-3-deoxy-L-arabinonate	1
+CHEBI:58304	2-oxo-2H-pyran-4,6-dicarboxylate	1
+CHEBI:29484	(S)-4,5-dihydroxypentane-2,3-dione	1
+CHEBI:58383	phosphonoacetaldehyde(1-)	1
+CHEBI:83903	UDP-N-acetyl-alpha-D-muramoyl-L-alanyl-D-gamma-glutamyl-L-lysinate(3-)	1
+CHEBI:15409	(-)-menthol	1
+CHEBI:25941	peroxynitrite	1
+CHEBI:57488	hydrogen phosphonatoacetate(2-)	1
+C00091	Succinyl-CoA	1
+CHEBI:17180	3-hydroxypyruvate	1
+C13050	Cyclic ADP-ribose	1
+CHEBI:16157	D-arabinonate	1
+CHEBI:28885	butan-1-ol	1
+C00064	L-Glutamine	1
+CHEBI:28034	beta-D-galactoside	1
+CHEBI:58695	D-tagatofuranose 6-phosphate(2-)	1
+CHEBI:58241	N(2)-(3-carboxylatopropionyl)-L-arginine(1-)	1
+CHEBI:50446	3-(hydroxyamino)phenol	1
+C03701	Glycosyl-N-acylsphingosine	1
+CHEBI:57581	(S)-coclaurinium	1
+CHEBI:68623	UDP-N-acetyl-alpha-D-mannosamine(2-)	1
+C01499	Geranial	1
+CHEBI:57315	(R)-3-hydroxybutanoyl-CoA(4-)	1
+CHEBI:16496	5beta-cholestane-3alpha,7alpha,12alpha-triol	1
+CHEBI:58366	deacetylcephalosporin C(1-)	1
+C03943	(2R,4S)-2,4-Diaminopentanoate	1
+CHEBI:58800	4-(L-gamma-glutamylamino)butanoate	1
+CHEBI:57406	prostaglandin D2(1-)	1
+CHEBI:57312	(2S,3S)-3-hydroxy-2-methylbutanoyl-CoA(4-)	1
+CHEBI:57781	N-methylethanolaminium phosphate(1-)	1
+CHEBI:58391	all-trans-nonaprenyl diphosphate(3-)	1
+CHEBI:14272	fluoroacetaldehyde	1
+CHEBI:15781	N(alpha),N(alpha),N(alpha)-trimethyl-L-histidine	1
+CHEBI:25224	methanesulfonate	1
+CHEBI:30924	L-tartrate(2-)	1
+CHEBI:61519	D-psicose 6-phosphate(2-)	1
+CHEBI:58528	3-hydroxypropanoyl-CoA(4-)	1
+CHEBI:15360	acetylpyruvate	1
+CHEBI:16653	cycloeucalenol	1
+CHEBI:17945	N-cyclohexylformamide	1
+CHEBI:57412	(3S,4R)-3,4-dihydroxycyclohexa-1,5-diene-1,4-dicarboxylate	1
+CHEBI:58530	gentamycin C1a(5+)	1
+CHEBI:72587	(R)-noradrenaline(1+)	1
+CHEBI:15415	ent-kaurene	1
+C00190	UDP-D-xylose	1
+CHEBI:17716	lactose	1
+CHEBI:17802	pseudouridine	1
+CHEBI:61378	2'-(5-triphosphoribosyl)-3'-dephospho-CoA(6-)	1
+CHEBI:61502	heptosyl-(KDO)2-lipid A(6-)	1
+CHEBI:83836	UDP-beta-L-rhamnose(2-)	1
+CHEBI:87305	trans-feruloyl-CoA(4-)	1
+CHEBI:58098	2-dehydro-3-deoxy-D-glucarate(2-)	1
+CHEBI:16188	octan-1-ol	1
+CHEBI:57698	2-(acetamidomethylidene)succinate(2-)	1
+C03197	(S)-3-Hydroxybutanoate	1
+CHEBI:57818	5,10-methylenetetrahydromethanopterin(3-)	1
+CHEBI:74299	geranyllinalool	1
+CHEBI:52026	amorpha-4,11-diene	1
+CHEBI:37619	L-galactopyranose	1
+CHEBI:57252	(E)-cinnamoyl-CoA(4-)	1
+C17248	4-Methylthiobutyl-desulfoglucosinolate	1
+C01390	Prenol	1
+CHEBI:82706	hercynylcysteine sulfoxide zwitterion	1
+C06561	Naringenin chalcone	1
+C00009	Orthophosphate	1
+C03057	2-Carboxybenzaldehyde	1
+CHEBI:78604	ursodeoxycholate	1
+CHEBI:58313	L-rhamnulose 1-phosphate(2-)	1
+CHEBI:17924	D-glucitol	1
+CHEBI:85985	3-deoxy-alpha-D-manno-2-octulosonate-8-phosphate(3-)	1
+CHEBI:17488	scopoletin	1
+CHEBI:15890	5,6-dimethylbenzimidazole	1
+CHEBI:61586	S-(hydroxymethyl)mycothiol	1
+CHEBI:144842	N(6)-methyl-AMP(2-)	1
+CHEBI:16501	L-arabinonate	1
+CHEBI:35372	D-fuconate	1
+CHEBI:15896	3,4-dihydroxy-9,10-secoandrosta-1,3,5(10)-triene-9,17-dione	1
+C00544	Homogentisate	1
+CHEBI:15408	(-)-isopiperitenone	1
+C00158	Citrate	1
+CHEBI:58723	2-ammonio-2-deoxy-D-glucopyranose	1
+CHEBI:18236	6-demethylsterigmatocystin	1
+CHEBI:61698	L-ascorbate 6-phosphate(3-)	1
+CHEBI:16769	2-oxoglutaramate	1
+CHEBI:17117	5-dehydro-4-deoxy-D-glucuronate	1
+CHEBI:62727	molybdopterin adenine dinucleotide(3-)	1
+CHEBI:58452	4-(phosphonatooxy)-L-threonine(2-)	1
+CHEBI:58628	5-diphospho-1D-myo-inositol pentakisphosphate(13-)	1
+C01847	Reduced FMN	1
+C11554	1-Phosphatidyl-1D-myo-inositol 3,4-bisphosphate	1
+CHEBI:57541	2-(alpha-D-mannosyl)-D-glycerate	1
+CHEBI:46994	D-arabinopyranose	1
+C16234	o-Nitrobenzoate	1
+CHEBI:16744	pregna-4,9(11)-diene-3,20-dione	1
+C00527	Glutaryl-CoA	1
+C19669	Thermospermine	1
+CHEBI:59953	thebaine(1+)	1
+CHEBI:35596	(+)-pulegone	1
+CHEBI:57397	prostaglandin E1(1-)	1
+CHEBI:61998	glucosyl-heptosyl-4-phosphonatoheptosyl-(KDO)2-lipid A(8-)	1
+CHEBI:17437	dimethyl sulfide	1
+CHEBI:17790	methanol	1
+C06711	Fluoren-9-ol	1
+CHEBI:30936	L-citramalate(2-)	1
+CHEBI:82705	hercynylselenocysteine zwitterion	1
+CHEBI:42548	alpha-L-fucose	1
+CHEBI:57351	4,8,12-trimethyltridecanoyl-CoA(4-)	1
+CHEBI:86339	D-5-monosubstituted hydantoin	1
+CHEBI:16812	(S,S)-butane-2,3-diol	1
+C11952	(+)-Isomenthone	1
+C00167	UDP-glucuronate	1
+CHEBI:17941	diisopropyl fluorophosphate	1
+CHEBI:13248	anilide	1
+CHEBI:58469	1D-myo-inositol 4-phosphate(2-)	1
+CHEBI:58514	N(2)-succinyl-L-ornithinate(1-)	1
+CHEBI:36264	molybdate	1
+C02274	Dihydrocoumarin	1
+CHEBI:58431	jasmonate(1-)	1
+CHEBI:58761	L-2,4-diazaniumylbutyrate	1
+C07609	Parthenolide	1
+CHEBI:17113	erythritol	1
+CHEBI:61283	baicalin(1-)	1
+CHEBI:61985	4-carboxy-2-hydroxymuconate semialdehyde hemiacetal(2-)	1
+C15547	1,4-Dihydroxy-2-naphthoyl-CoA	1
+C00022	Pyruvate	1
+C21008	7,8-Dihydromonapterin	1
+CHEBI:57493	pseudotropinium	1
+CHEBI:11009	(R)-3-phenyllactate	1
+CHEBI:59967	ADP-D-glycero-beta-D-manno-heptose(2-)	1
+CHEBI:17617	L-fuculose	1
+CHEBI:57566	2'-deoxycytosine 5'-monophosphate(2-)	1
+C00458	dCTP	1
+CHEBI:80291	aliphatic nitrile	1
+CHEBI:61450	(2E,4Z,7E)-2-hydroxy-6-oxonona-2,4,7-trienedioate(2-)	1
+CHEBI:57895	1D-myo-inositol 1,3,4,5-tetrakisphosphate(8-)	1
+CHEBI:83374	all-cis-polyprenyl diphosphate(3-)	1
+CHEBI:16031	indole-3-acetamide	1
+C00603	(S)-Ureidoglycolate	1
+CHEBI:64235	(6E)-8-hydroxygeraniol	1
+CHEBI:58195	S-(5-deoxy-D-ribos-5-yl)-L-homocysteine zwitterion	1
+CHEBI:60377	cytidine 5'-monophosphate(2-)	1
+CHEBI:58038	Photinus luciferin(1-)	1
+CHEBI:61313	C21-steroid	1
+CHEBI:18138	biuret	1
+CHEBI:11060	(S)-carnitine	1
+CHEBI:17821	thymine	1
+CHEBI:58764	(2S,3S)-2,3-dihydroxy-2,3-dihydrobenzoate	1
+CHEBI:16789	aldehydo-D-lyxose	1
+CHEBI:17276	phloretin	1
+CHEBI:16109	propane-1,3-diol	1
+CHEBI:17670	1,2-diacyl-3-O-(alpha-D-glucosyl)-sn-glycerol	1
+CHEBI:16639	4-methoxybenzoate	1
+CHEBI:17890	tryptophol	1
+CHEBI:64283	copal-8-ol diphosphate(3-)	1
+CHEBI:27547	zeaxanthin	1
+C00082	L-Tyrosine	1
+C06672	Vanillate	1
+C14448	Glyoxal	1
+CHEBI:58463	(7S)-salutaridinol(1+)	1
+C18910	2,5-Diamino-6-(5-phospho-D-ribitylamino)pyrimidin-4(3H)-one	1
+CHEBI:59907	F420-0(3-)	1
+C00100	Propanoyl-CoA	1
+CHEBI:16871	4-pyridoxolactone	1
+CHEBI:17237	(E)-4-(trimethylammonio)but-2-enoate	1
+C00072	Ascorbate	1
+C11429	Phenanthrene-9,10-oxide	1
+CHEBI:17396	(R)-prunasin	1
+CHEBI:58371	2-dehydro-3-deoxy-L-rhamnonate	1
+CHEBI:57820	N(6)-hydroxy-L-lysine zwitterion	1
+CHEBI:30612	D-glucarate(2-)	1
+CHEBI:37547	L-altrarate(2-)	1
+C00376	Retinal	1
+C06058	Nitroalkane	1
+CHEBI:73682	L-threonylcarbamoyladenylate(2-)	1
+CHEBI:16786	vestitone	1
+C00109	2-Oxobutanoate	1
+CHEBI:68686	alpha-D-ribose 1-methylphosphonate 5-phosphate(3-)	1
+CHEBI:18185	gamma-tocopherol	1
+CHEBI:29749	trans-ferulate	1
+CHEBI:48300	D-threitol	1
+CHEBI:68684	methylphosphonate(1-)	1
+CHEBI:57741	phenylethanolaminium	1
+CHEBI:58118	L-rhamnonate	1
+CHEBI:136514	indol-3-ylmethylamine(1+)	1
+CHEBI:57901	L-threo-3-phenylserine zwitterion	1
+CHEBI:60032	undecaprenyldiphosphonato-N-acetylmuramoyl-L-alanyl-D-gamma-glutamyl-L-lysyl-D-alanyl-D-alanine(3-)	1
+CHEBI:46951	3-(2,3-dihydroxyphenyl)propanoate	1
+CHEBI:57439	(3Z)-phytochromobilin(2-)	1
+CHEBI:78345	D-ribofuranose-2,5-bisphosphate(4-)	1
+CHEBI:8298	poly[(R)-3-hydroxybutanoate]	1
+CHEBI:88052	prenyl phosphate(2-)	1
+CHEBI:16353	sinapine	1
+CHEBI:40407	2-octaprenylphenol	1
+CHEBI:70784	CDP-alpha-D-abequose(2-)	1
+CHEBI:57596	dTDP-4-amino-4,6-dideoxy-D-galactose(1-)	1
+C01243	1D-myo-Inositol 1,3,4-trisphosphate	1
+CHEBI:57371	butyryl-CoA(4-)	1
+CHEBI:57511	cephalosporin C(1-)	1
+CHEBI:16829	polyneuridine aldehyde	1
+CHEBI:6178	L-arabinofuranose	1
+CHEBI:58075	2-hydroxy-4-oxobutane-1,2,4-tricarboxylate	1
+C00404	Polyphosphate	1
+CHEBI:15687	(S)-acetoin	1
+CHEBI:61540	palmitoleoyl-CoA(4-)	1
+CHEBI:57745	4-hydroxy-1-pyrroline-2-carboxylate	1
+CHEBI:57637	2-methylene-3-methylsuccinate(2-)	1
+CHEBI:17400	raucaffricine	1
+C01500	Geraniol	1
+CHEBI:18450	(R)-mandelonitrile	1
+C00580	Dimethyl sulfide	1
+CHEBI:17597	4-hydroxybenzaldehyde	1
+CHEBI:16724	4-hydroxybutyrate	1
+CHEBI:15406	(-)-trans-isopiperitenol	1
+C06026	KDO2-lipid A	1
+CHEBI:57918	alpha-ribazole 5'-phosphate(2-)	1
+CHEBI:58144	(R)-reticulinium(1+)	1
+CHEBI:30780	maleate(2-)	1
+CHEBI:58000	D-glutamine zwitterion	1
+C00334	4-Aminobutanoate	1
+CHEBI:58324	N(1)-acetylspermidinium(2+)	1
+CHEBI:17071	glycolaldehyde	1
+CHEBI:35349	7beta-hydroxy steroid	1
