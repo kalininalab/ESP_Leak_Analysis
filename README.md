@@ -142,10 +142,9 @@ on OOD data).
 
 * Output files:
 
-      ./SIP/data/2splits/train_ESPC2_2S.pkl
-      ./SIP/data/2splits/test_ESPC2_2S.pkl
-      ./SIP/data/Reports/split_report/Report_ESPC2_2S.log
-* The `ESPC2` emphasizes that the combined data of `C2` are used to perform the `ESP` split.
+      ./SIP/data/2splits/train_ESP_2S.pkl
+      ./SIP/data/2splits/test_ESP_2S.pkl
+      ./SIP/data/Reports/split_report/Report_ESP_2S.log
 
 
 ## Hyperparameter optimization and model training
@@ -153,9 +152,9 @@ on OOD data).
 ### 3-1-HyperOp_TraningXgb_2Splits.py
 * This script aims to tune the hyperparameters and train xgboost model for each split methods produced under 2 splits (train:test) scenario
 
-       python 3-1-HyperOp_TraningXgb_2Splits.py --split-data [C2,C1e, C1f, I1e, I1f,ESP, ESPC1f, ESPC2] --column-name [ECFP, PreGNN] --Data-ATP [NoATP, D3408]
+       python 3-1-HyperOp_TraningXgb_2Splits.py --split-data [C2,C1e, C1f, I1e, I1f,ESP, ESPC2] --column-name [ECFP, PreGNN]
 * Explanation of Arguments:
-* `--split-data` and `--Data-ATP` are same as before 
+* `--split-data` is same as before 
 * `--column-name` determines which embedded vector for the molecule should be concatenated with the ESMb1ts vector for hyperparameter optimization and training.
 ### 3-2-HyperOp_TraningXgb_3Splits.py
 * This script aims to tune the hyperparameters and train xgboost model for each split methods produced under 3 splits (train:test:val) scenario
