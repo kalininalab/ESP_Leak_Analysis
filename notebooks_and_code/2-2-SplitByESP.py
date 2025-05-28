@@ -34,26 +34,24 @@ def main(args):
     CURRENT_DIR = os.getcwd()
     input_path = args.input_path
     df_name = input_path.split("/")[-1]
-    Data_suffix = ""
-    if "_" in df_name:
-        Data_suffix = "_" + df_name.split(".")[0].split("_")[-1]
+
     split_size = args.split_size
     if len(split_size) not in [2, 3]:
         raise ValueError("The split-size argument must be a list of either two or three integers.")
 
     log_file = os.path.join(CURRENT_DIR, "..", "data", "Reports", "split_report",
-                            f"Report_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.log")
+                            f"Report_ESP{"C2" if "C2" in df_name else ""}_{len(split_size)}S.log")
     if os.path.exists(log_file):
         os.remove(log_file)
     setup_logging(log_file)
     logging.info(f"Current Directory: {CURRENT_DIR}")
 
     train_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                     f"train_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.pkl")
+                                     f"train_ESP{"C2" if "C2" in df_name else ""}_{len(split_size)}S.pkl")
     test_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                    f"test_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.pkl")
+                                    f"test_ESP{"C2" if "C2" in df_name else ""}_{len(split_size)}S.pkl")
     val_output_file = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                                   f"val_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.pkl")
+                                   f"val_ESP{"C2" if "C2" in df_name else ""}_{len(split_size)}S.pkl")
 
     data = pd.read_pickle(input_path)
     data.drop(columns=["ids"], inplace=True)
@@ -62,7 +60,7 @@ def main(args):
     logging.info(f"Start Clustering the data with CD-HIT")
     ofile = open(
         join(CURRENT_DIR, "..", "data", "clusters",
-             f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.fasta"), "w")
+             f"all_sequences_ESP{"C2" if "C2" in df_name else ""}_{len(split_size)}S.fasta"), "w")
 
     for ind in data.index:
         seq = data["Sequence"][ind]
@@ -76,7 +74,7 @@ def main(args):
     start_folder = cluster_folder
     cluster_all_levels(start_folder,
                        cluster_folder,
-                       filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S")
+                       filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}_{len(split_size)}S")
 
     cluster_folder = join(CURRENT_DIR, "..", "data", "clusters")
 
@@ -84,30 +82,30 @@ def main(args):
     start_folder = cluster_folder
     cluster_all_levels_80(start_folder,
                           cluster_folder,
-                          filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S")
+                          filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}_{len(split_size)}S")
 
     # collect cluster members
     df_80 = find_cluster_members_80(folder=cluster_folder,
-                                    filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S")
+                                    filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}_{len(split_size)}S")
     logging.info(f"Clustering report for 80% similarity\n{df_80.describe()}")
 
     cluster_all_levels_60(start_folder,
                           cluster_folder,
-                          filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S")
+                          filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}_{len(split_size)}S")
 
     # collect cluster members
     df_60 = find_cluster_members_60(folder=cluster_folder,
-                                    filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S")
+                                    filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}_{len(split_size)}S")
     logging.info(f"Clustering report for 60% similarity\n{df_60.describe()}")
 
     # cluster the fasta files
     cluster_all_levels(start_folder,
                        cluster_folder,
-                       filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S")
+                       filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}_{len(split_size)}S")
 
     # collect cluster members
     df_40 = find_cluster_members(folder=cluster_folder,
-                                 filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S")
+                                 filename=f"all_sequences_ESP{"C2" if "C2" in df_name else ""}_{len(split_size)}S")
 
     logging.info(f"Clustering report for 40% similarity\n{df_40.describe()}")
 
@@ -197,7 +195,7 @@ def main(args):
             None
 
     data.to_pickle(join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits",
-                        f"SeqIdentities_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.pkl"))
+                        f"SeqIdentities_ESP{"C2" if "C2" in df_name else ""}_{len(split_size)}S.pkl"))
 
     if len(split_size) == 2:
         result, total_samples, test_ratio = two_split_report(train, test)
@@ -286,7 +284,7 @@ def main(args):
     init()
     logging.info(
         Fore.GREEN + f"***** PROCESS COMPLETED: For an overview, "
-                     f"please review the Report_ESP{"C2" if "C2" in df_name else ""}{Data_suffix}_{len(split_size)}S.log file in "
+                     f"please review the Report_ESP{"C2" if "C2" in df_name else ""}_{len(split_size)}S.log file in "
                      f"Reports folder. *****" + Style.RESET_ALL)
 
 

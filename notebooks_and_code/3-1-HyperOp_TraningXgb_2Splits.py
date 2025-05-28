@@ -96,12 +96,12 @@ def create_input_and_output_data(df, column):
     return x, y
 
 
-def customized_cross_validation(train_set, CV_col,split_data,Data_Eng, save_indices=True, ndp=None):
+def customized_cross_validation(train_set, CV_col,split_data, save_indices=True, ndp=None):
     current_dir = os.getcwd()
     train_indices = [[], [], [], [], []]
     test_indices = [[], [], [], [], []]
-    split_file_train = os.path.join(current_dir, "..", "data", f"2splits_{ndp}", f"CV_train_indices_{split_data}{Data_Eng}_{CV_col}.pkl")
-    split_file_val = os.path.join(current_dir, "..", "data", f"2splits_{ndp}", f"CV_test_indices_{split_data}{Data_Eng}_{CV_col}.pkl")
+    split_file_train = os.path.join(current_dir, "..", "data", f"2splits_{ndp}", f"CV_train_indices_{split_data}_{CV_col}.pkl")
+    split_file_val = os.path.join(current_dir, "..", "data", f"2splits_{ndp}", f"CV_test_indices_{split_data}_{CV_col}.pkl")
     if save_indices:
         data_train2 = train_set.copy()
         data_train2 = array_column_to_strings(data_train2, column=CV_col)
@@ -181,9 +181,8 @@ def cross_validation_neg_acc_gradient_boosting(param, train_indices, test_indice
 def main(args):
     current_dir = os.getcwd()
     split_data = args.split_data
-    Data_Eng = f"_{args.Data_EnCof}" if args.Data_EnCof else ""
     column_name = args.column_name
-    wandb.init(project='ESP', entity='vahid-atabaigi', name=f"ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S")
+    wandb.init(project='ESP', entity='vahid-atabaigi', name=f"ESM1b_ts_{column_name}_{split_data}_2S")
     column_cv = None
     if split_data in ["C1f", "I1f", "ESP", "ESPC2"]:
         column_cv = "ESM1b_ts"
@@ -193,7 +192,7 @@ def main(args):
         column_cv = "ECFP"
     report_path = join(current_dir, "..", "data", "Reports", f"hyperOp_report")
     os.makedirs(report_path, exist_ok=True)
-    logging.basicConfig(filename=join(report_path, f"HOP_ESM1bts_and_{column_name}_{split_data}{Data_Eng}_2S.log"),
+    logging.basicConfig(filename=join(report_path, f"HOP_ESM1bts_and_{column_name}_{split_data}_2S.log"),
                         level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     console_handler = logging.StreamHandler()
@@ -202,8 +201,8 @@ def main(args):
     logging.getLogger().addHandler(console_handler)
     split_path = join(current_dir, "..", "data", f"2splits")
     os.makedirs(split_path, exist_ok=True)
-    df_train = load_data(join(split_path, f"train_{split_data}{Data_Eng}_2S.pkl"), column=column_name)
-    df_test = load_data(join(split_path, f"test_{split_data}{Data_Eng}_2S.pkl"), column=column_name)
+    df_train = load_data(join(split_path, f"train_{split_data}_2S.pkl"), column=column_name)
+    df_test = load_data(join(split_path, f"test_{split_data}_2S.pkl"), column=column_name)
 
     train_x, train_y = create_input_and_output_data(df=df_train, column=column_name)
     test_x, test_y = create_input_and_output_data(df=df_test, column=column_name)
@@ -222,8 +221,8 @@ def main(args):
 
     # Load or save CV indices once
     save_indices = not os.path.exists(
-        os.path.join(split_path, f"CV_train_indices_{split_data}{Data_Eng}_{column_cv}.pkl"))
-    train_indices, test_indices = customized_cross_validation(df_train, column_cv,split_data, Data_Eng, save_indices)
+        os.path.join(split_path, f"CV_train_indices_{split_data}_{column_cv}.pkl"))
+    train_indices, test_indices = customized_cross_validation(df_train, column_cv,split_data, save_indices)
 
 
     # Defining search space for hyperparameter optimization
@@ -303,11 +302,11 @@ def main(args):
 
     results_path = join(current_dir, "..", "data", f"training_results_2S")
     os.makedirs(results_path, exist_ok=True)
-    np.save(join(results_path, f"acc_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"),
+    np.save(join(results_path, f"acc_CV_xgboost_ESM1b_ts_{column_name}_{split_data}_2S.npy"),
             np.array(accuracy))
-    np.save(join(results_path, f"loss_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"),
+    np.save(join(results_path, f"loss_CV_xgboost_ESM1b_ts_{column_name}_{split_data}_2S.npy"),
             np.array(loss))
-    np.save(join(results_path, f"ROC_AUC_CV_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"),
+    np.save(join(results_path, f"ROC_AUC_CV_xgboost_ESM1b_ts_{column_name}_{split_data}_2S.npy"),
             np.array(roc_auc))
     dtrain = xgb.DMatrix(np.array(train_x), weight=weights, label=np.array(train_y),
                          feature_names=feature_names)
@@ -322,9 +321,9 @@ def main(args):
 
     print("Accuracy on test set: %s, ROC-AUC score for test set: %s, MCC: %s" % (acc_test, roc_auc, mcc))
 
-    np.save(join(results_path, f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"),
+    np.save(join(results_path, f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{split_data}_2S.npy"),
             bst.predict(dtest))
-    np.save(join(results_path, f"y_test_true_xgboost_ESM1b_ts_{column_name}_{split_data}{Data_Eng}_2S.npy"),
+    np.save(join(results_path, f"y_test_true_xgboost_ESM1b_ts_{column_name}_{split_data}_2S.npy"),
             test_y)
 
 
@@ -337,7 +336,5 @@ if __name__ == "__main__":
     parser.add_argument('--column-name', type=str, required=True,
                         help="This argument selects the embedded vector for molecules to concatenate with the ESM1bts,"
                              " column name should be one of [ ECFP , PreGNN]")
-    parser.add_argument('--Data-EnCof', default="", type=str, required=False,
-                        help="The Dataframe without energy (NoEnCof) and its ground true D6964 ")
     args = parser.parse_args()
     main(args)

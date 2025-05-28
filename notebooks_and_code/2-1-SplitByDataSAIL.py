@@ -34,14 +34,12 @@ def main(args):
     epsilon = args.epsilon_value
     delta = args.delta_value
     strat = args.strat
-    df_name = input_path.split("/")[-1]
-    Data_suffix = "_" + df_name.split(".")[0].split("_")[-1] if "_" in df_name else ""
 
     if len(split_size) not in [2, 3]:
         raise ValueError("The split-size argument must be a list of either two or three integers.")
 
     log_file = os.path.join(CURRENT_DIR, "..", "data", "Reports", f"split_report",
-                            f"Report_{split_method}{Data_suffix}_{len(split_size)}S.log")
+                            f"Report_{split_method}_{len(split_size)}S.log")
     if os.path.exists(log_file):
         os.remove(log_file)
     setup_logging(log_file)
@@ -49,9 +47,9 @@ def main(args):
 
     output_dir = os.path.join(CURRENT_DIR, "..", "data", f"{len(split_size)}splits")
     os.makedirs(output_dir, exist_ok=True)
-    train_output_file = os.path.join(output_dir, f"train_{split_method}{Data_suffix}_{len(split_size)}S.pkl")
-    test_output_file = os.path.join(output_dir, f"test_{split_method}{Data_suffix}_{len(split_size)}S.pkl")
-    val_output_file = os.path.join(output_dir, f"val_{split_method}{Data_suffix}_{len(split_size)}S.pkl")
+    train_output_file = os.path.join(output_dir, f"train_{split_method}_{len(split_size)}S.pkl")
+    test_output_file = os.path.join(output_dir, f"test_{split_method}_{len(split_size)}S.pkl")
+    val_output_file = os.path.join(output_dir, f"val_{split_method}_{len(split_size)}S.pkl")
 
     data = pd.read_pickle(input_path)
     # Start running DataSAIL ###########################
@@ -168,7 +166,7 @@ def main(args):
     init()
     logging.info(
         Fore.GREEN + f"***** PROCESS COMPLETED *****\nFor an overview,"
-                     f"please review the Report_{split_method}{Data_suffix}_{len(split_size)}S.log file in Reports"
+                     f"please review the Report_{split_method}_{len(split_size)}S.log file in Reports"
                      f"folder. " + Style.RESET_ALL)
 
 
