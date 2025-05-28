@@ -1,4 +1,4 @@
-# Substrate Inhibitor Prediction (SIP)
+# ESP Leak Analysis (SIP)
 
 ## Table of Contents
 - [Introduction](#---------------------introduction----------------------)
@@ -14,7 +14,6 @@
   - [Hyperparameter optimization and model training](#hyperparameter-optimization-and-model-training)
     - [3-1-HyperOp_TraningXgb_2Splits.py](#3-1-hyperop_traningxgb_2splitspy)
     - [3-2-HyperOp_TraningXgb_3Splits.py](#3-2-hyperop_traningxgb_3splitspy)
-- [Substrate Inhibitor prediction(SIP)](#---------substrate-inhibitor-predictionsip-------------)
 
 
 # ---------------------***Introduction***----------------------
@@ -29,8 +28,7 @@ Furthermore, we utilized the EMS1b model to embed the enzyme sequences, focusing
 ## Setup Instructions
 ###  Folder structure
 ```
-SIP/
-├── ESP_HardSplits/
+├── ESP_Leak_Analysis/
 │ ├── data/
 │ │ ├── data_ESP/
 │ │ ├── 2splits/
@@ -41,18 +39,17 @@ SIP/
 │ │ └── training_results_3S
 │ └── notebooks_and_code/
 │   └── additional_code/
-├── SIP/
 └── README.md
 ```
 
-### Setting up `SIP` Environment
+### Setting up `ESL_LA` Environment
 * It is recommended to install the packages in order
 
 * For MacOSX M1 desktop 
 
-      conda create --name SIP python=3.12.0
-      conda activate SIP
-      conda install mamba -n SIP -c conda-forge
+      conda create --name ESP_LA python=3.12.0
+      conda activate ESP_LA
+      conda install mamba -n ESP_LA -c conda-forge
       mamba install -c kalininalab -c conda-forge -c bioconda datasail-lite
       pip install grakel
       pip install xgboost==2.1.0
@@ -64,9 +61,9 @@ SIP/
 
 * For server with linux OS
 
-      conda create --name SIP python=3.12.0
-      conda activate SIP
-      conda install mamba -n SIP -c conda-forge
+      conda create --name ESP_LA python=3.12.0
+      conda activate ESP_LA
+      conda install mamba -n ESP_LA -c conda-forge
       mamba install -c kalininalab -c conda-forge -c bioconda datasail-lite
       pip install grakel
       conda install -c bioconda cd-hit
@@ -86,8 +83,6 @@ SIP/
 * After running this script, three different versions of the data will be generated:
 
         dataESP.pkl: Original ESP data containing only positive data points with experimental evidence.
-        dataESP_NoATP.pkl: This dataset excludes all ATP data points from dataESP.pkl.
-        dataESP_D3408.pkl: This dataset randomly removes 3408 data points from dataESP.pkl (equivalent to the number of ATP points).
 
 
 * The reason for randomly deleting 3408 data points is to create a control case to understand the impact of ATP removal on model performance, as approximately 20% of the molecules in the dataESP are ATP.
@@ -98,17 +93,15 @@ SIP/
 ## Splitting Data 
 * This table outlines an overview of all  different split strategies we used in this project.
 
-| split | DataFrame         | 2splits | training            | 3splits | training            |
-|-----|-------------------|---------|---------------------|---------|---------------------|
-| C1e* | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
-| C1f | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
-| I1e | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
-| I1f | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
-| ESP | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
-| C2  | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | No      |                     |
-| ESP | dataESPC2.pkl     | Yes     | ESM1bts+PreGNN/ECFP | No      |                     |
-| ESP | dataESP_NoATP.pkl | Yes     | ESM1bts+PreGNN/ECFP | No      |                     |
-| ESP | dataESP_D3408.pkl | Yes     | ESM1bts+PreGNN/ECFP | No      |                     |
+| split | DataFrame         | 2splits | training            | 3splits | training           |
+|-------|-------------------|---------|---------------------|---------|--------------------|
+| C1e*  | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP|
+| C1f   | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
+| I1e   | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
+| I1f   | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
+| ESP+  | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
+| C2    | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
+| ESP   | dataESPC2.pkl     | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
 
 * *DataSAIL can split data in 1 and 2 dimensions(1D,2D). The 1D splits are [C1e, C1f, I1e I1f] and the 2D splits are C2 and I2, we used C2 and all 1D splits in this project. To get more information please check the dataSAIL webpage(https://datasail.readthedocs.io/en/latest/index.html).
 * +In this project we refer to the split method that used in ESP paper as ESP split
@@ -168,7 +161,3 @@ SIP/
 ### 3-2-HyperOp_TraningXgb_3Splits.py
 * This script aims to tune the hyperparameters and train xgboost model for each split methods produced under 3 splits (train:test:val) scenario
 * Explanation of Arguments: The Arguments are same as `3-1-HyperOp_TraningXgb_2Splits.py`
-
-
-
-# ---------***Substrate Inhibitor prediction(SIP)***-------------
