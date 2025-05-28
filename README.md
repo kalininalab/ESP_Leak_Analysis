@@ -1,29 +1,28 @@
-# ESP Leak Analysis (SIP)
+# ESP Leak Analysis
+Recently, the deep learning-based model Enzyme-Substrate Prediction (ESP) has
+been introduced to classify enzyme-small molecule pairs as enzyme-substrate or
+enzyme-non-substrate, reaching an accuracy of 0.91. We reanalyzed the data processing
+pipeline and introduced information leakage using our novel method DataSAIL
+. We demonstrated that the performance of the model is overestimated for out-
+of-distribution (OOD) data, potentially due to information leakage resulting from
+inter-sample similarities and biased negative data generation. Information leakage
+(also called data leakage) describes the phenomenon when information is illicitly shared
+between the training and test data, artificially boosting the performance of a model
+on data, which may be different from the data the model is intended for (inference
+on OOD data). 
 
 ## Table of Contents
-- [Introduction](#---------------------introduction----------------------)
-  - [Setup Instructions](#setup-instructions)
-    - [Folder Structure](#folder-structure)
-    - [Setting up `SIP` Environment](#setting-up-sip-environment)
-- [ESP_Hard Split](#--------------------esp_hard-split---------------------)
-  - [Data Preparation](#data-preparation)
-    - [1-DataPreparation.py](#data-preparation)
-  - [Splitting Data](#splitting-data-)
-    - [2-1-SplitByDataSAIL.py](#2-1-splitbydatasailpy)
-    - [2-2-SplitByESP.py](#2-2-splitbyesppy)
-  - [Hyperparameter optimization and model training](#hyperparameter-optimization-and-model-training)
-    - [3-1-HyperOp_TraningXgb_2Splits.py](#3-1-hyperop_traningxgb_2splitspy)
-    - [3-2-HyperOp_TraningXgb_3Splits.py](#3-2-hyperop_traningxgb_3splitspy)
-
-
-# ---------------------***Introduction***----------------------
-
-This project was conducted in two parts. In the first part, we addressed data leakage in the ESP model by splitting the data using a powerful tool named DataSAIL (Data Splitting Against Information Leakage).
-
-In the second part of the project, we extended the ESP dataset. To achieve this, we extracted 3,450 positive data points from the BRENDA database. Instead of generating negative data points, we used inhibitors as negative data points.
-
-Furthermore, we utilized the EMS1b model to embed the enzyme sequences, focusing on the residues on the enzyme's surface. Additionally, we used the ChemBERTa model to embed the structure of the molecules, paying attention to the functional groups.
-
+- [Setup Instructions](#setup-instructions)
+  - [Folder Structure](#folder-structure)
+  - [Setting up `SIP` Environment](#setting-up-sip-environment)
+- [Data Preparation](#data-preparation)
+  - [1-DataPreparation.py](#data-preparation)
+- [Splitting Data](#splitting-data-)
+  - [2-1-SplitByDataSAIL.py](#2-1-splitbydatasailpy)
+  - [2-2-SplitByESP.py](#2-2-splitbyesppy)
+- [Hyperparameter optimization and model training](#hyperparameter-optimization-and-model-training)
+  - [3-1-HyperOp_TraningXgb_2Splits.py](#3-1-hyperop_traningxgb_2splitspy)
+  - [3-2-HyperOp_TraningXgb_3Splits.py](#3-2-hyperop_traningxgb_3splitspy)
 
 ## Setup Instructions
 ###  Folder structure
@@ -38,8 +37,8 @@ Furthermore, we utilized the EMS1b model to embed the enzyme sequences, focusing
 │ │ ├── training_results_2S
 │ │ └── training_results_3S
 │ └── notebooks_and_code/
-│   └── additional_code/
-└── README.md
+│ │ └── additional_code/
+│ └── README.md
 ```
 
 ### Setting up `ESL_LA` Environment
@@ -64,7 +63,7 @@ Furthermore, we utilized the EMS1b model to embed the enzyme sequences, focusing
       conda create --name ESP_LA python=3.12.0
       conda activate ESP_LA
       conda install mamba -n ESP_LA -c conda-forge
-      mamba install -c kalininalab -c conda-forge -c bioconda datasail-lite
+      mamba install -c kalininalab -c conda-forge -c bioconda datasail
       pip install grakel
       conda install -c bioconda cd-hit
       conda install pytorch torchvision torchaudio pytorch-cuda -c pytorch -c nvidia
@@ -75,23 +74,14 @@ Furthermore, we utilized the EMS1b model to embed the enzyme sequences, focusing
       pip install libchebipy==1.0.10
       pip install wandb
 
-# --------------------***ESP_Hard Split***---------------------
 ## Data Preparation
 
 ### 1-DataPreparation.py 
 
-* After running this script, three different versions of the data will be generated:
+* After running this script, the below dataset will be generated:
 
         dataESP.pkl: Original ESP data containing only positive data points with experimental evidence.
 
-
-* The reason for randomly deleting 3408 data points is to create a control case to understand the impact of ATP removal on model performance, as approximately 20% of the molecules in the dataESP are ATP.
-
-
-
-
-## Splitting Data 
-* This table outlines an overview of all  different split strategies we used in this project.
 ## Splitting Data 
 * This table outlines an overview of all different split strategies we used in this project.
 
@@ -118,7 +108,7 @@ Furthermore, we utilized the EMS1b model to embed the enzyme sequences, focusing
 * *DataSAIL can split data in 1 and 2 dimensions(1D,2D). The 1D splits are [C1e, C1f, I1e I1f] and the 2D splits are C2 and I2, we used C2 and all 1D splits in this project. To get more information please check the dataSAIL webpage(https://datasail.readthedocs.io/en/latest/index.html).
 * +In this project we refer to the split method that used in ESP paper as ESP split
 ### 2-1-SplitByDataSAIL.py
-* This script aims to split (by DataSAIL) and generate negative data for each DataFrame explained in above.
+* This script aims to split the dataESP by DataSAIL and generate negative data for each split.
 
        python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e I1f] --split-size [8 2, 7 2 1] --input-path 
 
@@ -137,7 +127,7 @@ Furthermore, we utilized the EMS1b model to embed the enzyme sequences, focusing
 
       ./SIP/data/2splits/train_C1e_2S.pkl
       ./SIP/data/2splits/test_C1e_2S.pkl
-      ./SIP/data/Reports/Report_2Splits_C1e.log
+      ./SIP/data/Reports/Report_C1e_2S.log
 
 ### 2-2-SplitByESP.py
 * This script aims to generate a control set for 1D abd 2D splits produced by dataSAIL and then creates negative data for each split. The original ESP dataset contains some missing (NaN) data, and for some molecules, we couldn't find the SMILES string. Additionally, during parsing with dataSAIL, some molecules had invalid SMILES strings. Consequently, the size of the dataset is smaller than the original ESP dataset.
@@ -151,7 +141,7 @@ Furthermore, we utilized the EMS1b model to embed the enzyme sequences, focusing
 
 * Example:
 
-      python 2-2-SplitByESP.py  --split-size 8 2 --input-path  ./../data/data_ESP/dataESPC2.pkl
+      python 2-2-SplitByESP.py  --split-size 8 2 --input-path  ./../data/data_ESP/dataESP.pkl
 
 * Output files:
 
