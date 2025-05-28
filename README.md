@@ -104,9 +104,6 @@ on OOD data).
 
 * DataSAIL can split data in 1 and 2 dimensions (1D, 2D). The 1D splits are [S1ₗ, S1ₚ, I1ₗ, I1ₚ] and the 2D splits are S2 and I2. We used S2 and all 1D splits in this project. For more information please check the dataSAIL webpage (https://datasail.readthedocs.io/en/latest/index.html).
 * In this project we refer to the split method that was used in the ESP paper as ESP split.
-
-* *DataSAIL can split data in 1 and 2 dimensions(1D,2D). The 1D splits are [C1e, C1f, I1e I1f] and the 2D splits are C2 and I2, we used C2 and all 1D splits in this project. To get more information please check the dataSAIL webpage(https://datasail.readthedocs.io/en/latest/index.html).
-* +In this project we refer to the split method that used in ESP paper as ESP split
 ### 2-1-SplitByDataSAIL.py
 * This script aims to split the dataESP by DataSAIL and generate negative data for each split.
 
