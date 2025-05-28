@@ -41,7 +41,7 @@ on OOD data).
 │ └── README.md
 ```
 
-### Setting up `ESL_LA` Environment
+### Setting up `ESP_LA` Environment
 * It is recommended to install the packages in order
 
 * For MacOSX M1 desktop 
