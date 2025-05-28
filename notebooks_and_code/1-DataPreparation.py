@@ -21,9 +21,6 @@ print(CURRENT_DIR)
 ######
 # Extract all experimental data point from train and test set
 ######
-# df_UID_MID = pd.read_pickle(join(CURRENT_DIR, ".." ,"data","data_ESP", "df_UID_MID.pkl"))
-# df_chebi_to_inchi = pd.read_csv(join(CURRENT_DIR, ".." ,"data", "data_ESP", "chebiID_to_inchi.tsv"), sep = "\t")
-# mol_folder = join(CURRENT_DIR, ".." ,"additional_data_ESP", "mol-files")
 train_set = pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "df_train_with_ESM1b_ts_GNN.pkl"))
 test_set = pd.read_pickle(join(CURRENT_DIR, ".." ,"data", "data_ESP", "df_test_with_ESM1b_ts_GNN.pkl"))
 train_set=train_set[train_set["Binding"]==1]
