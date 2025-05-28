@@ -92,16 +92,28 @@ Furthermore, we utilized the EMS1b model to embed the enzyme sequences, focusing
 
 ## Splitting Data 
 * This table outlines an overview of all  different split strategies we used in this project.
+## Splitting Data 
+* This table outlines an overview of all different split strategies we used in this project.
 
-| split | DataFrame         | 2splits | training            | 3splits | training           |
-|-------|-------------------|---------|---------------------|---------|--------------------|
-| C1e*  | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP|
-| C1f   | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
-| I1e   | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
-| I1f   | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
-| ESP+  | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
-| C2    | dataESP.pkl       | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
-| ESP   | dataESPC2.pkl     | Yes     | ESM1bts+PreGNN/ECFP | Yes     | ESM1bts+PreGNN/ECFP |
+| Method   | Cross-val (Y/N) | Train Samples | Val Samples | Test Samples | Train Neg/Pos | Val Neg/Pos | Test Neg/Pos |
+|----------|----------------|---------------|-------------|--------------|---------------|-------------|--------------|
+| S1ₗ      | Y              | 55430         | n.a.        | 13901        | 2.78          | n.a.        | 2.80         |
+| S1ₚ      | Y              | 55522         | n.a.        | 13904        | 2.79          | n.a.        | 2.80         |
+| I1ₗ      | Y              | 55209         | n.a.        | 13845        | 2.77          | n.a.        | 2.78         |
+| I1ₚ      | Y              | 55651         | n.a.        | 13864        | 2.80          | n.a.        | 2.79         |
+| ESP      | Y              | 55374         | n.a.        | 14056        | 2.79          | n.a.        | 2.81         |
+| S2       | Y              | 32455         | n.a.        | 6913         | 2.79          | n.a.        | 2.78         |
+| ESPₛ₂    | Y              | 31444         | n.a.        | 7933         | 2.78          | n.a.        | 2.82         |
+| S1ₗ      | N              | 48489         | 6825        | 13839        | 2.78          | 2.73        | 2.78         |
+| S1ₚ      | N              | 48497         | 6941        | 13919        | 2.78          | 2.79        | 2.80         |
+| I1ₗ      | N              | 48938         | 6966        | 12121        | 2.82          | 2.80        | 2.31         |
+| I1ₚ      | N              | 48660         | 6982        | 13844        | 2.78          | 2.81        | 2.80         |
+| ESP      | N              | 48541         | 7008        | 14034        | 2.79          | 2.82        | 2.82         |
+| S2       | N              | 25604         | 1837        | 3622         | 2.77          | 2.73        | 2.75         |
+| ESPₛ₂    | N              | 22128         | 3095        | 6344         | 2.81          | 2.90        | 2.83         |
+
+* DataSAIL can split data in 1 and 2 dimensions (1D, 2D). The 1D splits are [S1ₗ, S1ₚ, I1ₗ, I1ₚ] and the 2D splits are S2 and I2. We used S2 and all 1D splits in this project. For more information please check the dataSAIL webpage (https://datasail.readthedocs.io/en/latest/index.html).
+* In this project we refer to the split method that was used in the ESP paper as ESP split.
 
 * *DataSAIL can split data in 1 and 2 dimensions(1D,2D). The 1D splits are [C1e, C1f, I1e I1f] and the 2D splits are C2 and I2, we used C2 and all 1D splits in this project. To get more information please check the dataSAIL webpage(https://datasail.readthedocs.io/en/latest/index.html).
 * +In this project we refer to the split method that used in ESP paper as ESP split
