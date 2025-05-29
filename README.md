@@ -2,7 +2,7 @@
 Recently, the deep learning-based model Enzyme-Substrate Prediction ([ESP](https://github.com/AlexanderKroll/ESP)) has
 been introduced to classify enzyme-small molecule pairs as enzyme-substrate or
 enzyme-non-substrate, reaching an accuracy of 0.91. We reanalyzed the data processing
-pipeline and introduced information leakage using our novel method DataSAIL
+pipeline and introduced information leakage using our novel method [DataSAIL](https://www.nature.com/articles/s41467-025-58606-8)
 . We demonstrated that the performance of the model is overestimated for out-
 of-distribution (OOD) data, potentially due to information leakage resulting from
 inter-sample similarities and biased negative data generation. Information leakage
@@ -111,7 +111,7 @@ on OOD data).
 
 * Explanation of Arguments:
 
-       --split-method [C2, C1e, C1f, I1e, I1f]: Specifies the methods used for splitting the data.
+       --split-method [C2, C1e, C1f, I1e, I1f]: Different split methods provided by DataSAIL.
        --split-size [8 2, 7 2 1]: Defines the number of splits for each method.
        --input-path  ./../data/data_ESP/dataESP.pkl
 
