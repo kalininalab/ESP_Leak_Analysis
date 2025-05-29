@@ -1,5 +1,5 @@
 # ESP Leak Analysis
-Recently, the deep learning-based model Enzyme-Substrate Prediction (ESP) has
+Recently, the deep learning-based model Enzyme-Substrate Prediction ([ESP](https://github.com/AlexanderKroll/ESP)) has
 been introduced to classify enzyme-small molecule pairs as enzyme-substrate or
 enzyme-non-substrate, reaching an accuracy of 0.91. We reanalyzed the data processing
 pipeline and introduced information leakage using our novel method DataSAIL
