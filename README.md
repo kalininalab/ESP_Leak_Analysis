@@ -122,9 +122,9 @@ on OOD data).
 
 * Output files:
 
-      ./SIP/data/2splits/train_C1e_2S.pkl
-      ./SIP/data/2splits/test_C1e_2S.pkl
-      ./SIP/data/Reports/Report_C1e_2S.log
+      ./ESP_Leak_Analysis/data/2splits/train_C1e_2S.pkl
+      ./ESP_Leak_Analysis/data/2splits/test_C1e_2S.pkl
+      ./ESP_Leak_Analysis/data/Reports/Report_C1e_2S.log
 
 ### 2-2-SplitByESP.py
 * This script aims to generate a control set for 1D abd 2D splits produced by dataSAIL and then creates negative data for each split. The original ESP dataset contains some missing (NaN) data, and for some molecules, we couldn't find the SMILES string. Additionally, during parsing with dataSAIL, some molecules had invalid SMILES strings. Consequently, the size of the dataset is smaller than the original ESP dataset.
@@ -142,9 +142,9 @@ on OOD data).
 
 * Output files:
 
-      ./SIP/data/2splits/train_ESP_2S.pkl
-      ./SIP/data/2splits/test_ESP_2S.pkl
-      ./SIP/data/Reports/split_report/Report_ESP_2S.log
+      ./ESP_Leak_Analysis/data/2splits/train_ESP_2S.pkl
+      ./ESP_Leak_Analysis/data/2splits/test_ESP_2S.pkl
+      ./ESP_Leak_Analysis/data/Reports/split_report/Report_ESP_2S.log
 
 
 ## Hyperparameter optimization and model training
