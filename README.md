@@ -1,4 +1,4 @@
-# ESP Leak Analysis
+# Description:
 Recently, the deep learning-based model Enzyme-Substrate Prediction ([ESP](https://github.com/AlexanderKroll/ESP)) has
 been introduced to classify enzyme-small molecule pairs as enzyme-substrate or
 enzyme-non-substrate, reaching an accuracy of 0.91. We reanalyzed the data processing
@@ -11,7 +11,7 @@ between the training and test data, artificially boosting the performance of a m
 on data, which may be different from the data the model is intended for (inference
 on OOD data). 
 
-## Table of Contents
+## Table of Contents:
 - [Setup Instructions](#setup-instructions)
   - [Folder Structure](#folder-structure)
   - [Setting up `SIP` Environment](#setting-up-sip-environment)
@@ -24,8 +24,8 @@ on OOD data).
   - [3-1-HyperOp_TraningXgb_2Splits.py](#3-1-hyperop_traningxgb_2splitspy)
   - [3-2-HyperOp_TraningXgb_3Splits.py](#3-2-hyperop_traningxgb_3splitspy)
 
-## Setup Instructions
-###  Folder structure
+## Setup Instructions:
+###  Folder structure:
 ```
 ├── ESP_Leak_Analysis/
 │ ├── data/
@@ -41,7 +41,7 @@ on OOD data).
 │ └── README.md
 ```
 
-### Setting up `ESP_LA` Environment
+### Setting up `ESP_LA` Environment:
 * It is recommended to install the packages in order
 
 * For MacOSX M1 desktop 
@@ -74,15 +74,15 @@ on OOD data).
       pip install libchebipy==1.0.10
       pip install wandb
 
-## Data Preparation
+## Data Preparation:
 
-### 1-DataPreparation.py 
+### 1-DataPreparation.py:
 
 * After running this script, the below dataset will be generated:
 
         dataESP.pkl: Original ESP data containing only positive data points with experimental evidence.
 
-## Splitting Data 
+## Splitting Data:
 * This table outlines an overview of all different split strategies we used in this project.
 
 | Method   | Cross-val (Y/N) | Train Samples | Val Samples | Test Samples | Train Neg/Pos | Val Neg/Pos | Test Neg/Pos |
@@ -104,7 +104,7 @@ on OOD data).
 
 * DataSAIL can split data in 1 and 2 dimensions (1D, 2D). The 1D splits are [S1ₗ, S1ₚ, I1ₗ, I1ₚ] and the 2D splits are S2 and I2. We used S2 and all 1D splits in this project. For more information please check the DataSAIL's [documentation](https://datasail.readthedocs.io/en/latest/index.html).
 * In this project we refer to the split method that was used in the ESP paper as ESP split.
-### 2-1-SplitByDataSAIL.py
+### 2-1-SplitByDataSAIL.py:
 * This script aims to split the dataESP by DataSAIL and generate negative data for each split.
 
        python 2-1-SplitByDataSAIL.py --split-method [C2, C1e, C1f, I1e I1f] --split-size [8 2, 7 2 1] --input-path 
@@ -126,7 +126,7 @@ on OOD data).
       ./ESP_Leak_Analysis/data/2splits/test_C1e_2S.pkl
       ./ESP_Leak_Analysis/data/Reports/Report_C1e_2S.log
 
-### 2-2-SplitByESP.py
+### 2-2-SplitByESP.py:
 * This script aims to generate a control set for 1D abd 2D splits produced by dataSAIL and then creates negative data for each split. The original ESP dataset contains some missing (NaN) data, and for some molecules, we couldn't find the SMILES string. Additionally, during parsing with dataSAIL, some molecules had invalid SMILES strings. Consequently, the size of the dataset is smaller than the original ESP dataset.
 
 * Explanation of Arguments:
@@ -147,15 +147,15 @@ on OOD data).
       ./ESP_Leak_Analysis/data/Reports/split_report/Report_ESP_2S.log
 
 
-## Hyperparameter optimization and model training
+## Hyperparameter optimization and model training:
 
-### 3-1-HyperOp_TraningXgb_2Splits.py
+### 3-1-HyperOp_TraningXgb_2Splits.py:
 * This script aims to tune the hyperparameters and train xgboost model for each split methods produced under 2 splits (train:test) scenario
 
        python 3-1-HyperOp_TraningXgb_2Splits.py --split-data [C2,C1e, C1f, I1e, I1f,ESP, ESPC2] --column-name [ECFP, PreGNN]
 * Explanation of Arguments:
 * `--split-data` is same as before 
 * `--column-name` determines which embedded vector for the molecule should be concatenated with the ESMb1ts vector for hyperparameter optimization and training.
-### 3-2-HyperOp_TraningXgb_3Splits.py
+### 3-2-HyperOp_TraningXgb_3Splits.py:
 * This script aims to tune the hyperparameters and train xgboost model for each split methods produced under 3 splits (train:test:val) scenario
 * Explanation of Arguments: The Arguments are same as `3-1-HyperOp_TraningXgb_2Splits.py`
