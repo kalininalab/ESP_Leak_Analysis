@@ -102,7 +102,7 @@ on OOD data).
 | S2       | N              | 25604         | 1837        | 3622         | 2.77          | 2.73        | 2.75         |
 | ESPₛ₂    | N              | 22128         | 3095        | 6344         | 2.81          | 2.90        | 2.83         |
 
-* DataSAIL can split data in 1 and 2 dimensions (1D, 2D). The 1D splits are [S1ₗ, S1ₚ, I1ₗ, I1ₚ] and the 2D splits are S2 and I2. We used S2 and all 1D splits in this project. For more information please check the dataSAIL's [documentation](https://datasail.readthedocs.io/en/latest/index.html).
+* DataSAIL can split data in 1 and 2 dimensions (1D, 2D). The 1D splits are [S1ₗ, S1ₚ, I1ₗ, I1ₚ] and the 2D splits are S2 and I2. We used S2 and all 1D splits in this project. For more information please check the DataSAIL's [documentation](https://datasail.readthedocs.io/en/latest/index.html).
 * In this project we refer to the split method that was used in the ESP paper as ESP split.
 ### 2-1-SplitByDataSAIL.py
 * This script aims to split the dataESP by DataSAIL and generate negative data for each split.
