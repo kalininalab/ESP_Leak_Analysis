@@ -14,7 +14,7 @@ on OOD data).
 ## Table of Contents:
 - [Setup Instructions](#setup-instructions)
   - [Folder Structure](#folder-structure)
-  - [Setting up `SIP` Environment](#setting-up-sip-environment)
+  - [Setting up `ESP_LA` Environment](#setting-up-sip-environment)
 - [Data Preparation](#data-preparation)
   - [1-DataPreparation.py](#data-preparation)
 - [Splitting Data](#splitting-data-)
