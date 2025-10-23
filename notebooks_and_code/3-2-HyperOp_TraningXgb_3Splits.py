@@ -169,21 +169,21 @@ def main(args):
     print("MCC: %.4f" % mcc_val)
     print("Accuracy: %.4f" % accuracy_val)
     print("Loss: %.4f" % loss_val)
-
-    # Save validation results
-    np.save(join(current_dir, "..", "data", f"training_results_3S",
-                 f"y_val_pred_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"),
-            bst_final.predict(dval))
-    np.save(join(current_dir, "..", "data", f"training_results_3S",
-                 f"y_val_true_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"), val_y)
-    np.save(join(current_dir, "..", "data", f"training_results_3S",
-                 f"roc_auc_val_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"), roc_auc_val)
-    np.save(join(current_dir, "..", "data", f"training_results_3S",
-                 f"mcc_val_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"), mcc_val)
-    np.save(join(current_dir, "..", "data", f"training_results_3S",
-                 f"accuracy_val_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"), accuracy_val)
-    np.save(join(current_dir, "..", "data", f"training_results_3S",
-                 f"loss_val_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"), loss_val)
+    #
+    # # Save validation results
+    # np.save(join(current_dir, "..", "data", f"training_results_3S",
+    #              f"y_val_pred_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"),
+    #         bst_final.predict(dval))
+    # np.save(join(current_dir, "..", "data", f"training_results_3S",
+    #              f"y_val_true_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"), val_y)
+    # np.save(join(current_dir, "..", "data", f"training_results_3S",
+    #              f"roc_auc_val_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"), roc_auc_val)
+    # np.save(join(current_dir, "..", "data", f"training_results_3S",
+    #              f"mcc_val_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"), mcc_val)
+    # np.save(join(current_dir, "..", "data", f"training_results_3S",
+    #              f"accuracy_val_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"), accuracy_val)
+    # np.save(join(current_dir, "..", "data", f"training_results_3S",
+    #              f"loss_val_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"), loss_val)
 
     # Evaluate final model on test set
     dtest = xgb.DMatrix(test_X, label=test_y, feature_names=feature_names)
@@ -203,10 +203,10 @@ def main(args):
 
     # Save test results
     np.save(join(current_dir, "..", "data", f"training_results_3S",
-                 f"y_test_pred_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"),
+                 f"y_test_pred_ESP_{split_data}_3S.npy"),
             bst_final.predict(dtest))
     np.save(join(current_dir, "..", "data", f"training_results_3S",
-                 f"y_test_true_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"), test_y)
+                 f"y_test_true_ESP_{split_data}_3S.npy"), test_y)
 
 
 
