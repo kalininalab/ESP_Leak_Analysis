@@ -207,14 +207,10 @@ def main(args):
             bst_final.predict(dtest))
     np.save(join(current_dir, "..", "data", f"training_results_3S",
                  f"y_test_true_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"), test_y)
-    np.save(join(current_dir, "..", "data", f"training_results_3S",
-                 f"roc_auc_test_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"), roc_auc_test)
-    np.save(join(current_dir, "..", "data", f"training_results_3S",
-                 f"mcc_test_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"), mcc_test)
-    np.save(join(current_dir, "..", "data", f"training_results_3S",
-                 f"accuracy_test_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"), accuracy_test)
-    np.save(join(current_dir, "..", "data", f"training_results_3S",
-                 f"loss_test_xgboost_ESM1b_ts_{column_name}_{split_data}_3S.npy"), loss_test)
+
+
+
+
 
 
 if __name__ == "__main__":
